@@ -1,0 +1,5 @@
+# Use this in Wolfram Mathematica
+
+BoolToInt[x_] := If[x, 1, 0]
+Test[x_] := x > 1000000
+Total[Map[Composition[BoolToInt, Test], Flatten[Table[Table[Binomial[n, r], {r, 0, n}], {n, 1, 100}]]]]
