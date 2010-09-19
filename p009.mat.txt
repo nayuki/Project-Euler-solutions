@@ -1,0 +1,5 @@
+# Use this in Wolfram Mathematica
+
+For[i = 1, i <= 1000, i++,
+  For[j = i + 1, i + j <= 1000, j++,
+    If[k = Sqrt[i^2 + j^2]; IntegerQ[k] && i + j + k == 1000, Print[i, " ", j, " ", k, " ", i * j * k]]]]
