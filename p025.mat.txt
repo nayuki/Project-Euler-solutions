@@ -1,0 +1,5 @@
+# Use this in Wolfram Mathematica
+
+i = 0;
+While[Fibonacci[i] < 10^1000, i++]
+i
