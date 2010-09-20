@@ -1,0 +1,3 @@
+# Use this in Wolfram Mathematica
+
+Length[Select[Range[2, 1001], Function[n, Length[IntegerDigits[Numerator[FromContinuedFraction[ContinuedFraction[Sqrt[2], n]]]]] > Length[IntegerDigits[Denominator[FromContinuedFraction[ContinuedFraction[Sqrt[2], n]]]]]]]]
