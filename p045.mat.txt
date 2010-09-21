@@ -1,0 +1,4 @@
+# Use this in Wolfram Mathematica
+
+n = 1000000;
+Intersection[Table[i(i+1)/2, {i, n}], Table[i(3i-1)/2, {i, n}], Table[i(2i-1), {i, n}]]
