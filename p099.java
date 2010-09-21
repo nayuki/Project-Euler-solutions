@@ -1,5 +1,6 @@
 import java.math.BigInteger;
 
+
 public class p099 {
 	
 	private static int[][] data = {
@@ -1006,6 +1007,7 @@ public class p099 {
 	};
 	
 	
+	
 	public static void main(String[] args) {
 		calculateApproximately();
 		calculateExactly();
@@ -1033,7 +1035,7 @@ public class p099 {
 		int maxIndex = -1;
 		
 		for (int i = 0; i < data.length; i++) {
-			BigInteger val = BigInteger.valueOf(data[i][0]).pow(data[i][1]);
+			BigInteger val = pow(BigInteger.valueOf(data[i][0]), data[i][1]);
 			if (maxVal == null || val.compareTo(maxVal) > 0) {
 				maxVal = val;
 				maxIndex = i;
@@ -1041,6 +1043,56 @@ public class p099 {
 		}
 		
 		System.out.println(maxIndex + 1);
+	}
+	
+	
+	
+	private static BigInteger pow(BigInteger x, int y) {
+		if (y < 0)
+			throw new IllegalArgumentException();
+		
+		BigInteger z = BigInteger.ONE;
+		for (; y != 0; y >>>= 1) {
+			if ((y & 1) != 0)
+				z = multiply(z, x);
+			x = multiply(x, x);
+		}
+		return z;
+	}
+	
+	
+	private static BigInteger multiply(BigInteger x, BigInteger y) {
+		if (x.signum() < 0 && y.signum() < 0) {
+			return privateMultiply(x.negate(), y.negate());
+		} else if (x.signum() < 0 && y.signum() >= 0) {
+			return privateMultiply(x.negate(), y).negate();
+		} else if (x.signum() >= 0 && y.signum() < 0) {
+			return privateMultiply(x, y.negate()).negate();
+		} else {  // Main case. x >= 0, y >= 0.
+			return privateMultiply(x, y);
+		}
+	}
+	
+	
+	private static final int CUTOFF = 2048;
+	
+	private static BigInteger privateMultiply(BigInteger x, BigInteger y) {
+		if (x.bitLength() <= CUTOFF || y.bitLength() <= CUTOFF) {  // Base case
+			return x.multiply(y);
+		} else {
+			int n = Math.max(x.bitLength(), y.bitLength());
+			int half = (n + 32) / 64 * 32;
+			BigInteger mask = BigInteger.ONE.shiftLeft(half).subtract(BigInteger.ONE);
+			BigInteger xlow = x.and(mask);
+			BigInteger ylow = y.and(mask);
+			BigInteger xhigh = x.shiftRight(half);
+			BigInteger yhigh = y.shiftRight(half);
+			BigInteger a = privateMultiply(xhigh, yhigh);
+			BigInteger b = privateMultiply(xlow.add(xhigh), ylow.add(yhigh));
+			BigInteger c = privateMultiply(xlow, ylow);
+			BigInteger d = b.subtract(a).subtract(c);
+			return c.add(d.shiftLeft(half)).add(a.shiftLeft(half * 2));
+		}
 	}
 
 }
