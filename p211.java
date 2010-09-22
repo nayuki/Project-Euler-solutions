@@ -13,7 +13,7 @@ public class p211 {
 	
 	
 	private static long[] listSigma2(int n) {
-		// Quasi sieve of Eratosthenes
+		// Richer version of the sieve of Eratosthenes
 		int[] smallestPrimeFactor = new int[n + 1];
 		for (int i = 2; i < smallestPrimeFactor.length; i++) {
 			if (smallestPrimeFactor[i] == 0) {
