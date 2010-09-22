@@ -86,23 +86,26 @@ public class p083 {
 	};
 	
 	
+	private static final int INFINITY = Integer.MAX_VALUE / 2;
+	
+	
 	public static void main(String[] args) {
 		int h = grid.length;
 		int w = grid[0].length;
 		
 		int[][] distance = new int[h][w];
 		for (int i = 0; i < h; i++)
-			Arrays.fill(distance[i], -1);
+			Arrays.fill(distance[i], INFINITY);
 		
-		distance[0][0] = getValue(grid, 0, 0);
+		distance[0][0] = grid[0][0];
 		for (int i = 0; i < w * h; i++) {
 			for (int y = 0; y < h; y++) {
 				for (int x = 0; x < w; x++) {
 					int dist = getValue(distance, x, y);
-					dist = min(add(getValue(grid, x, y), getValue(distance, x - 1, y)), dist);
-					dist = min(add(getValue(grid, x, y), getValue(distance, x + 1, y)), dist);
-					dist = min(add(getValue(grid, x, y), getValue(distance, x, y - 1)), dist);
-					dist = min(add(getValue(grid, x, y), getValue(distance, x, y + 1)), dist);
+					dist = Math.min(grid[y][x] + getValue(distance, x - 1, y), dist);
+					dist = Math.min(grid[y][x] + getValue(distance, x + 1, y), dist);
+					dist = Math.min(grid[y][x] + getValue(distance, x, y - 1), dist);
+					dist = Math.min(grid[y][x] + getValue(distance, x, y + 1), dist);
 					distance[y][x] = dist;
 				}
 			}
@@ -114,29 +117,9 @@ public class p083 {
 	
 	private static int getValue(int[][] grid, int x, int y) {
 		if (y < 0 || y >= grid.length || x < 0 || x >= grid[y].length)
-			return -1;
+			return INFINITY;
 		else
 			return grid[y][x];
-	}
-	
-	
-	private static int add(int x, int y) {
-		if (x == -1)
-			return -1;
-		else if (y == -1)
-			return -1;
-		else
-			return x + y;
-	}
-	
-	
-	private static int min(int x, int y) {
-		if (x == -1)
-			return y;
-		else if (y == -1)
-			return x;
-		else
-			return Math.min(x, y);
 	}
 	
 }
