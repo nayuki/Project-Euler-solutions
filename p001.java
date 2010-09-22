@@ -8,5 +8,5 @@ public class p001 {
 		}
 		System.out.println(sum);
 	}
-
+	
 }

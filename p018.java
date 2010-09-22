@@ -26,5 +26,5 @@ public class p018 {
 		}
 		System.out.println(triangle[0][0]);
 	}
-
+	
 }

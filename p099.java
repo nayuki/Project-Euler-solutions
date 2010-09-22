@@ -1094,5 +1094,5 @@ public class p099 {
 			return c.add(d.shiftLeft(half)).add(a.shiftLeft(half * 2));
 		}
 	}
-
+	
 }

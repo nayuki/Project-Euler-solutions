@@ -67,5 +67,5 @@ public class p011 {
 		else
 			return Math.max(x, y);
 	}
-
+	
 }

@@ -1,6 +1,7 @@
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class p026 {
 	
 	public static void main(String[] args) {
@@ -30,5 +31,5 @@ public class p026 {
 		}
 		return iter - stateToIter.get(state);
 	}
-
+	
 }

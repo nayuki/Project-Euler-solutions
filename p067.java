@@ -111,5 +111,5 @@ public class p067 {
 		}
 		System.out.println(triangle[0][0]);
 	}
-
+	
 }

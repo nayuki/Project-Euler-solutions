@@ -16,5 +16,5 @@ public class p206 {
 	private static boolean isConcealedSquare(long n) {
 		return PATTERN.matcher(Long.toString(n * n)).matches();
 	}
-
+	
 }
