@@ -58,7 +58,8 @@ public class p107 {
 			for (int j = i + 1; j < vertices; j++) {
 				if (weights[i][j] != weights[j][i])
 					throw new AssertionError("Matrix not symmetric");
-				oldWeight += weights[i][j];
+				if (weights[i][j] != -1)
+					oldWeight += weights[i][j];
 			}
 		}
 		
