@@ -1,14 +1,10 @@
 public class p069 {
 	
 	public static void main(String[] args) {
-		int n = 1000000;
-		boolean[] isPrime = listPrimality(n);
-		int[] totient = listTotients(n, isPrime);
-		
 		double maxVal = -1;
 		int maxNum = -1;
-		for (int i = 1; i <= n; i++) {
-			double val = (double)i / totient[i];
+		for (int i = 1; i <= 1000000; i++) {
+			double val = (double)i / totient(i);
 			if (maxNum == -1 || val > maxVal) {
 				maxVal = val;
 				maxNum = i;
@@ -18,48 +14,24 @@ public class p069 {
 	}
 	
 	
-	private static boolean[] listPrimality(int n) {
-		if (n < 0)
-			throw new IllegalArgumentException();
-		boolean[] prime = new boolean[n + 1];
-		if (n >= 2)
-			prime[2] = true;
-		for (int i = 3; i <= n; i += 2)
-			prime[i] = true;
-		for (int i = 3, end = sqrt(n); i <= end; i += 2) {
-			if (prime[i]) {
-				for (int j = i * 3; j <= n; j += i << 1)
-					prime[j] = false;
-			}
-		}
-		return prime;
-	}
-	
-	
-	private static int[] listTotients(int n, boolean[] isPrime) {
-		int[] totients = new int[n + 1];
-		totients[1] = 1;
-		for (int i = 2; i <= n; i++) {
-			if (isPrime[i])
-				totients[i] = i - 1;
-			else {
-				for (int j = 2; ; j++) {  // This loop will terminate before j > sqrt(n)
-					if (isPrime[j] && i % j == 0) {  // Only need to consider prime factors
-						int tot = j - 1;
-						int temp = i / j;
-						while (temp % j == 0) {
-							tot *= j;
-							temp /= j;
-						}
-						// temp is now coprime to j
-						tot *= totients[temp];
-						totients[i] = tot;
-						break;
-					}
+	private static int totient(int x) {
+		if (x <= 0)
+			throw new IllegalArgumentException("Totient of non-positive integer");
+		int p = 1;
+		for (int i = 2, end = sqrt(x); i <= end; i++) {  // Trial division
+			if (x % i == 0) {  // Found a factor
+				p *= i - 1;
+				x /= i;
+				while (x % i == 0) {
+					p *= i;
+					x /= i;
 				}
+				end = sqrt(x);
 			}
 		}
-		return totients;
+		if (x != 1)
+			p *= x - 1;
+		return p;
 	}
 	
 	
