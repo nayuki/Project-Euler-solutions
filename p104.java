@@ -1,0 +1,101 @@
+import java.math.BigInteger;
+
+
+public class p104 {
+	
+	public static void main(String[] args) {
+		int i = 0;
+		int a = 0;
+		int b = 1;
+		while (!isFound(i, a)) {
+			int c = (a + b) % 1000000000;
+			a = b;
+			b = c;
+			i++;
+		}
+		System.out.println(i);
+	}
+	
+	
+	private static boolean isFound(int n, int fibMod) {
+		if (!is1To9Pandigital(Integer.toString(fibMod)))
+			return false;
+		BigInteger fib = fibonacci(n);
+		if (fib.mod(BigInteger.valueOf(1000000000)).intValue() != fibMod)
+			throw new AssertionError();
+		return is1To9Pandigital(fib.toString().substring(0, 9));
+	}
+	
+	
+	private static boolean is1To9Pandigital(String s) {
+		if (s.length() != 9)
+			return false;
+		for (char d = '1'; d <= '9'; d++) {
+			if (s.indexOf(d) == -1)
+				return false;
+		}
+		return true;
+	}
+	
+	
+	private static BigInteger fibonacci(int n) {
+		BigInteger a = BigInteger.ZERO;
+		BigInteger b = BigInteger.ONE;
+		int m = 0;
+		for (int i = 31; i >= 0; i--) {
+			// Loop invariant: a = f(m), b = f(m+1)
+			
+			// Double it
+			BigInteger d = multiply(a, b.shiftLeft(1).subtract(a));
+			BigInteger e = multiply(a, a).add(multiply(b, b));
+			a = d;
+			b = e;
+			m *= 2;
+			
+			// Advance by one conditionally
+			if (((1 << i) & n) != 0) {
+				BigInteger c = a.add(b);
+				a = b;
+				b = c;
+				m++;
+			}
+		}
+		return a;
+	}
+	
+	
+	private static BigInteger multiply(BigInteger x, BigInteger y) {
+		if (x.signum() < 0 && y.signum() < 0) {
+			return karatsubaMultiply(x.negate(), y.negate());
+		} else if (x.signum() < 0 && y.signum() >= 0) {
+			return karatsubaMultiply(x.negate(), y).negate();
+		} else if (x.signum() >= 0 && y.signum() < 0) {
+			return karatsubaMultiply(x, y.negate()).negate();
+		} else {  // Main case. x >= 0, y >= 0.
+			return karatsubaMultiply(x, y);
+		}
+	}
+	
+	
+	private static final int CUTOFF = 2048;
+	
+	private static BigInteger karatsubaMultiply(BigInteger x, BigInteger y) {
+		if (x.bitLength() <= CUTOFF || y.bitLength() <= CUTOFF) {  // Base case
+			return x.multiply(y);
+		} else {
+			int n = Math.max(x.bitLength(), y.bitLength());
+			int half = (n + 32) / 64 * 32;
+			BigInteger mask = BigInteger.ONE.shiftLeft(half).subtract(BigInteger.ONE);
+			BigInteger xlow = x.and(mask);
+			BigInteger ylow = y.and(mask);
+			BigInteger xhigh = x.shiftRight(half);
+			BigInteger yhigh = y.shiftRight(half);
+			BigInteger a = karatsubaMultiply(xhigh, yhigh);
+			BigInteger b = karatsubaMultiply(xlow.add(xhigh), ylow.add(yhigh));
+			BigInteger c = karatsubaMultiply(xlow, ylow);
+			BigInteger d = b.subtract(a).subtract(c);
+			return c.add(d.shiftLeft(half)).add(a.shiftLeft(half * 2));
+		}
+	}
+	
+}
