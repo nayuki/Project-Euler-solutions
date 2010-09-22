@@ -1,38 +1,46 @@
 public class p211 {
 	
 	public static void main(String[] args) {
+		int n = 64000000;
+		long[] sigma2 = listSigma2(n);
 		long sum = 0;
-		for (int i = 1; i <= 64000000; i++) {
-			if(i%100000==0)System.out.println(i);
-			if (isPerfectSquare(divisorSquareSum(i)))
+		for (int i = 1; i <= n; i++) {
+			if (isPerfectSquare(sigma2[i]))
 				sum += i;
 		}
 		System.out.println(sum);
 	}
 	
 	
-	private static long divisorSquareSum(int n) {
-		long sum = 0;
-		for (int i = 1, end = (int)sqrt(n); i <= end; i++) {
-			if (n % i == 0) {
-				sum += (long)i * i;
-				sum += (long)(n / i) * (n / i);
+	private static long[] listSigma2(int n) {
+		// Quasi sieve of Eratosthenes
+		int[] smallestPrimeFactor = new int[n + 1];
+		for (int i = 2; i < smallestPrimeFactor.length; i++) {
+			if (smallestPrimeFactor[i] == 0) {
+				smallestPrimeFactor[i] = i;
+				for (int j = i * 2; j < smallestPrimeFactor.length; j += i) {
+					if (smallestPrimeFactor[j] == 0)
+						smallestPrimeFactor[j] = i;
+				}
 			}
 		}
 		
-		if (isPerfectSquare(n))  // Fix-up for perfect square n
-			sum -= n;
-		
-		return sum;
-	}
-
-
-	private static boolean isPerfectSquare(long n) {
-		return sqrt(n) * sqrt(n) == n;
+		long[] sigma2 = new long[n + 1];
+		sigma2[1] = 1;
+		for (int i = 2; i < sigma2.length; i++) {
+			int p = smallestPrimeFactor[i];
+			long sum = 1;
+			int j = i;
+			long p2 = (long)p * p;
+			for (long k = p2; j % p == 0; j /= p, k *= p2)
+				sum += k;
+			sigma2[i] = sum * sigma2[j];
+		}
+		return sigma2;
 	}
 	
 	
-	private static long sqrt(long x) {
+	private static boolean isPerfectSquare(long x) {
 		if (x < 0)
 			throw new IllegalArgumentException("Square root of negative number");
 		long y = 0;
@@ -41,7 +49,7 @@ public class p211 {
 			if (y > 3037000499L || y * y > x)
 				y ^= i;
 		}
-		return y;
+		return y * y == x;
 	}
-
+	
 }
