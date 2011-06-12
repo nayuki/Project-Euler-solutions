@@ -1,4 +1,4 @@
-# Use this in Wolfram Mathematica
+(* Use this in Wolfram Mathematica *)
 
 Coins = {1, 2, 5, 10, 20, 50, 100, 200};
 Ways[coins_, total_] := If[coins == 0, If[total == 0, 1, 0], Sum[Ways[coins - 1, total - i*Coins[[coins]]], {i, 0, Floor[total/Coins[[coins]]]}]]

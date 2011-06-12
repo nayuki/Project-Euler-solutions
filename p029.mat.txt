@@ -1,3 +1,3 @@
-# Use this in Wolfram Mathematica
+(* Use this in Wolfram Mathematica *)
 
 Length[Union[Flatten[Table[Table[a^b, {b, 2, 100}], {a, 2, 100}]]]]

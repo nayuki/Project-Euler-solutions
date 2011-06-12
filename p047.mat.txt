@@ -1,4 +1,4 @@
-# Use this in Wolfram Mathematica
+(* Use this in Wolfram Mathematica *)
 
 Has4PrimeFactors[n_] := Length[FactorInteger[n]] == 4
 i = 2;
