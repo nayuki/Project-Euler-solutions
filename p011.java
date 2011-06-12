@@ -26,10 +26,10 @@ public class p011 {
 	
 	public static void main(String[] args) {
 		int max = -1;
-		max = max(maxProduct(1, 0), max);
-		max = max(maxProduct(0, 1), max);
-		max = max(maxProduct(1, 1), max);
-		max = max(maxProduct(1, -1), max);
+		max = Math.max(maxProduct(1, 0), max);
+		max = Math.max(maxProduct(0, 1), max);
+		max = Math.max(maxProduct(1, 1), max);
+		max = Math.max(maxProduct(1, -1), max);
 		System.out.println(max);
 	}
 	
@@ -38,15 +38,17 @@ public class p011 {
 		int max = -1;
 		for (int y = 0; y < square.length; y++) {
 			for (int x = 0; x < square[y].length; x++)
-				max = max(product(x, y, dx, dy, 4), max);
+				max = Math.max(product(x, y, dx, dy, 4), max);
 		}
 		return max;
 	}
 	
 	
 	private static int product(int x, int y, int dx, int dy, int n) {
+		// First endpoint is assumed to be in bounds. Check if second endpoint is in bounds.
 		if (!isInBounds(x + (n - 1) * dx, y + (n - 1) * dy))
 			return -1;
+		
 		int prod = 1;
 		for (int i = 0; i < n; i++, x += dx, y += dy)
 			prod *= square[y][x];
@@ -56,16 +58,6 @@ public class p011 {
 	
 	private static boolean isInBounds(int x, int y) {
 		return 0 <= y && y < square.length && 0 <= x && x < square[y].length;
-	}
-	
-	
-	private static int max(int x, int y) {
-		if (x == -1)
-			return y;
-		else if (y == -1)
-			return x;
-		else
-			return Math.max(x, y);
 	}
 	
 }
