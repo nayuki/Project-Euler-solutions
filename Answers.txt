@@ -50,6 +50,7 @@ Problem 053: 4075
 Problem 055: 249
 Problem 056: 972
 Problem 057: 153
+Problem 058: 26241
 Problem 059: 107359
 Problem 063: 49
 Problem 064: 1322
