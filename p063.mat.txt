@@ -1,0 +1,4 @@
+(* Use this in Wolfram Mathematica *)
+
+(* When n = 22 or above, it is impossible for an nth power have n digits, because 9^22 has 21 digits. *)
+Sum[Floor[(10 ^ n - 1) ^ (1 / n)] - Ceiling[(10 ^ (n - 1)) ^ (1 / n)] + 1, {n, 21}]
