@@ -1,7 +1,8 @@
 (* Use this in Wolfram Mathematica *)
 
-HasPandigitalProduct[n_] := Length[Select[Divisors[n], Function[k, DigitCount[n] + DigitCount[k] + DigitCount[n/k] == {1, 1, 1, 1, 1, 1, 1, 1, 1, 0}]]] > 0
+HasPandigitalProduct[n_] := Select[Divisors[n], Function[k, DigitCount[n] + DigitCount[k] + DigitCount[n/k] == {1, 1, 1, 1, 1, 1, 1, 1, 1, 0}]] != {}
 
+(* A candidate has at most 4 digits. This is because if it has 4 digits, then expressing it as a product of two numbers uses at least 4 digits. *)
 sum = 0;
-For[i = 1, i < 10^8, i++, If[HasPandigitalProduct[i], Print[i]; sum += i]]
+For[i = 1, i < 10^4, i++, If[HasPandigitalProduct[i], Print[i]; sum += i]]
 Print[sum]
