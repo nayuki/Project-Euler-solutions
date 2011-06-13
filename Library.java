@@ -1,5 +1,6 @@
 import java.math.BigInteger;
 
+
 final class Library {
 	
 	public static int sqrt(int x) {

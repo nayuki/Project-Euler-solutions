@@ -1,5 +1,6 @@
 import java.util.Arrays;
 
+
 public class p082 {
 	
 	private static int[][] grid = {

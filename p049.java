@@ -1,5 +1,6 @@
 import java.util.Arrays;
 
+
 public class p049 {
 	
 	private static boolean[] isPrime = Library.listPrimality(10000);
