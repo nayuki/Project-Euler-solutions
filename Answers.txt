@@ -42,6 +42,7 @@ Problem 045: 1533776805
 Problem 046: 5777
 Problem 047: 134043
 Problem 048: 9110846700
+Problem 049: 296962999629
 Problem 050: 997651
 Problem 052: 142857
 Problem 053: 4075
