@@ -32,10 +32,9 @@ public class p037 {
 	
 	
 	private static boolean isRightTruncatablePrime(int x) {
-		while (x != 0) {
+		for (; x != 0; x /= 10) {
 			if (!isPrime(x))
 				return false;
-			x /= 10;
 		}
 		return true;
 	}
