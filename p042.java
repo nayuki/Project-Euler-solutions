@@ -15,10 +15,10 @@ public class p042 {
 	
 	private static boolean isTriangularNumber(int x) {
 		int a = 8 * x + 1;
-		if (sqrt(a) * sqrt(a) != a)
+		if (Library.sqrt(a) * Library.sqrt(a) != a)
 			return false;
 		
-		int b = sqrt(a) - 1;
+		int b = Library.sqrt(a) - 1;
 		if (b % 2 != 0)
 			return false;
 		
@@ -36,19 +36,6 @@ public class p042 {
 			sum += c - 'A' + 1;
 		}
 		return sum;
-	}
-	
-	
-	private static int sqrt(int x) {
-		if (x < 0)
-			throw new IllegalArgumentException("Square root of negative number");
-		int y = 0;
-		for (int i = 32768; i >= 1; i /= 2) {
-			y += i;
-			if (y > 46340 || y * y > x)
-				y -= i;
-		}
-		return y;
 	}
 	
 }

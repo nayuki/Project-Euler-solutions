@@ -20,36 +20,9 @@ public class p027 {
 	
 	private static int numberOfConsecutivePrimesGenerated(int a, int b) {
 		int i = 0;
-		while (isPrime(i * i + i * a + b))
+		while (Library.isPrime(i * i + i * a + b))
 			i++;
 		return i;
-	}
-	
-	
-	
-	private static boolean isPrime(int x) {
-		if (x <= 1)
-			return false;
-		else {
-			for (int i = 2, end = sqrt(x); i <= end; i ++) {
-				if (x % i == 0)
-					return false;
-			}
-			return true;
-		}
-	}
-	
-	
-	private static int sqrt(int x) {
-		if (x < 0)
-			throw new IllegalArgumentException("Square root of negative number");
-		int y = 0;
-		for (int i = 32768; i != 0; i >>>= 1) {
-			y |= i;
-			if (y > 46340 || y * y > x)
-				y ^= i;
-		}
-		return y;
 	}
 	
 }

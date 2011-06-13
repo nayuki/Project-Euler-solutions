@@ -8,7 +8,7 @@ public class p041 {
 			
 			int result = -1;
 			do {
-				if (isPrime(toInteger(digits)))
+				if (Library.isPrime(toInteger(digits)))
 					result = toInteger(digits);
 			} while (nextPermutation(digits));
 			if (result != -1) {
@@ -38,32 +38,6 @@ public class p041 {
 		a[i] = a[j];
 		a[j] = tp;
 		return true;
-	}
-	
-	
-	private static boolean isPrime(int x) {
-		if (x <= 1)
-			return false;
-		else {
-			for (int i = 2, end = sqrt(x); i <= end; i ++) {
-				if (x % i == 0)
-					return false;
-			}
-			return true;
-		}
-	}
-	
-	
-	private static int sqrt(int x) {
-		if (x < 0)
-			throw new IllegalArgumentException("Square root of negative number");
-		int y = 0;
-		for (int i = 32768; i != 0; i >>>= 1) {
-			y |= i;
-			if (y > 46340 || y * y > x)
-				y ^= i;
-		}
-		return y;
 	}
 	
 	
