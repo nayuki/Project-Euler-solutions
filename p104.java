@@ -46,8 +46,8 @@ public class p104 {
 			// Loop invariant: a = f(m), b = f(m+1)
 			
 			// Double it
-			BigInteger d = multiply(a, b.shiftLeft(1).subtract(a));
-			BigInteger e = multiply(a, a).add(multiply(b, b));
+			BigInteger d = Library.multiply(a, b.shiftLeft(1).subtract(a));
+			BigInteger e = Library.multiply(a, a).add(Library.multiply(b, b));
 			a = d;
 			b = e;
 			m *= 2;
@@ -61,41 +61,6 @@ public class p104 {
 			}
 		}
 		return a;
-	}
-	
-	
-	private static BigInteger multiply(BigInteger x, BigInteger y) {
-		if (x.signum() < 0 && y.signum() < 0) {
-			return karatsubaMultiply(x.negate(), y.negate());
-		} else if (x.signum() < 0 && y.signum() >= 0) {
-			return karatsubaMultiply(x.negate(), y).negate();
-		} else if (x.signum() >= 0 && y.signum() < 0) {
-			return karatsubaMultiply(x, y.negate()).negate();
-		} else {  // Main case. x >= 0, y >= 0.
-			return karatsubaMultiply(x, y);
-		}
-	}
-	
-	
-	private static final int CUTOFF = 2048;
-	
-	private static BigInteger karatsubaMultiply(BigInteger x, BigInteger y) {
-		if (x.bitLength() <= CUTOFF || y.bitLength() <= CUTOFF) {  // Base case
-			return x.multiply(y);
-		} else {
-			int n = Math.max(x.bitLength(), y.bitLength());
-			int half = (n + 32) / 64 * 32;
-			BigInteger mask = BigInteger.ONE.shiftLeft(half).subtract(BigInteger.ONE);
-			BigInteger xlow = x.and(mask);
-			BigInteger ylow = y.and(mask);
-			BigInteger xhigh = x.shiftRight(half);
-			BigInteger yhigh = y.shiftRight(half);
-			BigInteger a = karatsubaMultiply(xhigh, yhigh);
-			BigInteger b = karatsubaMultiply(xlow.add(xhigh), ylow.add(yhigh));
-			BigInteger c = karatsubaMultiply(xlow, ylow);
-			BigInteger d = b.subtract(a).subtract(c);
-			return c.add(d.shiftLeft(half)).add(a.shiftLeft(half * 2));
-		}
 	}
 	
 }

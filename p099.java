@@ -1054,45 +1054,10 @@ public class p099 {
 		BigInteger z = BigInteger.ONE;
 		for (; y != 0; y >>>= 1) {
 			if ((y & 1) != 0)
-				z = multiply(z, x);
-			x = multiply(x, x);
+				z = Library.multiply(z, x);
+			x = Library.multiply(x, x);
 		}
 		return z;
-	}
-	
-	
-	private static BigInteger multiply(BigInteger x, BigInteger y) {
-		if (x.signum() < 0 && y.signum() < 0) {
-			return privateMultiply(x.negate(), y.negate());
-		} else if (x.signum() < 0 && y.signum() >= 0) {
-			return privateMultiply(x.negate(), y).negate();
-		} else if (x.signum() >= 0 && y.signum() < 0) {
-			return privateMultiply(x, y.negate()).negate();
-		} else {  // Main case. x >= 0, y >= 0.
-			return privateMultiply(x, y);
-		}
-	}
-	
-	
-	private static final int CUTOFF = 2048;
-	
-	private static BigInteger privateMultiply(BigInteger x, BigInteger y) {
-		if (x.bitLength() <= CUTOFF || y.bitLength() <= CUTOFF) {  // Base case
-			return x.multiply(y);
-		} else {
-			int n = Math.max(x.bitLength(), y.bitLength());
-			int half = (n + 32) / 64 * 32;
-			BigInteger mask = BigInteger.ONE.shiftLeft(half).subtract(BigInteger.ONE);
-			BigInteger xlow = x.and(mask);
-			BigInteger ylow = y.and(mask);
-			BigInteger xhigh = x.shiftRight(half);
-			BigInteger yhigh = y.shiftRight(half);
-			BigInteger a = privateMultiply(xhigh, yhigh);
-			BigInteger b = privateMultiply(xlow.add(xhigh), ylow.add(yhigh));
-			BigInteger c = privateMultiply(xlow, ylow);
-			BigInteger d = b.subtract(a).subtract(c);
-			return c.add(d.shiftLeft(half)).add(a.shiftLeft(half * 2));
-		}
 	}
 	
 }
