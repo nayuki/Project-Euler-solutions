@@ -57,6 +57,7 @@ Problem 064: 1322
 Problem 065: 272
 Problem 067: 7273
 Problem 069: 510510
+Problem 070: 8319823
 Problem 071: 428570
 Problem 072: 303963552391
 Problem 073: 7295372
