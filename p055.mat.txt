@@ -1,0 +1,8 @@
+(* Use this in Wolfram Mathematica *)
+
+ReverseInt[x_] := FromDigits[Reverse[IntegerDigits[x]]]
+PalindromeQ[x_] := IntegerDigits[x] == Reverse[IntegerDigits[x]]
+LychrelQ[x_] := LychrelQ[x, 50]
+LychrelQ[x_, 0 ] := True
+LychrelQ[x_, i_] := If[PalindromeQ[x + ReverseInt[x]], False, LychrelQ[x + ReverseInt[x], i - 1]]
+Length[Select[Range[9999], LychrelQ]]

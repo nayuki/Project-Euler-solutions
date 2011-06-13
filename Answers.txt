@@ -45,6 +45,7 @@ Problem 048: 9110846700
 Problem 050: 997651
 Problem 052: 142857
 Problem 053: 4075
+Problem 055: 249
 Problem 056: 972
 Problem 057: 153
 Problem 059: 107359
