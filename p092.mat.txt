@@ -1,0 +1,6 @@
+(* Use this in Wolfram Mathematica *)
+
+EightyNineQ[1] := False
+EightyNineQ[89] := True
+EightyNineQ[x_] := EightyNineQ[Total[Map[(#^2) &, IntegerDigits[x]]]]
+Length[Select[Range[10^7 - 1], EightyNineQ]]
