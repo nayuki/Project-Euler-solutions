@@ -1,26 +1,38 @@
 public class p187 {
 	
-	private static boolean[] isPrime = Library.listPrimality(100000000);
+	private static int[] smallestPrimeFactor = listSmallestPrimeFactor(100000000);
 	
 	
 	public static void main(String[] args) {
 		int count = 0;
 		for (int i = 2; i < 100000000; i++) {
-			if (has2PrimeFactors(i))
+			if (!isPrime(i) && isPrime(i / smallestPrimeFactor[i]))
 				count++;
 		}
 		System.out.println(count);
 	}
 	
 	
-	private static boolean has2PrimeFactors(int n) {
-		if (isPrime[n])
-			return false;
-		for (int i = 2, end = Library.sqrt(n); i <= end; i++) {
-			if (n % i == 0)
-				return isPrime[n / i];
+	private static int[] listSmallestPrimeFactor(int n) {
+		// Richer version of the sieve of Eratosthenes
+		int[] smallestPrimeFactor = new int[n + 1];
+		for (int i = 2; i < smallestPrimeFactor.length; i++) {
+			if (smallestPrimeFactor[i] == 0) {
+				smallestPrimeFactor[i] = i;
+				if ((long)i * i <= n) {
+					for (int j = i * i; j <= n; j += i) {
+						if (smallestPrimeFactor[j] == 0)
+							smallestPrimeFactor[j] = i;
+					}
+				}
+			}
 		}
-		throw new AssertionError();
+		return smallestPrimeFactor;
+	}
+	
+	
+	private static boolean isPrime(int n) {
+		return smallestPrimeFactor[n] == n;
 	}
 	
 }
