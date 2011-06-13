@@ -60,6 +60,7 @@ Problem 069: 510510
 Problem 071: 428570
 Problem 072: 303963552391
 Problem 073: 7295372
+Problem 074: 402
 Problem 076: 190569291
 Problem 079: 73162890
 Problem 080: 40886
