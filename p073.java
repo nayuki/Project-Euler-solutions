@@ -12,7 +12,7 @@ public class p073 {
 		int count = 0;
 		for (int d = 1; d <= 12000; d++) {
 			for (int n = 1; n <= d / 2; n++) {
-				if (gcd(n, d) == 1 && lessThan(1, 3, n, d) && lessThan(n, d, 1, 2))
+				if (Library.gcd(n, d) == 1 && lessThan(1, 3, n, d) && lessThan(n, d, 1, 2))
 					count++;
 			}
 		}
@@ -22,16 +22,6 @@ public class p073 {
 	
 	private static boolean lessThan(int n0, int d0, int n1, int d1) {
 		return n0 * d1 < n1 * d0;
-	}
-	
-	
-	private static int gcd(int x, int y) {
-		while (y != 0) {
-			int z = x % y;
-			x = y;
-			y = z;
-		}
-		return x;
 	}
 	
 	

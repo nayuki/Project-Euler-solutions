@@ -15,6 +15,16 @@ final class Library {
 	}
 	
 	
+	public static int gcd(int x, int y) {
+		while (y != 0) {
+			int z = x % y;
+			x = y;
+			y = z;
+		}
+		return x;
+	}
+	
+	
 	public static boolean isPrime(int x) {
 		if (x < 0)
 			throw new IllegalArgumentException();
@@ -48,6 +58,27 @@ final class Library {
 			}
 		}
 		return prime;
+	}
+	
+	
+	public static int totient(int x) {
+		if (x <= 0)
+			throw new IllegalArgumentException("Totient of non-positive integer");
+		int p = 1;
+		for (int i = 2, end = Library.sqrt(x); i <= end; i++) {  // Trial division
+			if (x % i == 0) {  // Found a factor
+				p *= i - 1;
+				x /= i;
+				while (x % i == 0) {
+					p *= i;
+					x /= i;
+				}
+				end = Library.sqrt(x);
+			}
+		}
+		if (x != 1)
+			p *= x - 1;
+		return p;
 	}
 	
 	
