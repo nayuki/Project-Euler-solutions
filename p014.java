@@ -17,12 +17,12 @@ public class p014 {
 	
 	
 	
-	private static int[] collatz;
+	private static int[] collatz;  // Memoization
 	
 	static {
 		collatz = new int[10000000];
 		Arrays.fill(collatz, -1);
-		collatz[1] = 0;
+		collatz[1] = 1;
 	}
 	
 	
@@ -31,16 +31,13 @@ public class p014 {
 			throw new IllegalArgumentException();
 		
 		if (n < collatz.length && collatz[(int)n] != -1)
-			return collatz[(int)n];
+			return collatz[(int)n];  // Return memoized
 		else {
 			int result;
-			if (n % 2 == 0)
-				result = collatz(n / 2) + 1;
-			else
-				result = collatz(checkedAdd(checkedMultiply(n, 3), 1)) + 1;
+			if (n % 2 == 0) result = collatz(n / 2) + 1;
+			else            result = collatz(checkedAdd(checkedMultiply(n, 3), 1)) + 1;
 			
-			if (n < collatz.length)
-				collatz[(int)n] = result;
+			if (n < collatz.length) collatz[(int)n] = result;  // Memoize
 			return result;
 		}
 	}
