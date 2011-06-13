@@ -22,7 +22,7 @@ public class p018 {
 	public static void main(String[] args) {
 		for (int i = triangle.length - 2; i >= 0; i--) {
 			for (int j = 0; j < triangle[i].length; j++)
-				triangle[i][j] += Math.max(triangle[i + 1][j], triangle[i + 1][j + 1]);
+				triangle[i][j] += Math.max(triangle[i + 1][j], triangle[i + 1][j + 1]);  // Dynamic programming
 		}
 		System.out.println(triangle[0][0]);
 	}
