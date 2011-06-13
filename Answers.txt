@@ -66,6 +66,7 @@ Problem 081: 427337
 Problem 082: 260324
 Problem 083: 425185
 Problem 085: 2772
+Problem 089: 743
 Problem 097: 8739992577
 Problem 092: 8581146
 Problem 099: 709
