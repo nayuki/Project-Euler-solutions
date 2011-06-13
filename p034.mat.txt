@@ -1,3 +1,3 @@
 (* Use this in Wolfram Mathematica *)
 
-Apply[Plus, Select[Range[3, 10^7], Function[n, n == Apply[Plus, Map[Factorial, IntegerDigits[n]]]]]]
+Total[Select[Range[3, 10^7], Function[n, n == Total[Map[Factorial, IntegerDigits[n]]]]]]
