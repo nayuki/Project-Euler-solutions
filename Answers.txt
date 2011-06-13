@@ -55,6 +55,7 @@ Problem 065: 272
 Problem 067: 7273
 Problem 069: 510510
 Problem 072: 303963552391
+Problem 073: 7295372
 Problem 076: 190569291
 Problem 079: 73162890
 Problem 080: 40886
