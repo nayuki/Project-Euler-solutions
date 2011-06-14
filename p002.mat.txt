@@ -1,4 +1,5 @@
 (* Use this in Wolfram Mathematica *)
 
-(* Note: Fibonacci[34] = 5702887 > 4000000 *)
-Total[Select[Map[Fibonacci, Range[33]], Function[x, EvenQ[x] && x <= 4000000]]]
+sum = 0;
+For[i = 0, Fibonacci[i] <= 4000000, i++, If[EvenQ[Fibonacci[i]], sum += Fibonacci[i]]]
+sum
