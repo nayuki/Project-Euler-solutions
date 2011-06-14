@@ -5,4 +5,4 @@ Plot[F[x], {x, -1, 1}]
 Table[N[Nest[F, -1, i], 15], {i, 0, 20}] // TableForm
 Table[N[Nest[F, -1, i], 15], {i, 100, 109}] // TableForm
 Table[N[Nest[F, -1, i], 15], {i, 1000, 1009}] // TableForm
-N[Nest[F, -1, 10000] + Nest[F, -1, 10001], 10]
+N[Nest[F, -1, 10000] + Nest[F, -1, 10001], 10]  (* Empirical approximation *)
