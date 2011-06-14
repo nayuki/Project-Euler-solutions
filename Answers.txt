@@ -30,6 +30,7 @@ Problem 029: 9183
 Problem 030: 443839
 Problem 031: 73682
 Problem 032: 45228
+Problem 033: 100
 Problem 034: 40730
 Problem 035: 55
 Problem 036: 872187
@@ -37,8 +38,10 @@ Problem 037: 748317
 Problem 038: 932718654
 Problem 039: 840
 Problem 040: 210
+Problem 041: 7652413
 Problem 042: 162
 Problem 043: 16695334890
+Problem 044: 5482660
 Problem 045: 1533776805
 Problem 046: 5777
 Problem 047: 134043
@@ -71,9 +74,9 @@ Problem 082: 260324
 Problem 083: 425185
 Problem 085: 2772
 Problem 089: 743
-Problem 097: 8739992577
 Problem 092: 8581146
 Problem 096: 24702
+Problem 097: 8739992577
 Problem 099: 709
 Problem 102: 228
 Problem 104: 329468
