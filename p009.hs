@@ -1,5 +1,3 @@
-import Char (ord)
-
 cond a b = a <= b && b <= c
         && a * a + b * b == c * c
         where c = 1000 - a - b
