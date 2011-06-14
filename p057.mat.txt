@@ -1,3 +1,6 @@
 (* Use this in Wolfram Mathematica *)
 
-Length[Select[Range[2, 1001], Function[n, Length[IntegerDigits[Numerator[FromContinuedFraction[ContinuedFraction[Sqrt[2], n]]]]] > Length[IntegerDigits[Denominator[FromContinuedFraction[ContinuedFraction[Sqrt[2], n]]]]]]]]
+CountDigits[n_] := Length[IntegerDigits[n]]
+ContFrac[n_] := FromContinuedFraction[ContinuedFraction[Sqrt[2], n]]
+NumExceedDenom[n_] := CountDigits[Numerator[ContFrac[n]]] > CountDigits[Denominator[ContFrac[n]]]
+Length[Select[Range[2, 1001], NumExceedDenom]]
