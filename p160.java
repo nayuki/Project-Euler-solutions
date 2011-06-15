@@ -1,78 +1,64 @@
 public class p160 {
 	
 	public static void main(String[] args) {
-		System.out.println(factorialLast5Digits(1, 1000000000000L));
+		System.out.println(factorialLast(1000000000000L));
 	}
 	
 	
-	private static int factorialLast5Digits(long start, long end) {
-		long x = 1;
-		long twos = 0;
-		long i = start;
-		
-		for (; i <= end && i % 10 != 0; i++) {  // Iterate up to a multiple of 10
-			long j = i;
-			for (; j % 2 == 0; twos++, j /= 2);
-			for (; j % 5 == 0; twos--, j /= 5);
-			x = x * j % 100000;
+	// The last 5 digits of n!.
+	private static long factorialLast(long n) {
+		long twos = countFactors(n, 2) - countFactors(n, 5);  // Always non-negative for every n
+		return factorialish(n) * powMod(2, twos, 100000) % 100000;
+	}
+	
+	
+	// Equal to n! but with all factors of 2 and 5 removed and then modulo 10^5.
+	// The identity f(n) = of(n) * ef(n) (mod 10^5) is true by definition.
+	private static long factorialish(long n) {
+		return evenFactorialish(n) * oddFactorialish(n) % 100000;
+	}
+	
+	
+	// The product of {all even numbers up to and including n}, but with all factors of 2 and 5 removed and then modulo 10^5.
+	// For example, ef(9) only considers the numbers {2, 4, 6, 8}. Divide each number by 2 to get {1, 2, 3, 4}. Thus ef(9) = f(4).
+	private static long evenFactorialish(long n) {
+		if (n == 0)
+			return 1;
+		else
+			return factorialish(n / 2);
+	}
+	
+	
+	// The product of {all odd numbers up to and including n}, but with all factors of 2 and 5 removed and then modulo 10^5.
+	// By definition, of() never considers any number that has a factor of 2. The product of the numbers that not a multiple of 5 are accumulated by factorialoid(). Those that are a multiple of 5 are handled recursively by of(), noting that they are still odd after dividing by 5.
+	private static long oddFactorialish(long n) {
+		if (n == 0)
+			return 1;
+		else
+			return oddFactorialish(n / 5) * factorialoid(n) % 100000;
+	}
+	
+	
+	// The product of {all numbers coprime with 10 up to and including n}, modulo 10^5.
+	// The input argument can be taken modulo 10^5 because factorialoid(10^5) = 1 and the processing behaves the same for each block of 10^5 consecutive numbers.
+	private static long factorialoid(long n) {
+		n %= 100000;
+		long product = 1;
+		for (int i = 1; i <= n; i++) {
+			if (i % 2 != 0 && i % 5 != 0)
+				product = i * product % 100000;
 		}
-		for (; i + 9 <= end; i += 10) {  // Iterate by tens
-			long j;
-			// 0
-			j = i;
-			do {j >>>= 1; twos++;} while ((j & 1) == 0);
-			do {j /= 5; twos--;} while (j % 5 == 0);
-			x = x * j % 100000;
-			
-			// 1
-			j = i + 1;
-			x = x * j % 100000;
-			
-			// 2
-			j = i + 2;
-			do {j >>>= 1; twos++;} while ((j & 1) == 0);
-			x = x * j % 100000;
-			
-			// 3
-			j = i + 3;
-			x = x * j % 100000;
-			
-			// 4
-			j = i + 4;
-			do {j >>>= 1; twos++;} while ((j & 1) == 0);
-			x = x * j % 100000;
-			
-			// 5
-			j = i + 5;
-			do {j /= 5; twos--;} while (j % 5 == 0);
-			x = x * j % 100000;
-			
-			// 6
-			j = i + 6;
-			do {j >>>= 1; twos++;} while ((j & 1) == 0);
-			x = x * j % 100000;
-			
-			// 7
-			j = i + 7;
-			x = x * j % 100000;
-			
-			// 8
-			j = i + 8;
-			do {j >>>= 1; twos++;} while ((j & 1) == 0);
-			x = x * j % 100000;
-			
-			// 9
-			j = i + 9;
-			x = x * j % 100000;
-		}
-		for (; i <= end; i++) {  // Iterate up to end
-			long j = i;
-			for (; j % 2 == 0; twos++, j /= 2);
-			for (; j % 5 == 0; twos--, j /= 5);
-			x = x * j % 100000;
-		}
-		
-		return (int)(x * powMod(2, twos, 100000) % 100000);
+		return product;
+	}
+	
+	
+	// Counts the number of factors of n in the set of integers {1, 2, ..., end}.
+	// For example, countFactors(25, 5) = 6 because {5, 10, 15, 20} each has one factor of 5, and 25 has two factors of 5.
+	private static long countFactors(long end, long n) {
+		if (end == 0)
+			return 0;
+		else
+			return end / n + countFactors(end / n, n);
 	}
 	
 	
