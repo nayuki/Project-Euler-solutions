@@ -1,3 +1,9 @@
+(* 
+ * Solution to Project Euler problem 53
+ * By Nayuki Minase
+ *)
+
+
 (* Use this in Wolfram Mathematica *)
 
 Length[Select[Flatten[Table[Table[Binomial[n, r], {r, 0, n}], {n, 1, 100}]], Function[x, x > 1000000]]]

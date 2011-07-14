@@ -1,3 +1,9 @@
+/* 
+ * Solution to Project Euler problem 214
+ * By Nayuki Minase
+ */
+
+
 public class p214 {
 	
 	public static void main(String[] args) {

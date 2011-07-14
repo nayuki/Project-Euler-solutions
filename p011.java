@@ -1,3 +1,9 @@
+/* 
+ * Solution to Project Euler problem 11
+ * By Nayuki Minase
+ */
+
+
 public class p011 {
 	
 	private static int[][] square = {

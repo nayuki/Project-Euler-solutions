@@ -1,3 +1,9 @@
+/* 
+ * Solution to Project Euler problem 107
+ * By Nayuki Minase
+ */
+
+
 public class p107 {
 	
 	private static int[][] weights = {

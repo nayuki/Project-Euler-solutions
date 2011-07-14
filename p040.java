@@ -1,3 +1,9 @@
+/* 
+ * Solution to Project Euler problem 40
+ * By Nayuki Minase
+ */
+
+
 public class p040 {
 	
 	public static void main(String[] args) {

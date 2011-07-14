@@ -1,3 +1,9 @@
+(* 
+ * Solution to Project Euler problem 15
+ * By Nayuki Minase
+ *)
+
+
 (* Use this in Wolfram Mathematica *)
 
 Binomial[40, 20]

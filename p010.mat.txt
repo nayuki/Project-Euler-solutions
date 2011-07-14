@@ -1,3 +1,9 @@
+(* 
+ * Solution to Project Euler problem 10
+ * By Nayuki Minase
+ *)
+
+
 (* Use this in Wolfram Mathematica *)
 
 Total[Select[Range[1999999], PrimeQ]]

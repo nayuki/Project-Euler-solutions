@@ -1,3 +1,9 @@
+/* 
+ * Solution to Project Euler problem 46
+ * By Nayuki Minase
+ */
+
+
 public class p046 {
 	
 	private static boolean[] isPrime = Library.listPrimality(10000);

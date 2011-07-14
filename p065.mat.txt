@@ -1,3 +1,9 @@
+(* 
+ * Solution to Project Euler problem 65
+ * By Nayuki Minase
+ *)
+
+
 (* Use this in Wolfram Mathematica *)
 
 Total[IntegerDigits[Numerator[FromContinuedFraction[ContinuedFraction[E, 100]]]]]

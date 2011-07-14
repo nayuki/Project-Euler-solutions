@@ -1,3 +1,9 @@
+/* 
+ * Solution to Project Euler problem 117
+ * By Nayuki Minase
+ */
+
+
 public class p117 {
 	
 	public static void main(String[] args) {

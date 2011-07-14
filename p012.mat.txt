@@ -1,3 +1,9 @@
+(* 
+ * Solution to Project Euler problem 12
+ * By Nayuki Minase
+ *)
+
+
 (* Use this in Wolfram Mathematica *)
 
 TriangleNumber[n_] := Sum[i, {i, n}]

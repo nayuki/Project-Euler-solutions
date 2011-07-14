@@ -1,3 +1,9 @@
+/* 
+ * Solution to Project Euler problem 70
+ * By Nayuki Minase
+ */
+
+
 import java.util.Arrays;
 
 

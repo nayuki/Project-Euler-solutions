@@ -1,3 +1,9 @@
+/* 
+ * Solution to Project Euler problem 81
+ * By Nayuki Minase
+ */
+
+
 public class p081 {
 	
 	private static int[][] grid = {

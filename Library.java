@@ -1,3 +1,9 @@
+/* 
+ * Shared code for solutions to Project Euler problems
+ * By Nayuki Minase
+ */
+
+
 import java.math.BigInteger;
 
 

@@ -1,3 +1,9 @@
+/* 
+ * Solution to Project Euler problem 99
+ * By Nayuki Minase
+ */
+
+
 import java.math.BigInteger;
 
 

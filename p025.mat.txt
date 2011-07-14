@@ -1,3 +1,9 @@
+(* 
+ * Solution to Project Euler problem 25
+ * By Nayuki Minase
+ *)
+
+
 (* Use this in Wolfram Mathematica *)
 
 i = 0;

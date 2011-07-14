@@ -1,3 +1,9 @@
+(* 
+ * Solution to Project Euler problem 20
+ * By Nayuki Minase
+ *)
+
+
 (* Use this in Wolfram Mathematica *)
 
 Total[IntegerDigits[100!]]

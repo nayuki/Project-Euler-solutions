@@ -1,3 +1,9 @@
+/* 
+ * Solution to Project Euler problem 67
+ * By Nayuki Minase
+ */
+
+
 public class p067 {
 	
 	private static int[][] triangle = {

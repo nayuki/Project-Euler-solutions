@@ -1,3 +1,9 @@
+/* 
+ * Solution to Project Euler problem 19
+ * By Nayuki Minase
+ */
+
+
 public class p019 {
 	
 	public static void main(String[] args) {

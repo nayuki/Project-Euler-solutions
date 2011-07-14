@@ -1,3 +1,9 @@
+/* 
+ * Solution to Project Euler problem 26
+ * By Nayuki Minase
+ */
+
+
 import java.util.HashMap;
 import java.util.Map;
 

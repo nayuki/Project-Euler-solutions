@@ -1,3 +1,9 @@
+(* 
+ * Solution to Project Euler problem 104
+ * By Nayuki Minase
+ *)
+
+
 (* Use this in Wolfram Mathematica *)
 
 Test[n_] := With[{f = Fibonacci[n]}, f >= 10^8 && Sort[Take[IntegerDigits[f], 9]] == Sort[Take[IntegerDigits[f], -9]] == {1,2,3,4,5,6,7,8,9}]

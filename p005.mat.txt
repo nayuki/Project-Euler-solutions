@@ -1,3 +1,9 @@
+(* 
+ * Solution to Project Euler problem 5
+ * By Nayuki Minase
+ *)
+
+
 (* Use this in Wolfram Mathematica *)
 
 Apply[LCM, Range[20]]

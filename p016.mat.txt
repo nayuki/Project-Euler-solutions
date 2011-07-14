@@ -1,3 +1,9 @@
+(* 
+ * Solution to Project Euler problem 16
+ * By Nayuki Minase
+ *)
+
+
 (* Use this in Wolfram Mathematica *)
 
 Total[IntegerDigits[2^1000]]

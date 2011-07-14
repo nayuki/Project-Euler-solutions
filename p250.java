@@ -1,3 +1,9 @@
+/* 
+ * Solution to Project Euler problem 250
+ * By Nayuki Minase
+ */
+
+
 public class p250 {
 	
 	public static void main(String[] args) {

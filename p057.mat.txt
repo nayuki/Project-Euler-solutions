@@ -1,3 +1,9 @@
+(* 
+ * Solution to Project Euler problem 57
+ * By Nayuki Minase
+ *)
+
+
 (* Use this in Wolfram Mathematica *)
 
 CountDigits[n_] := Length[IntegerDigits[n]]

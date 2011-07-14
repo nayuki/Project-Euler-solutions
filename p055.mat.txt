@@ -1,3 +1,9 @@
+(* 
+ * Solution to Project Euler problem 55
+ * By Nayuki Minase
+ *)
+
+
 (* Use this in Wolfram Mathematica *)
 
 ReverseInt[x_] := FromDigits[Reverse[IntegerDigits[x]]]

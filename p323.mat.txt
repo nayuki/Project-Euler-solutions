@@ -1,3 +1,9 @@
+(* 
+ * Solution to Project Euler problem 323
+ * By Nayuki Minase
+ *)
+
+
 (* Use this in Wolfram Mathematica *)
 
 cdf[n_] := (1 - (1/2)^n) ^ 32

@@ -1,3 +1,9 @@
+(* 
+ * Solution to Project Euler problem 9
+ * By Nayuki Minase
+ *)
+
+
 (* Use this in Wolfram Mathematica *)
 
 For[a = 1, a <= 1000, a++,

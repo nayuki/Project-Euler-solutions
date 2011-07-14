@@ -1,3 +1,7 @@
+-- Solution to Project Euler problem 22
+-- By Nayuki Minase
+
+
 import List (sort)
 import Char (ord)
 

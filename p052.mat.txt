@@ -1,3 +1,9 @@
+(* 
+ * Solution to Project Euler problem 52
+ * By Nayuki Minase
+ *)
+
+
 (* Use this in Wolfram Mathematica *)
 
 SameDigits[x_, y_] := Sort[IntegerDigits[x]] == Sort[IntegerDigits[y]]

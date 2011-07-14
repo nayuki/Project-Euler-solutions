@@ -1,3 +1,9 @@
+(* 
+ * Solution to Project Euler problem 21
+ * By Nayuki Minase
+ *)
+
+
 (* Use this in Wolfram Mathematica *)
 
 DivisorSum[n_] := Total[Divisors[n]] - n

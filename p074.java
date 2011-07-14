@@ -1,3 +1,9 @@
+/* 
+ * Solution to Project Euler problem 74
+ * By Nayuki Minase
+ */
+
+
 import java.util.HashSet;
 import java.util.Set;
 

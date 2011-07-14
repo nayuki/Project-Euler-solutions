@@ -1,3 +1,9 @@
+(* 
+ * Solution to Project Euler problem 80
+ * By Nayuki Minase
+ *)
+
+
 (* Use this in Wolfram Mathematica *)
 
 Total[Map[Function[x, Total[IntegerDigits[Floor[Sqrt[x] * 10^(100 - Ceiling[Log[10, Sqrt[x]]])]]]], Select[Range[1, 100], Composition[Not, IntegerQ, Sqrt]]]]

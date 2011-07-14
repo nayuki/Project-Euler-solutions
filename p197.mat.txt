@@ -1,3 +1,9 @@
+(* 
+ * Solution to Project Euler problem 197
+ * By Nayuki Minase
+ *)
+
+
 (* Use this in Wolfram Mathematica *)
 
 F[x_] := Floor[2^(30.403243784`30 - x^2)] * 10^-9

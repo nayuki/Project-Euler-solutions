@@ -1,3 +1,9 @@
+/* 
+ * Solution to Project Euler problem 122
+ * By Nayuki Minase
+ */
+
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

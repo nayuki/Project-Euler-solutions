@@ -1,3 +1,9 @@
+/* 
+ * Solution to Project Euler problem 187
+ * By Nayuki Minase
+ */
+
+
 public class p187 {
 	
 	private static int[] smallestPrimeFactor = listSmallestPrimeFactor(100000000);

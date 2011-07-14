@@ -1,3 +1,9 @@
+(* 
+ * Solution to Project Euler problem 63
+ * By Nayuki Minase
+ *)
+
+
 (* Use this in Wolfram Mathematica *)
 
 (* When n = 22 or above, it is impossible for an nth power have n digits, because 9^22 has 21 digits. *)

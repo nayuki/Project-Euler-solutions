@@ -1,3 +1,9 @@
+/* 
+ * Solution to Project Euler problem 59
+ * By Nayuki Minase
+ */
+
+
 import java.io.UnsupportedEncodingException;
 
 
