@@ -11,11 +11,11 @@ public class p054 {
 		for (String hand : HANDS) {
 			String[] cards = hand.split(" ");
 			
-			int[] player1 = new int[5];
+			Card[] player1 = new Card[5];
 			for (int i = 0; i < 5; i++)
 				player1[i] = parseCard(cards[i]);
 			
-			int[] player2 = new int[5];
+			Card[] player2 = new Card[5];
 			for (int i = 0; i < 5; i++)
 				player2[i] = parseCard(cards[i + 5]);
 			
@@ -26,23 +26,36 @@ public class p054 {
 	}
 	
 	
-	private static int parseCard(String cardStr) {
-		int rank = "23456789TJQKA".indexOf(cardStr.charAt(0));
-		int suit = "SHCD".indexOf(cardStr.charAt(1));
-		if (rank == -1 || suit == -1)
-			throw new IllegalArgumentException();
-		int card = suit << 4 | rank;
-		return card;
+	
+	private static final class Card {
+		
+		public final int rank;
+		public final int suit;
+		
+		
+		public Card(int rank, int suit) {
+			if (rank < 0 || rank >= 13 || suit < 0 || suit >= 4)
+				throw new IllegalArgumentException();
+			this.rank = rank;
+			this.suit = suit;
+		}
+		
 	}
 	
 	
-	private static int getScore(int[] hand) {
+	
+	private static Card parseCard(String cardStr) {
+		return new Card("23456789TJQKA".indexOf(cardStr.charAt(0)), "SHCD".indexOf(cardStr.charAt(1)));
+	}
+	
+	
+	private static int getScore(Card[] hand) {
 		// Build histograms
 		int[] ranks = new int[13];
 		int[] suits = new int[4];
 		for (int i = 0; i < hand.length; i++) {
-			ranks[hand[i] & 0xF]++;
-			suits[hand[i] >>> 4]++;
+			ranks[hand[i].rank]++;
+			suits[hand[i].suit]++;
 		}
 		
 		// Build histograms of histograms
@@ -62,8 +75,8 @@ public class p054 {
 			
 			int[] flushRanks = new int[13];
 			for (int i = 0; i < hand.length; i++) {
-				if ((hand[i] >>> 4) == flush)
-					flushRanks[hand[i] & 0xF]++;
+				if ((hand[i].suit) == flush)
+					flushRanks[hand[i].rank]++;
 			}
 			
 			// Straight flush
@@ -120,8 +133,8 @@ public class p054 {
 		if (flush != -1) {
 			int[] flushRanks = new int[13];
 			for (int i = 0; i < hand.length; i++) {
-				if ((hand[i] >>> 4) == flush)
-					flushRanks[hand[i] & 0xF]++;
+				if ((hand[i].suit) == flush)
+					flushRanks[hand[i].rank]++;
 			}
 			
 			// Get cards in the flush
