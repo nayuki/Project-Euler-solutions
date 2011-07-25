@@ -53,6 +53,7 @@ Problem 047: 134043
 Problem 048: 9110846700
 Problem 049: 296962999629
 Problem 050: 997651
+Problem 051: 121313
 Problem 052: 142857
 Problem 053: 4075
 Problem 054: 376
