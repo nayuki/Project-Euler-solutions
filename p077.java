@@ -47,13 +47,11 @@ public class p077 {
 	private static int primePartitions(int n, int max) {
 		if (primePartitions[n][max] != -1)
 			return primePartitions[n][max];
+		
 		else {
 			int result;
-			
 			if (n == 0)
 				result = 1;
-			else if (n == 1)
-				result = 0;
 			else {
 				result = 0;
 				for (int p : primes) {
