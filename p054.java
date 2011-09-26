@@ -1,3 +1,4 @@
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -31,33 +32,6 @@ public class p054 {
 	
 	
 	
-	private static final class Card {
-		
-		public final int rank;
-		public final int suit;
-		
-		
-		public Card(int rank, int suit) {
-			if (rank < 0 || rank >= 13 || suit < 0 || suit >= 4)
-				throw new IllegalArgumentException();
-			this.rank = rank;
-			this.suit = suit;
-		}
-		
-		
-		public Card(String str) {
-			this("23456789TJQKA".indexOf(str.charAt(0)), "SHCD".indexOf(str.charAt(1)));
-		}
-		
-		
-		public int toNumber() {
-			return rank * 4 + suit;
-		}
-		
-	}
-	
-	
-	
 	private static int getScore(Card[] hand) {
 		// Build histograms
 		int[] ranks = new int[13];
@@ -81,22 +55,11 @@ public class p054 {
 		int flushSuit = getFlushSuit(suits);
 		
 		// Straight flush
-		if (straightHighRank != -1 && flushSuit != -1) {	
-			Set<Integer> tempHand = new HashSet<Integer>();
-			for (Card card : hand)
-				tempHand.add(card.toNumber());
-			
-			boolean pass = true;
-			for (int i = 0; i < 5; i++) {
-				int rank = (straightHighRank - i + 13) % 13;
-				pass &= tempHand.contains(rank * 4 + flushSuit);
-			}
-			if (pass)
-				return 8 << 20 | straightHighRank;
-		}
+		if (hasStraightFlush(hand, straightHighRank, flushSuit))
+			return 8 << 20 | straightHighRank;
 		
 		// Four of a kind
-		if (ranksHist[4] >= 1)
+		else if (ranksHist[4] >= 1)
 			return 7 << 20 | bestCards;
 		
 		// Full house
@@ -157,6 +120,22 @@ public class p054 {
 	}
 	
 	
+	private static boolean hasStraightFlush(Card[] hand, int straightHighRank, int flushSuit) {
+		if (straightHighRank == -1 || flushSuit == -1)
+			return false;
+		
+		Set<Card> tempHand = new HashSet<Card>();
+		Collections.addAll(tempHand, hand);
+		
+		for (int i = 0; i < 5; i++) {
+			int rank = (straightHighRank - i + 13) % 13;
+			if (!tempHand.contains(new Card(rank, flushSuit)))
+				return false;
+		}
+		return true;
+	}
+	
+	
 	private static int getFlushSuit(int[] suits) {
 		for (int i = 0; i < suits.length; i++) {
 			if (suits[i] >= 5)
@@ -176,6 +155,43 @@ public class p054 {
 			return i;
 		}
 		return -1;
+	}
+	
+	
+	
+	private static final class Card {
+		
+		public final int rank;
+		public final int suit;
+		
+		
+		public Card(int rank, int suit) {
+			if (rank < 0 || rank >= 13 || suit < 0 || suit >= 4)
+				throw new IllegalArgumentException();
+			this.rank = rank;
+			this.suit = suit;
+		}
+		
+		
+		public Card(String str) {
+			this("23456789TJQKA".indexOf(str.charAt(0)), "SHCD".indexOf(str.charAt(1)));
+		}
+		
+		
+		public boolean equals(Object obj) {
+			if (!(obj instanceof Card))
+				return false;
+			else {
+				Card other = (Card)obj;
+				return rank == other.rank && suit == other.suit;
+			}
+		}
+		
+		
+		public int hashCode() {
+			return rank * 4 + suit;
+		}
+		
 	}
 	
 	
