@@ -1,11 +1,11 @@
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-
 /* 
  * Solution to Project Euler problem 54
  * By Nayuki Minase
  */
+
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 
 public class p054 {

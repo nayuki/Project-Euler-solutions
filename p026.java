@@ -3,7 +3,6 @@
  * By Nayuki Minase
  */
 
-
 import java.util.HashMap;
 import java.util.Map;
 

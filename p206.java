@@ -3,7 +3,6 @@
  * By Nayuki Minase
  */
 
-
 import java.util.regex.Pattern;
 
 
