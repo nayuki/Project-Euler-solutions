@@ -1,3 +1,6 @@
+import java.util.HashSet;
+import java.util.Set;
+
 /* 
  * Solution to Project Euler problem 54
  * By Nayuki Minase
@@ -46,6 +49,11 @@ public class p054 {
 			this("23456789TJQKA".indexOf(str.charAt(0)), "SHCD".indexOf(str.charAt(1)));
 		}
 		
+		
+		public int toNumber() {
+			return rank * 4 + suit;
+		}
+		
 	}
 	
 	
@@ -60,185 +68,92 @@ public class p054 {
 		}
 		
 		// Build histograms of histograms
-		int[] ranksHist = new int[6];
-		int[] suitsHist = new int[6];
+		int[] ranksHist = new int[hand.length + 1];
+		int[] suitsHist = new int[hand.length + 1];
 		for (int i = 0; i < ranks.length; i++)
 			ranksHist[ranks[i]]++;
 		for (int i = 0; i < suits.length; i++)
 			suitsHist[suits[i]]++;
 		
-		int flush = getFlushSuit(suits);
-		int straight = -1;
+		// Get some summary numbers
+		int bestCards = get5FrequentHighestCards(ranks, ranksHist);
+		int straightHighRank = getStraightHighRank(ranks);
+		int flushSuit = getFlushSuit(suits);
 		
-		// If there is a flush
-		if (flush != -1) {
-			straight = getStraightHigh(ranks);
+		// Straight flush
+		if (straightHighRank != -1 && flushSuit != -1) {	
+			Set<Integer> tempHand = new HashSet<Integer>();
+			for (Card card : hand)
+				tempHand.add(card.toNumber());
 			
-			int[] flushRanks = new int[13];
-			for (int i = 0; i < hand.length; i++) {
-				if ((hand[i].suit) == flush)
-					flushRanks[hand[i].rank]++;
+			boolean pass = true;
+			for (int i = 0; i < 5; i++) {
+				int rank = (straightHighRank - i + 13) % 13;
+				pass &= tempHand.contains(rank * 4 + flushSuit);
 			}
-			
-			// Straight flush
-			int tempStraight = getStraightHigh(flushRanks);
-			if (tempStraight > 0)
-				return tempStraight | 0x800000;
+			if (pass)
+				return 8 << 20 | straightHighRank;
 		}
 		
 		// Four of a kind
-		if (ranksHist[4] >= 1) {
-			int result = 0;
-			for (int i = ranks.length - 1; ; i--) {  // Get rank with 4 suits
-				if (i < 0)
-					throw new AssertionError();
-				if (ranks[i] == 4) {
-					result = result << 4 | i;
-					break;
-				}
-			}
-			for (int i = ranks.length - 1; ; i--) {  // Get highest one other card
-				if (i < 0)
-					throw new AssertionError();
-				if (ranks[i] > 0 && ranks[i] < 4) {
-					result = result << 4 | i;
-					break;
-				}
-			}
-			return result | 0x700000;
-		}
+		if (ranksHist[4] >= 1)
+			return 7 << 20 | bestCards;
 		
 		// Full house
-		if (ranksHist[3] >= 2 || ranksHist[3] >= 1 && ranksHist[2] >= 1) {
-			int result = 0;
-			for (int i = ranks.length - 1; ; i--) {  // Get rank with 3 suits
-				if (i < 0)
-					throw new AssertionError();
-				if (ranks[i] == 3) {
-					result = result << 4 | i;
-					break;
-				}
-			}
-			for (int i = ranks.length - 1; ; i--) {  // Get rank with at least 2 suits
-				if (i < 0)
-					throw new AssertionError();
-				if (ranks[i] >= 2 && i != result) {
-					result = result << 4 | i;
-					break;
-				}
-			}
-			return result | 0x600000;
-		}
+		else if (ranksHist[3] >= 2 || ranksHist[3] >= 1 && ranksHist[2] >= 1)
+			return 6 << 20 | bestCards;
 		
 		// Flush
-		if (flush != -1) {
+		else if (flushSuit != -1) {
 			int[] flushRanks = new int[13];
-			for (int i = 0; i < hand.length; i++) {
-				if ((hand[i].suit) == flush)
-					flushRanks[hand[i].rank]++;
+			for (Card card : hand) {
+				if (card.suit == flushSuit)
+					flushRanks[card.rank]++;
 			}
-			
-			// Get cards in the flush
-			int result = 0;
-			int count = 0;
-			for (int i = flushRanks.length - 1; count < 5; i--) {
-				if (i < 0)
-					throw new AssertionError();
-				if (flushRanks[i] == 1) {
-					result = result << 4 | i;
-					count++;
-				}
-			}
-			return result | 0x500000;
+			int[] flushRanksHist = new int[hand.length + 1];
+			for (int i = 0; i < ranks.length; i++)
+				flushRanksHist[flushRanks[i]]++;
+			return 5 << 20 | get5FrequentHighestCards(flushRanks, flushRanksHist);
 		}
 		
-		if (straight == -1)
-			straight = getStraightHigh(ranks);
 		// Straight
-		if (straight > 0)
-			return straight | 0x400000;
+		else if (straightHighRank != -1)
+			return 4 << 20 | straightHighRank;
 		
 		// Three of a kind
-		if (ranksHist[3] >= 1) {
-			int result = 0;
-			for (int i = ranks.length - 1; ; i--) {  // Get rank with 3 suits
-				if (i < 0)
-					throw new AssertionError();
-				if (ranks[i] == 3) {
-					result = result << 4 | i;
-					break;
-				}
-			}
-			int count = 0;
-			for (int i = ranks.length - 1; count < 2; i--) {  // Get other 2 ranks
-				if (i < 0)
-					throw new AssertionError();
-				if (ranks[i] == 1) {
-					result = result << 4 | i;
-					count++;
-				}
-			}
-			return result | 0x300000;
-		}
+		else if (ranksHist[3] >= 1)
+			return 3 << 20 | bestCards;
 		
-		// Two pair
-		if (ranksHist[2] >= 2) {
-			int result = 0;
-			int count = 0;
-			for (int i = ranks.length - 1; count < 2; i--) {  // Get two rank with 2 suits each
-				if (i < 0)
-					throw new AssertionError();
-				if (ranks[i] == 2) {
-					result = result << 4 | i;
-					count++;
-				}
-			}
-			for (int i = ranks.length - 1; ; i--) {  // Get other rank
-				if (i < 0)
-					throw new AssertionError();
-				if (ranks[i] == 1) {
-					result = result << 4 | i;
-					break;
-				}
-			}
-			return result | 0x200000;
-		}
+		// Two pairs
+		else if (ranksHist[2] >= 2)
+			return 2 << 20 | bestCards;
 		
 		// One pair
-		if (ranksHist[2] >= 1) {
-			int result = 0;
-			for (int i = ranks.length - 1; ; i--) {  // Get rank with 2 suits
-				if (i < 0)
-					throw new AssertionError();
-				if (ranks[i] == 2) {
-					result = result << 4 | i;
-					break;
-				}
-			}
-			int count = 0;
-			for (int i = ranks.length - 1; count < 3; i--) {  // Get other ranks
-				if (i < 0)
-					throw new AssertionError();
-				if (ranks[i] == 1) {
-					result = result << 4 | i;
-					count++;
-				}
-			}
-			return result | 0x100000;
-		}
+		else if (ranksHist[2] >= 1)
+			return 1 << 20 | bestCards;
 		
 		// High card
+		else
+			return 0 << 20 | bestCards;
+	}
+	
+	
+	private static int get5FrequentHighestCards(int[] ranks, int[] ranksHist) {
 		int result = 0;
 		int count = 0;
-		for (int i = ranks.length - 1; count < 5; i--) {  // Get 5 highest cards
-			if (i < 0)
-				throw new AssertionError();
-			if (ranks[i] == 1) {
-				result = result << 4 | i;
-				count++;
+		
+		for (int i = ranksHist.length - 1; i >= 0; i--) {
+			for (int j = ranks.length - 1; j >= 0; j--) {
+				if (ranks[j] == i) {
+					for (int k = 0; k < i && count < 5; k++, count++)
+						result = result << 4 | j;
+				}
 			}
 		}
-		return result | 0x000000;
+		
+		if (count != 5)
+			throw new IllegalArgumentException();
+		return result;
 	}
 	
 	
@@ -251,26 +166,16 @@ public class p054 {
 	}
 	
 	
-	private static int getStraightHigh(int[] ranks) {
+	private static int getStraightHighRank(int[] ranks) {
 		outer:
-		for (int i = ranks.length - 5; i >= 0; i--) {
+		for (int i = ranks.length - 1; i >= 3; i--) {
 			for (int j = 0; j < 5; j++) {
-				if (ranks[i + j] == 0)
+				if (ranks[(i - j + 13) % 13] == 0)
 					continue outer;
 			}
-			return i + 4;
+			return i;
 		}
-		
-		// Check A,1,2,3,4 straight
-		if (ranks[12] > 0) {
-			for (int j = 0; j < 4; j++) {
-				if (ranks[j] == 0)
-					return 0;
-			}
-			return 3;
-		}
-		
-		return 0;
+		return -1;
 	}
 	
 	
