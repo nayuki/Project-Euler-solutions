@@ -10,14 +10,15 @@ public class p054 {
 		int count = 0;
 		for (String hand : HANDS) {
 			String[] cards = hand.split(" ");
+			if (cards.length != 10)
+				throw new AssertionError();
 			
 			Card[] player1 = new Card[5];
-			for (int i = 0; i < 5; i++)
-				player1[i] = parseCard(cards[i]);
-			
 			Card[] player2 = new Card[5];
-			for (int i = 0; i < 5; i++)
-				player2[i] = parseCard(cards[i + 5]);
+			for (int i = 0; i < 5; i++) {
+				player1[i] = new Card(cards[i + 0]);
+				player2[i] = new Card(cards[i + 5]);
+			}
 			
 			if (getScore(player1) > getScore(player2))
 				count++;
@@ -40,13 +41,13 @@ public class p054 {
 			this.suit = suit;
 		}
 		
+		
+		public Card(String str) {
+			this("23456789TJQKA".indexOf(str.charAt(0)), "SHCD".indexOf(str.charAt(1)));
+		}
+		
 	}
 	
-	
-	
-	private static Card parseCard(String cardStr) {
-		return new Card("23456789TJQKA".indexOf(cardStr.charAt(0)), "SHCD".indexOf(cardStr.charAt(1)));
-	}
 	
 	
 	private static int getScore(Card[] hand) {
@@ -271,6 +272,7 @@ public class p054 {
 		
 		return 0;
 	}
+	
 	
 	
 	private static String[] HANDS = {
