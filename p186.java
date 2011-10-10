@@ -22,7 +22,7 @@ public class p186 {
 	
 	
 	private static int connectedness(int iters) {
-		Random random = new Random();
+		LfgRandom random = new LfgRandom();
 		DisjointSets ds = new DisjointSets(1000000);
 		for (int i = 0; i < iters; ) {
 			int caller = random.next();
@@ -45,7 +45,7 @@ public class p186 {
 	
 	private static class DisjointSets {
 		
-		private static Node[] nodes;
+		private Node[] nodes;
 		
 		
 		public DisjointSets(int size) {
@@ -83,12 +83,15 @@ public class p186 {
 	
 	private static class Node {
 		
+		public final int id;
+		
 		public Node parent;
 		
 		public int rank;
 		
 		
 		public Node(int id) {
+			this.id = id;
 			parent = this;
 			rank = 0;
 		}
@@ -97,14 +100,15 @@ public class p186 {
 	
 	
 	
-	private static class Random {
+	// Lagged Fibonacci generator
+	private static class LfgRandom {
 		
 		private int k;
 		
 		private int[] history;
 		
 		
-		public Random() {
+		public LfgRandom() {
 			k = 1;
 			history = new int[55];
 		}
