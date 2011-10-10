@@ -57,9 +57,15 @@ public class p186 {
 		
 		public Node find(int i) {
 			Node node = nodes[i];
-			while (node.parent != node)
-				node = node.parent;
-			return node;
+			if (node.parent == node)
+				return node;
+			else {
+				Node temp = node;
+				while (temp.parent != temp)
+					temp = temp.parent;
+				node.parent = temp;  // Path compression
+				return temp;
+			}
 		}
 		
 		
