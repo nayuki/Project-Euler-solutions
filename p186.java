@@ -6,43 +6,19 @@
 
 public class p186 {
 	
-	private static DisjointSets ds = new DisjointSets(1000000);
-	
-	
 	public static void main(String[] args) {
-		// Binary search
-		int iters = 1;
-		while (connectedness(iters) < 990000)
-			iters *= 2;
-		
-		iters /= 2;
-		for (int i = iters / 2; i != 0; i /= 2) {
-			if (connectedness(iters + i) < 990000)
-				iters += i;
-		}
-		System.out.println(iters + 1);
-	}
-	
-	
-	private static int connectedness(int iters) {
+		DisjointSets ds = new DisjointSets(1000000);
 		LfgRandom random = new LfgRandom();
-		ds.reset();
-		for (int i = 0; i < iters; ) {
+		int i = 0;
+		while (ds.size(524287) < 990000) {
 			int caller = random.next();
 			int callee = random.next();
-			if (caller == callee)
-				continue;
-			i++;
-			ds.union(caller, callee);
+			if (caller != callee) {
+				ds.union(caller, callee);
+				i++;
+			}
 		}
-		
-		Node primeMinister = ds.find(524287);
-		int count = 0;
-		for (int i = 0; i < 1000000; i++) {
-			if (ds.find(i) == primeMinister)
-				count++;
-		}
-		return count;
+		System.out.println(i);
 	}
 	
 	
@@ -55,7 +31,7 @@ public class p186 {
 		public DisjointSets(int size) {
 			nodes = new Node[size];
 			for (int i = 0; i < size; i++)
-				nodes[i] = new Node(i);
+				nodes[i] = new Node();
 		}
 		
 		
@@ -68,6 +44,8 @@ public class p186 {
 				while (temp.parent != temp)
 					temp = temp.parent;
 				node.parent = temp;  // Path compression
+				temp.size += node.size;
+				node.size = 0;
 				return temp;
 			}
 		}
@@ -78,22 +56,28 @@ public class p186 {
 			Node y = find(j);
 			if (x == y)
 				return;
-			else if (x.rank < y.rank)
+			else if (x.rank < y.rank) {
 				x.parent = y;
-			else if (x.rank > y.rank)
+				y.size += x.size;
+				x.size = 0;
+			} else if (x.rank > y.rank) {
 				y.parent = x;
-			else {
+				x.size += y.size;
+				y.size = 0;
+			} else {
 				x.parent = y;
 				y.rank++;
+				y.size += x.size;
+				x.size = 0;
 			}
 		}
 		
 		
-		public void reset() {
-			for (Node node : nodes) {
-				node.parent = node;
-				node.rank = 0;
-			}
+		public int size(int i) {
+			Node node = nodes[i];
+			while (node.parent != node)
+				node = node.parent;
+			return node.size;
 		}
 		
 	}
@@ -101,17 +85,17 @@ public class p186 {
 	
 	private static class Node {
 		
-		public final int id;
-		
 		public Node parent;
 		
 		public int rank;
 		
+		public int size;  // The size of the set that this node belongs to, valid if this node is the representative
 		
-		public Node(int id) {
-			this.id = id;
+		
+		public Node() {
 			parent = this;
 			rank = 0;
+			size = 1;
 		}
 		
 	}
