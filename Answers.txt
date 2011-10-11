@@ -83,9 +83,9 @@ Problem 083: 425185
 Problem 085: 2772
 Problem 089: 743
 Problem 092: 8581146
+Problem 095: 14316
 Problem 096: 24702
 Problem 097: 8739992577
-Problem 095: 14316
 Problem 099: 709
 Problem 102: 228
 Problem 104: 329468
