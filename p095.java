@@ -3,6 +3,9 @@
  * By Nayuki Minase
  */
 
+import java.util.HashSet;
+import java.util.Set;
+
 
 public class p095 {
 	
@@ -17,19 +20,19 @@ public class p095 {
 		int[] amicableChainLen = new int[n];
 		for (int i = 0; i < n; i++) {
 			int count = 1;
-			boolean[] visited = new boolean[n];
-			visited[i] = true;
+			Set<Integer> visited = new HashSet<Integer>();
+			visited.add(i);
 			int temp = i;
 			while (true) {
 				int next = divisorSum[temp];
 				if (next == i) {
 					amicableChainLen[i] = count;
 					break;
-				} else if (next >= n || visited[next]) {
+				} else if (next >= n || visited.contains(next)) {
 					amicableChainLen[i] = 0;  // Illegal
 					break;
 				} else {
-					visited[next] = true;
+					visited.add(next);
 					temp = next;
 				}
 				count++;
