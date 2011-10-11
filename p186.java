@@ -6,6 +6,9 @@
 
 public class p186 {
 	
+	private static DisjointSets ds = new DisjointSets(1000000);
+	
+	
 	public static void main(String[] args) {
 		// Binary search
 		int iters = 1;
@@ -23,7 +26,7 @@ public class p186 {
 	
 	private static int connectedness(int iters) {
 		LfgRandom random = new LfgRandom();
-		DisjointSets ds = new DisjointSets(1000000);
+		ds.reset();
 		for (int i = 0; i < iters; ) {
 			int caller = random.next();
 			int callee = random.next();
@@ -33,9 +36,10 @@ public class p186 {
 			ds.union(caller, callee);
 		}
 		
+		Node primeMinister = ds.find(524287);
 		int count = 0;
 		for (int i = 0; i < 1000000; i++) {
-			if (ds.find(i) == ds.find(524287))
+			if (ds.find(i) == primeMinister)
 				count++;
 		}
 		return count;
@@ -81,6 +85,14 @@ public class p186 {
 			else {
 				x.parent = y;
 				y.rank++;
+			}
+		}
+		
+		
+		public void reset() {
+			for (Node node : nodes) {
+				node.parent = node;
+				node.rank = 0;
 			}
 		}
 		
