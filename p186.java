@@ -111,23 +111,37 @@ public class p186 {
 		
 		private int k;
 		
-		private int[] history;
+		private int[] history;  // Circular buffer
+		private int index;
 		
 		
 		public LfgRandom() {
 			k = 1;
 			history = new int[55];
+			index = 0;
 		}
 		
 		
 		public int next() {
 			int result;
 			if (k <= 55) result = (int)((100003L - 200003L*k + 300007L*k*k*k) % 1000000);
-			else result = (history[23] + history[54]) % 1000000;
-			System.arraycopy(history, 0, history, 1, history.length - 1);
-			history[0] = result;
+			else result = (getHistory(24) + getHistory(55)) % 1000000;
 			k++;
+			
+			history[index] = result;
+			index++;
+			if (index == history.length)
+				index = 0;
+			
 			return result;
+		}
+		
+		
+		private int getHistory(int n) {
+			int i = index - n;
+			if (i < 0)
+				i += history.length;
+			return history[i];
 		}
 		
 	}
