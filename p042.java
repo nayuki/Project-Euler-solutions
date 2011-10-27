@@ -20,15 +20,21 @@ public class p042 {
 	
 	
 	private static boolean isTriangularNumber(int x) {
-		int a = 8 * x + 1;
-		if (Library.sqrt(a) * Library.sqrt(a) != a)
+		// Given x, solve for y in the quadratic equation x = 1/2 * y * (y + 1), and see if there is a positive integer y solution.
+		// By the quadratic formula, we get y = (-b + sqrt(b^2 - 4ac)) / (2a), where a = 1/2, b = 1/2, c = -x. So y = -1/2 + sqrt(2x + 1/4).
+		// The determinant, det = 2x + 1/4, has a rational square root iff the numerator is a perfect square. Thus we need 8x+1 to be a perfect square.
+		// Finally, we need y to be an integer, and y to be at least 1 (we don't want things that come before the first triangle number).
+		
+		int det = 8 * x + 1;
+		if (Library.sqrt(det) * Library.sqrt(det) != det)
 			return false;
 		
-		int b = Library.sqrt(a) - 1;
-		if (b % 2 != 0)
+		int temp = Library.sqrt(det) - 1;
+		if (temp % 2 != 0)
 			return false;
 		
-		int y = b / 2;
+		// Now y satisfies 1/2 * y * (y + 1) = x, so x is some kind of extended triangle 
+		int y = temp / 2;
 		return y >= 1;
 	}
 	
