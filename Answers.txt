@@ -96,6 +96,7 @@ Problem 115: 168
 Problem 116: 20492570929
 Problem 117: 100808458960497
 Problem 122: 1582
+Problem 124: 21417
 Problem 145: 608720
 Problem 160: 16576
 Problem 179: 986262
