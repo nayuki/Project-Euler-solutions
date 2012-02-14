@@ -76,6 +76,7 @@ Problem 074: 402
 Problem 075: 161667
 Problem 076: 190569291
 Problem 077: 71
+Problem 078: 55374
 Problem 079: 73162890
 Problem 080: 40886
 Problem 081: 427337
