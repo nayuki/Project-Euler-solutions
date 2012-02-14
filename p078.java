@@ -3,8 +3,8 @@
  * By Nayuki Minase
  */
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class p078 {
@@ -12,31 +12,59 @@ public class p078 {
 	private static int MODULUS = 1000000;
 	
 	
-	// Compute and memoize the intermediate partition function, mod one million
 	public static void main(String[] args) {
-		// p.get(n)[k] == p(n, k) mod 1000000
-		List<int[]> p = new ArrayList<int[]>();
-		for (int n = 0; ; n++) {
-			int[] row = new int[n + 1];
-			row[0] = 0;
-			if (n >= 1) {
-				row[1] = 1;
-				int rowSum = 1;
-				for (int k = 2; k <= n; k++) {
-					int temp = p.get(n - 1)[k - 1];
-					if (n - k >= k)
-						temp = (temp + p.get(n - k)[k]) % MODULUS;
-					row[k] = temp;
-					rowSum = (rowSum + temp) % MODULUS;
+		for (int i = 0; ; i++) {
+			if (partition(i) == 0) {
+				System.out.println(i);
+				break;
+			}
+		}
+		
+	}
+	
+	
+	private static Map<Integer,Integer> partitionMemo = new HashMap<Integer,Integer>();
+	
+	private static int partition(int n) {  // Modulo the modulus
+		if (!partitionMemo.containsKey(n)) {
+			int result;
+			if (n < 0)  // Won't actually invoke this case
+				return 0;
+			else if (n == 0)
+				return 1;
+			else {
+				/*
+				 * Theorem:
+				 *   p(n) = 0, if n < 0
+				 *   p(0) = 1
+				 *   p(n) = ... p(n-15) - p(n-7) + p(n-2) + p(n-1) - p(n-5) + p(n-12) ...
+				 *        = sum of (-1)^(i+1) p(n - pent(i)) for i from -inf to inf excluding 0
+				 *        when n > 0
+				 * The last equation is based on the pentagonal number theorem.
+				 * Note: pent(n) = n(3n - 1) / 2
+				 */
+				result = 0;
+				for (int i = 1; ; i++) {
+					int temp = pentagon(i);
+					if (temp > n)
+						break;
+					result = (result + (i % 2 == 0 ? -1 : 1) * partition(n - temp) + MODULUS) % MODULUS;
 				}
-				
-				if (rowSum % MODULUS == 0) {
-					System.out.println(n);
-					break;
+				for (int i = -1; ; i--) {
+					int temp = pentagon(i);
+					if (temp > n)
+						break;
+					result = (result + (i % 2 == 0 ? -1 : 1) * partition(n - temp) + MODULUS) % MODULUS;
 				}
 			}
-			p.add(row);
+			partitionMemo.put(n, result);
 		}
+		return partitionMemo.get(n);
+	}
+	
+	
+	private static int pentagon(int n) {
+		return n * (n * 3 - 1) / 2;
 	}
 	
 }
