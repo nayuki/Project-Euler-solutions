@@ -1,0 +1,14 @@
+(* 
+ * Solution to Project Euler problem 123
+ * By Nayuki Minase
+ *)
+
+
+(* Use this in Wolfram Mathematica *)
+
+n = 1;
+While[
+  Block[{pn = Prime[n], m = pn^2},
+    Mod[PowerMod[pn - 1, n, m] + PowerMod[pn + 1, n, m], m] <= 10^10],
+  n++]
+n
