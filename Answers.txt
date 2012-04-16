@@ -104,6 +104,7 @@ Problem 124: 21417
 Problem 125: 2906969179
 Problem 145: 608720
 Problem 160: 16576
+Problem 173: 1572729
 Problem 179: 986262
 Problem 186: 2325629
 Problem 187: 17427258
