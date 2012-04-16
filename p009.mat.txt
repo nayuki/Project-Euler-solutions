@@ -8,4 +8,6 @@
 
 For[a = 1, a <= 1000, a++,
   For[b = a, b <= 1000, b++,
-	Block[{c}, c = 1000 - a - b; If[a <= b <= c && a * a + b * b == c * c, Print[a, " ", b, " ", c, " ", a * b * c]]]]]
+    Block[{c = 1000 - a - b},
+      If[a <= b <= c && a * a + b * b == c * c,
+        Print[a, " ", b, " ", c, " ", a * b * c]]]]]
