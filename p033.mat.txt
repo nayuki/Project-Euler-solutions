@@ -1,0 +1,22 @@
+(* 
+ * Solution to Project Euler problem 33
+ * By Nayuki Minase
+ *)
+
+
+(* Use this in Wolfram Mathematica *)
+
+CanSimplify[a_, b_] :=
+  10 <= b <= 99 && 10 <= a < b &&
+  Block[{a1 = Floor[a/10], a0 = Mod[a, 10], b1 = Floor[b/10], b0 = Mod[b, 10]},
+    a0 == b0 && b0 != 0 && b1 != 0 && a1/b1 == a/b ||
+    a0 == b1 && b0 != 0 && a1/b0 == a/b ||
+    a1 == b0 && b1 != 0 && a0/b1 == a/b ||
+    a1 == b1 && b0 != 0 && a0/b0 == a/b]
+
+product = 1;
+For[i = 10, i ≤ 99, i++,
+  For[j = 10, j < i, j++,
+    If[CanSimplify[j, i], product *= j/i; Print[j, " ", i]]]]
+product
+Denominator[product]
