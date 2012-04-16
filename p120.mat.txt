@@ -1,0 +1,11 @@
+(* 
+ * Solution to Project Euler problem 120
+ * By Nayuki Minase
+ *)
+
+
+(* Use this in Wolfram Mathematica *)
+
+Rem[a_, n_] := Mod[PowerMod[a - 1, n, a^2] + PowerMod[a + 1, n, a^2], a^2]
+MaxRem[a_] := Max[Table[Rem[a, n], {n, 0, EulerPhi[a^2 - 1]}]]
+Sum[MaxRem[a], {a, 3, 1000}]
