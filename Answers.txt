@@ -102,6 +102,7 @@ Problem 122: 1582
 Problem 123: 21035
 Problem 124: 21417
 Problem 125: 2906969179
+Problem 142: 1006193
 Problem 145: 608720
 Problem 160: 16576
 Problem 173: 1572729
