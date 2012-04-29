@@ -9,6 +9,6 @@
 (* By Wilson's theorem, (p-1)! = -1 mod p if and only if p is prime. *)
 S[p_] := Mod[Sum[-1 * Product[PowerMod[-j, -1, p], {j, 1, k - 1}], {k, 1, 5}], p]
 
-sum = 4;  (* Special cased for 5 *)
-For[i = 4, Prime[i] <= 10^8, i++, sum += S[Prime[i]]]
+sum = 0;
+For[i = 3, Prime[i] <= 10^8, i++, sum += S[Prime[i]]]
 sum

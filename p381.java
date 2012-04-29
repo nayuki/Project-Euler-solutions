@@ -8,8 +8,8 @@ public class p381 {
 	
 	public static void main(String[] args) {
 		boolean[] isPrime = Library.listPrimality(100000000);
-		long sum = 4;  // Special-cased for 5
-		for (int i = 6; i < isPrime.length; i++) {
+		long sum = 0;
+		for (int i = 5; i < isPrime.length; i++) {
 			if (isPrime[i])
 				sum += s(i);
 		}
