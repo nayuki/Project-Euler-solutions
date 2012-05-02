@@ -17,16 +17,20 @@ public class p381 {
 	}
 	
 	
+	/*
+	 * Note about the mathematical simplification:
+	 * (p-5)! + (p-4)! + (p-3)! + (p-2)! + (p-1)!
+	 * = (p-5)! (1 + (p-4) + (p-4)(p-3) + (p-4)(p-3)(p-2) + (p-4)(p-3)(p-2)(p-1))
+	 * = (p-5)! (1 + -4 + 12 + -24 + 24)
+	 * = (p-5)! * 9
+	 * = (p-1)! / ((p-1)(p-2)(p-3)(p-4)) * 9
+	 * = (p-1)! / 24 * 9
+	 * = (p-1)! * 3 / 8
+	 * = -1 * 3 / 8  (by Wilson's theorem)
+	 * = -3/8 mod p
+	 */
 	private static int s(int p) {
-		// By Wilson's theorem, because p is prime, (p-1)! = -1 mod p.
-		// This starting point covers the k=1 case.
-		long temp = p - 1;
-		int sum = (int)temp;
-		for (int k = 2; k <= 5; k++) {
-			temp = temp * reciprocalMod(p - (k - 1), p) % p;  // Divide by k-1 so that temp becomes congruent to (p-k)!
-			sum += temp;
-		}
-		return sum % p;
+		return (int)((long)(p - 3) * reciprocalMod(8 % p, p) % p);
 	}
 	
 	
