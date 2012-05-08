@@ -1,0 +1,13 @@
+(* 
+ * Solution to Project Euler problem 101
+ * By Nayuki Minase
+ *)
+
+
+(* Use this in Wolfram Mathematica *)
+
+u[n_] := Sum[(-n)^k, {k, 0, 10}]  (* Degree 10 polynomial *)
+OP[k_, n_] := InterpolatingPolynomial[Table[u[i], {i, k}], x] /. (x -> n)
+
+(* For each k below 11, the first incorrect term must be at n = k+1 because the interpolating polynomial has degree k-1, which is below 10. *)
+Sum[OP[k, k + 1], {k, 1, 10}]
