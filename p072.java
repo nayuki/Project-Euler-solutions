@@ -8,8 +8,7 @@ public class p072 {
 	
 	public static void main(String[] args) {
 		int n = 1000000;
-		boolean[] isPrime = Library.listPrimality(n);
-		int[] totient = Library.listTotients(n, isPrime);
+		int[] totient = Library.listTotients(n);
 		long sum = 0;
 		for (int i = 2; i < totient.length; i++)
 			sum += totient[i];
