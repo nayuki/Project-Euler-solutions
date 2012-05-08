@@ -39,6 +39,8 @@ final class Library {
 		else if (x == 2)
 			return true;
 		else {
+			if (x % 2 == 0)
+				return false;
 			for (int i = 3, end = sqrt(x); i <= end; i += 2) {
 				if (x % i == 0)
 					return false;
