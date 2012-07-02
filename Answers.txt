@@ -97,6 +97,7 @@ Problem 104: 329468
 Problem 107: 259679
 Problem 108: 180180
 Problem 109: 38182
+Problem 112: 1587000
 Problem 114: 16475640049
 Problem 115: 168
 Problem 116: 20492570929
