@@ -1,0 +1,12 @@
+(* 
+ * Solution to Project Euler problem 113
+ * By Nayuki Minase
+ *)
+
+
+(* Use this in Wolfram Mathematica *)
+
+n = 100;
+(Binomial[n + 9, 9] - 1) +                  (* Nondecreasing numbers *)
+  Sum[Binomial[k + 9, 9] - 1, {k, 1, n}] -  (* Nondecreasing numbers *)
+  9n                                        (* Unchanging numbers *)
