@@ -6,4 +6,10 @@
 
 (* Use this in Wolfram Mathematica *)
 
-Total[Map[Function[x, Total[IntegerDigits[Floor[Sqrt[x] * 10^(100 - Ceiling[Log[10, Sqrt[x]]])]]]], Select[Range[1, 100], Composition[Not, IntegerQ, Sqrt]]]]
+DecimalPrefix[x_, n_] := Floor[x * 10^(n - 1 - Floor[Log[10, x]])]
+DecimalPrefixDigitSum[x_, n_] := Total[IntegerDigits[DecimalPrefix[x, n]]]
+
+NotPerfectSquareQ[x_] := Not[IntegerQ[Sqrt[x]]]
+notperfectsquares = Select[Range[1, 100], NotPerfectSquareQ];
+
+Total[Map[Function[x, DecimalPrefixDigitSum[Sqrt[x], 100]], notperfectsquares]]
