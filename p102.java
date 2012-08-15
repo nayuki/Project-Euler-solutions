@@ -8,7 +8,7 @@ public class p102 {
 	
 	public static void main(String[] args) {
 		int count = 0;
-		for (int i = 0; i < triangles.length; i++) {
+		for (int i = 0; i < TRIANGLES.length; i++) {
 			if (isInTriangle(i, 0, 0))
 				count++;
 		}
@@ -17,7 +17,7 @@ public class p102 {
 	
 	
 	private static boolean isInTriangle(int index, int x, int y) {
-		int[] triangle = triangles[index];
+		int[] triangle = TRIANGLES[index];
 		int a = sign((triangle[0] - triangle[2]) * (y - triangle[1]) - (triangle[1] - triangle[3]) * (x - triangle[0]));
 		int b = sign((triangle[2] - triangle[4]) * (y - triangle[3]) - (triangle[3] - triangle[5]) * (x - triangle[2]));
 		int c = sign((triangle[4] - triangle[0]) * (y - triangle[5]) - (triangle[5] - triangle[1]) * (x - triangle[4]));
@@ -30,7 +30,7 @@ public class p102 {
 	}
 	
 	
-	private static int[][] triangles = {
+	private static int[][] TRIANGLES = {
 		{-340,495,-153,-910,835,-947},
 		{-175,41,-421,-714,574,-645},
 		{-547,712,-352,579,951,-786},

@@ -8,7 +8,7 @@ public class p096 {
 	
 	public static void main(String[] args) {
 		int sum = 0;
-		for (String puz : puzzles) {
+		for (String puz : PUZZLES) {
 			SudokuSolver ss = new SudokuSolver(puz);
 			ss.solve();
 			if (!ss.isValid())
@@ -108,7 +108,7 @@ public class p096 {
 	
 	
 	
-	private static String[] puzzles = {
+	private static String[] PUZZLES = {
 		"003020600900305001001806400008102900700000008006708200002609500800203009005010300",
 		"200080300060070084030500209000105408000000000402706000301007040720040060004010003",
 		"000000907000420180000705026100904000050000040000507009920108000034059000507000000",

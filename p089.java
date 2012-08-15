@@ -8,7 +8,7 @@ public class p089 {
 	
 	public static void main(String[] args) {
 		int sum = 0;
-		for (String s : toSimplify)
+		for (String s : TO_SIMPLIFY)
 			sum += s.length() - romanNumeralLength(parseRomanNumeral(s));
 		System.out.println(sum);
 	}
@@ -59,7 +59,7 @@ public class p089 {
 	}
 	
 	
-	private static String[] toSimplify = {
+	private static String[] TO_SIMPLIFY = {
 		"MMMMDCLXXII",
 		"MMDCCCLXXXIII",
 		"MMMDLXVIIII",
