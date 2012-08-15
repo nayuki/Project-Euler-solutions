@@ -22,7 +22,6 @@ public class p250 {
 	}
 	
 	
-	
 	private static int powMod(int x, int y, int m) {
 		if (y < 0)
 			throw new IllegalArgumentException();
