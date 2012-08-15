@@ -6,7 +6,53 @@
 
 public class p107 {
 	
-	private static int[][] weights = {
+	public static void main(String[] args) {
+		int vertices = WEIGHTS.length;
+		for (int i = 0; i < vertices; i++) {
+			if (WEIGHTS[i].length != vertices)
+				throw new AssertionError("Matrix not square");
+		}
+		
+		int oldWeight = 0;
+		for (int i = 0; i < vertices; i++) {
+			if (WEIGHTS[i][i] != -1)
+				throw new AssertionError("Self edge");
+			for (int j = i + 1; j < vertices; j++) {
+				if (WEIGHTS[i][j] != WEIGHTS[j][i])
+					throw new AssertionError("Matrix not symmetric");
+				if (WEIGHTS[i][j] != -1)
+					oldWeight += WEIGHTS[i][j];
+			}
+		}
+		
+		// Inefficient minimum spanning tree algorithm
+		boolean[] reachable = new boolean[vertices];
+		reachable[0] = true;
+		int newWeight = 0;
+		for (int i = 1; i < vertices; i++) {
+			int lowestWeight = -1;
+			int target = -1;
+			for (int j = 0; j < vertices; j++) {
+				if (reachable[j]) {
+					for (int k = 0; k < vertices; k++) {
+						if (!reachable[k] && WEIGHTS[j][k] != -1 && (lowestWeight == -1 || WEIGHTS[j][k] < lowestWeight)) {
+							lowestWeight = WEIGHTS[j][k];
+							target = k;
+						}
+					}
+				}
+			}
+			if (lowestWeight == -1)
+				throw new AssertionError("No spanning tree exists");
+			reachable[target] = true;
+			newWeight += lowestWeight;
+		}
+		
+		System.out.println(oldWeight - newWeight);
+	}
+	
+	
+	private static int[][] WEIGHTS = {
 		{-1,-1,-1,427,668,495,377,678,-1,177,-1,-1,870,-1,869,624,300,609,131,-1,251,-1,-1,-1,856,221,514,-1,591,762,182,56,-1,884,412,273,636,-1,-1,774},
 		{-1,-1,262,-1,-1,508,472,799,-1,956,578,363,940,143,-1,162,122,910,-1,729,802,941,922,573,531,539,667,607,-1,920,-1,-1,315,649,937,-1,185,102,636,289},
 		{-1,262,-1,-1,926,-1,958,158,647,47,621,264,81,-1,402,813,649,386,252,391,264,637,349,-1,-1,-1,108,-1,727,225,578,699,-1,898,294,-1,575,168,432,833},
@@ -48,51 +94,5 @@ public class p107 {
 		{-1,636,432,76,-1,386,686,770,828,582,-1,433,203,526,600,848,227,616,-1,217,117,707,369,109,586,205,809,-1,-1,240,-1,853,-1,-1,-1,768,-1,371,-1,540},
 		{774,289,833,257,-1,381,239,722,711,468,933,-1,-1,17,-1,-1,148,-1,-1,853,-1,-1,-1,-1,264,194,260,947,-1,752,147,-1,-1,343,112,273,344,680,540,-1}
 	};
-	
-	
-	public static void main(String[] args) {
-		int vertices = weights.length;
-		for (int i = 0; i < vertices; i++) {
-			if (weights[i].length != vertices)
-				throw new AssertionError("Matrix not square");
-		}
-		
-		int oldWeight = 0;
-		for (int i = 0; i < vertices; i++) {
-			if (weights[i][i] != -1)
-				throw new AssertionError("Self edge");
-			for (int j = i + 1; j < vertices; j++) {
-				if (weights[i][j] != weights[j][i])
-					throw new AssertionError("Matrix not symmetric");
-				if (weights[i][j] != -1)
-					oldWeight += weights[i][j];
-			}
-		}
-		
-		// Inefficient minimum spanning tree algorithm
-		boolean[] reachable = new boolean[vertices];
-		reachable[0] = true;
-		int newWeight = 0;
-		for (int i = 1; i < vertices; i++) {
-			int lowestWeight = -1;
-			int target = -1;
-			for (int j = 0; j < vertices; j++) {
-				if (reachable[j]) {
-					for (int k = 0; k < vertices; k++) {
-						if (!reachable[k] && weights[j][k] != -1 && (lowestWeight == -1 || weights[j][k] < lowestWeight)) {
-							lowestWeight = weights[j][k];
-							target = k;
-						}
-					}
-				}
-			}
-			if (lowestWeight == -1)
-				throw new AssertionError("No spanning tree exists");
-			reachable[target] = true;
-			newWeight += lowestWeight;
-		}
-		
-		System.out.println(oldWeight - newWeight);
-	}
 	
 }

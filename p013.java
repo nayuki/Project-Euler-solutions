@@ -8,6 +8,14 @@ import java.math.BigInteger;
 
 public class p013 {
 	
+	public static void main(String[] args) {
+		BigInteger sum = BigInteger.ZERO;
+		for (String num : NUMBERS)
+			sum = sum.add(new BigInteger(num));
+		System.out.println(sum.toString().substring(0, 10));
+	}
+	
+	
 	private static String[] NUMBERS = {
 		"37107287533902102798797998220837590246510135740250",
 		"46376937677490009712648124896970078050417018260538",
@@ -110,13 +118,5 @@ public class p013 {
 		"20849603980134001723930671666823555245252804609722",
 		"53503534226472524250874054075591789781264330331690",
 	};
-	
-	
-	public static void main(String[] args) {
-		BigInteger sum = BigInteger.ZERO;
-		for (String num : NUMBERS)
-			sum = sum.add(new BigInteger(num));
-		System.out.println(sum.toString().substring(0, 10));
-	}
 	
 }

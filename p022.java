@@ -8,6 +8,19 @@ import java.util.Arrays;
 
 public class p022 {
 	
+	public static void main(String[] args) {
+		Arrays.sort(NAMES);
+		int sum = 0;
+		for (int i = 0; i < NAMES.length; i++) {
+			int value = 0;
+			for (int j = 0; j < NAMES[i].length(); j++)
+				value += NAMES[i].charAt(j) - 'A' + 1;
+			sum += value * (i + 1);
+		}
+		System.out.println(sum);
+	}
+	
+	
 	private static String[] NAMES = {
 		"MARY",
 		"PATRICIA",
@@ -5173,18 +5186,5 @@ public class p022 {
 		"BRODERICK",
 		"ALONSO",
 	};
-	
-	
-	public static void main(String[] args) {
-		Arrays.sort(NAMES);
-		int sum = 0;
-		for (int i = 0; i < NAMES.length; i++) {
-			int value = 0;
-			for (int j = 0; j < NAMES[i].length(); j++)
-				value += NAMES[i].charAt(j) - 'A' + 1;
-			sum += value * (i + 1);
-		}
-		System.out.println(sum);
-	}
 	
 }

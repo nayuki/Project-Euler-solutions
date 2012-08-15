@@ -6,7 +6,44 @@
 
 public class p011 {
 	
-	private static int[][] square = {
+	public static void main(String[] args) {
+		int max = -1;
+		max = Math.max(maxProduct(1, 0), max);
+		max = Math.max(maxProduct(0, 1), max);
+		max = Math.max(maxProduct(1, 1), max);
+		max = Math.max(maxProduct(1, -1), max);
+		System.out.println(max);
+	}
+	
+	
+	private static int maxProduct(int dx, int dy) {
+		int max = -1;
+		for (int y = 0; y < SQUARE.length; y++) {
+			for (int x = 0; x < SQUARE[y].length; x++)
+				max = Math.max(product(x, y, dx, dy, 4), max);
+		}
+		return max;
+	}
+	
+	
+	private static int product(int x, int y, int dx, int dy, int n) {
+		// First endpoint is assumed to be in bounds. Check if second endpoint is in bounds.
+		if (!isInBounds(x + (n - 1) * dx, y + (n - 1) * dy))
+			return -1;
+		
+		int prod = 1;
+		for (int i = 0; i < n; i++, x += dx, y += dy)
+			prod *= SQUARE[y][x];
+		return prod;
+	}
+	
+	
+	private static boolean isInBounds(int x, int y) {
+		return 0 <= y && y < SQUARE.length && 0 <= x && x < SQUARE[y].length;
+	}
+	
+	
+	private static int[][] SQUARE = {
 		{ 8,02,22,97,38,15,00,40,00,75,04,05,07,78,52,12,50,77,91, 8},
 		{49,49,99,40,17,81,18,57,60,87,17,40,98,43,69,48,04,56,62,00},
 		{81,49,31,73,55,79,14,29,93,71,40,67,53,88,30,03,49,13,36,65},
@@ -28,42 +65,5 @@ public class p011 {
 		{20,73,35,29,78,31,90,01,74,31,49,71,48,86,81,16,23,57,05,54},
 		{01,70,54,71,83,51,54,69,16,92,33,48,61,43,52,01,89,19,67,48}
 	};
-	
-	
-	public static void main(String[] args) {
-		int max = -1;
-		max = Math.max(maxProduct(1, 0), max);
-		max = Math.max(maxProduct(0, 1), max);
-		max = Math.max(maxProduct(1, 1), max);
-		max = Math.max(maxProduct(1, -1), max);
-		System.out.println(max);
-	}
-	
-	
-	private static int maxProduct(int dx, int dy) {
-		int max = -1;
-		for (int y = 0; y < square.length; y++) {
-			for (int x = 0; x < square[y].length; x++)
-				max = Math.max(product(x, y, dx, dy, 4), max);
-		}
-		return max;
-	}
-	
-	
-	private static int product(int x, int y, int dx, int dy, int n) {
-		// First endpoint is assumed to be in bounds. Check if second endpoint is in bounds.
-		if (!isInBounds(x + (n - 1) * dx, y + (n - 1) * dy))
-			return -1;
-		
-		int prod = 1;
-		for (int i = 0; i < n; i++, x += dx, y += dy)
-			prod *= square[y][x];
-		return prod;
-	}
-	
-	
-	private static boolean isInBounds(int x, int y) {
-		return 0 <= y && y < square.length && 0 <= x && x < square[y].length;
-	}
 	
 }

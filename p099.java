@@ -8,7 +8,60 @@ import java.math.BigInteger;
 
 public class p099 {
 	
-	private static int[][] data = {
+	public static void main(String[] args) {
+		calculateApproximately();
+		calculateExactly();
+	}
+	
+	
+	private static void calculateApproximately() {
+		double maxVal = -1;
+		int maxIndex = -1;
+		
+		for (int i = 0; i < DATA.length; i++) {
+			double val = Math.log(DATA[i][0]) * DATA[i][1];
+			if (maxVal == -1 || val > maxVal) {
+				maxVal = val;
+				maxIndex = i;
+			}
+		}
+		
+		System.out.println(maxIndex + 1);
+	}
+	
+	
+	private static void calculateExactly() {
+		BigInteger maxVal = null;
+		int maxIndex = -1;
+		
+		for (int i = 0; i < DATA.length; i++) {
+			BigInteger val = pow(BigInteger.valueOf(DATA[i][0]), DATA[i][1]);
+			if (maxVal == null || val.compareTo(maxVal) > 0) {
+				maxVal = val;
+				maxIndex = i;
+			}
+		}
+		
+		System.out.println(maxIndex + 1);
+	}
+	
+	
+	
+	private static BigInteger pow(BigInteger x, int y) {
+		if (y < 0)
+			throw new IllegalArgumentException();
+		
+		BigInteger z = BigInteger.ONE;
+		for (; y != 0; y >>>= 1) {
+			if ((y & 1) != 0)
+				z = Library.multiply(z, x);
+			x = Library.multiply(x, x);
+		}
+		return z;
+	}
+	
+	
+	private static int[][] DATA = {
 		{519432,525806},
 		{632382,518061},
 		{78864,613712},
@@ -1010,59 +1063,5 @@ public class p099 {
 		{172115,573985},
 		{13846,725685}
 	};
-	
-	
-	
-	public static void main(String[] args) {
-		calculateApproximately();
-		calculateExactly();
-	}
-	
-	
-	private static void calculateApproximately() {
-		double maxVal = -1;
-		int maxIndex = -1;
-		
-		for (int i = 0; i < data.length; i++) {
-			double val = Math.log(data[i][0]) * data[i][1];
-			if (maxVal == -1 || val > maxVal) {
-				maxVal = val;
-				maxIndex = i;
-			}
-		}
-		
-		System.out.println(maxIndex + 1);
-	}
-	
-	
-	private static void calculateExactly() {
-		BigInteger maxVal = null;
-		int maxIndex = -1;
-		
-		for (int i = 0; i < data.length; i++) {
-			BigInteger val = pow(BigInteger.valueOf(data[i][0]), data[i][1]);
-			if (maxVal == null || val.compareTo(maxVal) > 0) {
-				maxVal = val;
-				maxIndex = i;
-			}
-		}
-		
-		System.out.println(maxIndex + 1);
-	}
-	
-	
-	
-	private static BigInteger pow(BigInteger x, int y) {
-		if (y < 0)
-			throw new IllegalArgumentException();
-		
-		BigInteger z = BigInteger.ONE;
-		for (; y != 0; y >>>= 1) {
-			if ((y & 1) != 0)
-				z = Library.multiply(z, x);
-			x = Library.multiply(x, x);
-		}
-		return z;
-	}
 	
 }

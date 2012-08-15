@@ -6,7 +6,16 @@
 
 public class p018 {
 	
-	private static int[][] triangle = {
+	public static void main(String[] args) {
+		for (int i = TRIANGLE.length - 2; i >= 0; i--) {
+			for (int j = 0; j < TRIANGLE[i].length; j++)
+				TRIANGLE[i][j] += Math.max(TRIANGLE[i + 1][j], TRIANGLE[i + 1][j + 1]);  // Dynamic programming
+		}
+		System.out.println(TRIANGLE[0][0]);
+	}
+	
+	
+	private static int[][] TRIANGLE = {
 		{75},
 		{95,64},
 		{17,47,82},
@@ -23,14 +32,5 @@ public class p018 {
 		{63,66,04,68,89,53,67,30,73,16,69,87,40,31},
 		{04,62,98,27,23, 9,70,98,73,93,38,53,60,04,23}
 	};
-	
-	
-	public static void main(String[] args) {
-		for (int i = triangle.length - 2; i >= 0; i--) {
-			for (int j = 0; j < triangle[i].length; j++)
-				triangle[i][j] += Math.max(triangle[i + 1][j], triangle[i + 1][j + 1]);  // Dynamic programming
-		}
-		System.out.println(triangle[0][0]);
-	}
 	
 }
