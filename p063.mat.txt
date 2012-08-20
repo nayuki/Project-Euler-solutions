@@ -1,4 +1,4 @@
-(*
+(* 
  * Solution to Project Euler problem 63
  * By Nayuki Minase
  *)
