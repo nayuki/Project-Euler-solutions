@@ -1,4 +1,4 @@
-(* 
+(*
  * Solution to Project Euler problem 63
  * By Nayuki Minase
  *)
@@ -6,5 +6,10 @@
 
 (* Use this in Wolfram Mathematica *)
 
-(* When n = 22 or above, it is impossible for an nth power have n digits, because 9^22 has 21 digits. *)
-Sum[Floor[(10 ^ n - 1) ^ (1 / n)] - Ceiling[(10 ^ (n - 1)) ^ (1 / n)] + 1, {n, 21}]
+(*
+ * For every n, 10^n has n+1 digits, so it is excluded.
+ * For n = 22, 9^22 has only 21 digits. Furthermore when k < 9, k^22 has fewer than 22 digits. So there are no solutions.
+ * For n > 22, 9^n has n-1 or fewer digits, so again there are no solutions.
+ *)
+
+Sum[Floor[(10^n - 1) ^ (1/n)] - Ceiling[(10 ^ (n-1)) ^ (1/n)] + 1, {n, 21}]
