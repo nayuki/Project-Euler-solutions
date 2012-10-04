@@ -40,23 +40,10 @@ public class p113 {
 	 * (Technically, in the problem statement and this solution, "increasing" actually means "nondecreasing" and "decreasing" means "nonincreasing".)
 	 */
 	private static BigInteger countNonBouncy(int digits) {
-		BigInteger increasing = binomial(digits + 9, 9).subtract(BigInteger.ONE);
-		BigInteger decreasing = binomial(digits + 10, 10).subtract(BigInteger.valueOf(digits + 1));
+		BigInteger increasing = Library.binomial(digits + 9, 9).subtract(BigInteger.ONE);
+		BigInteger decreasing = Library.binomial(digits + 10, 10).subtract(BigInteger.valueOf(digits + 1));
 		BigInteger flat = BigInteger.valueOf(digits * 9);
 		return increasing.add(decreasing).subtract(flat);
-	}
-	
-	
-	private static BigInteger binomial(int n, int k) {
-		return factorial(n).divide(factorial(n - k).multiply(factorial(k)));
-	}
-	
-	
-	private static BigInteger factorial(int n) {
-		BigInteger prod = BigInteger.ONE;
-		for (int i = 1; i <= n; i++)
-			prod = prod.multiply(BigInteger.valueOf(i));
-		return prod;
 	}
 	
 }
