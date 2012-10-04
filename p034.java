@@ -19,21 +19,16 @@ public class p034 {
 	}
 	
 	
+	// Hard-coded values for factorial(0), factorial(1), ..., factorial(9)
+	private static int[] FACTORIAL = {1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880};
+	
 	private static int factorialDigitSum(int x) {
 		int sum = 0;
 		while (x != 0) {
-			sum += factorial(x % 10);
+			sum += FACTORIAL[x % 10];
 			x /= 10;
 		}
 		return sum;
-	}
-	
-	
-	private static int factorial(int n) {
-		int prod = 1;
-		for (int i = 1; i <= n; i++)
-			prod *= i;
-		return prod;
 	}
 	
 }
