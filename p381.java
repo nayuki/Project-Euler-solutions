@@ -7,7 +7,7 @@
 public class p381 {
 	
 	public static void main(String[] args) {
-		boolean[] isPrime = Library.listPrimality(100000000);
+		boolean[] isPrime = Library.listPrimality(Library.pow(10, 8));
 		long sum = 0;
 		for (int i = 5; i < isPrime.length; i++) {
 			if (isPrime[i])

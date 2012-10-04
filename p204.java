@@ -11,7 +11,7 @@ public class p204 {
 	}
 	
 	
-	private static long LIMIT = 1000000000;
+	private static long LIMIT = Library.pow(10, 9);
 	
 	private static int[] primes = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97};
 	

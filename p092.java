@@ -8,7 +8,7 @@ public class p092 {
 	
 	public static void main(String[] args) {
 		int count = 0;
-		for (int i = 1; i < 10000000; i++) {
+		for (int i = 1, end = Library.pow(10, 7); i < end; i++) {
 			if (isClass89(i))
 				count++;
 		}

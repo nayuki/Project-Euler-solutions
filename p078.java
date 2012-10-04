@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class p078 {
 	
-	private static int MODULUS = 1000000;
+	private static int MODULUS = Library.pow(10, 6);
 	
 	
 	public static void main(String[] args) {

@@ -49,6 +49,17 @@ final class Library {
 	}
 	
 	
+	// Does not check for overflow
+	public static int pow(int x, int y) {
+		if (y < 0)
+			throw new IllegalArgumentException("Negative exponent");
+		int z = 1;
+		for (int i = 0; i < y; i++)
+			z *= x;
+		return z;
+	}
+	
+	
 	public static BigInteger binomial(int n, int k) {
 		return factorial(n).divide(factorial(n - k).multiply(factorial(k)));
 	}

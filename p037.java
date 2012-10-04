@@ -29,7 +29,7 @@ public class p037 {
 	
 	
 	private static boolean isLeftTruncatablePrime(int x) {
-		for (int i = 1000000000; i != 1; i /= 10) {
+		for (int i = Library.pow(10, 9); i != 1; i /= 10) {
 			if (!Library.isPrime(x % i))
 				return false;
 		}

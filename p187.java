@@ -6,12 +6,12 @@
 
 public class p187 {
 	
-	private static int[] smallestPrimeFactor = listSmallestPrimeFactor(100000000);
+	private static int[] smallestPrimeFactor = listSmallestPrimeFactor(Library.pow(10, 8));
 	
 	
 	public static void main(String[] args) {
 		int count = 0;
-		for (int i = 2; i < 100000000; i++) {
+		for (int i = 2, end = Library.pow(10, 8); i < end; i++) {
 			if (!isPrime(i) && isPrime(i / smallestPrimeFactor[i]))
 				count++;
 		}

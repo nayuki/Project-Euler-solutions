@@ -8,7 +8,7 @@ public class p145 {
 	
 	public static void main(String[] args) {
 		int count = 0;
-		for (int i = 0; i < 1000000000; i++) {
+		for (int i = 0, end = Library.pow(10, 9); i < end; i++) {
 			if (isReversible(i))
 				count++;
 		}

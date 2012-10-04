@@ -11,7 +11,7 @@ public class p038 {
 	public static void main(String[] args) {
 		int max = -1;
 		for (int n = 2; n <= 9; n++) {
-			for (int i = 1; i < pow(10, 9 / n); i++) {
+			for (int i = 1; i < Library.pow(10, 9 / n); i++) {
 				String concat = "";
 				for (int j = 1; j <= n; j++)
 					concat += i * j;
@@ -29,14 +29,6 @@ public class p038 {
 		char[] temp = s.toCharArray();
 		Arrays.sort(temp);
 		return new String(temp).equals("123456789");
-	}
-	
-	
-	private static int pow(int x, int y) {
-		int z = 1;
-		for (int i = 0; i < y; i++)
-			z *= x;
-		return z;
 	}
 	
 }

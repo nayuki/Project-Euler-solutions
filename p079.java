@@ -11,7 +11,7 @@ public class p079 {
 	
 	public static void main(String[] args) {
 		for (int len = 3; ; len++) {
-			int end = pow(10, len);
+			int end = Library.pow(10, len);
 			for (int guess = 0; guess < end; guess++) {
 				if (isConsistent(toString(guess, len))) {
 					System.out.println(toString(guess, len));
@@ -48,16 +48,6 @@ public class p079 {
 		while (s.length() < len)
 			s = "0" + s;
 		return s;
-	}
-	
-	
-	private static int pow(int x, int y) {
-		if (y < 0)
-			throw new IllegalArgumentException();
-		int z = 1;
-		for (int i = 0; i < y; i++)
-			z *= x;
-		return z;
 	}
 	
 }

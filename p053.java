@@ -8,7 +8,7 @@ import java.math.BigInteger;
 
 public class p053 {
 	
-	private static BigInteger MILLION = BigInteger.valueOf(1000000);
+	private static BigInteger MILLION = BigInteger.TEN.pow(6);
 	
 	
 	public static void main(String[] args) {

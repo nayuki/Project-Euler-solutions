@@ -7,8 +7,7 @@
 public class p072 {
 	
 	public static void main(String[] args) {
-		int n = 1000000;
-		int[] totient = Library.listTotients(n);
+		int[] totient = Library.listTotients(Library.pow(10, 6));
 		long sum = 0;
 		for (int i = 2; i < totient.length; i++)
 			sum += totient[i];
