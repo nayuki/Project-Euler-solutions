@@ -22,14 +22,14 @@ public class p052 {
 	
 	
 	private static boolean hasSameDigits(int x, int y) {
-		return sortDigits(x).equals(sortDigits(y));
+		return Arrays.equals(sortDigits(x), sortDigits(y));
 	}
 	
 	
-	private static String sortDigits(int x) {
-		char[] temp = Integer.toString(x).toCharArray();
-		Arrays.sort(temp);
-		return new String(temp);
+	private static char[] sortDigits(int x) {
+		char[] result = Integer.toString(x).toCharArray();
+		Arrays.sort(result);
+		return result;
 	}
 	
 }
