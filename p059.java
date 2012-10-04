@@ -13,6 +13,7 @@ public class p059 {
 	
 	public static void main(String[] args) throws UnsupportedEncodingException {
 		byte[] bestKey = null;
+		byte[] bestDecrypted = null;
 		double bestScore = Double.NaN;
 		for (int x = 'a'; x <= 'z'; x++) {
 			for (int y = 'a'; y <= 'z'; y++) {
@@ -22,22 +23,24 @@ public class p059 {
 					double score = score(decrypted);
 					if (bestKey == null || score > bestScore) {
 						bestKey = key;
+						bestDecrypted = decrypted;
 						bestScore = score;
 					}
 				}
 			}
 		}
-		
-		byte[] decrypted = decrypt(CIPHERTEXT, bestKey);
-		System.out.printf("%c%c%c: %s%n", bestKey[0], bestKey[1], bestKey[2], new String(decrypted, "US-ASCII"));
+
+		System.out.printf("Key: %c%c%c%n", bestKey[0], bestKey[1], bestKey[2]);
+		System.out.printf("Plaintext: %s%n", new String(bestDecrypted, "US-ASCII"));
 		
 		int sum = 0;
-		for (int i = 0; i < decrypted.length; i++)
-			sum += decrypted[i];
+		for (int i = 0; i < bestDecrypted.length; i++)
+			sum += bestDecrypted[i];
 		System.out.println(sum);
 	}
 	
 	
+	// Heuristical scoring function. The current implementation returns only integral values, but floating-point values are legal too.
 	private static double score(byte[] b) {
 		double sum = 0;
 		for (int i = 0; i < b.length; i++) {

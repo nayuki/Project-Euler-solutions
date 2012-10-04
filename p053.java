@@ -8,10 +8,8 @@ import java.math.BigInteger;
 
 public class p053 {
 	
-	private static BigInteger MILLION = BigInteger.TEN.pow(6);
-	
-	
 	public static void main(String[] args) {
+		BigInteger MILLION = BigInteger.TEN.pow(6);
 		int count = 0;
 		for (int n = 1; n <= 100; n++) {
 			for (int c = 0; c <= n; c++) {

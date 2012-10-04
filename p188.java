@@ -21,23 +21,13 @@ public class p188 {
 	
 	
 	private static int powMod(int x, int y, int m) {
-		if (gcd(x, m) != 1)
+		if (Library.gcd(x, m) != 1)
 			throw new IllegalArgumentException();
 		y %= Library.totient(m);
 		int prod = 1;
 		for (int i = 0; i < y; i++)
 			prod = (int)((long)x * prod % m);
 		return prod;
-	}
-	
-	
-	private static int gcd(int x, int y) {
-		while (y != 0) {
-			int z = x % y;
-			x = y;
-			y = z;
-		}
-		return x;
 	}
 	
 }

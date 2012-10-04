@@ -29,21 +29,14 @@ public class p074 {
 	}
 	
 	
+	// Hard-coded values for factorial(0), factorial(1), ..., factorial(9)
+	private static int[] FACTORIAL = {1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880};
+	
 	private static int factorialize(int n) {
 		int sum = 0;
 		for (; n != 0; n /= 10)
-			sum += factorial(n % 10);
+			sum += FACTORIAL[n % 10];
 		return sum;
-	}
-	
-	
-	private static int factorial(int n) {
-		if (n < 0)
-			throw new IllegalArgumentException();
-		int prod = 1;
-		for (int i = 2; i <= n; i++)
-			prod *= i;
-		return prod;
 	}
 	
 }

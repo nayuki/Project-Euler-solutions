@@ -1,5 +1,5 @@
 /* 
- * Solution to Project Euler problem 114
+ * Solution to Project Euler problem 118
  * By Nayuki Minase
  */
 
@@ -12,7 +12,7 @@ public class p118 {
 	
 	
 	public static void main(String[] args) {
-		// Do prime sieve but store bitwise (instead Boolean array)
+		// Do prime sieve but store bitwise (instead of the usual Boolean array)
 		int n = 999999999;
 		isPrime = new int[(n + 31) / 32];
 		Arrays.fill(isPrime, 0xFFFFFFFF);
@@ -37,7 +37,7 @@ public class p118 {
 		// Eliminate permutation duplicates
 		int count = 0;
 		for (int i = 0; i < countBySize.length; i++)
-			count += countBySize[i] / factorial(i);
+			count += countBySize[i] / FACTORIAL[i];
 		System.out.println(count);
 	}
 	
@@ -65,16 +65,12 @@ public class p118 {
 	}
 	
 	
-	private static int factorial(int n) {
-		int product = 1;
-		for (int i = 2; i <= n; i++)
-			product *= i;
-		return product;
-	}
-	
-	
 	private static boolean isPrime(int x) {
 		return (isPrime[x >>> 5] >>> (x & 0x1F) & 1) != 0;
 	}
+	
+	
+	// Hard-coded values for factorial(0), factorial(1), ..., factorial(9)
+	private static int[] FACTORIAL = {1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880};
 	
 }

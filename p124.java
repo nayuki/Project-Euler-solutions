@@ -43,16 +43,11 @@ public class p124 {
 		
 		
 		public int compareTo(IntPair other) {
-			if (a < other.a)
-				return -1;
-			else if (a > other.a)
-				return 1;
-			else if (b < other.b)
-				return -1;
-			else if (b > other.b)
-				return 1;
-			else
-				return 0;
+			if      (a < other.a) return -1;
+			else if (a > other.a) return +1;
+			else if (b < other.b) return -1;
+			else if (b > other.b) return +1;
+			else                  return  0;
 		}
 		
 	}
