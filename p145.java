@@ -22,7 +22,7 @@ public class p145 {
 	
 	
 	private static int reverse(int x) {
-		return Integer.parseInt(new StringBuffer().append(x).reverse().toString());
+		return Integer.parseInt(Library.reverse(Integer.toString(x)));
 	}
 	
 	

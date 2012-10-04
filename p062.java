@@ -38,7 +38,7 @@ public class p062 {
 	private static long getNumberClass(long x) {
 		char[] digits = Long.toString(x).toCharArray();
 		Arrays.sort(digits);
-		return Long.parseLong(new StringBuffer().append(digits).reverse().toString());
+		return Long.parseLong(Library.reverse(new String(digits)));
 	}
 	
 }

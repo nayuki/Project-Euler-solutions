@@ -8,6 +8,21 @@ import java.math.BigInteger;
 
 final class Library {
 	
+	public static String reverse(String s) {
+		return new StringBuilder(s).reverse().toString();
+	}
+	
+	
+	public static boolean isPalindrome(int x) {
+		return isPalindrome(Integer.toString(x));
+	}
+	
+	
+	public static boolean isPalindrome(String s) {
+		return s.equals(reverse(s));
+	}
+	
+	
 	public static int sqrt(int x) {
 		if (x < 0)
 			throw new IllegalArgumentException("Square root of negative number");

@@ -21,19 +21,12 @@ public class p055 {
 	private static boolean isLychrel(int n) {
 		BigInteger temp = BigInteger.valueOf(n);
 		for (int i = 0; i < 50; i++) {
-			String rev = new StringBuilder(temp.toString()).reverse().toString();
-			temp = temp.add(new BigInteger(rev));
+			temp = temp.add(new BigInteger(Library.reverse(temp.toString())));
 			
-			if (isPalindrome(temp.toString()))
+			if (Library.isPalindrome(temp.toString()))
 				return false;
 		}
 		return true;
-	}
-	
-	
-	private static boolean isPalindrome(String s) {
-		String rev = new StringBuilder(s).reverse().toString();
-		return s.equals(rev);
 	}
 	
 }
