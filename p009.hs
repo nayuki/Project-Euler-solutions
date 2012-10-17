@@ -1,5 +1,7 @@
--- Solution to Project Euler problem 9
--- By Nayuki Minase
+{- 
+ - Solution to Project Euler problem 9
+ - By Nayuki Minase
+ -}
 
 
 cond a b = a <= b && b <= c

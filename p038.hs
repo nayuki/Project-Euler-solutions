@@ -1,5 +1,7 @@
--- Solution to Project Euler problem 38
--- By Nayuki Minase
+{- 
+ - Solution to Project Euler problem 38
+ - By Nayuki Minase
+ -}
 
 
 import List (sort)

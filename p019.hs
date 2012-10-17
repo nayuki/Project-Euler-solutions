@@ -1,5 +1,7 @@
--- Solution to Project Euler problem 19
--- By Nayuki Minase
+{- 
+ - Solution to Project Euler problem 19
+ - By Nayuki Minase
+ -}
 
 
 dayOfWeek year month day = mod (y + (div y 4) - (div y 100) + (div (13 * m + 2) 5) + day + 2) 7

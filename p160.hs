@@ -1,5 +1,7 @@
--- Solution to Project Euler problem 160
--- By Nayuki Minase
+{- 
+ - Solution to Project Euler problem 160
+ - By Nayuki Minase
+ -}
 
 
 md n = mod n (10 ^ 5)  -- Modulo reduction

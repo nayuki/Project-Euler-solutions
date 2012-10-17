@@ -1,5 +1,7 @@
--- Solution to Project Euler problem 40
--- By Nayuki Minase
+{- 
+ - Solution to Project Euler problem 40
+ - By Nayuki Minase
+ -}
 
 
 digits 0 = [0]

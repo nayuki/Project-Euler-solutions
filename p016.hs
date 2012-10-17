@@ -1,5 +1,7 @@
--- Solution to Project Euler problem 16
--- By Nayuki Minase
+{- 
+ - Solution to Project Euler problem 16
+ - By Nayuki Minase
+ -}
 
 
 digits 0 = [0]

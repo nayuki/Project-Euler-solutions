@@ -1,5 +1,7 @@
--- Solution to Project Euler problem 7
--- By Nayuki Minase
+{- 
+ - Solution to Project Euler problem 7
+ - By Nayuki Minase
+ -}
 
 
 primes = sieve [2..] where

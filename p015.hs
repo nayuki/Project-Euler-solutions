@@ -1,5 +1,7 @@
--- Solution to Project Euler problem 15
--- By Nayuki Minase
+{- 
+ - Solution to Project Euler problem 15
+ - By Nayuki Minase
+ -}
 
 
 factorial 0 = 1

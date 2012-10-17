@@ -1,5 +1,7 @@
--- Solution to Project Euler problem 29
--- By Nayuki Minase
+{- 
+ - Solution to Project Euler problem 29
+ - By Nayuki Minase
+ -}
 
 
 import List (nub)
