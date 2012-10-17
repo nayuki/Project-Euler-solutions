@@ -1,6 +1,9 @@
 Project Euler numerical answers
 Computed by Nayuki Minase
 
+http://nayuki.eigenstate.org/page/project-euler-solutions
+https://github.com/nayuki/Project-Euler-solutions
+
 
 Problem 001: 233168
 Problem 002: 4613732

@@ -1,6 +1,9 @@
 /* 
  * Solution to Project Euler problem 60
  * By Nayuki Minase
+ * 
+ * http://nayuki.eigenstate.org/page/project-euler-solutions
+ * https://github.com/nayuki/Project-Euler-solutions
  */
 
 import java.util.Arrays;

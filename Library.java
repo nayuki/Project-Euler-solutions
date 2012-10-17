@@ -1,6 +1,9 @@
 /* 
  * Shared code for solutions to Project Euler problems
  * By Nayuki Minase
+ * 
+ * http://nayuki.eigenstate.org/page/project-euler-solutions
+ * https://github.com/nayuki/Project-Euler-solutions
  */
 
 import java.math.BigInteger;
