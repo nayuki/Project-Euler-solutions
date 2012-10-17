@@ -1,5 +1,4 @@
-Project Euler answers
-
+Project Euler numerical answers
 Computed by Nayuki Minase
 
 
