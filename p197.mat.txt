@@ -6,9 +6,21 @@
 
 (* Use this in Wolfram Mathematica *)
 
+iterations = 10^12;
 F[x_] := Floor[2^(30.403243784`30 - x^2)] * 10^-9
-Plot[F[x], {x, -1, 1}]
-Table[N[Nest[F, -1, i], 15], {i, 0, 20}] // TableForm
-Table[N[Nest[F, -1, i], 15], {i, 100, 109}] // TableForm
-Table[N[Nest[F, -1, i], 15], {i, 1000, 1009}] // TableForm
-N[Nest[F, -1, 10000] + Nest[F, -1, 10001], 10]  (* Empirical approximation *)
+
+(* Floyd's cycle-finding algorithm *)
+x = -1;
+y = -1;
+i = 0;
+While[i < iterations,
+  If[i > 0 && x == y, Break[]];
+  x = F[x];
+  y = F[F[y]];
+  i++]
+
+(* Deal with remaining iterations *)
+remain = Mod[iterations - i, i];
+While[remain > 0, x = F[x]; remain--]
+answer = x + F[x];
+N[Floor[answer * 10^9] / 10^9, Floor[Log[10, answer]] + 1 + 9]
