@@ -13,7 +13,7 @@ public class p162 {
 	
 	/* 
 	 * Among the set of n-digit hexadecimal numbers, how many of them:
-	 * 
+	 *   
 	 *   Are there in total?: 15*16^(n-1).
 	 *   
 	 *   Have no 0?: 15^n.
