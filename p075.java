@@ -15,7 +15,7 @@ public class p075 {
 	public static void main(String[] args) {
 		int n = 1500000;
 		
-		/*
+		/* 
 		 * Pythagorean triples theorem:
 		 *   Every primitive Pythagorean triple with a odd and b even can be expressed as
 		 *   a = st, b = (s^2-t^2)/2, c = (s^2+t^2)/2, where s > t >= 1 are coprime odd integers.

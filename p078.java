@@ -36,7 +36,7 @@ public class p078 {
 			else if (n == 0)
 				return 1;
 			else {
-				/*
+				/* 
 				 * Theorem:
 				 *   p(n) = 0, if n < 0
 				 *   p(0) = 1

@@ -9,7 +9,7 @@
 
 public class p120 {
 	
-	/*
+	/* 
 	 * For a given a, what is the n that maximizes the remainder, and what is the value of this remainder?
 	 * 
 	 * Let's simplify one term, mod a^2:

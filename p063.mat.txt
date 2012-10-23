@@ -9,7 +9,7 @@
 
 (* Use this in Wolfram Mathematica *)
 
-(*
+(* 
  * For every n, 10^n has n+1 digits, so it is excluded.
  * For n = 22, 9^22 has only 21 digits. Furthermore when k < 9, k^22 has fewer than 22 digits. So there are no solutions.
  * For n > 22, 9^n has n-1 or fewer digits, so again there are no solutions.
