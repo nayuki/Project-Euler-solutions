@@ -117,7 +117,7 @@ final class Library {
 			prime[i] = true;
 		// Sieve of Eratosthenes
 		for (int i = 3, end = sqrt(n); i <= end; i += 2) {
-			if (prime[i] && (long)i * i <= n) {
+			if (prime[i]) {
 				for (int j = i * i; j <= n; j += i << 1)
 					prime[j] = false;
 			}
