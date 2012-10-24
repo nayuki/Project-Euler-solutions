@@ -10,6 +10,7 @@
 public class p111 {
 	
 	private static int[] primes;
+	private static long[] primesSquared;
 	
 	static {
 		boolean[] isPrime = Library.listPrimality((int)Library.sqrt(9999999999L));
@@ -19,9 +20,11 @@ public class p111 {
 				count++;
 		}
 		primes = new int[count];
+		primesSquared = new long[count];
 		for (int i = 0, j = 0; i < isPrime.length; i++) {
 			if (isPrime[i]) {
 				primes[j] = i;
+				primesSquared[j] = (long)i * i;
 				j++;
 			}
 		}
@@ -62,10 +65,8 @@ public class p111 {
 	
 	
 	private static boolean isPrime(long x) {
-		for (int p : primes) {
-			if ((long) p * p > x)
-				break;
-			if (x % p == 0)
+		for (int i = 0; i < primes.length && primesSquared[i] <= x; i++) {
+			if (x % primes[i] == 0)
 				return false;
 		}
 		return true;
