@@ -12,50 +12,45 @@ public class p182 {
 	private static int P = 1009;
 	private static int Q = 3643;
 	private static int TOTIENT = (P - 1) * (Q - 1);
-	private static int N = P * Q;
 	
 	
 	public static void main(String[] args) {
-		int[] numUnconcealed = new int[TOTIENT];
-		for (int e = 0; e < numUnconcealed.length; e++) {
-			if (Library.gcd(e, TOTIENT) == 1)
-				numUnconcealed[e] = countUnconcealed(e);
-			else
-				numUnconcealed[e] = Integer.MAX_VALUE;
-		}
+		int[] numUnconcealedP = countAllUnconcealed(P);
+		int[] numUnconcealedQ = countAllUnconcealed(Q);
 		
-		int minUnconcealed = Integer.MAX_VALUE;
-		for (int x : numUnconcealed)
-			minUnconcealed = Math.min(x, minUnconcealed);
+		int minUnconcealedP = Integer.MAX_VALUE;
+		for (int x : numUnconcealedP)
+			minUnconcealedP = Math.min(x, minUnconcealedP);
+		
+		int minUnconcealedQ = Integer.MAX_VALUE;
+		for (int x : numUnconcealedQ)
+			minUnconcealedQ = Math.min(x, minUnconcealedQ);
 		
 		long sum = 0;
-		for (int i = 0; i < numUnconcealed.length; i++) {
-			if (numUnconcealed[i] == minUnconcealed)
-				sum += i;
+		for (int e = 0; e < TOTIENT; e++) {
+			if (numUnconcealedP[e % (P - 1)] == minUnconcealedP && numUnconcealedQ[e % (Q - 1)] == minUnconcealedQ)
+				sum += e;
 		}
 		System.out.println(sum);
 	}
 	
 	
-	private static int countUnconcealed(int e) {
-		int count0 = 0;
-		for (int m = 0; m < P; m++) {
-			if (powMod(m, e, P) == m)
-				count0++;
+	private static int[] countAllUnconcealed(int prime) {
+		int[] numUnconcealed = new int[prime - 1];
+		for (int e = 0; e < numUnconcealed.length; e++) {
+			if (Library.gcd(e, prime - 1) == 1)
+				numUnconcealed[e] = countUnconcealed(prime, e);
+			else
+				numUnconcealed[e] = Integer.MAX_VALUE;
 		}
-		int count1 = 0;
-		for (int m = 0; m < Q; m++) {
-			if (powMod(m, e, Q) == m)
-				count1++;
-		}
-		return count0 * count1;
+		return numUnconcealed;
 	}
 	
 	
-	private static int countUnconcealedSlow(int e) {
+	private static int countUnconcealed(int modulus, int e) {
 		int count = 0;
-		for (int m = 0; m < N; m++) {
-			if (powMod(m, e, N) == m)
+		for (int m = 0; m < modulus; m++) {
+			if (powMod(m, e, modulus) == m)
 				count++;
 		}
 		return count;
