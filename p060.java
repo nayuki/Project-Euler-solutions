@@ -7,6 +7,7 @@
  */
 
 import java.util.Arrays;
+import java.util.BitSet;
 
 
 public class p060 {
@@ -15,8 +16,15 @@ public class p060 {
 	
 	private static int[] primes = Library.listPrimes(PRIME_LIMIT);
 	
+	// Memoization
+	private static BitSet isConcatPrimeKnown;
+	private static BitSet isConcatPrime;
+	
 	
 	public static void main(String[] args) {
+		isConcatPrimeKnown = new BitSet(primes.length * primes.length);
+		isConcatPrime = new BitSet(primes.length * primes.length);
+		
 		int sumLimit = PRIME_LIMIT;
 		while (true) {
 			int sum = findSetSum(new int[]{}, 5, sumLimit - 1);
@@ -46,7 +54,7 @@ public class p060 {
 			for (; i < primes.length && primes[i] <= sumLimit; i++) {
 				boolean pass = true;
 				for (int j : prefix)
-					pass &= isConcatenationPrime(i, j) && isConcatenationPrime(j, i);
+					pass &= isConcatPrime(i, j) && isConcatPrime(j, i);
 				
 				if (pass) {
 					int[] appended = Arrays.copyOf(prefix, prefix.length + 1);
@@ -61,7 +69,11 @@ public class p060 {
 	}
 	
 	
-	private static boolean isConcatenationPrime(int x, int y) {
+	private static boolean isConcatPrime(int x, int y) {
+		int index = x * primes.length + y;
+		if (isConcatPrimeKnown.get(index))
+			return isConcatPrime.get(index);
+		
 		x = primes[x];
 		y = primes[y];
 		
@@ -69,17 +81,20 @@ public class p060 {
 		for (int temp = y; temp != 0; temp /= 10)
 			mult *= 10;
 		
-		return isPrime((long)x * mult + y);
+		isConcatPrimeKnown.set(index);
+		if (isPrime((long)x * mult + y)) {
+			isConcatPrime.set(index);
+			return true;
+		} else
+			return false;
 	}
 	
 	
 	private static boolean isPrime(long x) {
 		if (x < 0)
 			throw new IllegalArgumentException();
-		if (x == 0 || x == 1)
+		else if (x == 0 || x == 1)
 			return false;
-		else if (x == 2)
-			return true;
 		else {
 			long end = Library.sqrt(x);
 			for (int p : primes) {
