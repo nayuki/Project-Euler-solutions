@@ -24,22 +24,11 @@ public class p077 {
 	}
 	
 	
-	private static int[] primes;  // 2, 3, 5, 7, 11, 13, 17, 19, ...
+	private static int[] primes = Library.listPrimes(LIMIT);
 	
 	private static int[][] primePartitions;  // Memoization
 	
 	static {
-		boolean[] isPrime = Library.listPrimality(LIMIT);
-		int[] tempPrimes = new int[isPrime.length];
-		int primesLen = 0;
-		for (int i = 0; i < isPrime.length; i++) {
-			if (isPrime[i]) {
-				tempPrimes[primesLen] = i;
-				primesLen++;
-			}
-		}
-		primes = Arrays.copyOf(tempPrimes, primesLen);
-		
 		primePartitions = new int[LIMIT][LIMIT];
 		for (int[] array : primePartitions)
 			Arrays.fill(array, -1);

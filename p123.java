@@ -11,23 +11,7 @@ public class p123 {
 	
 	private static final int PRIME_LIMIT = 1000000;
 	
-	private static int[] primes;
-	
-	static {
-		boolean[] isPrime = Library.listPrimality(PRIME_LIMIT);
-		int count = 0;
-		for (boolean b : isPrime) {
-			if (b)
-				count++;
-		}
-		primes = new int[count];
-		for (int i = 0, j = 0; i < isPrime.length; i++) {
-			if (isPrime[i]) {
-				primes[j] = i;
-				j++;
-			}
-		}
-	}
+	private static int[] primes = Library.listPrimes(PRIME_LIMIT);
 	
 	
 	public static void main(String[] args) {

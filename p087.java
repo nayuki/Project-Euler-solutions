@@ -9,39 +9,43 @@
 
 public class p087 {
 	
+	private static final int LIMIT = 50000000;
+	
+	
 	public static void main(String[] args) {
-		boolean[] isPrime = Library.listPrimality(7071);  // sqrt(50 000 000)
+		int[] primes = Library.listPrimes(Library.sqrt(LIMIT));
 		
 		// Squares
-		boolean[] possible = new boolean[50000000 + 1];
-		for (int i = 0; i < isPrime.length && i * i < possible.length; i++) {
-			if (!isPrime[i])
-				continue;
-			possible[i * i] = true;
+		boolean[] possible = new boolean[LIMIT + 1];
+		for (int p : primes) {
+			if (p * p >= LIMIT + 1)
+				break;
+			possible[p * p] = true;
 		}
 		
 		// Cubes
-		boolean[] nextPossible = new boolean[possible.length];
-		for (int i = 0; i < isPrime.length && (long)i * i * i < possible.length; i++) {
-			if (!isPrime[i])
-				continue;
-			int prod = i * i * i;
-			for (int j = possible.length - 1 - prod; j >= 0; j--)
-				nextPossible[j + prod] |= possible[j];
+		boolean[] nextPossible = new boolean[LIMIT + 1];
+		for (int p : primes) {
+			if ((long)p * p * p > LIMIT)
+				break;
+			int prod = p * p * p;
+			for (int i = LIMIT - prod; i >= 0; i--)
+				nextPossible[i + prod] |= possible[i];
 		}
 		possible = nextPossible;
 		
 		// Fourth power
-		nextPossible = new boolean[possible.length];
-		for (int i = 0; i < isPrime.length && (long)i * i * i * i < possible.length; i++) {
-			if (!isPrime[i])
-				continue;
-			int prod = i * i * i * i;
-			for (int j = possible.length - 1 - prod; j >= 0; j--)
-				nextPossible[j + prod] |= possible[j];
+		nextPossible = new boolean[LIMIT + 1];
+		for (int p : primes) {
+			if ((long)p * p * p * p > LIMIT)
+				break;
+			int prod = p * p * p * p;
+			for (int i = LIMIT - prod; i >= 0; i--)
+				nextPossible[i + prod] |= possible[i];
 		}
 		possible = nextPossible;
 		
+		// Count sums
 		int count = 0;
 		for (boolean x : possible) {
 			if (x)

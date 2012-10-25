@@ -126,6 +126,24 @@ final class Library {
 	}
 	
 	
+	public static int[] listPrimes(int n) {
+		boolean[] isPrime = listPrimality(n);
+		int count = 0;
+		for (boolean b : isPrime) {
+			if (b)
+				count++;
+		}
+		int[] primes = new int[count];
+		for (int i = 0, j = 0; i < isPrime.length; i++) {
+			if (isPrime[i]) {
+				primes[j] = i;
+				j++;
+			}
+		}
+		return primes;
+	}
+	
+	
 	public static int totient(int x) {
 		if (x <= 0)
 			throw new IllegalArgumentException("Totient of non-positive integer");

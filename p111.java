@@ -11,26 +11,10 @@ import java.util.Arrays;
 
 public class p111 {
 	
-	private static int[] primes;
-	
-	static {
-		boolean[] isPrime = Library.listPrimality((int)Library.sqrt(9999999999L));
-		int count = 0;
-		for (boolean b : isPrime) {
-			if (b)
-				count++;
-		}
-		primes = new int[count];
-		for (int i = 0, j = 0; i < isPrime.length; i++) {
-			if (isPrime[i]) {
-				primes[j] = i;
-				j++;
-			}
-		}
-	}
-	
+	private static int[] primes = Library.listPrimes((int)Library.sqrt(9999999999L));
 	
 	private static final int BLOCK_SIZE = 10000000;
+	
 	
 	public static void main(String[] args) {
 		// Classify each 9-digit prime number for each digit value
