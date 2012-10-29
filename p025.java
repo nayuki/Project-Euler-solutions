@@ -17,12 +17,17 @@ public final class p025 implements EulerSolution {
 	
 	
 	public String run() {
+		BigInteger lowerthres = BigInteger.TEN.pow( 999);
+		BigInteger upperthres = BigInteger.TEN.pow(1000);
 		BigInteger prev = BigInteger.ONE;
 		BigInteger cur = BigInteger.ZERO;
 		int i = 0;
 		while (true) {
-			if (cur.toString().length() == 1000)
+			if (cur.compareTo(lowerthres) >= 0)
 				return Integer.toString(i);
+			else if (cur.compareTo(upperthres) >= 0)
+				throw new RuntimeException("Not found");
+			
 			BigInteger temp = cur.add(prev);
 			prev = cur;
 			cur = temp;

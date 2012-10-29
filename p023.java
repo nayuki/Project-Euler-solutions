@@ -42,11 +42,14 @@ public final class p023 implements EulerSolution {
 		if (n < 1)
 			throw new IllegalArgumentException();
 		
-		int sum = 0;  // Sum of factors
-		for (int i = 1; i < n; i++) {
+		int sum = 1;  // Sum of factors
+		int end = Library.sqrt(n);
+		for (int i = 2; i <= end; i++) {
 			if (n % i == 0)
-				sum += i;
+				sum += i + n / i;
 		}
+		if (end * end == n)
+			sum -= end;
 		return sum > n;
 	}
 	
