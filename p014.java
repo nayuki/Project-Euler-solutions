@@ -17,7 +17,7 @@ public final class p014 implements EulerSolution {
 	
 	
 	private static final int LIMIT = Library.pow(10, 6);
-	private static final BigInteger LIMIT_BI = BigInteger.valueOf(LIMIT);
+	private static final BigInteger CACHE_SIZE = BigInteger.valueOf(LIMIT);
 	
 	
 	public String run() {
@@ -34,14 +34,15 @@ public final class p014 implements EulerSolution {
 	}
 	
 	
-	private int[] collatzChainLength = new int[LIMIT];
+	// Memoization
+	private int[] collatzChainLength = new int[CACHE_SIZE.intValue()];
 	
 	private int collatzChainLength(BigInteger n) {
 		if (n.signum() < 0)
 			throw new IllegalArgumentException();
 		
 		int index;
-		if (n.compareTo(LIMIT_BI) < 0)
+		if (n.compareTo(CACHE_SIZE) < 0)
 			index = n.intValue();
 		else
 			index = -1;
