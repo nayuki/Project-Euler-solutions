@@ -15,23 +15,23 @@ public final class p039 {
 	
 	
 	public String run() {
-		int maxP = -1;
-		int maxTriangles = -1;
-		for (int p = 0; p <= 1000; p++) {
+		int maxPerimeter = -1;
+		int maxTriangles = Integer.MIN_VALUE;
+		for (int p = 1; p <= 1000; p++) {
 			int triangles = countSolutions(p);
-			if (maxTriangles == -1 || triangles > maxTriangles) {
+			if (triangles > maxTriangles) {
 				maxTriangles = triangles;
-				maxP = p;
+				maxPerimeter = p;
 			}
 		}
-		return Integer.toString(maxP);
+		return Integer.toString(maxPerimeter);
 	}
 	
 	
 	private static int countSolutions(int p) {
 		int count = 0;
-		for (int a = 1; a <= 1000; a++) {
-			for (int b = a; b <= 1000; b++) {
+		for (int a = 1; a <= p; a++) {
+			for (int b = a; b <= p; b++) {
 				int c = p - a - b;
 				if (b <= c && a * a + b * b == c * c)
 					count++;
