@@ -29,9 +29,17 @@ public final class p027 {
 	
 	private static int numberOfConsecutivePrimesGenerated(int a, int b) {
 		int i = 0;
-		while (Library.isPrime(i * i + i * a + b))
+		while (isPrime(i * i + i * a + b))
 			i++;
 		return i;
+	}
+	
+	
+	private static boolean isPrime(int x) {
+		if (x < 0)
+			return false;
+		else
+			return Library.isPrime(x);
 	}
 	
 }
