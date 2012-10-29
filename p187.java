@@ -7,7 +7,7 @@
  */
 
 
-public class p187 {
+public final class p187 {
 	
 	private static int[] smallestPrimeFactor = listSmallestPrimeFactor(Library.pow(10, 8));
 	

@@ -9,7 +9,7 @@
 import java.math.BigInteger;
 
 
-public class p053 {
+public final class p053 {
 	
 	public static void main(String[] args) {
 		BigInteger MILLION = BigInteger.TEN.pow(6);

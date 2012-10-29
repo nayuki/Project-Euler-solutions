@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-public class p029 {
+public final class p029 {
 	
 	public static void main(String[] args) {
 		Set<BigInteger> generated = new HashSet<BigInteger>();

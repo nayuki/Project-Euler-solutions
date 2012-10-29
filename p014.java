@@ -9,7 +9,7 @@
 import java.math.BigInteger;
 
 
-public class p014 {
+public final class p014 {
 	
 	public static void main(String[] args) {
 		int maxArg = -1;

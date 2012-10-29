@@ -7,7 +7,7 @@
  */
 
 
-public class p072 {
+public final class p072 {
 	
 	public static void main(String[] args) {
 		int[] totient = Library.listTotients(Library.pow(10, 6));

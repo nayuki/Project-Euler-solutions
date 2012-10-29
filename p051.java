@@ -9,7 +9,7 @@
 import java.util.Arrays;
 
 
-public class p051 {
+public final class p051 {
 	
 	public static void main(String[] args) {
 		boolean[] isPrime = Library.listPrimality(1000000);

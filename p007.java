@@ -7,7 +7,7 @@
  */
 
 
-public class p007 {
+public final class p007 {
 	
 	public static void main(String[] args) {
 		boolean[] isPrime = Library.listPrimality(300000);

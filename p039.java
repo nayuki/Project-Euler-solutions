@@ -7,7 +7,7 @@
  */
 
 
-public class p039 {
+public final class p039 {
 	
 	public static void main(String[] args) {
 		int maxP = -1;

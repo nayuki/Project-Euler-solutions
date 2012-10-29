@@ -7,7 +7,7 @@
  */
 
 
-public class p087 {
+public final class p087 {
 	
 	private static final int LIMIT = 50000000;
 	

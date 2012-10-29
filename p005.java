@@ -9,7 +9,7 @@
 import java.math.BigInteger;
 
 
-public class p005 {
+public final class p005 {
 	
 	public static void main(String[] args) {
 		BigInteger allLcm = BigInteger.ONE;

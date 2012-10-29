@@ -7,7 +7,7 @@
  */
 
 
-public class p142 {
+public final class p142 {
 	
 	private static boolean[] isSquare = new boolean[10000001];
 	

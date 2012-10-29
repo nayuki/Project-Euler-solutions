@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.BitSet;
 
 
-public class p060 {
+public final class p060 {
 	
 	private static final int PRIME_LIMIT = 100000;
 	

@@ -7,7 +7,7 @@
  */
 
 
-public class p179 {
+public final class p179 {
 	
 	public static void main(String[] args) {
 		int count = 0;

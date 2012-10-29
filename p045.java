@@ -7,7 +7,7 @@
  */
 
 
-public class p045 {
+public final class p045 {
 	
 	public static void main(String[] args) {
 		int i = 286;

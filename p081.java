@@ -7,7 +7,7 @@
  */
 
 
-public class p081 {
+public final class p081 {
 	
 	public static void main(String[] args) {
 		for (int i = GRID.length - 1; i >= 0; i--) {

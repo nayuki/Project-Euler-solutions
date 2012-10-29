@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-public class p203 {
+public final class p203 {
 	
 	private static long[] PRIMES_SQUARED = listPrimesSquared(1 << 24);
 	

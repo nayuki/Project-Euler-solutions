@@ -7,7 +7,7 @@
  */
 
 
-public class p182 {
+public final class p182 {
 	
 	private static int P = 1009;
 	private static int Q = 3643;

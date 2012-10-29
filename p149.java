@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class p149 {
+public final class p149 {
 	
 	public static void main(String[] args) {
 		int[][] grid = new int[2000][2000];
@@ -56,7 +56,7 @@ public class p149 {
 	
 	
 	// Lagged Fibonacci generator
-	private static class LfgRandom {
+	private static final class LfgRandom {
 		
 		private int k;
 		

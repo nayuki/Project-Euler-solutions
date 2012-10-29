@@ -7,7 +7,7 @@
  */
 
 
-public class p197 {
+public final class p197 {
 	
 	private static long ITERATIONS = 1000000000000L;
 	

@@ -7,7 +7,7 @@
  */
 
 
-public class p115 {
+public final class p115 {
 	
 	public static void main(String[] args) {
 		for (int i = 1; ; i++) {

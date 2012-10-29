@@ -7,7 +7,7 @@
  */
 
 
-public class p024 {
+public final class p024 {
 	
 	public static void main(String[] args) {
 		// Initialize

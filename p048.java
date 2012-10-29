@@ -9,7 +9,7 @@
 import java.math.BigInteger;
 
 
-public class p048 {
+public final class p048 {
 	
 	public static void main(String[] args) {
 		BigInteger modulus = BigInteger.valueOf(10).pow(10);

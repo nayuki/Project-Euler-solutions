@@ -7,7 +7,7 @@
  */
 
 
-public class p204 {
+public final class p204 {
 	
 	public static void main(String[] args) {
 		System.out.println(count(0, 1));

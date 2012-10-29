@@ -7,7 +7,7 @@
  */
 
 
-public class p214 {
+public final class p214 {
 	
 	public static void main(String[] args) {
 		int n = 40000000;

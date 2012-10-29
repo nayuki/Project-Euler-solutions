@@ -7,7 +7,7 @@
  */
 
 
-public class p067 {
+public final class p067 {
 	
 	public static void main(String[] args) {
 		for (int i = TRIANGLE.length - 2; i >= 0; i--) {

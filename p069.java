@@ -7,7 +7,7 @@
  */
 
 
-public class p069 {
+public final class p069 {
 	
 	public static void main(String[] args) {
 		double maxVal = -1;

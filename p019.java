@@ -7,7 +7,7 @@
  */
 
 
-public class p019 {
+public final class p019 {
 	
 	public static void main(String[] args) {
 		int count = 0;

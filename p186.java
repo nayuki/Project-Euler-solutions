@@ -7,7 +7,7 @@
  */
 
 
-public class p186 {
+public final class p186 {
 	
 	public static void main(String[] args) {
 		DisjointSets ds = new DisjointSets(1000000);
@@ -26,7 +26,7 @@ public class p186 {
 	
 	
 	
-	private static class DisjointSets {
+	private static final class DisjointSets {
 		
 		private Node[] nodes;
 		
@@ -86,7 +86,7 @@ public class p186 {
 	}
 	
 	
-	private static class Node {
+	private static final class Node {
 		
 		public Node parent;
 		
@@ -106,7 +106,7 @@ public class p186 {
 	
 	
 	// Lagged Fibonacci generator
-	private static class LfgRandom {
+	private static final class LfgRandom {
 		
 		private int k;
 		

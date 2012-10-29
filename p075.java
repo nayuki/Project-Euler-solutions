@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-public class p075 {
+public final class p075 {
 	
 	public static void main(String[] args) {
 		int n = 1500000;
@@ -51,7 +51,7 @@ public class p075 {
 	
 	
 	
-	private static class IntTriple {
+	private static final class IntTriple {
 		
 		public final int a;
 		public final int b;

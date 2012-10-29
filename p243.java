@@ -9,7 +9,7 @@
 import java.math.BigInteger;
 
 
-public class p243 {
+public final class p243 {
 	
 	private static BigInteger TARGET_NUMERATOR   = BigInteger.valueOf(15499);
 	private static BigInteger TARGET_DENOMINATOR = BigInteger.valueOf(94744);

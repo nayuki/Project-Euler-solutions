@@ -7,7 +7,7 @@
  */
 
 
-public class p381 {
+public final class p381 {
 	
 	public static void main(String[] args) {
 		boolean[] isPrime = Library.listPrimality(Library.pow(10, 8));

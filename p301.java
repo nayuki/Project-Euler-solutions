@@ -7,7 +7,7 @@
  */
 
 
-public class p301 {
+public final class p301 {
 	
 	public static void main(String[] args) {
 		long count = 0;

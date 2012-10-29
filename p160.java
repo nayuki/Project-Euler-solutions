@@ -7,7 +7,7 @@
  */
 
 
-public class p160 {
+public final class p160 {
 	
 	public static void main(String[] args) {
 		System.out.println(factorialLast(1000000000000L));

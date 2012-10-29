@@ -7,7 +7,7 @@
  */
 
 
-public class p191 {
+public final class p191 {
 	
 	public static void main(String[] args) {
 		long[][][] dp = new long[31][3][2];  // dp[i][j][k] is the number of prize strings of exactly length i with exactly j absences at the tail and exactly k lates in the whole string

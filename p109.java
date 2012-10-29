@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class p109 {
+public final class p109 {
 	
 	private static List<Integer> points;
 	private static List<Integer> doublePoints;

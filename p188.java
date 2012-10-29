@@ -7,7 +7,7 @@
  */
 
 
-public class p188 {
+public final class p188 {
 	
 	public static void main(String[] args) {
 		System.out.println(tetrationMod(1777, 1885, Library.pow(10, 8)));

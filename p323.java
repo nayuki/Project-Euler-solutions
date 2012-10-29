@@ -7,7 +7,7 @@
  */
 
 
-public class p323 {
+public final class p323 {
 	
 	/* 
 	 * Suppose that n 32-bit integers have been OR'd together.

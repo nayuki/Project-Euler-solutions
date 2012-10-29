@@ -7,7 +7,7 @@
  */
 
 
-public class p040 {
+public final class p040 {
 	
 	public static void main(String[] args) {
 		StringBuilder sb = new StringBuilder();

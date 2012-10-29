@@ -9,7 +9,7 @@
 import java.math.BigInteger;
 
 
-public class p104 {
+public final class p104 {
 	
 	public static void main(String[] args) {
 		int i = 0;

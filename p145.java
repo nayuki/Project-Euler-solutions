@@ -7,7 +7,7 @@
  */
 
 
-public class p145 {
+public final class p145 {
 	
 	public static void main(String[] args) {
 		int count = 0;

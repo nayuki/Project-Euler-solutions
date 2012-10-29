@@ -7,7 +7,7 @@
  */
 
 
-public class p108 {
+public final class p108 {
 	
 	public static void main(String[] args) {
 		int n = 1;

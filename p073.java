@@ -7,7 +7,7 @@
  */
 
 
-public class p073 {
+public final class p073 {
 	
 	public static void main(String[] args) {
 		System.out.println(sternBrocot());  // Probably needs more stack; use something like "-Xss4M" for the JVM

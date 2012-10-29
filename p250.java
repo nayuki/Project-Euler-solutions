@@ -7,7 +7,7 @@
  */
 
 
-public class p250 {
+public final class p250 {
 	
 	public static void main(String[] args) {
 		long[] numSubsetsRemainder = new long[250];

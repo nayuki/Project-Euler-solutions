@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-public class p095 {
+public final class p095 {
 	
 	public static void main(String[] args) {
 		int n = 1000001;

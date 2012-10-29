@@ -7,7 +7,7 @@
  */
 
 
-public class p112 {
+public final class p112 {
 	
 	public static void main(String[] args) {
 		int bouncy = 0;

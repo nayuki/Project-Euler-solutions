@@ -7,7 +7,7 @@
  */
 
 
-public class p030 {
+public final class p030 {
 	
 	public static void main(String[] args) {
 		// As stated in the problem, 1 = 1^5 is excluded.

@@ -9,7 +9,7 @@
 import java.util.Arrays;
 
 
-public class p124 {
+public final class p124 {
 	
 	public static void main(String[] args) {
 		int n = 100000;
@@ -33,7 +33,7 @@ public class p124 {
 	
 	
 	
-	private static class IntPair implements Comparable<IntPair> {
+	private static final class IntPair implements Comparable<IntPair> {
 		
 		public final int a;
 		public final int b;

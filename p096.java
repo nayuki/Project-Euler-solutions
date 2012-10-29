@@ -7,7 +7,7 @@
  */
 
 
-public class p096 {
+public final class p096 {
 	
 	public static void main(String[] args) {
 		int sum = 0;
@@ -23,7 +23,7 @@ public class p096 {
 	
 	
 	
-	private static class SudokuSolver {
+	private static final class SudokuSolver {
 		
 		public int[][] board;
 		

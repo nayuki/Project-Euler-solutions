@@ -7,7 +7,7 @@
  */
 
 
-public class p107 {
+public final class p107 {
 	
 	public static void main(String[] args) {
 		int vertices = WEIGHTS.length;

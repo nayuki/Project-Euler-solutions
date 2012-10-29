@@ -7,7 +7,7 @@
  */
 
 
-public class p058 {
+public final class p058 {
 	
 	public static void main(String[] args) {
 		int diagonalSize = 1;

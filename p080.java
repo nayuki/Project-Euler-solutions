@@ -9,7 +9,7 @@
 import java.math.BigInteger;
 
 
-public class p080 {
+public final class p080 {
 	
 	public static void main(String[] args) {
 		int sum = 0;

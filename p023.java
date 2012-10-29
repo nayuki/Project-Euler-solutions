@@ -7,7 +7,7 @@
  */
 
 
-public class p023 {
+public final class p023 {
 	
 	public static void main(String[] args) {
 		// Compute look-up table

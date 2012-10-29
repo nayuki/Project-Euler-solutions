@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-public class p054 {
+public final class p054 {
 	
 	public static void main(String[] args) {
 		int count = 0;

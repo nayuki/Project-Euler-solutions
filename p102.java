@@ -7,7 +7,7 @@
  */
 
 
-public class p102 {
+public final class p102 {
 	
 	public static void main(String[] args) {
 		int count = 0;

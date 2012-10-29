@@ -7,7 +7,7 @@
  */
 
 
-public class p020 {
+public final class p020 {
 	
 	public static void main(String[] args) {
 		String temp = Library.factorial(100).toString();

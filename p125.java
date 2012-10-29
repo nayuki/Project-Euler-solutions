@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-public class p125 {
+public final class p125 {
 	
 	public static void main(String[] args) {
 		Set<Integer> nums = new HashSet<Integer>();

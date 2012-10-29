@@ -7,7 +7,7 @@
  */
 
 
-public class p027 {
+public final class p027 {
 	
 	public static void main(String[] args) {
 		int bestNum = -1;

@@ -9,7 +9,7 @@
 import java.math.BigInteger;
 
 
-public class p076 {
+public final class p076 {
 	
 	public static void main(String[] args) {
 		System.out.println(partitions(100, 1).subtract(BigInteger.ONE));

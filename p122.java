@@ -12,7 +12,7 @@ import java.util.List;
 
 
 // Uses the concepts of addition chains. See: http://en.wikipedia.org/wiki/Addition_chain
-public class p122 {
+public final class p122 {
 	
 	private static int[] minChainLength;
 	

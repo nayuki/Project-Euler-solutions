@@ -9,7 +9,7 @@
 import java.math.BigInteger;
 
 
-public class p113 {
+public final class p113 {
 	
 	public static void main(String[] args) {
 		System.out.println(countNonBouncy(100));

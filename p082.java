@@ -9,7 +9,7 @@
 import java.util.Arrays;
 
 
-public class p082 {
+public final class p082 {
 	
 	private static final int INFINITY = Integer.MAX_VALUE / 2;
 	

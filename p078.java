@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class p078 {
+public final class p078 {
 	
 	private static int MODULUS = Library.pow(10, 6);
 	

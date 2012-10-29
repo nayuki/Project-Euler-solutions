@@ -7,7 +7,7 @@
  */
 
 
-public class p123 {
+public final class p123 {
 	
 	private static final int PRIME_LIMIT = 1000000;
 	

@@ -9,7 +9,7 @@
 import java.util.Arrays;
 
 
-public class p118 {
+public final class p118 {
 	
 	private static int[] isPrime;
 	

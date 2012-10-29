@@ -9,7 +9,7 @@
 import java.util.Arrays;
 
 
-public class p022 {
+public final class p022 {
 	
 	public static void main(String[] args) {
 		Arrays.sort(NAMES);

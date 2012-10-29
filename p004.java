@@ -7,7 +7,7 @@
  */
 
 
-public class p004 {
+public final class p004 {
 	
 	public static void main(String[] args) {
 		int maxPalin = -1;

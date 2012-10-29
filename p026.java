@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class p026 {
+public final class p026 {
 	
 	public static void main(String[] args) {
 		int bestNumber = -1;

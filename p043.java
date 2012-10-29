@@ -7,7 +7,7 @@
  */
 
 
-public class p043 {
+public final class p043 {
 	
 	public static void main(String[] args) {
 		int[] divisibilityTests = {2, 3, 5, 7, 11, 13, 17};

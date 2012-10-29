@@ -7,7 +7,7 @@
  */
 
 
-public class p044 {
+public final class p044 {
 	
 	public static void main(String[] args) {
 		outer:

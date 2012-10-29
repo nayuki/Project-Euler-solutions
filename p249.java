@@ -7,7 +7,7 @@
  */
 
 
-public class p249 {
+public final class p249 {
 	
 	private static int LIMIT = 5000;
 	private static long MODULUS = 10000000000000000L;

@@ -9,7 +9,7 @@
 import java.util.Arrays;
 
 
-public class p077 {
+public final class p077 {
 	
 	private static int LIMIT = 1000;
 	

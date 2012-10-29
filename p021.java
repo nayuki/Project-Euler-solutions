@@ -7,7 +7,7 @@
  */
 
 
-public class p021 {
+public final class p021 {
 	
 	public static void main(String[] args) {
 		int sum = 0;

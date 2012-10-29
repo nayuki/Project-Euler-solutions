@@ -9,7 +9,7 @@
 import java.math.BigInteger;
 
 
-public class p025 {
+public final class p025 {
 	
 	public static void main(String[] args) {
 		BigInteger prev = BigInteger.ONE;

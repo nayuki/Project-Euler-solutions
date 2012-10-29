@@ -7,7 +7,7 @@
  */
 
 
-public class p117 {
+public final class p117 {
 	
 	public static void main(String[] args) {
 		long[] ways = new long[51];  // Memoization

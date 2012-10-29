@@ -9,7 +9,7 @@
 import java.util.Arrays;
 
 
-public class p052 {
+public final class p052 {
 	
 	public static void main(String[] args) {
 		outer:

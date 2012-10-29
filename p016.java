@@ -9,7 +9,7 @@
 import java.math.BigInteger;
 
 
-public class p016 {
+public final class p016 {
 	
 	public static void main(String[] args) {
 		String temp = BigInteger.ONE.shiftLeft(1000).toString();

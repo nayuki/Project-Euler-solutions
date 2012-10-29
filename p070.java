@@ -9,7 +9,7 @@
 import java.util.Arrays;
 
 
-public class p070 {
+public final class p070 {
 	
 	public static void main(String[] args) {
 		int minNumerator = 10;

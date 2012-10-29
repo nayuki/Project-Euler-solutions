@@ -7,7 +7,7 @@
  */
 
 
-public class p085 {
+public final class p085 {
 	
 	public static void main(String[] args) {
 		int bestDiff = -1;

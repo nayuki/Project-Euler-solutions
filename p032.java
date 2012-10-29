@@ -9,7 +9,7 @@
 import java.util.Arrays;
 
 
-public class p032 {
+public final class p032 {
 	
 	public static void main(String[] args) {
 		// A candidate has at most 4 digits. This is because if it has 4 digits, then expressing it as a product of two numbers uses at least 4 digits.

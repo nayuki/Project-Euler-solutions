@@ -9,7 +9,7 @@
 import java.math.BigInteger;
 
 
-public class p099 {
+public final class p099 {
 	
 	public static void main(String[] args) {
 		calculateApproximately();

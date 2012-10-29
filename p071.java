@@ -7,7 +7,7 @@
  */
 
 
-public class p071 {
+public final class p071 {
 	
 	public static void main(String[] args) {
 		int maxN = 0;

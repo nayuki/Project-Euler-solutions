@@ -9,7 +9,7 @@
 import java.math.BigInteger;
 
 
-public class p162 {
+public final class p162 {
 	
 	/* 
 	 * Among the set of n-digit hexadecimal numbers, how many of them:

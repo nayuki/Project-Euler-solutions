@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class p062 {
+public final class p062 {
 	
 	public static void main(String[] args) {
 		final int LIMIT = 10000;  // Arbitrary search cut-off

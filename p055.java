@@ -9,7 +9,7 @@
 import java.math.BigInteger;
 
 
-public class p055 {
+public final class p055 {
 	
 	public static void main(String[] args) {
 		int count = 0;

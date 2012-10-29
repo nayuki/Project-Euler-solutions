@@ -7,7 +7,7 @@
  */
 
 
-public class p009 {
+public final class p009 {
 	
 	public static void main(String[] args) {
 		for (int a = 1; a < 1000; a++) {

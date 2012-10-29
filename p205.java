@@ -7,7 +7,7 @@
  */
 
 
-public class p205 {
+public final class p205 {
 	
 	private static final int[] PYRAMIDAL_DIE_PDF = {0, 1, 1, 1, 1};
 	private static final int[] CUBIC_DIE_PDF = {0, 1, 1, 1, 1, 1, 1};

@@ -9,7 +9,7 @@
 import java.util.Arrays;
 
 
-public class p111 {
+public final class p111 {
 	
 	private static int[] primes = Library.listPrimes((int)Library.sqrt(9999999999L));
 	

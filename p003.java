@@ -7,7 +7,7 @@
  */
 
 
-public class p003 {
+public final class p003 {
 	
 	public static void main(String[] args) {
 		long n = 600851475143L;

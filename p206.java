@@ -9,7 +9,7 @@
 import java.util.regex.Pattern;
 
 
-public class p206 {
+public final class p206 {
 	
 	public static void main(String[] args) {
 		long i = 1000000000;
