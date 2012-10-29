@@ -10,9 +10,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public final class p026 {
+public final class p026 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p026().run());
+	}
+	
+	
+	public String run() {
 		int bestNumber = -1;
 		int bestLength = -1;
 		
@@ -24,7 +29,7 @@ public final class p026 {
 			}
 		}
 		
-		System.out.println(bestNumber);
+		return Integer.toString(bestNumber);
 	}
 	
 	

@@ -7,16 +7,21 @@
  */
 
 
-public final class p010 {
+public final class p010 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p010().run());
+	}
+	
+	
+	public String run() {
 		boolean[] isPrime = Library.listPrimality(1999999);
 		long sum = 0;
 		for (int i = 0; i < isPrime.length; i++) {
 			if (isPrime[i])
 				sum += i;
 		}
-		System.out.println(sum);
+		return Long.toString(sum);
 	}
 	
 }

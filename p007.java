@@ -7,17 +7,20 @@
  */
 
 
-public final class p007 {
+public final class p007 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p007().run());
+	}
+	
+	
+	public String run() {
 		boolean[] isPrime = Library.listPrimality(300000);
 		for (int i = 0, j = 0; i < isPrime.length; i++) {
 			if (isPrime[i]) {
 				j++;
-				if (j == 10001) {
-					System.out.println(i);
-					return;
-				}
+				if (j == 10001)
+					return Integer.toString(i);
 			}
 		}
 		throw new RuntimeException("Not found");

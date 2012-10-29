@@ -7,9 +7,14 @@
  */
 
 
-public final class p003 {
+public final class p003 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p003().run());
+	}
+	
+	
+	public String run() {
 		long n = 600851475143L;
 		while (true) {
 			long k = smallestFactor(n);
@@ -18,7 +23,7 @@ public final class p003 {
 			else
 				break;
 		}
-		System.out.println(n);
+		return Long.toString(n);
 	}
 	
 	

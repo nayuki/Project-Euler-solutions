@@ -9,13 +9,18 @@
 import java.math.BigInteger;
 
 
-public final class p005 {
+public final class p005 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p005().run());
+	}
+	
+	
+	public String run() {
 		BigInteger allLcm = BigInteger.ONE;
 		for (int i = 1; i <= 20; i++)
 			allLcm = lcm(BigInteger.valueOf(i), allLcm);
-		System.out.println(allLcm);
+		return allLcm.toString();
 	}
 	
 	

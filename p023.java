@@ -7,9 +7,14 @@
  */
 
 
-public final class p023 {
+public final class p023 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p023().run());
+	}
+	
+	
+	public String run() {
 		// Compute look-up table
 		boolean[] isAbundant = new boolean[28124];
 		for (int i = 1; i < isAbundant.length; i++)
@@ -20,7 +25,7 @@ public final class p023 {
 			if (!isSumOf2Abundants(i, isAbundant))
 				sum += i;
 		}
-		System.out.println(sum);
+		return Integer.toString(sum);
 	}
 	
 	

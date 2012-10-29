@@ -7,16 +7,19 @@
  */
 
 
-public final class p012 {
+public final class p012 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p012().run());
+	}
+	
+	
+	public String run() {
 		int num = 0;
 		for (int i = 1; ; i++) {
 			num += i;  // num is triangle number i
-			if (countDivisors(num) > 500) {
-				System.out.println(num);
-				break;
-			}
+			if (countDivisors(num) > 500)
+				return Integer.toString(num);
 		}
 	}
 	

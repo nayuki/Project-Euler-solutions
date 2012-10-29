@@ -9,13 +9,18 @@
 import java.math.BigInteger;
 
 
-public final class p013 {
+public final class p013 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p013().run());
+	}
+	
+	
+	public String run() {
 		BigInteger sum = BigInteger.ZERO;
 		for (String num : NUMBERS)
 			sum = sum.add(new BigInteger(num));
-		System.out.println(sum.toString().substring(0, 10));
+		return sum.toString().substring(0, 10);
 	}
 	
 	

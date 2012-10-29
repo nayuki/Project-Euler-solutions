@@ -7,9 +7,14 @@
  */
 
 
-public final class p024 {
+public final class p024 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p024().run());
+	}
+	
+	
+	public String run() {
 		// Initialize
 		int[] array = new int[10];
 		for (int i = 0; i < array.length; i++)
@@ -21,10 +26,11 @@ public final class p024 {
 				throw new AssertionError();
 		}
 		
-		// Print
+		// Format output
+		String ans = "";
 		for (int i = 0; i < array.length; i++)
-			System.out.print(array[i] + " ");
-		System.out.println();
+			ans += array[i];
+		return ans;
 	}
 	
 }

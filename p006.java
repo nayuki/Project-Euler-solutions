@@ -7,16 +7,21 @@
  */
 
 
-public final class p006 {
+public final class p006 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p006().run());
+	}
+	
+	
+	public String run() {
 		int sum = 0;
 		int sum2 = 0;
 		for (int i = 1; i <= 100; i++) {
 			sum += i;
 			sum2 += i * i;
 		}
-		System.out.println(sum * sum - sum2);
+		return Integer.toString(sum * sum - sum2);
 	}
 	
 }

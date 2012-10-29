@@ -7,10 +7,15 @@
  */
 
 
-public final class p015 {
+public final class p015 implements EulerSolution {
 	
 	public static void main(String[] args) {
-		System.out.println(Library.binomial(40, 20));
+		System.out.println(new p015().run());
+	}
+	
+	
+	public String run() {
+		return Library.binomial(40, 20).toString();
 	}
 	
 }

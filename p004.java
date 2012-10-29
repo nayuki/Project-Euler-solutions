@@ -7,9 +7,14 @@
  */
 
 
-public final class p004 {
+public final class p004 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p004().run());
+	}
+	
+	
+	public String run() {
 		int maxPalin = -1;
 		for (int i = 100; i < 1000; i++) {
 			for (int j = 100; j < 1000; j++) {
@@ -18,7 +23,7 @@ public final class p004 {
 					maxPalin = prod;
 			}
 		}
-		System.out.println(maxPalin);
+		return Integer.toString(maxPalin);
 	}
 	
 }

@@ -7,15 +7,20 @@
  */
 
 
-public final class p021 {
+public final class p021 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p021().run());
+	}
+	
+	
+	public String run() {
 		int sum = 0;
 		for (int i = 1; i < 10000; i++) {
 			if (isAmicable(i))
 				sum += i;
 		}
-		System.out.println(sum);
+		return Integer.toString(sum);
 	}
 	
 	

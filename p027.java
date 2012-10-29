@@ -7,9 +7,14 @@
  */
 
 
-public final class p027 {
+public final class p027 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p027().run());
+	}
+	
+	
+	public String run() {
 		int bestNum = -1;
 		int bestA = -1;
 		int bestB = -1;
@@ -23,7 +28,7 @@ public final class p027 {
 				}
 			}
 		}
-		System.out.println(bestA * bestB);
+		return Integer.toString(bestA * bestB);
 	}
 	
 	

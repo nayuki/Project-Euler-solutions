@@ -7,9 +7,14 @@
  */
 
 
-public final class p030 {
+public final class p030 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p030().run());
+	}
+	
+	
+	public String run() {
 		// As stated in the problem, 1 = 1^5 is excluded.
 		// If a number has at least n >= 7 digits, then even if every digit is 9,
 		// n * 9^5 is still less than the number (which is at least 10^n).
@@ -18,7 +23,7 @@ public final class p030 {
 			if (i == fifthPowerDigitSum(i))
 				sum += i;
 		}
-		System.out.println(sum);
+		return Integer.toString(sum);
 	}
 	
 	

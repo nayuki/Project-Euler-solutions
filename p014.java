@@ -9,9 +9,14 @@
 import java.math.BigInteger;
 
 
-public final class p014 {
+public final class p014 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p014().run());
+	}
+	
+	
+	public String run() {
 		int maxArg = -1;
 		int maxChain = 0;
 		for (int i = 1; i < 1000000; i++) {
@@ -21,7 +26,7 @@ public final class p014 {
 				maxChain = chainLen;
 			}
 		}
-		System.out.println(maxArg + " " + maxChain);
+		return Integer.toString(maxArg);
 	}
 	
 	

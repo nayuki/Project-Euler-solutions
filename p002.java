@@ -7,9 +7,14 @@
  */
 
 
-public final class p002 {
+public final class p002 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p002().run());
+	}
+	
+	
+	public String run() {
 		int sum = 0;
 		for (int i = 0; ; i++) {
 			int fib = fibonacci(i);
@@ -18,7 +23,7 @@ public final class p002 {
 			if (fib % 2 == 0)
 				sum += fib;
 		}
-		System.out.println(sum);
+		return Integer.toString(sum);
 	}
 	
 	

@@ -7,15 +7,20 @@
  */
 
 
-public final class p011 {
+public final class p011 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p011().run());
+	}
+	
+	
+	public String run() {
 		int max = -1;
 		max = Math.max(maxProduct(1, 0), max);
 		max = Math.max(maxProduct(0, 1), max);
 		max = Math.max(maxProduct(1, 1), max);
 		max = Math.max(maxProduct(1, -1), max);
-		System.out.println(max);
+		return Integer.toString(max);
 	}
 	
 	

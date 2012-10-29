@@ -7,9 +7,14 @@
  */
 
 
-public final class p019 {
+public final class p019 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p019().run());
+	}
+	
+	
+	public String run() {
 		int count = 0;
 		for (int y = 1901; y <= 2000; y++) {
 			for (int m = 1; m <= 12; m++) {
@@ -17,7 +22,7 @@ public final class p019 {
 					count++;
 			}
 		}
-		System.out.println(count);
+		return Integer.toString(count);
 	}
 	
 	

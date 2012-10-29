@@ -9,9 +9,14 @@
 import java.util.Arrays;
 
 
-public final class p022 {
+public final class p022 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p022().run());
+	}
+	
+	
+	public String run() {
 		Arrays.sort(NAMES);
 		int sum = 0;
 		for (int i = 0; i < NAMES.length; i++) {
@@ -20,11 +25,11 @@ public final class p022 {
 				value += NAMES[i].charAt(j) - 'A' + 1;
 			sum += value * (i + 1);
 		}
-		System.out.println(sum);
+		return Integer.toString(sum);
 	}
 	
 	
-	private static String[] NAMES = {
+	private String[] NAMES = {
 		"MARY",
 		"PATRICIA",
 		"LINDA",
