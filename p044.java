@@ -10,15 +10,18 @@
 public final class p044 {
 	
 	public static void main(String[] args) {
-		System.out.println(new p045().run());
+		System.out.println(new p044().run());
 	}
 	
 	
 	public String run() {
-		for (long i = 1; ; i++) {
+		for (long i = 1; ; i++) {  // For each pentagonal difference
 			long penti = pentagonalNumber(i);
-			for (long j = i; pentagonalNumber(j) - pentagonalNumber(j - 1) <= penti; j++) {
-				if (isPentagonalNumber(pentagonalNumber(j) - penti) && isPentagonalNumber(2 * pentagonalNumber(j) - penti))
+			for (long j = 1; ; j++) {  // For each lower pentagonal number
+				long pentj = pentagonalNumber(j);
+				if (pentagonalNumber(j + 1) - pentj > penti)
+					break;
+				if (isPentagonalNumber(pentj + penti) && isPentagonalNumber(pentj * 2 + penti))
 					return Long.toString(penti);
 			}
 		}
@@ -33,13 +36,11 @@ public final class p044 {
 	
 	
 	private static boolean isPentagonalNumber(long n) {
-		long temp = 0;
-		for (long i = 2147483648L; i != 0; i >>>= 1) {
-			temp |= i;
-			if (temp > 2479700524L || pentagonalNumber(temp) > n)
-				temp ^= i;
-		}
-		return temp != 0 && pentagonalNumber(temp) == n;
+		if (n <= 0)
+			return false;
+		long temp = n * 24 + 1;
+		long sqrt = Library.sqrt(temp);
+		return sqrt * sqrt == temp && (sqrt + 1) % 3 == 0;
 	}
 	
 }

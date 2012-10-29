@@ -11,26 +11,25 @@ import java.util.Arrays;
 
 public final class p049 {
 	
-	private static boolean[] isPrime = Library.listPrimality(10000);
-	
-	
 	public static void main(String[] args) {
 		System.out.println(new p049().run());
 	}
+	
+	
+	private static boolean[] isPrime = Library.listPrimality(10000);
 	
 	
 	public String run() {
 		for (int base = 1000; base < 10000; base++) {
 			if (!isPrime[base])
 				continue;
-			middle:
-			for (int stepSize = 1; stepSize < 10000; stepSize++) {
-				for (int i = 1; i <= 2; i++) {
-					int n = base + i * stepSize;
-					if (n >= 10000 || !isPrime[n] || !hasSameDigits(base, n))
-						continue middle;
-				}
-				return "" + base + (base + stepSize) + (base + stepSize * 2);
+			for (int step = 1; step < 10000; step++) {
+				int a = base + step * 1;
+				int b = base + step * 2;
+				if (       a < 10000 && isPrime[a] && hasSameDigits(a, base)
+				        && b < 10000 && isPrime[b] && hasSameDigits(b, base)
+				        && (base != 1487 || step != 3330))
+					return "" + base + a + b;
 			}
 		}
 		throw new RuntimeException("Not found");
