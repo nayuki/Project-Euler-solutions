@@ -10,6 +10,11 @@
 public final class p039 {
 	
 	public static void main(String[] args) {
+		System.out.println(new p039().run());
+	}
+	
+	
+	public String run() {
 		int maxP = -1;
 		int maxTriangles = -1;
 		for (int p = 0; p <= 1000; p++) {
@@ -19,7 +24,7 @@ public final class p039 {
 				maxP = p;
 			}
 		}
-		System.out.println(maxP);
+		return Integer.toString(maxP);
 	}
 	
 	

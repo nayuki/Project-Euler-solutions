@@ -13,6 +13,11 @@ public final class p046 {
 	
 	
 	public static void main(String[] args) {
+		System.out.println(new p046().run());
+	}
+	
+	
+	public String run() {
 		outer:
 		for (int i = 3; i < isPrime.length; i += 2) {
 			if (!isPrime[i]) {
@@ -20,10 +25,10 @@ public final class p046 {
 					if (isPrime[i - 2 * j * j])
 						continue outer;
 				}
-				System.out.println(i);
-				break;
+				return Integer.toString(i);
 			}
 		}
+		throw new RuntimeException("Not found");
 	}
 	
 }

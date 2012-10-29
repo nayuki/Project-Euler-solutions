@@ -35,5 +35,24 @@ public final class EulerTest {
 	@Test public void testP028() { assertEquals("669171001"   , new p028().run()); }
 	@Test public void testP029() { assertEquals("9183"        , new p029().run()); }
 	@Test public void testP030() { assertEquals("443839"      , new p030().run()); }
+	@Test public void testP031() { assertEquals("73682"       , new p031().run()); }
+	@Test public void testP032() { assertEquals("45228"       , new p032().run()); }
+	@Test public void testP034() { assertEquals("40730"       , new p034().run()); }
+	@Test public void testP035() { assertEquals("55"          , new p035().run()); }
+	@Test public void testP036() { assertEquals("872187"      , new p036().run()); }
+	@Test public void testP037() { assertEquals("748317"      , new p037().run()); }
+	@Test public void testP038() { assertEquals("932718654"   , new p038().run()); }
+	@Test public void testP039() { assertEquals("840"         , new p039().run()); }
+	@Test public void testP040() { assertEquals("210"         , new p040().run()); }
+	@Test public void testP041() { assertEquals("7652413"     , new p041().run()); }
+	@Test public void testP042() { assertEquals("162"         , new p042().run()); }
+	@Test public void testP043() { assertEquals("16695334890" , new p043().run()); }
+	@Test public void testP044() { assertEquals("5482660"     , new p044().run()); }
+	@Test public void testP045() { assertEquals("1533776805"  , new p045().run()); }
+	@Test public void testP046() { assertEquals("5777"        , new p046().run()); }
+	@Test public void testP047() { assertEquals("134043"      , new p047().run()); }
+	@Test public void testP048() { assertEquals("9110846700"  , new p048().run()); }
+	@Test public void testP049() { assertEquals("296962999629", new p049().run()); }
+	@Test public void testP050() { assertEquals("997651"      , new p050().run()); }
 	
 }

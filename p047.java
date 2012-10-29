@@ -10,11 +10,14 @@
 public final class p047 {
 	
 	public static void main(String[] args) {
+		System.out.println(new p047().run());
+	}
+	
+	
+	public String run() {
 		for (int i = 2; ; i++) {
-			if (has4PrimeFactors(i) && has4PrimeFactors(i + 1) && has4PrimeFactors(i + 2) && has4PrimeFactors(i + 3)) {
-				System.out.println(i);
-				break;
-			}
+			if (has4PrimeFactors(i) && has4PrimeFactors(i + 1) && has4PrimeFactors(i + 2) && has4PrimeFactors(i + 3))
+				return Integer.toString(i);
 		}
 	}
 	

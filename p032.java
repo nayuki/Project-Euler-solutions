@@ -12,13 +12,18 @@ import java.util.Arrays;
 public final class p032 {
 	
 	public static void main(String[] args) {
+		System.out.println(new p032().run());
+	}
+	
+	
+	public String run() {
 		// A candidate has at most 4 digits. This is because if it has 4 digits, then expressing it as a product of two numbers uses at least 4 digits.
 		int sum = 0;
 		for (int i = 1; i < 10000; i++) {
 			if (hasPandigitalProduct(i))
 				sum += i;
 		}
-		System.out.println(sum);
+		return Integer.toString(sum);
 	}
 	
 	

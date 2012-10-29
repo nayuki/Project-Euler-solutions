@@ -10,6 +10,11 @@
 public final class p031 {
 	
 	public static void main(String[] args) {
+		System.out.println(new p031().run());
+	}
+	
+	
+	public String run() {
 		int total = 200;
 		int[] coins = {1, 2, 5, 10, 20, 50, 100, 200};
 		
@@ -22,7 +27,7 @@ public final class p031 {
 					ways[i + 1][k] += ways[i][j];  // Dynamic programming
 			}
 		}
-		System.out.println(ways[coins.length][total]);
+		return Integer.toString(ways[coins.length][total]);
 	}
 	
 }

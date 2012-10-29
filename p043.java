@@ -10,6 +10,11 @@
 public final class p043 {
 	
 	public static void main(String[] args) {
+		System.out.println(new p043().run());
+	}
+	
+	
+	public String run() {
 		int[] divisibilityTests = {2, 3, 5, 7, 11, 13, 17};
 		
 		int[] digits = new int[10];
@@ -26,7 +31,7 @@ public final class p043 {
 			System.out.println(toInteger(digits, 0, digits.length));
 			sum += toInteger(digits, 0, digits.length);
 		} while (Library.nextPermutation(digits));
-		System.out.println("Sum: " + sum);
+		return Long.toString(sum);
 	}
 	
 	

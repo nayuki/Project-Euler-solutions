@@ -13,12 +13,17 @@ public final class p035 {
 	
 	
 	public static void main(String[] args) {
+		System.out.println(new p035().run());
+	}
+	
+	
+	public String run() {
 		int count = 0;
 		for (int i = 0; i < isPrime.length; i++) {
 			if (isCircularPrime(i))
 				count++;
 		}
-		System.out.println(count);
+		return Integer.toString(count);
 	}
 	
 	

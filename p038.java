@@ -12,6 +12,11 @@ import java.util.Arrays;
 public final class p038 {
 	
 	public static void main(String[] args) {
+		System.out.println(new p038().run());
+	}
+	
+	
+	public String run() {
 		int max = -1;
 		for (int n = 2; n <= 9; n++) {
 			for (int i = 1; i < Library.pow(10, 9 / n); i++) {
@@ -22,7 +27,7 @@ public final class p038 {
 					max = Math.max(Integer.parseInt(concat), max);
 			}
 		}
-		System.out.println(max);
+		return Integer.toString(max);
 	}
 	
 	

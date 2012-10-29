@@ -13,21 +13,24 @@ public final class p050 {
 	
 	
 	public static void main(String[] args) {
+		System.out.println(new p050().run());
+	}
+	
+	
+	public String run() {
 		int count;
 		for (count = 0; sumOfConsecutivePrimes(0, count + 1) < 1000000; count++);
 		
-		outer:
 		for (; count >= 0; count--) {
 			int offset;
 			for (offset = 0; sumOfConsecutivePrimes(offset + 1, count) < 1000000; offset++);
 			
 			for (; offset >= 0; offset--) {
-				if (isPrime[sumOfConsecutivePrimes(offset, count)]) {
-					System.out.println(sumOfConsecutivePrimes(offset, count));
-					break outer;
-				}
+				if (isPrime[sumOfConsecutivePrimes(offset, count)])
+					return Integer.toString(sumOfConsecutivePrimes(offset, count));
 			}
 		}
+		throw new AssertionError();
 	}
 	
 	

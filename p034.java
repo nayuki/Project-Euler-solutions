@@ -10,6 +10,11 @@
 public final class p034 {
 	
 	public static void main(String[] args) {
+		System.out.println(new p034().run());
+	}
+	
+	
+	public String run() {
 		// As stated in the problem, 1 = 1! and 2 = 2! are excluded.
 		// If a number has at least n >= 8 digits, then even if every digit is 9,
 		// n * 9! is still less than the number (which is at least 10^n).
@@ -18,7 +23,7 @@ public final class p034 {
 			if (i == factorialDigitSum(i))
 				sum += i;
 		}
-		System.out.println(sum);
+		return Integer.toString(sum);
 	}
 	
 	

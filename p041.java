@@ -10,6 +10,11 @@
 public final class p041 {
 	
 	public static void main(String[] args) {
+		System.out.println(new p041().run());
+	}
+	
+	
+	public String run() {
 		for (int n = 9; n >= 1; n--) {
 			int[] digits = new int[n];
 			for (int i = 0; i < digits.length; i++)
@@ -20,11 +25,10 @@ public final class p041 {
 				if (Library.isPrime(toInteger(digits)))
 					result = toInteger(digits);
 			} while (Library.nextPermutation(digits));
-			if (result != -1) {
-				System.out.println(result);
-				break;
-			}
+			if (result != -1)
+				return Integer.toString(result);
 		}
+		throw new RuntimeException("Not found");
 	}
 	
 	

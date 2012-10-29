@@ -10,14 +10,16 @@
 public final class p044 {
 	
 	public static void main(String[] args) {
-		outer:
+		System.out.println(new p045().run());
+	}
+	
+	
+	public String run() {
 		for (long i = 1; ; i++) {
 			long penti = pentagonalNumber(i);
 			for (long j = i; pentagonalNumber(j) - pentagonalNumber(j - 1) <= penti; j++) {
-				if (isPentagonalNumber(pentagonalNumber(j) - penti) && isPentagonalNumber(2 * pentagonalNumber(j) - penti)) {
-					System.out.println(penti);
-					break outer;
-				}
+				if (isPentagonalNumber(pentagonalNumber(j) - penti) && isPentagonalNumber(2 * pentagonalNumber(j) - penti))
+					return Long.toString(penti);
 			}
 		}
 	}

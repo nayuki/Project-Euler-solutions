@@ -10,6 +10,11 @@
 public final class p037 {
 	
 	public static void main(String[] args) {
+		System.out.println(new p037().run());
+	}
+	
+	
+	public String run() {
 		int count = 0;
 		int sum = 0;
 		
@@ -22,7 +27,7 @@ public final class p037 {
 			i++;
 		}
 		
-		System.out.println(sum);
+		return Integer.toString(sum);
 	}
 	
 	

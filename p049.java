@@ -15,6 +15,11 @@ public final class p049 {
 	
 	
 	public static void main(String[] args) {
+		System.out.println(new p049().run());
+	}
+	
+	
+	public String run() {
 		for (int base = 1000; base < 10000; base++) {
 			if (!isPrime[base])
 				continue;
@@ -25,9 +30,10 @@ public final class p049 {
 					if (n >= 10000 || !isPrime[n] || !hasSameDigits(base, n))
 						continue middle;
 				}
-				System.out.println(base + " " + (base + stepSize) + " " + (base + stepSize * 2));
+				return "" + base + (base + stepSize) + (base + stepSize * 2);
 			}
 		}
+		throw new RuntimeException("Not found");
 	}
 	
 	

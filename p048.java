@@ -12,11 +12,16 @@ import java.math.BigInteger;
 public final class p048 {
 	
 	public static void main(String[] args) {
+		System.out.println(new p048().run());
+	}
+	
+	
+	public String run() {
 		BigInteger modulus = BigInteger.valueOf(10).pow(10);
 		BigInteger sum = BigInteger.ZERO;
 		for (int i = 1; i <= 1000; i++)
 			sum = sum.add(BigInteger.valueOf(i).modPow(BigInteger.valueOf(i), modulus)).mod(modulus);
-		System.out.println(sum);
+		return sum.toString();
 	}
 	
 }

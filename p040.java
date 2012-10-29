@@ -10,11 +10,16 @@
 public final class p040 {
 	
 	public static void main(String[] args) {
+		System.out.println(new p040().run());
+	}
+	
+	
+	public String run() {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 1; i < 1000000; i++)
 			sb.append(i);
 		
-		System.out.println(
+		return Integer.toString(
 			  getDigit(sb, 1)
 			* getDigit(sb, 10)
 			* getDigit(sb, 100)
