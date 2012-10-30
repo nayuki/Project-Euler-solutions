@@ -16,17 +16,22 @@ public final class p070 implements EulerSolution {
 	}
 	
 	
+	private static final int LIMIT = Library.pow(10, 7);
+	
+	
 	public String run() {
-		int minNumerator = 10;
-		int minDenominator = 1;
-		for (int i = 2; i < 10000000; i++) {
-			int tot = Library.totient(i);
-			if (hasSameDigits(i, tot) && (long)i * minDenominator < (long)minNumerator * tot) {
-				minNumerator = i;
-				minDenominator = tot;
+		int[] totients = Library.listTotients(LIMIT);
+		
+		int minNumer = 1;  // Dummy initial values
+		int minDenom = 0;
+		for (int i = 2; i < LIMIT; i++) {
+			int tot = totients[i];
+			if ((long)i * minDenom < (long)minNumer * tot && hasSameDigits(i, tot)) {
+				minNumer = i;
+				minDenom = tot;
 			}
 		}
-		return Integer.toString(minNumerator);
+		return Integer.toString(minNumer);
 	}
 	
 	
