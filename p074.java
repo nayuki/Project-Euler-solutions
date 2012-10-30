@@ -10,15 +10,20 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-public final class p074 {
+public final class p074 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p074().run());
+	}
+	
+	
+	public String run() {
 		int count = 0;
 		for (int i = 0; i < 1000000; i++) {
 			if (getChainLength(i) == 60)
 				count++;
 		}
-		System.out.println(count);
+		return Integer.toString(count);
 	}
 	
 	

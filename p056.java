@@ -9,9 +9,14 @@
 import java.math.BigInteger;
 
 
-public final class p056 {
+public final class p056 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p056().run());
+	}
+	
+	
+	public String run() {
 		int max = 0;
 		for (int a = 1; a < 100; a++) {
 			for (int b = 1; b < 100; b++) {
@@ -19,7 +24,7 @@ public final class p056 {
 				max = Math.max(digitSum(pow), max);
 			}
 		}
-		System.out.println(max);
+		return Integer.toString(max);
 	}
 	
 	

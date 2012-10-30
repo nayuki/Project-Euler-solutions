@@ -9,7 +9,7 @@
 import java.math.BigInteger;
 
 
-public final class p048 {
+public final class p048 implements EulerSolution {
 	
 	public static void main(String[] args) {
 		System.out.println(new p048().run());

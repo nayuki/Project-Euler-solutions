@@ -7,18 +7,23 @@
  */
 
 
-public final class p067 {
+public final class p067 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p067().run());
+	}
+	
+	
+	public String run() {
 		for (int i = TRIANGLE.length - 2; i >= 0; i--) {
 			for (int j = 0; j < TRIANGLE[i].length; j++)
 				TRIANGLE[i][j] += Math.max(TRIANGLE[i + 1][j], TRIANGLE[i + 1][j + 1]);  // Dynamic programming
 		}
-		System.out.println(TRIANGLE[0][0]);
+		return Integer.toString(TRIANGLE[0][0]);
 	}
 	
 	
-	private static int[][] TRIANGLE = {
+	private int[][] TRIANGLE = {
 		{59},
 		{73,41},
 		{52,40, 9},

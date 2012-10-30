@@ -11,9 +11,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-public final class p054 {
+public final class p054 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p054().run());
+	}
+	
+	
+	public String run() {
 		int count = 0;
 		for (String hand : HANDS) {
 			String[] cards = hand.split(" ");
@@ -30,9 +35,8 @@ public final class p054 {
 			if (getScore(player1) > getScore(player2))
 				count++;
 		}
-		System.out.println(count);
+		return Integer.toString(count);
 	}
-	
 	
 	
 	private static int getScore(Card[] hand) {

@@ -11,11 +11,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public final class p062 {
+public final class p062 implements EulerSolution {
 	
 	public static void main(String[] args) {
-		final int LIMIT = 10000;  // Arbitrary search cut-off
-		
+		System.out.println(new p062().run());
+	}
+	
+	
+	private static final int LIMIT = 10000;  // Arbitrary search cut-off
+	
+	public String run() {
 		Map<Long,Integer> count = new HashMap<Long,Integer>();
 		for (int i = 0; i < LIMIT; i++) {
 			long numClass = getNumberClass((long)i * i * i);
@@ -34,7 +39,7 @@ public final class p062 {
 				}
 			}
 		}
-		System.out.println((long)min * min * min);
+		return Long.toString((long)min * min * min);
 	}
 	
 	

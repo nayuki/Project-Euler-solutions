@@ -7,11 +7,16 @@
  */
 
 
-public final class p073 {
+public final class p073 implements EulerSolution {
 	
 	public static void main(String[] args) {
-		System.out.println(sternBrocot());  // Probably needs more stack; use something like "-Xss4M" for the JVM
+		System.out.println(new p073().run());
+	}
+	
+	
+	public String run() {
 		System.out.println(naive());
+		return Integer.toString(sternBrocot());  // Probably needs more stack; use something like "-Xss4M" for the JVM
 	}
 	
 	

@@ -9,9 +9,14 @@
 import java.util.Arrays;
 
 
-public final class p070 {
+public final class p070 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p070().run());
+	}
+	
+	
+	public String run() {
 		int minNumerator = 10;
 		int minDenominator = 1;
 		for (int i = 2; i < 10000000; i++) {
@@ -21,7 +26,7 @@ public final class p070 {
 				minDenominator = tot;
 			}
 		}
-		System.out.println(minNumerator);
+		return Integer.toString(minNumerator);
 	}
 	
 	

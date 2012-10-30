@@ -7,7 +7,7 @@
  */
 
 
-public final class p035 {
+public final class p035 implements EulerSolution {
 	
 	private static boolean[] isPrime = Library.listPrimality(999999);
 	

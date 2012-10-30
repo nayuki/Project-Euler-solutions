@@ -9,7 +9,7 @@
 import java.util.Arrays;
 
 
-public final class p032 {
+public final class p032 implements EulerSolution {
 	
 	public static void main(String[] args) {
 		System.out.println(new p032().run());

@@ -9,9 +9,14 @@
 import java.util.Arrays;
 
 
-public final class p051 {
+public final class p051 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p051().run());
+	}
+	
+	
+	public String run() {
 		boolean[] isPrime = Library.listPrimality(1000000);
 		for (int i = 0; i < isPrime.length; i++) {
 			if (isPrime[i]) {
@@ -28,16 +33,15 @@ public final class p051 {
 					if (count == 8) {
 						digits = doMask(n, mask);
 						for (int j = 0; j < 10; j++) {
-							if (digits[0] != 0 && isPrime[toNumber(digits)]) {
-								System.out.println(toNumber(digits));
-								return;
-							}
+							if (digits[0] != 0 && isPrime[toNumber(digits)])
+								return Integer.toString(toNumber(digits));
 							digits = addMask(digits, mask);
 						}
 					}
 				}
 			}
 		}
+		throw new RuntimeException("Not found");
 	}
 	
 	

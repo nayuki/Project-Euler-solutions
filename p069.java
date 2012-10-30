@@ -7,9 +7,14 @@
  */
 
 
-public final class p069 {
+public final class p069 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p069().run());
+	}
+	
+	
+	public String run() {
 		double maxVal = -1;
 		int maxNum = -1;
 		for (int i = 1; i <= 1000000; i++) {
@@ -19,7 +24,7 @@ public final class p069 {
 				maxNum = i;
 			}
 		}
-		System.out.println(maxNum);
+		return Integer.toString(maxNum);
 	}
 	
 }

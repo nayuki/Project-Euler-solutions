@@ -7,9 +7,14 @@
  */
 
 
-public final class p058 {
+public final class p058 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p058().run());
+	}
+	
+	
+	public String run() {
 		int diagonalSize = 1;
 		int numPrimes = 0;
 		int i = 1;
@@ -23,7 +28,7 @@ public final class p058 {
 				break;
 			i++;
 		}
-		System.out.println(i * 2 + 1);
+		return Integer.toString(i * 2 + 1);
 	}
 	
 	

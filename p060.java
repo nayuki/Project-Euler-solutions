@@ -10,7 +10,12 @@ import java.util.Arrays;
 import java.util.BitSet;
 
 
-public final class p060 {
+public final class p060 implements EulerSolution {
+	
+	public static void main(String[] args) {
+		System.out.println(new p060().run());
+	}
+	
 	
 	private static final int PRIME_LIMIT = 100000;
 	
@@ -21,17 +26,15 @@ public final class p060 {
 	private static BitSet isConcatPrime;
 	
 	
-	public static void main(String[] args) {
+	public String run() {
 		isConcatPrimeKnown = new BitSet(primes.length * primes.length);
 		isConcatPrime = new BitSet(primes.length * primes.length);
 		
 		int sumLimit = PRIME_LIMIT;
 		while (true) {
 			int sum = findSetSum(new int[]{}, 5, sumLimit - 1);
-			if (sum == -1) {
-				System.out.println(sumLimit);
-				break;
-			}
+			if (sum == -1)
+				return Integer.toString(sumLimit);
 			sumLimit = sum;
 		}
 	}

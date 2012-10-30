@@ -9,10 +9,15 @@
 import java.math.BigInteger;
 
 
-public final class p076 {
+public final class p076 implements EulerSolution {
 	
 	public static void main(String[] args) {
-		System.out.println(partitions(100, 1).subtract(BigInteger.ONE));
+		System.out.println(new p076().run());
+	}
+	
+	
+	public String run() {
+		return partitions(100, 1).subtract(BigInteger.ONE).toString();
 	}
 	
 	

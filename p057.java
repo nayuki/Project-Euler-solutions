@@ -9,9 +9,14 @@
 import java.math.BigInteger;
 
 
-public final class p057 {
+public final class p057 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p057().run());
+	}
+	
+	
+	public String run() {
 		BigInteger n = BigInteger.ZERO;
 		BigInteger d = BigInteger.ONE;
 		int count = 0;
@@ -23,7 +28,7 @@ public final class p057 {
 			if (n.add(d).toString().length() > d.toString().length())
 				count++;
 		}
-		System.out.println(count);
+		return Integer.toString(count);
 	}
 	
 }

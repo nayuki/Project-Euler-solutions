@@ -9,9 +9,14 @@
 import java.math.BigInteger;
 
 
-public final class p065 {
+public final class p065 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p065().run());
+	}
+	
+	
+	public String run() {
 		BigInteger n = BigInteger.ONE;
 		BigInteger d = BigInteger.ZERO;
 		for (int i = 99; i >= 0; i--) {
@@ -26,7 +31,7 @@ public final class p065 {
 			sum += divrem[1].intValue();
 			n = divrem[0];
 		}
-		System.out.println(sum);
+		return Integer.toString(sum);
 	}
 	
 	

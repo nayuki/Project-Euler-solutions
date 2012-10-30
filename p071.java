@@ -7,9 +7,14 @@
  */
 
 
-public final class p071 {
+public final class p071 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p071().run());
+	}
+	
+	
+	public String run() {
 		int maxN = 0;
 		int maxD = 1;
 		for (int d = 2; d <= 1000000; d++) {
@@ -22,6 +27,7 @@ public final class p071 {
 			}
 		}
 		System.out.println(maxN + "/" + maxD);
+		return Integer.toString(maxN);
 	}
 	
 }

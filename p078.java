@@ -10,19 +10,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public final class p078 {
+public final class p078 implements EulerSolution {
+	
+	public static void main(String[] args) {
+		System.out.println(new p078().run());
+	}
+	
 	
 	private static int MODULUS = Library.pow(10, 6);
 	
 	
-	public static void main(String[] args) {
+	public String run() {
 		for (int i = 0; ; i++) {
-			if (partition(i) == 0) {
-				System.out.println(i);
-				break;
-			}
+			if (partition(i) == 0)
+				return Integer.toString(i);
 		}
-		
 	}
 	
 	

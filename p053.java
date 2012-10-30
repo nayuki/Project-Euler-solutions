@@ -9,9 +9,14 @@
 import java.math.BigInteger;
 
 
-public final class p053 {
+public final class p053 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p053().run());
+	}
+	
+	
+	public String run() {
 		BigInteger MILLION = BigInteger.TEN.pow(6);
 		int count = 0;
 		for (int n = 1; n <= 100; n++) {
@@ -20,7 +25,7 @@ public final class p053 {
 					count++;
 			}
 		}
-		System.out.println(count);
+		return Integer.toString(count);
 	}
 	
 }

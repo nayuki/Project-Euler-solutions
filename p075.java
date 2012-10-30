@@ -10,9 +10,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-public final class p075 {
+public final class p075 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p075().run());
+	}
+	
+	
+	public String run() {
 		int n = 1500000;
 		
 		/* 
@@ -46,7 +51,7 @@ public final class p075 {
 			if (x == 1)
 				count++;
 		}
-		System.out.println(count);
+		return Integer.toString(count);
 	}
 	
 	

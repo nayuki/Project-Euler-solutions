@@ -9,15 +9,20 @@
 import java.math.BigInteger;
 
 
-public final class p055 {
+public final class p055 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p055().run());
+	}
+	
+	
+	public String run() {
 		int count = 0;
 		for (int i = 0; i < 10000; i++) {
 			if (isLychrel(i))
 				count++;
 		}
-		System.out.println(count);
+		return Integer.toString(count);
 	}
 	
 	

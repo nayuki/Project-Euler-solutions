@@ -9,17 +9,21 @@
 import java.util.Arrays;
 
 
-public final class p052 {
+public final class p052 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p052().run());
+	}
+	
+	
+	public String run() {
 		outer:
 		for (int i = 1; ; i++) {
 			for (int j = 2; j < 6; j++) {
 				if (!hasSameDigits(i * j, i * (j + 1)))
 					continue outer;
 			}
-			System.out.println(i);
-			break;
+			return Integer.toString(i);
 		}
 	}
 	

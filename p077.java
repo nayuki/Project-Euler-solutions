@@ -9,18 +9,22 @@
 import java.util.Arrays;
 
 
-public final class p077 {
+public final class p077 implements EulerSolution {
+	
+	public static void main(String[] args) {
+		System.out.println(new p077().run());
+	}
+	
 	
 	private static int LIMIT = 1000;
 	
 	
-	public static void main(String[] args) {
+	public String run() {
 		for (int i = 2; i < LIMIT; i++) {
-			if (primePartitions(i, i) > 5000) {
-				System.out.println(i);
-				break;
-			}
+			if (primePartitions(i, i) > 5000)
+				return Integer.toString(i);
 		}
+		throw new RuntimeException("Not found");
 	}
 	
 	

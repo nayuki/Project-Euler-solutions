@@ -7,7 +7,7 @@
  */
 
 
-public final class p044 {
+public final class p044 implements EulerSolution {
 	
 	public static void main(String[] args) {
 		System.out.println(new p044().run());

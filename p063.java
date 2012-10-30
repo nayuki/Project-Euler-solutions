@@ -9,9 +9,14 @@
 import java.math.BigInteger;
 
 
-public final class p063 {
+public final class p063 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p063().run());
+	}
+	
+	
+	public String run() {
 		int count = 0;
 		for (int n = 1; n <= 21; n++) {
 			for (int i = 1; i <= 9; i++) {
@@ -19,7 +24,7 @@ public final class p063 {
 					count++;
 			}
 		}
-		System.out.println(count);
+		return Integer.toString(count);
 	}
 	
 }
