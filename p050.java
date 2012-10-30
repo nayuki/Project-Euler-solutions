@@ -9,45 +9,32 @@
 
 public final class p050 {
 	
-	private static boolean[] isPrime = Library.listPrimality(999999);
-	
-	
 	public static void main(String[] args) {
 		System.out.println(new p050().run());
 	}
 	
 	
+	private static final int LIMIT = Library.pow(10, 6);
+	private static boolean[] isPrime = Library.listPrimality(LIMIT);
+	private static int[] primes = Library.listPrimes(LIMIT);
+	
+	
 	public String run() {
-		int count;
-		for (count = 0; sumOfConsecutivePrimes(0, count + 1) < 1000000; count++);
-		
-		for (; count >= 0; count--) {
-			int offset;
-			for (offset = 0; sumOfConsecutivePrimes(offset + 1, count) < 1000000; offset++);
-			
-			for (; offset >= 0; offset--) {
-				if (isPrime[sumOfConsecutivePrimes(offset, count)])
-					return Integer.toString(sumOfConsecutivePrimes(offset, count));
+		int maxSum = 0;
+		int maxRun = 0;
+		for (int i = 0; i < primes.length; i++) {  // For each index of a starting prime number
+			int sum = 0;
+			for (int j = i; j < primes.length; j++) {  // For each end index (inclusive)
+				sum += primes[j];
+				if (sum > LIMIT)
+					break;
+				else if (j - i > maxRun && sum > maxSum && isPrime[sum]) {
+					maxSum = sum;
+					maxRun = j - i;
+				}
 			}
 		}
-		throw new AssertionError();
-	}
-	
-	
-	private static int sumOfConsecutivePrimes(int offset, int count) {
-		int i = 0;
-		for (; offset > 0; offset--) {
-			for (; !isPrime[i]; i++);
-			i++;
-		}
-		
-		int sum = 0;
-		for (; count > 0; count--) {
-			for (; !isPrime[i]; i++);
-			sum += i;
-			i++;
-		}
-		return sum;
+		return Integer.toString(maxSum);
 	}
 	
 }
