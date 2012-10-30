@@ -40,7 +40,7 @@ public final class p044 {
 			return false;
 		long temp = n * 24 + 1;
 		long sqrt = Library.sqrt(temp);
-		return sqrt * sqrt == temp && (sqrt + 1) % 3 == 0;
+		return sqrt * sqrt == temp && (sqrt + 1) % 6 == 0;
 	}
 	
 }
