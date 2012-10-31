@@ -55,22 +55,10 @@ public final class p182 implements EulerSolution {
 	private static int countUnconcealed(int modulus, int e) {
 		int count = 0;
 		for (int m = 0; m < modulus; m++) {
-			if (powMod(m, e, modulus) == m)
+			if (Library.powMod(m, e, modulus) == m)
 				count++;
 		}
 		return count;
-	}
-	
-	
-	private static int powMod(int x, int y, int m) {
-		if (y < 0)
-			throw new IllegalArgumentException();
-		int z = 1;
-		for (; y != 0; y >>>= 1, x = (int)((long)x * x % m)) {
-			if ((y & 1) != 0)
-				z = (int)((long)z * x % m);
-		}
-		return z;
 	}
 	
 }

@@ -63,6 +63,26 @@ final class Library {
 	}
 	
 	
+	public static int powMod(int x, int y, int m) {
+		if (x < 0)
+			throw new IllegalArgumentException("Negative base not handled");
+		if (y < 0)
+			throw new IllegalArgumentException("Reciprocal not handled");
+		if (m <= 0)
+			throw new IllegalArgumentException("Invalid modulus");
+		
+		// Exponentiation by squaring
+		int z = 1;
+		while (y != 0) {
+			if ((y & 1) != 0)
+				z = (int)((long)z * x % m);
+			x = (int)((long)x * x % m);
+			y >>>= 1;
+		}
+		return z;
+	}
+	
+	
 	public static BigInteger binomial(int n, int k) {
 		return factorial(n).divide(factorial(n - k).multiply(factorial(k)));
 	}

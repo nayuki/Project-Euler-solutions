@@ -23,7 +23,7 @@ public final class p250 implements EulerSolution {
 		numSubsets[0] = 1;
 		
 		for (int i = 1; i <= 250250; i++) {
-			int temp = powMod(i, i, 250);
+			int temp = Library.powMod(i, i, 250);
 			long[] newArray = numSubsets.clone();
 			for (int j = 0; j < 250; j++)
 				newArray[(j + temp) % 250] = (numSubsets[j] + numSubsets[(j + temp) % 250]) % MODULUS;
@@ -31,18 +31,6 @@ public final class p250 implements EulerSolution {
 		}
 		
 		return Long.toString((numSubsets[0] - 1 + MODULUS) % MODULUS);
-	}
-	
-	
-	private static int powMod(int x, int y, int m) {
-		if (y < 0)
-			throw new IllegalArgumentException();
-		int z = 1;
-		for (; y != 0; y >>>= 1, x = (int)((long)x * x % m)) {
-			if ((y & 1) != 0)
-				z = (int)((long)z * x % m);
-		}
-		return z;
 	}
 	
 }
