@@ -14,19 +14,19 @@ public final class p214 implements EulerSolution {
 	}
 	
 	
+	private static final int LIMIT = 40000000;
+	
+	
+	// Requires at least 320 MB of memory
 	public String run() {
-		int n = 40000000;
-		int[] totient = Library.listTotients(n);
-		
-		int[] totientChainLength = new int[n + 1];
+		int[] totient = Library.listTotients(LIMIT);
+		int[] totientChainLength = new int[LIMIT + 1];
 		totientChainLength[0] = 0;
-		for (int i = 1; i < totientChainLength.length; i++) {
-			totientChainLength[i] = totientChainLength[totient[i]] + 1;
-		}
-		
 		long sum = 0;
-		for (int i = 0; i < n; i++) {
-			if (totient[i] == i - 1 && totientChainLength[i] == 25)
+		for (int i = 1; i < LIMIT; i++) {  // Fill table in ascending order because totients are strictly decreasing
+			int chainlen = totientChainLength[totient[i]] + 1;
+			totientChainLength[i] = chainlen;
+			if (chainlen == 25 && totient[i] == i - 1)  // i is prime iff totient(i) = i-1
 				sum += i;
 		}
 		return Long.toString(sum);

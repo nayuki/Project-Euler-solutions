@@ -14,9 +14,12 @@ public final class p145 implements EulerSolution {
 	}
 	
 	
+	private static final int LIMIT = Library.pow(10, 9);
+	
+	
 	public String run() {
 		int count = 0;
-		for (int i = 0, end = Library.pow(10, 9); i < end; i++) {
+		for (int i = 0; i < LIMIT; i++) {
 			if (isReversible(i))
 				count++;
 		}
@@ -29,8 +32,12 @@ public final class p145 implements EulerSolution {
 	}
 	
 	
+	// Assumes x does not have trailing zeros
 	private static int reverse(int x) {
-		return Integer.parseInt(Library.reverse(Integer.toString(x)));
+		int y = 0;
+		for (; x != 0; x /= 10)
+			y = y * 10 + x % 10;
+		return y;
 	}
 	
 	

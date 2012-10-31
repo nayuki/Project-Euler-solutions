@@ -17,15 +17,15 @@ public final class p099 implements EulerSolution {
 	
 	
 	public String run() {
-		calculateApproximately();
-		return calculateExactly();
+		return calculateApproximately();
+		//return calculateExactly();
 	}
 	
 	
-	private static void calculateApproximately() {
+	// Compare by taking the logarithm of the power, using floating-point arithmetic
+	private static String calculateApproximately() {
 		double maxVal = -1;
 		int maxIndex = -1;
-		
 		for (int i = 0; i < DATA.length; i++) {
 			double val = Math.log(DATA[i][0]) * DATA[i][1];
 			if (maxVal == -1 || val > maxVal) {
@@ -33,15 +33,14 @@ public final class p099 implements EulerSolution {
 				maxIndex = i;
 			}
 		}
-		
-		System.out.println(maxIndex + 1);
+		return Integer.toString(maxIndex + 1);
 	}
 	
 	
+	// Compare using exact integer math, which runs very slowly due to the huge resulting numbers (~10 million bits)
 	private static String calculateExactly() {
 		BigInteger maxVal = null;
 		int maxIndex = -1;
-		
 		for (int i = 0; i < DATA.length; i++) {
 			BigInteger val = pow(BigInteger.valueOf(DATA[i][0]), DATA[i][1]);
 			if (maxVal == null || val.compareTo(maxVal) > 0) {
@@ -49,12 +48,11 @@ public final class p099 implements EulerSolution {
 				maxIndex = i;
 			}
 		}
-		
 		return Integer.toString(maxIndex + 1);
 	}
 	
 	
-	
+	// Faster than BigInteger.pow() by using the library's Karatsuba multiplication
 	private static BigInteger pow(BigInteger x, int y) {
 		if (y < 0)
 			throw new IllegalArgumentException();

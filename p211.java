@@ -14,11 +14,14 @@ public final class p211 implements EulerSolution {
 	}
 	
 	
+	private static final int LIMIT = 64000000;
+	
+	
+	// Requires at least 768 MB of memory
 	public String run() {
-		int n = 64000000;
-		long[] sigma2 = listSigma2(n);
+		long[] sigma2 = listSigma2(LIMIT - 1);
 		long sum = 0;
-		for (int i = 1; i <= n; i++) {
+		for (int i = 1; i < LIMIT; i++) {
 			if (isPerfectSquare(sigma2[i]))
 				sum += i;
 		}
@@ -32,9 +35,11 @@ public final class p211 implements EulerSolution {
 		for (int i = 2; i < smallestPrimeFactor.length; i++) {
 			if (smallestPrimeFactor[i] == 0) {
 				smallestPrimeFactor[i] = i;
-				for (int j = i * 2; j < smallestPrimeFactor.length; j += i) {
-					if (smallestPrimeFactor[j] == 0)
-						smallestPrimeFactor[j] = i;
+				if ((long)i * i <= n) {
+					for (int j = i * i; j <= n; j += i) {
+						if (smallestPrimeFactor[j] == 0)
+							smallestPrimeFactor[j] = i;
+					}
 				}
 			}
 		}

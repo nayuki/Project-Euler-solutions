@@ -14,19 +14,23 @@ public final class p250 implements EulerSolution {
 	}
 	
 	
+	private static final long MODULUS = 10000000000000000L;
+	
+	
 	public String run() {
-		long[] numSubsetsRemainder = new long[250];
-		numSubsetsRemainder[0] = 1;
+		// Use dynamic programming
+		long[] numSubsets = new long[250];  // numSubsets[i] is {the number of subsets with sum equal to i mod 250} mod 10^16
+		numSubsets[0] = 1;
 		
 		for (int i = 1; i <= 250250; i++) {
 			int temp = powMod(i, i, 250);
-			long[] newArray = numSubsetsRemainder.clone();
+			long[] newArray = numSubsets.clone();
 			for (int j = 0; j < 250; j++)
-				newArray[(j + temp) % 250] = (newArray[(j + temp) % 250] + numSubsetsRemainder[j]) % 10000000000000000L;
-			numSubsetsRemainder = newArray;
+				newArray[(j + temp) % 250] = (numSubsets[j] + numSubsets[(j + temp) % 250]) % MODULUS;
+			numSubsets = newArray;
 		}
 		
-		return Long.toString((numSubsetsRemainder[0] - 1 + 10000000000000000L) % 10000000000000000L);
+		return Long.toString((numSubsets[0] - 1 + MODULUS) % MODULUS);
 	}
 	
 	

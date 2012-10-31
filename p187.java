@@ -14,13 +14,15 @@ public final class p187 implements EulerSolution {
 	}
 	
 	
-	private static int[] smallestPrimeFactor = listSmallestPrimeFactor(Library.pow(10, 8));
+	private static final int LIMIT = Library.pow(10, 8);
+	
+	private int[] smallestPrimeFactor = listSmallestPrimeFactor(LIMIT);
 	
 	
 	public String run() {
 		int count = 0;
-		for (int i = 2, end = Library.pow(10, 8); i < end; i++) {
-			if (!isPrime(i) && isPrime(i / smallestPrimeFactor[i]))
+		for (int i = 2; i < LIMIT; i++) {
+			if (isPrime(i / smallestPrimeFactor[i]))
 				count++;
 		}
 		return Integer.toString(count);
@@ -45,7 +47,7 @@ public final class p187 implements EulerSolution {
 	}
 	
 	
-	private static boolean isPrime(int n) {
+	private boolean isPrime(int n) {
 		return smallestPrimeFactor[n] == n;
 	}
 	
