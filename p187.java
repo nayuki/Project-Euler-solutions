@@ -6,6 +6,8 @@
  * https://github.com/nayuki/Project-Euler-solutions
  */
 
+import java.util.Arrays;
+
 
 public final class p187 implements EulerSolution {
 	
@@ -14,41 +16,30 @@ public final class p187 implements EulerSolution {
 	}
 	
 	
-	private static final int LIMIT = Library.pow(10, 8);
-	
-	private int[] smallestPrimeFactor = listSmallestPrimeFactor(LIMIT);
+	private static final int LIMIT = Library.pow(10, 8) - 1;
 	
 	
+	/* 
+	 * LIMIT is the highest number that we will test for being semiprime.
+	 * Make a list of primes: 2, 3, 5, 7, ... . Stop beyond LIMIT/2, because one of the prime factors in the semiprime is at least 2.
+	 * For each prime p in the list, look at the set of numbers q such that q >= p and pq <= LIMIT.
+	 * Actually, we can stop when p^2 > LIMIT, as we'll see later.
+	 * In this algorithm, we find the index 'end' such that primes[i] * primes[end] > LIMIT.
+	 * So for that p, we have (end - i) different choices for q. Since q >= p, all these pairs are unique.
+	 * Furthermore, by the fundamental theorem of arithmetic, all the products pq are unique.
+	 */
 	public String run() {
 		int count = 0;
-		for (int i = 2; i < LIMIT; i++) {
-			if (isPrime(i / smallestPrimeFactor[i]))
-				count++;
+		int[] primes = Library.listPrimes(LIMIT / 2);
+		for (int i = 0, sqrt = Library.sqrt(LIMIT); i < primes.length && primes[i] <= sqrt; i++) {
+			int end = Arrays.binarySearch(primes, LIMIT / primes[i]);
+			if (end >= 0)
+				end++;
+			else
+				end = -end - 1;
+			count += end - i;
 		}
 		return Integer.toString(count);
-	}
-	
-	
-	private static int[] listSmallestPrimeFactor(int n) {
-		// Richer version of the sieve of Eratosthenes
-		int[] smallestPrimeFactor = new int[n + 1];
-		for (int i = 2; i < smallestPrimeFactor.length; i++) {
-			if (smallestPrimeFactor[i] == 0) {
-				smallestPrimeFactor[i] = i;
-				if ((long)i * i <= n) {
-					for (int j = i * i; j <= n; j += i) {
-						if (smallestPrimeFactor[j] == 0)
-							smallestPrimeFactor[j] = i;
-					}
-				}
-			}
-		}
-		return smallestPrimeFactor;
-	}
-	
-	
-	private boolean isPrime(int n) {
-		return smallestPrimeFactor[n] == n;
 	}
 	
 }
