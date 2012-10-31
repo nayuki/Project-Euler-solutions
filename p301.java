@@ -7,15 +7,20 @@
  */
 
 
-public final class p301 {
+public final class p301 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p301().run());
+	}
+	
+	
+	public String run() {
 		long count = 0;
 		for (int i = 1; i <= (1 << 30); i++) {
 			if ((i ^ (i * 2) ^ (i * 3)) == 0)
 				count++;
 		}
-		System.out.println(count);
+		return Long.toString(count);
 	}
 	
 }

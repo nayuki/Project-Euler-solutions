@@ -7,10 +7,15 @@
  */
 
 
-public final class p204 {
+public final class p204 implements EulerSolution {
 	
 	public static void main(String[] args) {
-		System.out.println(count(0, 1));
+		System.out.println(new p204().run());
+	}
+	
+	
+	public String run() {
+		return Integer.toString(count(0, 1));
 	}
 	
 	

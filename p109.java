@@ -11,12 +11,15 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public final class p109 {
+public final class p109 implements EulerSolution {
 	
-	private static List<Integer> points;
-	private static List<Integer> doublePoints;
+	public static void main(String[] args) {
+		System.out.println(new p109().run());
+	}
 	
-	static {
+	
+	public String run() {
+		// Initialization
 		points = new ArrayList<Integer>();  // Orderless, but duplicates are important
 		for (int i = 1; i <= 20; i++) {
 			points.add(i * 1);
@@ -30,10 +33,13 @@ public final class p109 {
 		for (int i = 1; i <= 20; i++)
 			doublePoints.add(i * 2);
 		doublePoints.add(25 * 2);
-	}
-	
-	
-	public static void main(String[] args) {
+		
+		ways = new int[3][101][points.size()];
+		for (int[][] x : ways) {
+			for (int[] y : x)
+				Arrays.fill(y, -1);
+		}
+		
 		int checkouts = 0;
 		for (int remainingPoints = 1; remainingPoints < 100; remainingPoints++) {
 			for (int throwz = 0; throwz <= 2; throwz++) {
@@ -43,23 +49,19 @@ public final class p109 {
 				}
 			}
 		}
-		System.out.println(checkouts);
+		return Integer.toString(checkouts);
 	}
 	
 	
-	private static int[][][] ways;
+	private List<Integer> points;
+	private List<Integer> doublePoints;
 	
-	static {
-		ways = new int[3][101][points.size()];
-		for (int[][] x : ways) {
-			for (int[] y : x)
-				Arrays.fill(y, -1);
-		}
-	}
+	private int[][][] ways;
+	
 	
 	// Number of ways to get exactly 'total' points in exactly 'throwz' throws, using
 	// items (unordered) from the 'points' list with index less than or equal to 'maxIndex'.
-	private static int ways(int throwz, int total, int maxIndex) {
+	private int ways(int throwz, int total, int maxIndex) {
 		if (ways[throwz][total][maxIndex] == -1) {
 			int result;
 			if (throwz == 0)

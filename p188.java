@@ -7,10 +7,15 @@
  */
 
 
-public final class p188 {
+public final class p188 implements EulerSolution {
 	
 	public static void main(String[] args) {
-		System.out.println(tetrationMod(1777, 1885, Library.pow(10, 8)));
+		System.out.println(new p188().run());
+	}
+	
+	
+	public String run() {
+		return Integer.toString(tetrationMod(1777, 1885, Library.pow(10, 8)));
 	}
 	
 	

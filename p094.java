@@ -7,9 +7,14 @@
  */
 
 
-public final class p094 {
+public final class p094 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p094().run());
+	}
+	
+	
+	public String run() {
 		long sum = 0;
 		
 		// Test triangles with side lengths {i, i, i+1}, excluding {1, 1, 2}
@@ -38,7 +43,7 @@ public final class p094 {
 			sum += i * 3 + 2;
 		}
 		
-		System.out.println(sum);
+		return Long.toString(sum);
 	}
 	
 }

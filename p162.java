@@ -9,7 +9,12 @@
 import java.math.BigInteger;
 
 
-public final class p162 {
+public final class p162 implements EulerSolution {
+	
+	public static void main(String[] args) {
+		System.out.println(new p162().run());
+	}
+	
 	
 	/* 
 	 * Among the set of n-digit hexadecimal numbers, how many of them:
@@ -46,7 +51,7 @@ public final class p162 {
 	 *     = (15*16^(n-1) - 13^n) - (15*16^(n-1) - 15^n) - (15*16^(n-1) - 14*15^(n-1)) - (15*16^(n-1) - 14*15^(n-1)) + (15*16^(n-1) - 29*15^(n-1) + 14^n) + (15*16^(n-1) - 29*15^(n-1) + 14^n) + (15*16^(n-1) - 28*15^(n-1) + 13*14^(n-1))
 	 *     = 15*16^(n-1) - 43*15^(n-1) + 41*14^(n-1) - 13^n.
 	 */
-	public static void main(String[] args) {
+	public String run() {
 		BigInteger sum = BigInteger.ZERO;
 		for (int n = 1; n <= 16; n++) {
 			sum = sum
@@ -55,7 +60,7 @@ public final class p162 {
 				.add(BI_41.multiply(BI_14.pow(n - 1)))
 				.subtract(BI_13.pow(n));
 		}
-		System.out.println(sum.toString(16).toUpperCase());
+		return sum.toString(16).toUpperCase();
 	}
 	
 	

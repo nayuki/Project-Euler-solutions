@@ -7,13 +7,18 @@
  */
 
 
-public final class p089 {
+public final class p089 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p089().run());
+	}
+	
+	
+	public String run() {
 		int sum = 0;
 		for (String s : TO_SIMPLIFY)
 			sum += s.length() - romanNumeralLength(parseRomanNumeral(s));
-		System.out.println(sum);
+		return Integer.toString(sum);
 	}
 	
 	

@@ -7,16 +7,21 @@
  */
 
 
-public final class p381 {
+public final class p381 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p381().run());
+	}
+	
+	
+	public String run() {
 		boolean[] isPrime = Library.listPrimality(Library.pow(10, 8));
 		long sum = 0;
 		for (int i = 5; i < isPrime.length; i++) {
 			if (isPrime[i])
 				sum += s(i);
 		}
-		System.out.println(sum);
+		return Long.toString(sum);
 	}
 	
 	

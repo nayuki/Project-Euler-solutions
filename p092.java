@@ -7,15 +7,20 @@
  */
 
 
-public final class p092 {
+public final class p092 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p092().run());
+	}
+	
+	
+	public String run() {
 		int count = 0;
 		for (int i = 1, end = Library.pow(10, 7); i < end; i++) {
 			if (isClass89(i))
 				count++;
 		}
-		System.out.println(count);
+		return Integer.toString(count);
 	}
 	
 	

@@ -9,11 +9,14 @@
 import java.math.BigInteger;
 
 
-public final class p113 {
+public final class p113 implements EulerSolution {
 	
 	public static void main(String[] args) {
-		System.out.println(countNonBouncy(100));
+		System.out.println(new p113().run());
 	}
+	
+	
+	private static final int DIGITS = 100;
 	
 	
 	/* 
@@ -42,11 +45,11 @@ public final class p113 {
 	 * 
 	 * (Technically, in the problem statement and this solution, "increasing" actually means "nondecreasing" and "decreasing" means "nonincreasing".)
 	 */
-	private static BigInteger countNonBouncy(int digits) {
-		BigInteger increasing = Library.binomial(digits + 9, 9).subtract(BigInteger.ONE);
-		BigInteger decreasing = Library.binomial(digits + 10, 10).subtract(BigInteger.valueOf(digits + 1));
-		BigInteger flat = BigInteger.valueOf(digits * 9);
-		return increasing.add(decreasing).subtract(flat);
+	public String run() {
+		BigInteger increasing = Library.binomial(DIGITS + 9, 9).subtract(BigInteger.ONE);
+		BigInteger decreasing = Library.binomial(DIGITS + 10, 10).subtract(BigInteger.valueOf(DIGITS + 1));
+		BigInteger flat = BigInteger.valueOf(DIGITS * 9);
+		return increasing.add(decreasing).subtract(flat).toString();
 	}
 	
 }

@@ -9,12 +9,17 @@
 import java.util.Arrays;
 
 
-public final class p118 {
-	
-	private static int[] isPrime;
-	
+public final class p118 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p118().run());
+	}
+	
+	
+	private int[] isPrime;
+	
+	
+	public String run() {
 		// Do prime sieve but store bitwise (instead of the usual Boolean array)
 		int n = 999999999;
 		isPrime = new int[(n + 31) / 32];
@@ -41,14 +46,14 @@ public final class p118 {
 		int count = 0;
 		for (int i = 0; i < countBySize.length; i++)
 			count += countBySize[i] / FACTORIAL[i];
-		System.out.println(count);
+		return Integer.toString(count);
 	}
 	
 	
-	private static int[] countBySize;
+	private int[] countBySize;
 	
 	
-	private static void countPrimeSets(int[] digits, int start, int size) {
+	private void countPrimeSets(int[] digits, int start, int size) {
 		if (start == digits.length)
 			countBySize[size]++;
 		else {
@@ -68,7 +73,7 @@ public final class p118 {
 	}
 	
 	
-	private static boolean isPrime(int x) {
+	private boolean isPrime(int x) {
 		return (isPrime[x >>> 5] >>> (x & 0x1F) & 1) != 0;
 	}
 	

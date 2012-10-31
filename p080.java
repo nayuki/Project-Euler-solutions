@@ -9,9 +9,14 @@
 import java.math.BigInteger;
 
 
-public final class p080 {
+public final class p080 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p080().run());
+	}
+	
+	
+	public String run() {
 		int sum = 0;
 		for (int i = 1; i <= 100; i++) {
 			BigInteger x = BigInteger.valueOf(i);
@@ -24,7 +29,7 @@ public final class p080 {
 					sum += s.charAt(j) - '0';
 			}
 		}
-		System.out.println(sum);
+		return Integer.toString(sum);
 	}
 	
 	

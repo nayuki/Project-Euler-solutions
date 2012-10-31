@@ -11,10 +11,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public final class p271 {
+public final class p271 implements EulerSolution {
+	
+	public static void main(String[] args) {
+		System.out.println(new p271().run());
+	}
+	
 	
 	@SuppressWarnings("unchecked")
-	public static void main(String[] args) {
+	public String run() {
 		// Note: 13082761331670030 = product of lowest 14 primes
 		// Find solutions to x^3 = 1 mod p, for each prime factor p
 		int[] factors = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43};
@@ -29,7 +34,7 @@ public final class p271 {
 		}
 		
 		buildAndAddSolutions(factors, factorSolutions, 0, BigInteger.ZERO, BigInteger.ONE);
-		System.out.println(sum);
+		return sum.toString();
 	}
 	
 	

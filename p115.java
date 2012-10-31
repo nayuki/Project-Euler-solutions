@@ -7,14 +7,17 @@
  */
 
 
-public final class p115 {
+public final class p115 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p115().run());
+	}
+	
+	
+	public String run() {
 		for (int i = 1; ; i++) {
-			if (ways(50, i) > 1000000) {
-				System.out.println(i);
-				break;
-			}
+			if (ways(50, i) > 1000000)
+				return Long.toString(i);
 		}
 	}
 	

@@ -7,7 +7,12 @@
  */
 
 
-public final class p120 {
+public final class p120 implements EulerSolution {
+	
+	public static void main(String[] args) {
+		System.out.println(new p120().run());
+	}
+	
 	
 	/* 
 	 * For a given a, what is the n that maximizes the remainder, and what is the value of this remainder?
@@ -28,11 +33,11 @@ public final class p120 {
 	 *   Else a is odd, then the maximum achievable value is a - 1 by setting n = (a - 1) / 2.
 	 * In conclusion, if a is even, the maximum remainder is a(a-2); otherwise a is odd, the maximum remainder is a(a-1).
 	 */
-	public static void main(String[] args) {
+	public String run() {
 		int sum = 0;
 		for (int a = 3; a <= 1000; a++)
 			sum += a * (a - (a % 2 == 0 ? 2 : 1));
-		System.out.println(sum);
+		return Integer.toString(sum);
 	}
 	
 }

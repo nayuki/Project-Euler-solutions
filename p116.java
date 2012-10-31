@@ -7,10 +7,15 @@
  */
 
 
-public final class p116 {
+public final class p116 implements EulerSolution {
 	
 	public static void main(String[] args) {
-		System.out.println(countWays(50, 2) + countWays(50, 3) + countWays(50, 4));
+		System.out.println(new p116().run());
+	}
+	
+	
+	public String run() {
+		return Long.toString(countWays(50, 2) + countWays(50, 3) + countWays(50, 4));
 	}
 	
 	

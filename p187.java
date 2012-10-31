@@ -7,18 +7,23 @@
  */
 
 
-public final class p187 {
+public final class p187 implements EulerSolution {
+	
+	public static void main(String[] args) {
+		System.out.println(new p187().run());
+	}
+	
 	
 	private static int[] smallestPrimeFactor = listSmallestPrimeFactor(Library.pow(10, 8));
 	
 	
-	public static void main(String[] args) {
+	public String run() {
 		int count = 0;
 		for (int i = 2, end = Library.pow(10, 8); i < end; i++) {
 			if (!isPrime(i) && isPrime(i / smallestPrimeFactor[i]))
 				count++;
 		}
-		System.out.println(count);
+		return Integer.toString(count);
 	}
 	
 	

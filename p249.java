@@ -7,13 +7,18 @@
  */
 
 
-public final class p249 {
+public final class p249 implements EulerSolution {
+	
+	public static void main(String[] args) {
+		System.out.println(new p249().run());
+	}
+	
 	
 	private static int LIMIT = 5000;
 	private static long MODULUS = 10000000000000000L;
 	
 	
-	public static void main(String[] args) {
+	public String run() {
 		boolean[] isPrime = Library.listPrimality(LIMIT * LIMIT / 2);
 		long[] numSubsets = new long[LIMIT * LIMIT / 2];  // numSubsets[i] is the number of subsets with sum i, mod 10^16
 		numSubsets[0] = 1;
@@ -32,7 +37,7 @@ public final class p249 {
 			if (isPrime[i])
 				sum = (sum + numSubsets[i]) % MODULUS;
 		}
-		System.out.println(sum);
+		return Long.toString(sum);
 	}
 	
 }

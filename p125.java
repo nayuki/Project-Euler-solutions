@@ -10,9 +10,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-public final class p125 {
+public final class p125 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p125().run());
+	}
+	
+	
+	public String run() {
 		Set<Integer> nums = new HashSet<Integer>();
 		for (int i = 1; i <= 10000; i++) {
 			int sum = i * i;
@@ -28,7 +33,7 @@ public final class p125 {
 		long sum = 0;
 		for (int x : nums)
 			sum += x;
-		System.out.println(sum);
+		return Long.toString(sum);
 	}
 	
 }

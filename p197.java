@@ -7,12 +7,17 @@
  */
 
 
-public final class p197 {
+public final class p197 implements EulerSolution {
+	
+	public static void main(String[] args) {
+		System.out.println(new p197().run());
+	}
+	
 	
 	private static long ITERATIONS = 1000000000000L;
 	
 	
-	public static void main(String[] args) {
+	public String run() {
 		// Floyd's cycle-finding algorithm
 		double x = -1;
 		double y = -1;
@@ -34,7 +39,7 @@ public final class p197 {
 			x = f(x);
 		double answer = x + f(x);
 		answer = Math.floor(answer * Math.pow(10, 9)) / Math.pow(10, 9);  // Truncate to 9 digits after the decimal point
-		System.out.printf("%.9f%n", answer);
+		return String.format("%.9f", answer);
 	}
 	
 	

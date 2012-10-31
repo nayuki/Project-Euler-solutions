@@ -10,9 +10,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-public final class p095 {
+public final class p095 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p095().run());
+	}
+	
+	
+	public String run() {
 		int n = 1000001;
 		int[] divisorSum = new int[n];
 		for (int i = 1; i < n; i++) {
@@ -47,10 +52,8 @@ public final class p095 {
 			maxChainLen = Math.max(x, maxChainLen);
 		
 		for (int i = 0; i < n; i++) {
-			if (amicableChainLen[i] == maxChainLen) {
-				System.out.println(i);
-				return;
-			}
+			if (amicableChainLen[i] == maxChainLen)
+				return Integer.toString(i);
 		}
 		throw new AssertionError();
 	}

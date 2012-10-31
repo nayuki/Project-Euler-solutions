@@ -7,9 +7,14 @@
  */
 
 
-public final class p096 {
+public final class p096 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p096().run());
+	}
+	
+	
+	public String run() {
 		int sum = 0;
 		for (String puz : PUZZLES) {
 			SudokuSolver ss = new SudokuSolver(puz);
@@ -18,7 +23,7 @@ public final class p096 {
 				throw new AssertionError();
 			sum += ss.board[0][0] * 100 + ss.board[0][1] * 10 + ss.board[0][2];
 		}
-		System.out.println(sum);
+		return Integer.toString(sum);
 	}
 	
 	

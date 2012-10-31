@@ -7,9 +7,14 @@
  */
 
 
-public final class p186 {
+public final class p186 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p186().run());
+	}
+	
+	
+	public String run() {
 		DisjointSets ds = new DisjointSets(1000000);
 		LfgRandom random = new LfgRandom();
 		int i = 0;
@@ -21,7 +26,7 @@ public final class p186 {
 				i++;
 			}
 		}
-		System.out.println(i);
+		return Integer.toString(i);
 	}
 	
 	

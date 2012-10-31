@@ -7,18 +7,23 @@
  */
 
 
-public final class p357 {
+public final class p357 implements EulerSolution {
+	
+	public static void main(String[] args) {
+		System.out.println(new p357().run());
+	}
+	
 	
 	private static boolean[] isPrime = Library.listPrimality(100000001);
 	
 	
-	public static void main(String[] args) {
+	public String run() {
 		long sum = 0;
 		for (int i = 0; i <= 100000000; i++) {
 			if (isPrimeGenerating(i))
 				sum += i;
 		}
-		System.out.println(sum);
+		return Long.toString(sum);
 	}
 	
 	

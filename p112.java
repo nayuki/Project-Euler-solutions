@@ -7,17 +7,20 @@
  */
 
 
-public final class p112 {
+public final class p112 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p112().run());
+	}
+	
+	
+	public String run() {
 		int bouncy = 0;
 		for (int i = 1; ; i++) {
 			if (isBouncy(i))
 				bouncy++;
-			if (bouncy * 100 == i * 99) {
-				System.out.println(i);
-				break;
-			}
+			if (bouncy * 100 == i * 99)
+				return Integer.toString(i);
 		}
 	}
 	

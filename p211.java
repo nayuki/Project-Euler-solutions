@@ -7,9 +7,14 @@
  */
 
 
-public final class p211 {
+public final class p211 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p211().run());
+	}
+	
+	
+	public String run() {
 		int n = 64000000;
 		long[] sigma2 = listSigma2(n);
 		long sum = 0;
@@ -17,7 +22,7 @@ public final class p211 {
 			if (isPerfectSquare(sigma2[i]))
 				sum += i;
 		}
-		System.out.println(sum);
+		return Long.toString(sum);
 	}
 	
 	

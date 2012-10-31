@@ -7,13 +7,18 @@
  */
 
 
-public final class p108 {
+public final class p108 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p108().run());
+	}
+	
+	
+	public String run() {
 		int n = 1;
 		while (numberOfSolutions(n) <= 1000)
 			n++;
-		System.out.println(n);
+		return Integer.toString(n);
 	}
 	
 	

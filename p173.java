@@ -7,9 +7,14 @@
  */
 
 
-public final class p173 {
+public final class p173 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p173().run());
+	}
+	
+	
+	public String run() {
 		int count = 0;
 		for (int a = 3; a <= 1000000; a++) {  // Outer square length
 			for (int b = a - 2; b >= 1; b -= 2) {  // Inner square length
@@ -19,7 +24,7 @@ public final class p173 {
 				count++;
 			}
 		}
-		System.out.println(count);
+		return Integer.toString(count);
 	}
 	
 }

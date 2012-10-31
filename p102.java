@@ -7,15 +7,20 @@
  */
 
 
-public final class p102 {
+public final class p102 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p102().run());
+	}
+	
+	
+	public String run() {
 		int count = 0;
 		for (int i = 0; i < TRIANGLES.length; i++) {
 			if (isInTriangle(i, 0, 0))
 				count++;
 		}
-		System.out.println(count);
+		return Integer.toString(count);
 	}
 	
 	

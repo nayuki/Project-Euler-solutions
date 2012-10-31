@@ -9,11 +9,16 @@
 import java.math.BigInteger;
 
 
-public final class p099 {
+public final class p099 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p099().run());
+	}
+	
+	
+	public String run() {
 		calculateApproximately();
-		calculateExactly();
+		return calculateExactly();
 	}
 	
 	
@@ -33,7 +38,7 @@ public final class p099 {
 	}
 	
 	
-	private static void calculateExactly() {
+	private static String calculateExactly() {
 		BigInteger maxVal = null;
 		int maxIndex = -1;
 		
@@ -45,7 +50,7 @@ public final class p099 {
 			}
 		}
 		
-		System.out.println(maxIndex + 1);
+		return Integer.toString(maxIndex + 1);
 	}
 	
 	

@@ -7,9 +7,14 @@
  */
 
 
-public final class p085 {
+public final class p085 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p085().run());
+	}
+	
+	
+	public String run() {
 		int bestDiff = -1;
 		int bestArea = -1;
 		for (int w = 1; w < 2000; w++) {
@@ -21,7 +26,7 @@ public final class p085 {
 				}
 			}
 		}
-		System.out.println(bestArea);
+		return Integer.toString(bestArea);
 	}
 	
 	

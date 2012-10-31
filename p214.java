@@ -7,9 +7,14 @@
  */
 
 
-public final class p214 {
+public final class p214 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p214().run());
+	}
+	
+	
+	public String run() {
 		int n = 40000000;
 		int[] totient = Library.listTotients(n);
 		
@@ -24,7 +29,7 @@ public final class p214 {
 			if (totient[i] == i - 1 && totientChainLength[i] == 25)
 				sum += i;
 		}
-		System.out.println(sum);
+		return Long.toString(sum);
 	}
 	
 }

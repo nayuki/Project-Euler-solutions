@@ -7,31 +7,33 @@
  */
 
 
-public final class p142 {
-	
-	private static boolean[] isSquare = new boolean[10000001];
-	
-	static {
-		for (int i = 0, end = Library.sqrt(isSquare.length - 1); i <= end; i++)
-			isSquare[i * i] = true;
-	}
+public final class p142 implements EulerSolution {
 	
 	
 	public static void main(String[] args) {
+		System.out.println(new p142().run());
+	}
+	
+	
+	private boolean[] isSquare = new boolean[10000001];
+	
+	
+	public String run() {
+		for (int i = 0, end = Library.sqrt(isSquare.length - 1); i <= end; i++)
+			isSquare[i * i] = true;
+		
 		int limit = isSquare.length - 1;
 		while (true) {
 			int temp = findSum(limit);
-			if (temp == -1) {
-				System.out.println(limit);
-				break;
-			}
+			if (temp == -1)
+				return Integer.toString(limit);
 			limit = temp;
 		}
 	}
 	
 	
 	// Finds any sum s=x+y+z such that s<limit, x>y>z>0, and these are perfect squares: x+y, x-y, x+z, x-z, y+z, y-z. Returns -1 if none is found.
-	private static int findSum(int limit) {
+	private int findSum(int limit) {
 		// Suppose we let x + y = a^2 and x - y = b^2.
 		// Then x = (a^2 + b^2) / 2 and y = (a^2 - b^2) / 2.
 		// By ensuring a > b > 0, we have x > y > 0.

@@ -9,13 +9,18 @@
 import java.math.BigInteger;
 
 
-public final class p243 {
+public final class p243 implements EulerSolution {
+	
+	public static void main(String[] args) {
+		System.out.println(new p243().run());
+	}
+	
 	
 	private static BigInteger TARGET_NUMERATOR   = BigInteger.valueOf(15499);
 	private static BigInteger TARGET_DENOMINATOR = BigInteger.valueOf(94744);
 	
 	
-	public static void main(String[] args) {
+	public String run() {
 		BigInteger numer = BigInteger.ONE;
 		BigInteger denom = BigInteger.ONE;
 		
@@ -28,10 +33,8 @@ public final class p243 {
 				for (int i = 1; i <= p; i++) {
 					BigInteger n = numer.multiply(BigInteger.valueOf(i));
 					BigInteger d = denom.multiply(BigInteger.valueOf(i)).subtract(BigInteger.ONE);
-					if (n.multiply(TARGET_DENOMINATOR).compareTo(d.multiply(TARGET_NUMERATOR)) < 0) {
-						System.out.println(d.add(BigInteger.ONE));
-						return;
-					}
+					if (n.multiply(TARGET_DENOMINATOR).compareTo(d.multiply(TARGET_NUMERATOR)) < 0)
+						return d.add(BigInteger.ONE).toString();
 				}
 			}
 		}

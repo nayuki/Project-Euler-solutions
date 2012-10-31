@@ -7,12 +7,17 @@
  */
 
 
-public final class p087 {
+public final class p087 implements EulerSolution {
+	
+	public static void main(String[] args) {
+		System.out.println(new p087().run());
+	}
+	
 	
 	private static final int LIMIT = 50000000;
 	
 	
-	public static void main(String[] args) {
+	public String run() {
 		int[] primes = Library.listPrimes(Library.sqrt(LIMIT));
 		
 		// Squares
@@ -51,7 +56,7 @@ public final class p087 {
 			if (x)
 				count++;
 		}
-		System.out.println(count);
+		return Integer.toString(count);
 	}
 	
 }

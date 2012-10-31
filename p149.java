@@ -10,9 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public final class p149 {
+public final class p149 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p149().run());
+	}
+	
+	
+	public String run() {
 		int[][] grid = new int[2000][2000];
 		LfgRandom rand = new LfgRandom();
 		for (int y = 0; y < grid.length; y++) {
@@ -34,7 +39,7 @@ public final class p149 {
 			max = Math.max(getMaxSubstringSum(grid, 1999, y,  0, +1), max);  // Horizontal
 			max = Math.max(getMaxSubstringSum(grid, 1999, y, -1, +1), max);  // Anti-diagonal
 		}
-		System.out.println(max);
+		return Integer.toString(max);
 	}
 	
 	

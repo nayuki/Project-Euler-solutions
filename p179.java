@@ -7,15 +7,20 @@
  */
 
 
-public final class p179 {
+public final class p179 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p179().run());
+	}
+	
+	
+	public String run() {
 		int count = 0;
 		for (int i = 2, end = Library.pow(10, 7); i < end; i++) {
 			if (countDivisors(i) == countDivisors(i + 1))
 				count++;
 		}
-		System.out.println(count);
+		return Integer.toString(count);
 	}
 	
 	

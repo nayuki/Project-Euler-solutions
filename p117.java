@@ -7,9 +7,14 @@
  */
 
 
-public final class p117 {
+public final class p117 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p117().run());
+	}
+	
+	
+	public String run() {
 		long[] ways = new long[51];  // Memoization
 		ways[0] = 1;
 		ways[1] = 1;
@@ -17,7 +22,7 @@ public final class p117 {
 			for (int j = 1; j <= 4 && j <= i; j++)
 				ways[i] += ways[i - j];  // Dynamic programming
 		}
-		System.out.println(ways[50]);
+		return Long.toString(ways[50]);
 	}
 	
 }

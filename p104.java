@@ -9,9 +9,14 @@
 import java.math.BigInteger;
 
 
-public final class p104 {
+public final class p104 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p104().run());
+	}
+	
+	
+	public String run() {
 		int i = 0;
 		int a = 0;
 		int b = 1;
@@ -21,7 +26,7 @@ public final class p104 {
 			b = c;
 			i++;
 		}
-		System.out.println(i);
+		return Integer.toString(i);
 	}
 	
 	

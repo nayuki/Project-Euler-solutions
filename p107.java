@@ -7,9 +7,14 @@
  */
 
 
-public final class p107 {
+public final class p107 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p107().run());
+	}
+	
+	
+	public String run() {
 		int vertices = WEIGHTS.length;
 		for (int i = 0; i < vertices; i++) {
 			if (WEIGHTS[i].length != vertices)
@@ -51,7 +56,7 @@ public final class p107 {
 			newWeight += lowestWeight;
 		}
 		
-		System.out.println(oldWeight - newWeight);
+		return Integer.toString(oldWeight - newWeight);
 	}
 	
 	

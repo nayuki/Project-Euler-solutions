@@ -7,7 +7,12 @@
  */
 
 
-public final class p323 {
+public final class p323 implements EulerSolution {
+	
+	public static void main(String[] args) {
+		System.out.println(new p323().run());
+	}
+	
 	
 	/* 
 	 * Suppose that n 32-bit integers have been OR'd together.
@@ -21,8 +26,7 @@ public final class p323 {
 	 * The probability distribution function is simply pdf(n) = cdf(n) - cdf(n-1).
 	 * So the expected value of the index where the number becomes all 1's is sum(n * pdf(n) for n = 0 to infinity).
 	 */
-	
-	public static void main(String[] args) {
+	public String run() {
 		// Computes an approximate answer; not guaranteed to be correct.
 		// However, the Mathematica version is exact.
 		double sum = 0;
@@ -32,7 +36,7 @@ public final class p323 {
 				break;
 			sum += n * p;
 		}
-		System.out.printf("%.10f%n", sum);
+		return String.format("%.10f", sum);
 	}
 	
 	

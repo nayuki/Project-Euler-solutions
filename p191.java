@@ -7,9 +7,14 @@
  */
 
 
-public final class p191 {
+public final class p191 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p191().run());
+	}
+	
+	
+	public String run() {
 		long[][][] dp = new long[31][3][2];  // dp[i][j][k] is the number of prize strings of exactly length i with exactly j absences at the tail and exactly k lates in the whole string
 		
 		dp[0][0][0] = 1;
@@ -39,7 +44,7 @@ public final class p191 {
 			}
 		}
 		
-		System.out.println(dp[30][0][0] + dp[30][0][1] + dp[30][1][0] + dp[30][1][1] + dp[30][2][0] + dp[30][2][1]);
+		return Long.toString(dp[30][0][0] + dp[30][0][1] + dp[30][1][0] + dp[30][1][1] + dp[30][2][0] + dp[30][2][1]);
 	}
 	
 }

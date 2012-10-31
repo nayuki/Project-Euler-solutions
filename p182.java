@@ -7,14 +7,19 @@
  */
 
 
-public final class p182 {
+public final class p182 implements EulerSolution {
+	
+	public static void main(String[] args) {
+		System.out.println(new p182().run());
+	}
+	
 	
 	private static int P = 1009;
 	private static int Q = 3643;
 	private static int TOTIENT = (P - 1) * (Q - 1);
 	
 	
-	public static void main(String[] args) {
+	public String run() {
 		int[] numUnconcealedP = countAllUnconcealed(P);
 		int[] numUnconcealedQ = countAllUnconcealed(Q);
 		
@@ -31,7 +36,7 @@ public final class p182 {
 			if (numUnconcealedP[e % (P - 1)] == minUnconcealedP && numUnconcealedQ[e % (Q - 1)] == minUnconcealedQ)
 				sum += e;
 		}
-		System.out.println(sum);
+		return Long.toString(sum);
 	}
 	
 	

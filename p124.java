@@ -9,9 +9,14 @@
 import java.util.Arrays;
 
 
-public final class p124 {
+public final class p124 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p124().run());
+	}
+	
+	
+	public String run() {
 		int n = 100000;
 		
 		// Modification of the Sieve of Eratosthenes
@@ -28,7 +33,7 @@ public final class p124 {
 		for (int i = 0; i < data.length; i++)
 			data[i] = new IntPair(rads[i + 1], i + 1);
 		Arrays.sort(data);
-		System.out.println(data[10000 - 1].b);
+		return Integer.toString(data[10000 - 1].b);
 	}
 	
 	

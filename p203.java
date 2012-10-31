@@ -10,12 +10,17 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-public final class p203 {
-	
-	private static long[] PRIMES_SQUARED = listPrimesSquared(1 << 24);
-	
+public final class p203 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p203().run());
+	}
+	
+	
+	private long[] PRIMES_SQUARED = listPrimesSquared(1 << 24);
+	
+	
+	public String run() {
 		Set<Long> numbers = new HashSet<Long>();
 		long[] row = new long[51];
 		row[0] = 1;
@@ -40,7 +45,7 @@ public final class p203 {
 		long sum = 0;
 		for (long x : numbers)
 			sum += x;
-		System.out.println(sum);
+		return Long.toString(sum);
 	}
 	
 	

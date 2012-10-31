@@ -9,12 +9,17 @@
 import java.util.Arrays;
 
 
-public final class p082 {
+public final class p082 implements EulerSolution {
+	
+	public static void main(String[] args) {
+		System.out.println(new p082().run());
+	}
+	
 	
 	private static final int INFINITY = Integer.MAX_VALUE / 2;
 	
 	
-	public static void main(String[] args) {
+	public String run() {
 		int h = GRID.length;
 		int w = GRID[0].length;
 		
@@ -39,7 +44,7 @@ public final class p082 {
 		int min = INFINITY;
 		for (int i = 0; i < h; i++)
 			min = Math.min(distance[i][w - 1], min);
-		System.out.println(min);
+		return Integer.toString(min);
 	}
 	
 	

@@ -7,15 +7,20 @@
  */
 
 
-public final class p145 {
+public final class p145 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p145().run());
+	}
+	
+	
+	public String run() {
 		int count = 0;
 		for (int i = 0, end = Library.pow(10, 9); i < end; i++) {
 			if (isReversible(i))
 				count++;
 		}
-		System.out.println(count);
+		return Integer.toString(count);
 	}
 	
 	

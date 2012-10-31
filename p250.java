@@ -7,9 +7,14 @@
  */
 
 
-public final class p250 {
+public final class p250 implements EulerSolution {
 	
 	public static void main(String[] args) {
+		System.out.println(new p250().run());
+	}
+	
+	
+	public String run() {
 		long[] numSubsetsRemainder = new long[250];
 		numSubsetsRemainder[0] = 1;
 		
@@ -21,7 +26,7 @@ public final class p250 {
 			numSubsetsRemainder = newArray;
 		}
 		
-		System.out.println((numSubsetsRemainder[0] - 1 + 10000000000000000L) % 10000000000000000L);
+		return Long.toString((numSubsetsRemainder[0] - 1 + 10000000000000000L) % 10000000000000000L);
 	}
 	
 	
