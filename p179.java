@@ -14,26 +14,39 @@ public final class p179 implements EulerSolution {
 	}
 	
 	
+	private static final int LIMIT = Library.pow(10, 7);
+	
+	
 	public String run() {
+		int[] smallestPrimeFactor = new int[LIMIT + 1];
+		for (int i = 2; i < smallestPrimeFactor.length; i++) {
+			if (smallestPrimeFactor[i] == 0) {
+				smallestPrimeFactor[i] = i;
+				if ((long)i * i <= LIMIT) {
+					for (int j = i * i; j <= LIMIT; j += i) {
+						if (smallestPrimeFactor[j] == 0)
+							smallestPrimeFactor[j] = i;
+					}
+				}
+			}
+		}
+		
+		int[] numDivisors = new int[LIMIT + 1];
+		numDivisors[1] = 1;
+		for (int i = 2; i < numDivisors.length; i++) {
+			int p = smallestPrimeFactor[i];
+			int exp = 0;
+			int j = i;
+			for (; j % p == 0; j /= p, exp++);
+			numDivisors[i] = (exp + 1) * numDivisors[j];
+		}
+		
 		int count = 0;
-		for (int i = 2, end = Library.pow(10, 7); i < end; i++) {
-			if (countDivisors(i) == countDivisors(i + 1))
+		for (int i = 2; i < LIMIT; i++) {
+			if (numDivisors[i] == numDivisors[i + 1])
 				count++;
 		}
 		return Integer.toString(count);
-	}
-	
-	
-	private static int countDivisors(int n) {
-		int end = Library.sqrt(n);
-		int count = 0;
-		for (int i = 1; i <= end; i++) {
-			if (n % i == 0)
-				count += 2;
-		}
-		if (end * end == n)  // Perfect square
-			count--;
-		return count;
 	}
 	
 }
