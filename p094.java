@@ -22,10 +22,7 @@ public final class p094 implements EulerSolution {
 			// The area of the triangle is (i + 1) sqrt(3i^2 - 2i - 1) / 4; check if it's an integer
 			long a = 3*i*i - 2*i - 1;
 			long b = Library.sqrt(a);
-			if (b * b != a)
-				continue;
-			b *= i + 1;
-			if (b % 4 != 0)
+			if (b * b != a || b * (i + 1) % 4 != 0)
 				continue;
 			sum += i * 3 + 1;
 		}
@@ -35,10 +32,7 @@ public final class p094 implements EulerSolution {
 			// The area of the triangle is i sqrt(3i^2 + 8i + 4) / 4; check if it's an integer
 			long a = 3*i*i + 8*i + 4;
 			long b = Library.sqrt(a);
-			if (b * b != a)
-				continue;
-			b *= i;
-			if (b % 4 != 0)
+			if (b * b != a || b * i % 4 != 0)
 				continue;
 			sum += i * 3 + 2;
 		}
