@@ -16,10 +16,16 @@ public final class p077 implements EulerSolution {
 	}
 	
 	
-	private static int LIMIT = 1000;
+	private static final int LIMIT = 1000;
+	
+	private int[] primes = Library.listPrimes(LIMIT);
 	
 	
 	public String run() {
+		primePartitions = new int[LIMIT][LIMIT];
+		for (int[] array : primePartitions)
+			Arrays.fill(array, -1);
+		
 		for (int i = 2; i < LIMIT; i++) {
 			if (primePartitions(i, i) > 5000)
 				return Integer.toString(i);
@@ -28,18 +34,9 @@ public final class p077 implements EulerSolution {
 	}
 	
 	
-	private static int[] primes = Library.listPrimes(LIMIT);
+	private int[][] primePartitions;  // Memoization
 	
-	private static int[][] primePartitions;  // Memoization
-	
-	static {
-		primePartitions = new int[LIMIT][LIMIT];
-		for (int[] array : primePartitions)
-			Arrays.fill(array, -1);
-	}
-	
-	
-	private static int primePartitions(int n, int max) {
+	private int primePartitions(int n, int max) {
 		if (primePartitions[n][max] != -1)
 			return primePartitions[n][max];
 		

@@ -9,7 +9,6 @@
 
 public final class p142 implements EulerSolution {
 	
-	
 	public static void main(String[] args) {
 		System.out.println(new p142().run());
 	}

@@ -14,13 +14,21 @@ public final class p006 implements EulerSolution {
 	}
 	
 	
+	private static final int N = 100;
+	
+	
 	public String run() {
 		int sum = 0;
 		int sum2 = 0;
-		for (int i = 1; i <= 100; i++) {
+		for (int i = 1; i <= N; i++) {
 			sum += i;
 			sum2 += i * i;
 		}
+		/* 
+		 * For the mathematically inclined:
+		 * sum  = N(N + 1) / 2
+		 * sum2 = N(N + 1)(2N + 1) / 6
+		 */
 		return Integer.toString(sum * sum - sum2);
 	}
 	

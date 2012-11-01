@@ -17,7 +17,7 @@ public final class p078 implements EulerSolution {
 	}
 	
 	
-	private static int MODULUS = Library.pow(10, 6);
+	private static final int MODULUS = Library.pow(10, 6);
 	
 	
 	public String run() {

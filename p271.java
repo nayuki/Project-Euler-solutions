@@ -38,11 +38,12 @@ public final class p271 implements EulerSolution {
 	}
 	
 	
-	private static BigInteger sum = BigInteger.valueOf(-1);  // Subtract 1 because is excluded as a solution
+	// The recursive algorithm generates all solutions, but the problem statement excludes 1.
+	private BigInteger sum = BigInteger.valueOf(-1);
 	
 	
 	// Try all possibilities recursively
-	private static void buildAndAddSolutions(int[] factors, List<Integer>[] factorSols, int i, BigInteger x, BigInteger m) {
+	private void buildAndAddSolutions(int[] factors, List<Integer>[] factorSols, int i, BigInteger x, BigInteger m) {
 		if (i == factors.length)
 			sum = sum.add(x);
 		else {

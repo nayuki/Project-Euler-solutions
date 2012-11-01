@@ -20,6 +20,7 @@ public final class p062 implements EulerSolution {
 	
 	private static final int LIMIT = 10000;  // Arbitrary search cut-off
 	
+	
 	public String run() {
 		Map<Long,Integer> count = new HashMap<Long,Integer>();
 		for (int i = 0; i < LIMIT; i++) {

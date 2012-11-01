@@ -9,15 +9,13 @@
 
 public final class p046 implements EulerSolution {
 	
-	private static boolean[] isPrime = Library.listPrimality(10000);
-	
-	
 	public static void main(String[] args) {
 		System.out.println(new p046().run());
 	}
 	
 	
 	public String run() {
+		boolean[] isPrime = Library.listPrimality(10000);
 		outer:
 		for (int i = 3; i < isPrime.length; i += 2) {
 			if (!isPrime[i]) {

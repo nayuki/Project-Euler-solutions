@@ -64,11 +64,11 @@ public final class p162 implements EulerSolution {
 	}
 	
 	
-	private static BigInteger BI_13 = BigInteger.valueOf(13);
-	private static BigInteger BI_14 = BigInteger.valueOf(14);
-	private static BigInteger BI_15 = BigInteger.valueOf(15);
-	private static BigInteger BI_16 = BigInteger.valueOf(16);
-	private static BigInteger BI_41 = BigInteger.valueOf(41);
-	private static BigInteger BI_43 = BigInteger.valueOf(43);
+	private static final BigInteger BI_13 = BigInteger.valueOf(13);
+	private static final BigInteger BI_14 = BigInteger.valueOf(14);
+	private static final BigInteger BI_15 = BigInteger.valueOf(15);
+	private static final BigInteger BI_16 = BigInteger.valueOf(16);
+	private static final BigInteger BI_41 = BigInteger.valueOf(41);
+	private static final BigInteger BI_43 = BigInteger.valueOf(43);
 	
 }

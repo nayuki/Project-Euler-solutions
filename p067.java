@@ -15,15 +15,15 @@ public final class p067 implements EulerSolution {
 	
 	
 	public String run() {
-		for (int i = TRIANGLE.length - 2; i >= 0; i--) {
-			for (int j = 0; j < TRIANGLE[i].length; j++)
-				TRIANGLE[i][j] += Math.max(TRIANGLE[i + 1][j], TRIANGLE[i + 1][j + 1]);  // Dynamic programming
+		for (int i = triangle.length - 2; i >= 0; i--) {
+			for (int j = 0; j < triangle[i].length; j++)
+				triangle[i][j] += Math.max(triangle[i + 1][j], triangle[i + 1][j + 1]);  // Dynamic programming
 		}
-		return Integer.toString(TRIANGLE[0][0]);
+		return Integer.toString(triangle[0][0]);
 	}
 	
 	
-	private int[][] TRIANGLE = {
+	private int[][] triangle = {
 		{59},
 		{73,41},
 		{52,40, 9},

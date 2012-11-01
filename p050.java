@@ -15,11 +15,12 @@ public final class p050 implements EulerSolution {
 	
 	
 	private static final int LIMIT = Library.pow(10, 6);
-	private static boolean[] isPrime = Library.listPrimality(LIMIT);
-	private static int[] primes = Library.listPrimes(LIMIT);
 	
 	
 	public String run() {
+		boolean[] isPrime = Library.listPrimality(LIMIT);
+		int[] primes = Library.listPrimes(LIMIT);
+		
 		int maxSum = 0;
 		int maxRun = 0;
 		for (int i = 0; i < primes.length; i++) {  // For each index of a starting prime number

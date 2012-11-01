@@ -16,8 +16,8 @@ public final class p243 implements EulerSolution {
 	}
 	
 	
-	private static BigInteger TARGET_NUMERATOR   = BigInteger.valueOf(15499);
-	private static BigInteger TARGET_DENOMINATOR = BigInteger.valueOf(94744);
+	private static final BigInteger TARGET_NUMERATOR   = BigInteger.valueOf(15499);
+	private static final BigInteger TARGET_DENOMINATOR = BigInteger.valueOf(94744);
 	
 	
 	public String run() {

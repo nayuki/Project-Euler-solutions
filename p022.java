@@ -17,19 +17,19 @@ public final class p022 implements EulerSolution {
 	
 	
 	public String run() {
-		Arrays.sort(NAMES);
+		Arrays.sort(names);
 		int sum = 0;
-		for (int i = 0; i < NAMES.length; i++) {
+		for (int i = 0; i < names.length; i++) {
 			int value = 0;
-			for (int j = 0; j < NAMES[i].length(); j++)
-				value += NAMES[i].charAt(j) - 'A' + 1;
+			for (int j = 0; j < names[i].length(); j++)
+				value += names[i].charAt(j) - 'A' + 1;
 			sum += value * (i + 1);
 		}
 		return Integer.toString(sum);
 	}
 	
 	
-	private String[] NAMES = {
+	private String[] names = {
 		"MARY",
 		"PATRICIA",
 		"LINDA",

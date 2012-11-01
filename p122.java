@@ -14,12 +14,12 @@ import java.util.List;
 // Uses the concepts of addition chains. See: http://en.wikipedia.org/wiki/Addition_chain
 public final class p122 implements EulerSolution {
 	
-	private static int[] minChainLength;
-	
-	
 	public static void main(String[] args) {
 		System.out.println(new p122().run());
 	}
+	
+	
+	private int[] minChainLength;
 	
 	
 	public String run() {
@@ -38,7 +38,7 @@ public final class p122 implements EulerSolution {
 	}
 	
 	
-	private static void exploreChains(List<Integer> chain) {
+	private void exploreChains(List<Integer> chain) {
 		int largest = chain.get(chain.size() - 1);
 		if (chain.size() > minChainLength[largest])
 			return;

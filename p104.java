@@ -7,6 +7,7 @@
  */
 
 import java.math.BigInteger;
+import java.util.Arrays;
 
 
 public final class p104 implements EulerSolution {
@@ -31,23 +32,21 @@ public final class p104 implements EulerSolution {
 	
 	
 	private static boolean isFound(int n, int fibMod) {
-		if (!is1To9Pandigital(Integer.toString(fibMod)))
+		if (!isPandigital(Integer.toString(fibMod)))
 			return false;
 		BigInteger fib = fibonacci(n);
 		if (fib.mod(BigInteger.valueOf(1000000000)).intValue() != fibMod)
 			throw new AssertionError();
-		return is1To9Pandigital(fib.toString().substring(0, 9));
+		return isPandigital(fib.toString().substring(0, 9));
 	}
 	
 	
-	private static boolean is1To9Pandigital(String s) {
+	private static boolean isPandigital(String s) {
 		if (s.length() != 9)
 			return false;
-		for (char d = '1'; d <= '9'; d++) {
-			if (s.indexOf(d) == -1)
-				return false;
-		}
-		return true;
+		char[] temp = s.toCharArray();
+		Arrays.sort(temp);
+		return new String(temp).equals("123456789");
 	}
 	
 	

@@ -14,9 +14,9 @@ public final class p182 implements EulerSolution {
 	}
 	
 	
-	private static int P = 1009;
-	private static int Q = 3643;
-	private static int TOTIENT = (P - 1) * (Q - 1);
+	private static final int P = 1009;
+	private static final int Q = 3643;
+	private static final int TOTIENT = (P - 1) * (Q - 1);
 	
 	
 	public String run() {

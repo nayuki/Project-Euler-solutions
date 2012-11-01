@@ -17,10 +17,12 @@ public final class p203 implements EulerSolution {
 	}
 	
 	
-	private long[] PRIMES_SQUARED = listPrimesSquared(1 << 24);
-	
-	
 	public String run() {
+		int[] primes = Library.listPrimes(1 << 24);
+		long[] primesSquared = new long[primes.length];
+		for (int i = 0; i < primes.length; i++)
+			primesSquared[i] = (long)primes[i] * primes[i];
+		
 		Set<Long> numbers = new HashSet<Long>();
 		long[] row = new long[51];
 		row[0] = 1;
@@ -29,7 +31,7 @@ public final class p203 implements EulerSolution {
 			for (long x : row) {
 				if (x == 0)
 					break;
-				for (long p : PRIMES_SQUARED) {
+				for (long p : primesSquared) {
 					if (p > x)
 						break;
 					if (x % p == 0)
@@ -46,25 +48,6 @@ public final class p203 implements EulerSolution {
 		for (long x : numbers)
 			sum += x;
 		return Long.toString(sum);
-	}
-	
-	
-	// Lists primes up to n (inclusive) and squares them
-	private static long[] listPrimesSquared(int n) {
-		boolean[] isPrime = Library.listPrimality(n);
-		int count = 0;
-		for (boolean b : isPrime) {
-			if (b)
-				count++;
-		}
-		long[] primes = new long[count];
-		for (int i = 0, j = 0; i < isPrime.length; i++) {
-			if (isPrime[i]) {
-				primes[j] = (long)i * i;
-				j++;
-			}
-		}
-		return primes;
 	}
 	
 }

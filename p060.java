@@ -19,11 +19,11 @@ public final class p060 implements EulerSolution {
 	
 	private static final int PRIME_LIMIT = 100000;
 	
-	private static int[] primes = Library.listPrimes(PRIME_LIMIT);
+	private int[] primes = Library.listPrimes(PRIME_LIMIT);
 	
 	// Memoization
-	private static BitSet isConcatPrimeKnown;
-	private static BitSet isConcatPrime;
+	private BitSet isConcatPrimeKnown;
+	private BitSet isConcatPrime;
 	
 	
 	public String run() {
@@ -40,7 +40,7 @@ public final class p060 implements EulerSolution {
 	}
 	
 	
-	private static int findSetSum(int[] prefix, int targetSize, int sumLimit) {
+	private int findSetSum(int[] prefix, int targetSize, int sumLimit) {
 		if (prefix.length == targetSize) {
 			int sum = 0;
 			for (int i : prefix)
@@ -72,7 +72,7 @@ public final class p060 implements EulerSolution {
 	}
 	
 	
-	private static boolean isConcatPrime(int x, int y) {
+	private boolean isConcatPrime(int x, int y) {
 		int index = x * primes.length + y;
 		if (isConcatPrimeKnown.get(index))
 			return isConcatPrime.get(index);
@@ -93,7 +93,7 @@ public final class p060 implements EulerSolution {
 	}
 	
 	
-	private static boolean isPrime(long x) {
+	private boolean isPrime(long x) {
 		if (x < 0)
 			throw new IllegalArgumentException();
 		else if (x == 0 || x == 1)

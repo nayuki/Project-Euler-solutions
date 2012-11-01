@@ -14,7 +14,7 @@ public final class p357 implements EulerSolution {
 	}
 	
 	
-	private static boolean[] isPrime = Library.listPrimality(100000001);
+	private boolean[] isPrime = Library.listPrimality(100000001);
 	
 	
 	public String run() {
@@ -27,7 +27,7 @@ public final class p357 implements EulerSolution {
 	}
 	
 	
-	private static boolean isPrimeGenerating(int n) {
+	private boolean isPrimeGenerating(int n) {
 		for (int i = 1, end = Library.sqrt(n); i <= end; i++) {
 			if (n % i == 0) {
 				if (!isPrime[i + n / i])

@@ -9,12 +9,14 @@
 
 public final class p035 implements EulerSolution {
 	
-	private static boolean[] isPrime = Library.listPrimality(999999);
-	
-	
 	public static void main(String[] args) {
 		System.out.println(new p035().run());
 	}
+	
+	
+	private static final int LIMIT = Library.pow(10, 6);
+	
+	private boolean[] isPrime = Library.listPrimality(LIMIT - 1);
 	
 	
 	public String run() {
@@ -27,7 +29,7 @@ public final class p035 implements EulerSolution {
 	}
 	
 	
-	private static boolean isCircularPrime(int n) {
+	private boolean isCircularPrime(int n) {
 		String s = Integer.toString(n);
 		for (int i = 0; i < s.length(); i++) {
 			if (!isPrime[Integer.parseInt(s.substring(i) + s.substring(0, i))])

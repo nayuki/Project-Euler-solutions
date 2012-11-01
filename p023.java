@@ -14,22 +14,24 @@ public final class p023 implements EulerSolution {
 	}
 	
 	
+	private boolean[] isAbundant = new boolean[28124];
+	
+	
 	public String run() {
 		// Compute look-up table
-		boolean[] isAbundant = new boolean[28124];
 		for (int i = 1; i < isAbundant.length; i++)
 			isAbundant[i] = isAbundant(i);
 		
 		int sum = 0;
 		for (int i = 1; i <= 28123; i++) {
-			if (!isSumOf2Abundants(i, isAbundant))
+			if (!isSumOf2Abundants(i))
 				sum += i;
 		}
 		return Integer.toString(sum);
 	}
 	
 	
-	private static boolean isSumOf2Abundants(int n, boolean[] isAbundant) {
+	private boolean isSumOf2Abundants(int n) {
 		for (int i = 0; i <= n; i++) {
 			if (isAbundant[i] && isAbundant[n - i])
 				return true;

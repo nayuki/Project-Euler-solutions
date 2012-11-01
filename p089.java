@@ -22,47 +22,51 @@ public final class p089 implements EulerSolution {
 	}
 	
 	
+	private static Object[][] PREFIXES = {
+		{"M" , 1000},
+		{"CM",  900},
+		{"D" ,  500},
+		{"CD",  400},
+		{"C" ,  100},
+		{"XC",   90},
+		{"L" ,   50},
+		{"XL",   40},
+		{"X" ,   10},
+		{"IX",    9},
+		{"V" ,    5},
+		{"IV",    4},
+		{"I" ,    1},
+	};
+	
 	private static int parseRomanNumeral(String s) {
 		int result = 0;
+		outer:
 		while (s.length() > 0) {
-			if      (s.startsWith("M" )) { result += 1000; s = s.substring(1); }
-			else if (s.startsWith("D" )) { result +=  500; s = s.substring(1); }
-			else if (s.startsWith("CM")) { result +=  900; s = s.substring(2); }
-			else if (s.startsWith("CD")) { result +=  400; s = s.substring(2); }
-			else if (s.startsWith("C" )) { result +=  100; s = s.substring(1); }
-			else if (s.startsWith("L" )) { result +=   50; s = s.substring(1); }
-			else if (s.startsWith("XC")) { result +=   90; s = s.substring(2); }
-			else if (s.startsWith("XL")) { result +=   40; s = s.substring(2); }
-			else if (s.startsWith("X" )) { result +=   10; s = s.substring(1); }
-			else if (s.startsWith("V" )) { result +=    5; s = s.substring(1); }
-			else if (s.startsWith("IX")) { result +=    9; s = s.substring(2); }
-			else if (s.startsWith("IV")) { result +=    4; s = s.substring(2); }
-			else if (s.startsWith("I" )) { result +=    1; s = s.substring(1); }
-			else throw new IllegalArgumentException();
+			for (Object[] prefix : PREFIXES) {
+				if (s.startsWith((String)prefix[0])) {
+					result += (Integer)prefix[1];
+					s = s.substring(((String)prefix[0]).length());
+					continue outer;
+				}
+			}
+			throw new IllegalArgumentException("Cannot parse Roman numeral");
 		}
 		return result;
 	}
 	
 	
+	// e.g. (empty), I, II, III, IV, V, VI, VII, VIII, IX
+	private static int[] DIGIT_LENGTHS = {0, 1, 2, 3, 2, 1, 2, 3, 4, 2};
+	
 	private static int romanNumeralLength(int n) {
 		if (n <= 0 || n >= 5000)
 			throw new IllegalArgumentException();
+		
 		int count = 0;
-		if (n >= 4000) count += 2;  // A hack
-		for (; n != 0; n /= 10) {
-			switch (n % 10) {
-				case 0:  count += 0;  break;
-				case 1:  count += 1;  break;
-				case 2:  count += 2;  break;
-				case 3:  count += 3;  break;
-				case 4:  count += 2;  break;
-				case 5:  count += 1;  break;
-				case 6:  count += 2;  break;
-				case 7:  count += 3;  break;
-				case 8:  count += 4;  break;
-				case 9:  count += 2;  break;
-			}
-		}
+		if (n >= 4000)  // Because 4000 is MMMM; it doesn't have a two-letter form
+			count += 2;
+		for (; n != 0; n /= 10)
+			count += DIGIT_LENGTHS[n % 10];
 		return count;
 	}
 	

@@ -16,10 +16,8 @@ public final class p049 implements EulerSolution {
 	}
 	
 	
-	private static boolean[] isPrime = Library.listPrimality(10000);
-	
-	
 	public String run() {
+		boolean[] isPrime = Library.listPrimality(10000);
 		for (int base = 1000; base < 10000; base++) {
 			if (!isPrime[base])
 				continue;

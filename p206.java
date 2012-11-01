@@ -17,17 +17,11 @@ public final class p206 implements EulerSolution {
 	
 	
 	public String run() {
+		Pattern concealedSquarePattern = Pattern.compile("1.2.3.4.5.6.7.8.9.0");
 		long i = 1000000000;
-		while (!isConcealedSquare(i))
+		while (!concealedSquarePattern.matcher(Long.toString(i * i)).matches())
 			i += 10;
 		return Long.toString(i);
-	}
-	
-	
-	private final Pattern PATTERN = Pattern.compile("1.2.3.4.5.6.7.8.9.0");
-	
-	private boolean isConcealedSquare(long n) {
-		return PATTERN.matcher(Long.toString(n * n)).matches();
 	}
 	
 }
