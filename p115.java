@@ -6,6 +6,9 @@
  * https://github.com/nayuki/Project-Euler-solutions
  */
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public final class p115 implements EulerSolution {
 	
@@ -14,12 +17,7 @@ public final class p115 implements EulerSolution {
 	}
 	
 	
-	public String run() {
-		for (int n = 1; ; n++) {
-			if (fillCount(50, n) > 1000000)
-				return Long.toString(n);
-		}
-	}
+	private static final int M = 50;
 	
 	
 	/* 
@@ -35,19 +33,20 @@ public final class p115 implements EulerSolution {
 	 *   - Otherwise k < n, this red block is followed by a black square, then followed
 	 *     by anything of length n-k-1. So add ways[n-m-1] + ways[n-m-2] + ... + ways[0].
 	 */
-	private static long fillCount(int m, int N) {
+	public String run() {
 		// Dynamic programming
-		long[] ways = new long[N + 1];
-		ways[0] = 1;
-		for (int n = 1; n <= N; n++) {
-			long sum = ways[n - 1];
-			for (int k = m; k < n; k++)
-				sum += ways[n - k - 1];
-			if (n >= m)
+		List<Long> ways = new ArrayList<Long>();
+		ways.add(1L);
+		for (int n = 1; ; n++) {
+			long sum = ways.get(n - 1);
+			for (int k = M; k < n; k++)
+				sum += ways.get(n - k - 1);
+			if (n >= M)
 				sum++;
-			ways[n] = sum;
+			ways.add(sum);
+			if (sum > 1000000)
+				return Long.toString(n);
 		}
-		return ways[N];
 	}
 	
 }
