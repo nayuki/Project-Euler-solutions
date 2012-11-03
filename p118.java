@@ -20,24 +20,10 @@ public final class p118 implements EulerSolution {
 	
 	
 	public String run() {
-		// Do prime sieve but store bitwise (instead of the usual Boolean array)
-		int n = 999999999;
-		isPrime = new int[(n + 31) / 32];
-		Arrays.fill(isPrime, 0xFFFFFFFF);
-		isPrime[0] &= ~3;  // 0 and 1 are not prime
+		listPrimality(Library.pow(10, 9) - 1);
 		
-		// Sieve of Eratosthenes
-		for (int i = 2, end = Library.sqrt(n); i <= end; i++) {
-			if (isPrime(i)) {
-				for (int j = i * i; j <= n; j += i){
-					isPrime[j >>> 5] &= ~(1 << (j & 0x1F));}
-			}
-		}
-		
-		int[] digits = new int[9];
-		for (int i = 0; i < digits.length; i++)
-			digits[i] = i + 1;
-		
+		// Try all permutations, and try all splits within each permutation
+		int[] digits = {1, 2, 3, 4, 5, 6, 7, 8, 9};
 		countBySize = new int[10];
 		do countPrimeSets(digits, 0, 0);
 		while (Library.nextPermutation(digits));
@@ -65,16 +51,32 @@ public final class p118 implements EulerSolution {
 	}
 	
 	
-	private static int toInteger(int[] digits, int start, int end) {
-		int result = 0;
-		for (int i = start; i < end; i++)
-			result = result * 10 + digits[i];
-		return result;
+	// Do prime sieve but store bitwise (instead of the usual Boolean array)
+	private void listPrimality(int n) {
+		isPrime = new int[n / 32 + 1];
+		Arrays.fill(isPrime, ~0);
+		isPrime[0] &= ~3;  // 0 and 1 are not prime
+		
+		// Sieve of Eratosthenes
+		for (int i = 2, end = Library.sqrt(n); i <= end; i++) {
+			if (isPrime(i)) {
+				for (int j = i * i; j <= n; j += i){
+					isPrime[j >>> 5] &= ~(1 << (j & 0x1F));}
+			}
+		}
 	}
 	
 	
 	private boolean isPrime(int x) {
 		return (isPrime[x >>> 5] >>> (x & 0x1F) & 1) != 0;
+	}
+	
+	
+	private static int toInteger(int[] digits, int start, int end) {
+		int result = 0;
+		for (int i = start; i < end; i++)
+			result = result * 10 + digits[i];
+		return result;
 	}
 	
 	
