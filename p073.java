@@ -15,7 +15,6 @@ public final class p073 implements EulerSolution {
 	
 	
 	public String run() {
-		System.out.println(naive());
 		return Integer.toString(sternBrocot());  // Probably needs more stack; use something like "-Xss4M" for the JVM
 	}
 	

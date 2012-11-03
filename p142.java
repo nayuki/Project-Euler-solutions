@@ -46,10 +46,8 @@ public final class p142 implements EulerSolution {
 					continue;
 				
 				for (int z = Math.min(y, limit - x - y) - 1; z > 0; z--) {
-					if (isSquare[x + z] && isSquare[x - z] && isSquare[y + z] && isSquare[y - z]) {
-						System.out.println(x + " " + y + " " + z);
+					if (isSquare[x + z] && isSquare[x - z] && isSquare[y + z] && isSquare[y - z])
 						return x + y + z;
-					}
 				}
 			}
 		}

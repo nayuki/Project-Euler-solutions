@@ -26,7 +26,6 @@ public final class p071 implements EulerSolution {
 				maxD = d;
 			}
 		}
-		System.out.println(maxN + "/" + maxD);
 		return Integer.toString(maxN);
 	}
 	
