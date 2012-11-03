@@ -27,11 +27,14 @@ public final class p120 implements EulerSolution {
 	 * Therefore, adding the two terms:
 	 *   (a+1)^n + (a-1)^n
 	 *   = if n is even then 2 else 2an.
+	 * 
 	 * We can always make 2an >= 2 by taking n=1, for example. So we can disregard the "n is even" case.
 	 * Maximizing 2an mod a^2 for n is the same as maximizing 2n mod a for n.
 	 *   If a is even,  then the maximum achievable value is a - 2 by setting n = a/2 - 1.
 	 *   Else a is odd, then the maximum achievable value is a - 1 by setting n = (a - 1) / 2.
-	 * In conclusion, if a is even, the maximum remainder is a(a-2); otherwise a is odd, the maximum remainder is a(a-1).
+	 * 
+	 * In conclusion, if a is even, the maximum remainder is a(a-2);
+	 * otherwise a is odd, the maximum remainder is a(a-1).
 	 */
 	public String run() {
 		int sum = 0;

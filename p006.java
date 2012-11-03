@@ -26,8 +26,8 @@ public final class p006 implements EulerSolution {
 		}
 		/* 
 		 * For the mathematically inclined:
-		 * sum  = N(N + 1) / 2
-		 * sum2 = N(N + 1)(2N + 1) / 6
+		 *   sum  = N(N + 1) / 2.
+		 *   sum2 = N(N + 1)(2N + 1) / 6.
 		 */
 		return Integer.toString(sum * sum - sum2);
 	}

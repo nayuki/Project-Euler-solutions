@@ -20,8 +20,8 @@ public final class p053 implements EulerSolution {
 		BigInteger MILLION = BigInteger.TEN.pow(6);
 		int count = 0;
 		for (int n = 1; n <= 100; n++) {
-			for (int c = 0; c <= n; c++) {
-				if (Library.binomial(n, c).compareTo(MILLION) > 0)
+			for (int r = 0; r <= n; r++) {
+				if (Library.binomial(n, r).compareTo(MILLION) > 0)
 					count++;
 			}
 		}

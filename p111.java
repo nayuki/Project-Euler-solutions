@@ -11,7 +11,6 @@ import java.util.Arrays;
 
 public final class p111 implements EulerSolution {
 	
-	
 	public static void main(String[] args) {
 		System.out.println(new p111().run());
 	}

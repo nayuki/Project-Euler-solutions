@@ -17,16 +17,18 @@ public final class p095 implements EulerSolution {
 	}
 	
 	
+	private static final int LIMIT = 1000000;
+	
+	
 	public String run() {
-		int n = 1000001;
-		int[] divisorSum = new int[n];
-		for (int i = 1; i < n; i++) {
-			for (int j = i * 2; j < n; j += i)
+		int[] divisorSum = new int[LIMIT + 1];
+		for (int i = 1; i <= LIMIT; i++) {
+			for (int j = i * 2; j <= LIMIT; j += i)
 				divisorSum[j] += i;
 		}
 		
-		int[] amicableChainLen = new int[n];
-		for (int i = 0; i < n; i++) {
+		int[] amicableChainLen = new int[LIMIT + 1];
+		for (int i = 0; i <= LIMIT; i++) {
 			int count = 1;
 			Set<Integer> visited = new HashSet<Integer>();
 			visited.add(i);
@@ -36,7 +38,7 @@ public final class p095 implements EulerSolution {
 				if (next == i) {
 					amicableChainLen[i] = count;
 					break;
-				} else if (next >= n || visited.contains(next)) {
+				} else if (next > LIMIT || visited.contains(next)) {
 					amicableChainLen[i] = 0;  // Illegal
 					break;
 				} else {
@@ -51,7 +53,7 @@ public final class p095 implements EulerSolution {
 		for (int x : amicableChainLen)
 			maxChainLen = Math.max(x, maxChainLen);
 		
-		for (int i = 0; i < n; i++) {
+		for (int i = 0; i <= LIMIT; i++) {
 			if (amicableChainLen[i] == maxChainLen)
 				return Integer.toString(i);
 		}
