@@ -14,19 +14,35 @@ public final class p116 implements EulerSolution {
 	}
 	
 	
+	private static final int LENGTH = 50;
+	
+	
 	public String run() {
-		return Long.toString(countWays(50, 2) + countWays(50, 3) + countWays(50, 4));
+		return Long.toString(countWays(LENGTH, 2) + countWays(LENGTH, 3) + countWays(LENGTH, 4));
 	}
 	
 	
-	private static long countWays(int length, int coloredTileLength) {
-		long[] ways = new long[length + 1];  // Memoization
+	/* 
+	 * How many ways can a row n units long be filled with black squares 1 unit long
+	 * and colored tiles m units long? Denote this quantity as ways[n].
+	 * Compute n = 0 manually as a base case.
+	 * 
+	 * Now assume n >= 1. Look at the leftmost item and sum up the possibilities.
+	 * - If the item is a black square, then the rest of the row
+	 *   is allowed to be anything of length n-1. Add ways[n-1].
+	 * - If the item is a colored tile of length m where m >= n, then the
+	 *   rest of the row can be anything of length n-m. Add ways[n-m].
+	 * 
+	 * At the end, return ways[length]-1 to exclude the case where the row is all black squares.
+	 */
+	private static long countWays(int length, int m) {  // m is the length of colored tiles
+		// Dynamic programming
+		long[] ways = new long[length + 1];
 		ways[0] = 1;
-		for (int i = 1; i <= length; i++) {
-			// Dynamic programming
-			ways[i] += ways[i - 1];
-			if (i >= coloredTileLength)
-				ways[i] += ways[i - coloredTileLength];  
+		for (int n = 1; n <= length; n++) {
+			ways[n] += ways[n - 1];
+			if (n >= m)
+				ways[n] += ways[n - m];  
 		}
 		return ways[length] - 1;
 	}

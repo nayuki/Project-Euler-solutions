@@ -14,15 +14,33 @@ public final class p117 implements EulerSolution {
 	}
 	
 	
+	private static final int LENGTH = 50;
+	
+	
+	/* 
+	 * How many ways can a row n units long be filled with:
+	 * - Black squares 1 unit long
+	 * - Red tiles 2 units long
+	 * - Green tiles 3 units long
+	 * - Blue tiles 4 units long
+	 * Denote this quantity as ways[n].
+	 * 
+	 * Compute n = 0 manually as a base case.
+	 * Now assume n >= 1. Look at the leftmost item and sum up the possibilities.
+	 * - Black square (n>=1): Rest of the row can be anything of length n-1. Add ways[n-1].
+	 * - Red tile     (n>=2): Rest of the row can be anything of length n-2. Add ways[n-2].
+	 * - Green tile   (n>=3): Rest of the row can be anything of length n-3. Add ways[n-3].
+	 * - Blue tile    (n>=4): Rest of the row can be anything of length n-4. Add ways[n-4].
+	 */
 	public String run() {
-		long[] ways = new long[51];  // Memoization
+		// Dynamic programming
+		long[] ways = new long[LENGTH + 1];
 		ways[0] = 1;
-		ways[1] = 1;
-		for (int i = 2; i <= 50; i++) {
-			for (int j = 1; j <= 4 && j <= i; j++)
-				ways[i] += ways[i - j];  // Dynamic programming
+		for (int n = 1; n <= LENGTH; n++) {
+			for (int k = 1; k <= 4 && k <= n; k++)
+				ways[n] += ways[n - k];
 		}
-		return Long.toString(ways[50]);
+		return Long.toString(ways[LENGTH]);
 	}
 	
 }

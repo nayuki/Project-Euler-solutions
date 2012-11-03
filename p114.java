@@ -14,18 +14,34 @@ public final class p114 implements EulerSolution {
 	}
 	
 	
+	private static final int LENGTH = 50;
+	
+	
+	/* 
+	 * How many ways can a row n units long be filled? Denote this quantity as ways[n].
+	 * Compute n = 0, 1, 2 manually as base cases.
+	 * 
+	 * Now assume n >= 3. Look at the leftmost item and sum up the possibilities.
+	 * - If the item is a black square, then the rest of the row is allowed
+	 *   to be anything of length n-1. Add ways[n-1].
+	 * - If the item is a red block with length k where k >= 3, then:
+	 *   - If k = n, then the whole row is filled by this red block. Add 1.
+	 *   - Otherwise k < n, this red block is followed by a black square, then followed
+	 *     by anything of length n-k-1. So add ways[n-4] + ways[n-5] + ... + ways[0].
+	 */
 	public String run() {
-		long[] ways = new long[51];  // Memoization
+		// Dynamic programming
+		long[] ways = new long[LENGTH + 1];
 		ways[0] = 1;
 		ways[1] = 1;
 		ways[2] = 1;
-		for (int i = 3; i <= 50; i++) {
-			ways[i] += ways[i - 1];
-			for (int j = 3; j < i; j++)
-				ways[i] += ways[i - j - 1];  // Dynamic programming
-			ways[i] += ways[0];
+		for (int n = 3; n <= LENGTH; n++) {
+			long sum = ways[n - 1] + 1;
+			for (int k = 3; k < n; k++)
+				sum += ways[n - k - 1];
+			ways[n] = sum;
 		}
-		return Long.toString(ways[50]);
+		return Long.toString(ways[LENGTH]);
 	}
 	
 }
