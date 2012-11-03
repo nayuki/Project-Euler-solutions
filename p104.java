@@ -37,7 +37,22 @@ public final class p104 implements EulerSolution {
 		BigInteger fib = fibonacci(n);
 		if (fib.mod(BigInteger.valueOf(1000000000)).intValue() != fibMod)
 			throw new AssertionError();
-		return isPandigital(fib.toString().substring(0, 9));
+		return isPandigital(leading9Digits(fib));
+	}
+	
+	
+	private static String leading9Digits(BigInteger x) {
+		// We know that x.bitLength() = floor(log2(x)) + 1.
+		// Now compute an approximate base-10 logarithm, because log10(2) = 0.301... .
+		// The computed quantity is no larger than floor(log10(x)).
+		int log10 = (x.bitLength() - 1) * 3 / 10;
+		
+		// Chop off quite a number of rightmost base-10 digits.
+		// It is guaranteed that there remains at least 9 digits.
+		x = x.divide(BigInteger.TEN.pow(Math.max(log10 + 1 - 9, 0)));
+		
+		// Deal with the remaining smaller number.
+		return x.toString().substring(0, 9);
 	}
 	
 	
