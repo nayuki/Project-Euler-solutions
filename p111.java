@@ -17,55 +17,78 @@ public final class p111 implements EulerSolution {
 	}
 	
 	
-	private static final int BLOCK_SIZE = 10000000;
+	private static final int DIGITS = 10;
 	
-	private int[] primes = Library.listPrimes((int)Library.sqrt(9999999999L));
+	private int[] primes;
 	
 	
 	public String run() {
-		// Classify each 9-digit prime number for each digit value
-		long[][] classSums = new long[10][11];  // classSums[i][j] is the sum of all the prime numbers where digit i occurs exactly j times
-		for (long i = 1000000000; i < 10000000000L; i += BLOCK_SIZE) {
-			boolean[] isPrime = sievePrimes(i, BLOCK_SIZE);
-			for (int j = 0; j < isPrime.length; j++) {
-				if (isPrime[j]) {
-					int[] digitCounts = getDigitCounts(i + j);
-					for (int k = 0; k < digitCounts.length; k++)
-						classSums[k][digitCounts[k]] += i + j;
-				}
-			}
-		}
+		primes = Library.listPrimes((int)Library.sqrt(pow(10, DIGITS)));
 		
-		long sum = 0;
-		for (int i = 0; i < classSums.length; i++) {
-			for (int j = classSums[i].length - 1; ; j--) {
-				if (classSums[i][j] > 0) {
-					sum += classSums[i][j];
+		long total = 0;
+		for (int digit = 0; digit < 10; digit++) {  // For each repeating digit
+			for (int rep = DIGITS; rep >= 0; rep--) {  // Search by the number of repetitions in decreasing order
+				long sum = 0;
+				int[] digits = new int[DIGITS];
+				long count = pow(9, DIGITS - rep);
+				level2:
+				for (long i = 0; i < count; i++) {  // Try all possibilities for filling the non-repeating digits
+					// Build initial array. For example, if DIGITS=7, digit=5, rep=4, i=123, then the array will be filled with 5,5,5,5,1,4,7.
+					Arrays.fill(digits, 0, rep, digit);
+					long temp = i;
+					for (int j = 0; j < DIGITS - rep; j++) {
+						int d = (int)(temp % 9);
+						if (d >= digit)  // Skip the repeating digit
+							d++;
+						if (j > 0 && d > digits[DIGITS - j])  // If this is true, then after sorting, the array will be in an already-tried configuration
+							continue level2;
+						digits[DIGITS - 1 - j] = d;
+						temp /= 9;
+					}
+					Arrays.sort(digits);  // Start at lowest permutation
+					
+					do {  // Go through all permutations
+						if (digits[0] > 0) {  // Skip if the number has a leading zero, which means it has less than DIGIT digits
+							long num = toInteger(digits);
+							if (isPrime(num))
+								sum += num;
+						}
+					} while (Library.nextPermutation(digits));
+				}
+				
+				if (sum > 0) {  // Primes found; skip all lesser repetitions
+					total += sum;
 					break;
 				}
 			}
 		}
-		return Long.toString(sum);
+		return Long.toString(total);
 	}
 	
 	
-	private boolean[] sievePrimes(long start, int n) {
-		boolean[] isPrime = new boolean[n];
-		Arrays.fill(isPrime, true);
+	// Only valid if 1 < n <= 10^DIGITS
+	private boolean isPrime(long n) {
 		for (int p : primes) {
-			for (int i = (p - (int)(start % p)) % p; i < isPrime.length; i += p)
-				isPrime[i] = false;
+			if (n % p == 0)
+				return false;
 		}
-		return isPrime;
+		return true;
 	}
 	
 	
-	// Returns the number of times each decimal digit occurred, excluding leading zeros.
-	private static int[] getDigitCounts(long n) {
-		int[] result = new int[10];
-		for (; n != 0; n /= 10)
-			result[(int)(n % 10)]++;
+	private static long toInteger(int[] digits) {
+		long result = 0;
+		for (int x : digits)
+			result = result * 10 + x;
 		return result;
+	}
+	
+	
+	private static long pow(int x, int y) {
+		long z = 1;
+		for (int i = 0; i < y; i++)
+			z *= x;
+		return z;
 	}
 	
 }
