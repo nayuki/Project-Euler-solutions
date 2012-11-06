@@ -17,7 +17,7 @@ public final class p060 implements EulerSolution {
 	}
 	
 	
-	private static final int PRIME_LIMIT = 100000;
+	private static final int PRIME_LIMIT = 100000;  // Arbitrary initial cutoff
 	
 	private int[] primes = Library.listPrimes(PRIME_LIMIT);
 	
@@ -40,6 +40,18 @@ public final class p060 implements EulerSolution {
 	}
 	
 	
+	/* 
+	 * Tries to find any suitable set and return its sum, or -1 if none is found.
+	 * A set is suitable if it contains only primes, its size is 'targetSize',
+	 * its sum is less than or equal to 'sumLimit', and each pair concatenates to a prime.
+	 * 'prefix' is an array of ascending indices into the 'primes' array,
+	 * which describes the set found so far.
+	 * The function blindly assumes that each pair of primes in 'prefix' concatenates to a prime.
+	 * 
+	 * For example, findSetSum(new int[]{1, 3, 28}, 5, 10000) means "find the sum of any set
+	 * where the set has size 5, consists of primes with the lowest elements being {3, 7, 109},
+	 * has sum 10000 or less, and has each pair concatenating to form a prime".
+	 */
 	private int findSetSum(int[] prefix, int targetSize, int sumLimit) {
 		if (prefix.length == targetSize) {
 			int sum = 0;
