@@ -28,12 +28,12 @@ public final class p060 implements EulerSolution {
 	
 	public String run() {
 		isConcatPrimeKnown = new BitSet(primes.length * primes.length);
-		isConcatPrime = new BitSet(primes.length * primes.length);
+		isConcatPrime      = new BitSet(primes.length * primes.length);
 		
 		int sumLimit = PRIME_LIMIT;
 		while (true) {
 			int sum = findSetSum(new int[]{}, 5, sumLimit - 1);
-			if (sum == -1)
+			if (sum == -1)  // No smaller sum found
 				return Integer.toString(sumLimit);
 			sumLimit = sum;
 		}
@@ -66,24 +66,25 @@ public final class p060 implements EulerSolution {
 			else
 				i = prefix[prefix.length - 1] + 1;
 			
+			outer:
 			for (; i < primes.length && primes[i] <= sumLimit; i++) {
-				boolean pass = true;
-				for (int j : prefix)
-					pass &= isConcatPrime(i, j) && isConcatPrime(j, i);
-				
-				if (pass) {
-					int[] appended = Arrays.copyOf(prefix, prefix.length + 1);
-					appended[appended.length - 1] = i;
-					int sum = findSetSum(appended, targetSize, sumLimit - primes[i]);
-					if (sum != -1)
-						return sum;
+				for (int j : prefix) {
+					if (!isConcatPrime(i, j) || !isConcatPrime(j, i))
+						continue outer;
 				}
+				
+				int[] appended = Arrays.copyOf(prefix, prefix.length + 1);
+				appended[appended.length - 1] = i;
+				int sum = findSetSum(appended, targetSize, sumLimit - primes[i]);
+				if (sum != -1)
+					return sum;
 			}
 			return -1;
 		}
 	}
 	
 	
+	// Tests whether parseInt(toString(x) + toString(y)) is prime.
 	private boolean isConcatPrime(int x, int y) {
 		int index = x * primes.length + y;
 		if (isConcatPrimeKnown.get(index))
@@ -91,17 +92,14 @@ public final class p060 implements EulerSolution {
 		
 		x = primes[x];
 		y = primes[y];
-		
 		int mult = 1;
 		for (int temp = y; temp != 0; temp /= 10)
 			mult *= 10;
 		
+		boolean result = isPrime((long)x * mult + y);
 		isConcatPrimeKnown.set(index);
-		if (isPrime((long)x * mult + y)) {
-			isConcatPrime.set(index);
-			return true;
-		} else
-			return false;
+		isConcatPrime.set(index, result);
+		return result;
 	}
 	
 	
