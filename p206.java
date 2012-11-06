@@ -29,29 +29,29 @@ public final class p206 implements EulerSolution {
 		
 		// Increment and search
 		while (!isConcealedSquare(n2digits)) {
-			// Since the square ends with 0, the number itself must end with 0
-			n += 10;
-			add10(ndigits);
-			
-			// Currently, n2digits = (n - 10)^2. Add 20n - 100 to it, bringing it to n^2.
+			// Add 20n + 100 so that n2digits = (n + 10)^2
 			add20n(ndigits, n2digits);
-			subtract100(n2digits);
+			add10Pow(n2digits, 2);
+			
+			// Since n^2 ends with 0, n must end with 0
+			n += 10;
+			add10Pow(ndigits, 1);
+			// Now n2digits = n^2
 		}
 		return Long.toString(n);
 	}
 	
 	
-	private static boolean isConcealedSquare(int[] digits) {
+	private static boolean isConcealedSquare(int[] n) {
 		for (int i = 1; i <= 9; i++) {  // Scan for 1 to 9
-			if (digits[digits.length + 1 - i * 2] != i)
+			if (n[20 - i * 2] != i)
 				return false;
 		}
-		return digits[0] == 0;  // Special case for 0
+		return n[0] == 0;  // Special case for 0
 	}
 	
 	
-	private static void add10(int[] n) {
-		int i = 1;
+	private static void add10Pow(int[] n, int i) {
 		while (n[i] == 9) {
 			n[i] = 0;
 			i++;
@@ -73,16 +73,6 @@ public final class p206 implements EulerSolution {
 			n2[i] = sum % 10;
 			carry = sum / 10;
 		}
-	}
-	
-	
-	private static void subtract100(int[] n2) {
-		int i = 2;
-		while (n2[i] == 0) {
-			n2[i] = 9;
-			i++;
-		}
-		n2[i]--;
 	}
 	
 }
