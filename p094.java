@@ -51,7 +51,15 @@ public final class p094 implements EulerSolution {
 	 */
 	public String run() {
 		long sum = 0;
-		for (int s = 1; s * s <= LIMIT; s++) {
+		/* 
+		 * What search range do we need?
+		 * c = (s^2+t^2)/2. Perimeter = p = 3c +/- 1 = 3/2 (s^2+t^2) +/- 1 <= LIMIT.
+		 * We need to keep the smaller perimeter within limit for
+		 * the search to be meaningful, so 3/2 (s^2+t^2) - 1 <= LIMIT.
+		 * With t < s, we have that s^2+t^2 < 2s^2, so 3/2 (s^2+t^2) - 1 < 3s^2 - 1.
+		 * Therefore it is sufficient to ensure that 3s^2 - 1 <= LIMIT, i.e. s^2 <= (LIMIT+1)/3.
+		 */
+		for (int s = 1; s * s <= (LIMIT + 1) / 3; s++) {
 			for (int t = 1; t < s; t++) {
 				if (Library.gcd(s, t) == 1) {
 					int a = s * t;
