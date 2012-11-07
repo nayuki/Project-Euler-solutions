@@ -16,9 +16,16 @@ public final class p211 implements EulerSolution {
 	
 	private static final int LIMIT = 64000000;
 	
+	// Can be any number >= 1, but it's most beneficial to use a product of unique small primes excluding 2
+	private static final int RESIDUE_TEST = 3 * 5 * 7 * 11 * 13;
+	
 	
 	// Requires at least 640 MB of memory
 	public String run() {
+		isResidue = new boolean[RESIDUE_TEST];
+		for (int i = 0; i < RESIDUE_TEST; i++)
+			isResidue[i * i % RESIDUE_TEST] = true;
+		
 		long[] sigma2 = listSigma2(LIMIT - 1);
 		long sum = 0;
 		for (int i = 1; i < LIMIT; i++) {
@@ -65,9 +72,19 @@ public final class p211 implements EulerSolution {
 	}
 	
 	
-	private static boolean isPerfectSquare(long x) {
-		if (x < 0)
-			throw new IllegalArgumentException("Square root of negative number");
+	private boolean[] isResidue;
+	
+	private boolean isPerfectSquare(long x) {
+		/* 
+		 * Optional optimization: Check if x is a quadratic residue modulo some number.
+		 * The modulus was chosen to be a product of k primes; in this case, k = 5.
+		 * If x is a square, then it must be a quadratic residue modulo each prime.
+		 * For each prime p, there is an approximately half chance that an arbitrary number
+		 * is a residue mod p. Thus with 5 primes, only about 1/32 of candidates remain.
+		 * Note that the prime 2 tells us nothing about whether x is a square, so we exclude it.
+		 */
+		if (!isResidue[(int)(x % RESIDUE_TEST)])
+			return false;
 		
 		long y = 0;
 		for (long i = 1L << 31; i != 0; i >>>= 1) {
