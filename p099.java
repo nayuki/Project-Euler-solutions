@@ -17,19 +17,30 @@ public final class p099 implements EulerSolution {
 	
 	
 	public String run() {
-		return calculateApproximately();
-		//return calculateExactly();
-	}
-	
-	
-	// Compare by taking the logarithm of the power, using floating-point arithmetic
-	private static String calculateApproximately() {
-		double maxVal = -1;
-		int maxIndex = -1;
-		for (int i = 0; i < DATA.length; i++) {
-			double val = Math.log(DATA[i][0]) * DATA[i][1];
-			if (maxVal == -1 || val > maxVal) {
-				maxVal = val;
+		int[] maxVal = DATA[0];
+		int maxIndex = 0;
+		outer:
+		for (int i = 1; i < DATA.length; i++) {
+			// Try limited-precision comparisons, retrying with increasing precision
+			for (int precision = 16; precision <= 1024; precision *= 2) {
+				// Use interval arithmetic for approximate comparisons
+				BigFloat curLow  = new BigFloat(DATA[i][0]).power(DATA[i][1], precision, false);
+				BigFloat curHigh = new BigFloat(DATA[i][0]).power(DATA[i][1], precision, true );
+				BigFloat maxLow  = new BigFloat(maxVal[0] ).power(maxVal [1], precision, false);
+				BigFloat maxHigh = new BigFloat(maxVal[0] ).power(maxVal [1], precision, true );
+				if (curLow.compareTo(maxHigh) > 0) {
+					maxVal = DATA[i];
+					maxIndex = i;
+					continue outer;
+				} else if (curHigh.compareTo(maxLow) < 0)
+					continue outer;
+			}
+			
+			// Do full-precision comparison (very slow)
+			BigInteger cur = BigInteger.valueOf(DATA[i][0]).pow(DATA[i][1]);
+			BigInteger max = BigInteger.valueOf(maxVal [0]).pow(maxVal [1]);
+			if (cur.compareTo(max) > 0) {
+				maxVal = DATA[i];
 				maxIndex = i;
 			}
 		}
@@ -37,33 +48,74 @@ public final class p099 implements EulerSolution {
 	}
 	
 	
-	// Compare using exact integer math, which runs very slowly due to the huge resulting numbers (~10 million bits)
-	private static String calculateExactly() {
-		BigInteger maxVal = null;
-		int maxIndex = -1;
-		for (int i = 0; i < DATA.length; i++) {
-			BigInteger val = pow(BigInteger.valueOf(DATA[i][0]), DATA[i][1]);
-			if (maxVal == null || val.compareTo(maxVal) > 0) {
-				maxVal = val;
-				maxIndex = i;
-			}
-		}
-		return Integer.toString(maxIndex + 1);
-	}
-	
-	
-	// Faster than BigInteger.pow() by using the library's Karatsuba multiplication
-	private static BigInteger pow(BigInteger x, int y) {
-		if (y < 0)
-			throw new IllegalArgumentException();
+	// Represents a strictly positive number equal to mantissa * 2^exponent
+	private static final class BigFloat implements Comparable<BigFloat> {
 		
-		BigInteger z = BigInteger.ONE;
-		for (; y != 0; y >>>= 1) {
-			if ((y & 1) != 0)
-				z = Library.multiply(z, x);
-			x = Library.multiply(x, x);
+		private final BigInteger mantissa;
+		private final int exponent;
+		
+		
+		public BigFloat(int n) {
+			if (n <= 0)
+				throw new IllegalArgumentException();
+			mantissa = BigInteger.valueOf(n);
+			exponent = 0;
 		}
-		return z;
+		
+		
+		private BigFloat(BigInteger man, int exp) {
+			mantissa = man;
+			exponent = exp;
+		}
+		
+		
+		public int compareTo(BigFloat other) {
+			int minExp = Math.min(exponent, other.exponent);
+			BigInteger tempx = mantissa.shiftLeft(exponent - minExp);
+			BigInteger tempy = other.mantissa.shiftLeft(other.exponent - minExp);
+			return tempx.compareTo(tempy);
+		}
+		
+		
+		public String toString() {
+			return mantissa + "<<" + exponent;
+		}
+		
+		
+		// The output's mantissa will have 'precision' or fewer bits
+		public BigFloat multiply(BigFloat other, int precision, boolean roundUp) {
+			BigInteger man = mantissa.multiply(other.mantissa);
+			int exp = exponent + other.exponent;
+			int excess = man.bitLength() - precision;
+			if (excess > 0) {
+				if (roundUp) {
+					BigInteger mask = BigInteger.ONE.shiftLeft(excess).subtract(BigInteger.ONE);
+					if (!mask.and(man).equals(BigInteger.ZERO))
+						man = man.add(BigInteger.ONE.shiftLeft(excess));
+					excess = man.bitLength() - precision;  // In case 'man' is bumped up to the next power of 2
+				}
+				man = man.shiftRight(excess);
+				exp += excess;
+			}
+			return new BigFloat(man, exp);
+		}
+		
+		
+		// Exponentiation by squaring
+		public BigFloat power(int y, int precision, boolean roundUp) {
+			if (y < 0 || precision <= 0)
+				throw new IllegalArgumentException();
+			
+			BigFloat x = this;
+			BigFloat z = new BigFloat(1);
+			for (; y != 0; y >>>= 1) {
+				if ((y & 1) != 0)
+					z = z.multiply(x, precision, roundUp);
+				x = x.multiply(x, precision, roundUp);
+			}
+			return z;
+		}
+		
 	}
 	
 	
