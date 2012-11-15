@@ -60,8 +60,8 @@ public final class p118 implements EulerSolution {
 		// Sieve of Eratosthenes
 		for (int i = 2, end = Library.sqrt(n); i <= end; i++) {
 			if (isPrime(i)) {
-				for (int j = i * i; j <= n; j += i){
-					isPrime[j >>> 5] &= ~(1 << (j & 0x1F));}
+				for (int j = i * i; j <= n; j += i)
+					isPrime[j >>> 5] &= ~(1 << (j & 0x1F));
 			}
 		}
 	}
