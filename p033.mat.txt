@@ -9,17 +9,33 @@
 
 (* Use this in Wolfram Mathematica *)
 
-CanSimplify[a_, b_] :=
-  10 <= b <= 99 && 10 <= a < b &&
-  Block[{a1 = Floor[a/10], a0 = Mod[a, 10], b1 = Floor[b/10], b0 = Mod[b, 10]},
-    a0 == b0 && b0 != 0 && b1 != 0 && a1/b1 == a/b ||
-    a0 == b1 && b0 != 0 && a1/b0 == a/b ||
-    a1 == b0 && b1 != 0 && a0/b1 == a/b ||
-    a1 == b1 && b0 != 0 && a0/b0 == a/b]
+(* 
+ * Consider an arbitrary fraction n/d:
+ *   Let n = 10 * n1 + n0 be the numerator.
+ *   Let d = 10 * d1 + d0 be the denominator.
+ * As stated in the problem, we need 10 <= n < d < 100.
+ * We must disregard trivial simplifications where n0 = d0 = 0.
+ * 
+ * Now, a simplification with n0 = d0 is impossible because:
+ *   n1 / d1 = n / d = (10*n1 + n0) / (10*d1 + n0).
+ *   n1 * (10*d1 + n0) = d1 * (10*n1 + n0).
+ *   10*n1*d1 + n1*n0 = 10*d1*n1 + d1*n0.
+ *   n1*n0 = d1*n0.
+ *   n1 = d1.
+ *   This implies n = d, which contradicts the fact that n < d.
+ * Similarly, we cannot have a simplification with n1 = d1 for the same reason.
+ * 
+ * Therefore we only need to consider the cases where n0 = d1 or n1 = d0.
+ * In the first case, check that n1/d0 = n/d; in the second case, check that n0/d1 = n/d.
+ *)
+CanSimplify[n_, d_] :=
+  10 <= n < d <= 99 &&
+  Block[{n0 = Mod[n, 10], n1 = Floor[n / 10],
+         d0 = Mod[d, 10], d1 = Floor[d / 10]},
+    d0 != 0 && n0 == d1 && n1/d0 == n/d || n1 == d0 && n0/d1 == n/d]
 
-product = 1;
-For[i = 10, i ≤ 99, i++,
-  For[j = 10, j < i, j++,
-    If[CanSimplify[j, i], product *= j/i; Print[j, " ", i]]]]
-product
-Denominator[product]
+prod = 1;
+For[d = 10, d < 100, d++,
+  For[n = 10, n < d, n++,
+    If[CanSimplify[n, d], prod *= n / d]]]
+Denominator[prod]
