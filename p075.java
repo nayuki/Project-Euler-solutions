@@ -24,11 +24,11 @@ public final class p075 implements EulerSolution {
 		/* 
 		 * Pythagorean triples theorem:
 		 *   Every primitive Pythagorean triple with a odd and b even can be expressed as
-		 *   a = st, b = (s^2-t^2)/2, c = (s^2+t^2)/2, where s > t >= 1 are coprime odd integers.
+		 *   a = st, b = (s^2-t^2)/2, c = (s^2+t^2)/2, where s > t > 0 are coprime odd integers.
 		 */
 		Set<IntTriple> triples = new HashSet<IntTriple>();
-		for (int t = 1; t * t <= LIMIT; t += 2) {
-			for (int s = t + 2; s * s <= LIMIT; s += 2) {
+		for (int s = 3; s * s <= LIMIT; s += 2) {
+			for (int t = s - 2; t > 0; t -= 2) {
 				if (Library.gcd(s, t) == 1) {
 					int a = s * t;
 					int b = (s * s - t * t) / 2;

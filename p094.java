@@ -47,7 +47,7 @@ public final class p094 implements EulerSolution {
 	 * 
 	 * Pythagorean triples theorem:
 	 *   Every primitive Pythagorean triple with a odd and b even can be expressed as
-	 *   a = st, b = (s^2-t^2)/2, c = (s^2+t^2)/2, where s > t >= 1 are coprime odd integers.
+	 *   a = st, b = (s^2-t^2)/2, c = (s^2+t^2)/2, where s > t > 0 are coprime odd integers.
 	 */
 	public String run() {
 		long sum = 0;
@@ -59,8 +59,8 @@ public final class p094 implements EulerSolution {
 		 * With t < s, we have that s^2+t^2 < 2s^2, so 3/2 (s^2+t^2) - 1 < 3s^2 - 1.
 		 * Therefore it is sufficient to ensure that 3s^2 - 1 <= LIMIT, i.e. s^2 <= (LIMIT+1)/3.
 		 */
-		for (int s = 1; s * s <= (LIMIT + 1) / 3; s++) {
-			for (int t = 1; t < s; t++) {
+		for (int s = 1; s * s <= (LIMIT + 1) / 3; s += 2) {
+			for (int t = s - 2; t > 0; t -= 2) {
 				if (Library.gcd(s, t) == 1) {
 					int a = s * t;
 					int b = (s * s - t * t) / 2;
