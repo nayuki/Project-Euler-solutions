@@ -6,6 +6,9 @@
  * https://github.com/nayuki/Project-Euler-solutions
  */
 
+import java.util.HashSet;
+import java.util.Set;
+
 
 public final class p087 implements EulerSolution {
 	
@@ -20,43 +23,28 @@ public final class p087 implements EulerSolution {
 	public String run() {
 		int[] primes = Library.listPrimes(Library.sqrt(LIMIT));
 		
-		// Squares
-		boolean[] possible = new boolean[LIMIT + 1];
-		for (int p : primes) {
-			if (p * p >= LIMIT + 1)
-				break;
-			possible[p * p] = true;
+		Set<Integer> sums = new HashSet<Integer>();
+		sums.add(0);
+		for (int i = 2; i <= 4; i++) {
+			Set<Integer> newsums = new HashSet<Integer>();
+			for (int p : primes) {
+				long q = 1;
+				for (int j = 0; j < i; j++)
+					q *= p;
+				// q = p^i
+				if (q > LIMIT)
+					break;
+				
+				int r = (int)q;
+				for (int x : sums) {
+					if (x + r <= LIMIT)
+						newsums.add(x + r);
+				}
+			}
+			sums = newsums;
 		}
 		
-		// Cubes
-		boolean[] nextPossible = new boolean[LIMIT + 1];
-		for (int p : primes) {
-			if ((long)p * p * p > LIMIT)
-				break;
-			int prod = p * p * p;
-			for (int i = LIMIT - prod; i >= 0; i--)
-				nextPossible[i + prod] |= possible[i];
-		}
-		possible = nextPossible;
-		
-		// Fourth power
-		nextPossible = new boolean[LIMIT + 1];
-		for (int p : primes) {
-			if ((long)p * p * p * p > LIMIT)
-				break;
-			int prod = p * p * p * p;
-			for (int i = LIMIT - prod; i >= 0; i--)
-				nextPossible[i + prod] |= possible[i];
-		}
-		possible = nextPossible;
-		
-		// Count sums
-		int count = 0;
-		for (boolean x : possible) {
-			if (x)
-				count++;
-		}
-		return Integer.toString(count);
+		return Integer.toString(sums.size());
 	}
 	
 }
