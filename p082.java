@@ -6,8 +6,6 @@
  * https://github.com/nayuki/Project-Euler-solutions
  */
 
-import java.util.Arrays;
-
 
 public final class p082 implements EulerSolution {
 	
@@ -19,40 +17,36 @@ public final class p082 implements EulerSolution {
 	private static final int INFINITY = Integer.MAX_VALUE / 2;
 	
 	
+	private int[][] distance;
+	
 	public String run() {
 		int h = GRID.length;
 		int w = GRID[0].length;
 		
-		int[][] distance = new int[h][w];
-		for (int i = 0; i < h; i++)
-			Arrays.fill(distance[i], INFINITY);
-		
-		for (int i = 0; i < h; i++)
-			distance[i][0] = GRID[i][0];
+		// Dynamic programming
+		distance = new int[h][w];
 		for (int x = 0; x < w; x++) {
-			for (int i = 0; i < h; i++) {
-				for (int y = 0; y < h; y++) {
-					int dist = getValue(distance, x, y);
-					dist = Math.min(GRID[y][x] + getValue(distance, x - 1, y), dist);
-					dist = Math.min(GRID[y][x] + getValue(distance, x, y - 1), dist);
-					dist = Math.min(GRID[y][x] + getValue(distance, x, y + 1), dist);
-					distance[y][x] = dist;
-				}
-			}
+			for (int y = 0; y < h; y++)
+				distance[y][x] = GRID[y][x] + Math.min(getValue(x - 1, y), getValue(x, y - 1));
+			for (int y = h - 1; y >= 0; y--)
+				distance[y][x] = Math.min(GRID[y][x] + getValue(x, y + 1), distance[y][x]);
 		}
 		
+		// Minimum of rightmost column
 		int min = INFINITY;
-		for (int i = 0; i < h; i++)
-			min = Math.min(distance[i][w - 1], min);
+		for (int y = 0; y < h; y++)
+			min = Math.min(distance[y][w - 1], min);
 		return Integer.toString(min);
 	}
 	
 	
-	private static int getValue(int[][] grid, int x, int y) {
-		if (y < 0 || y >= grid.length || x < 0 || x >= grid[y].length)
+	private int getValue(int x, int y) {
+		if (x < 0)
+			return 0;
+		else if (y < 0 || y >= distance.length || x >= distance[y].length)
 			return INFINITY;
 		else
-			return grid[y][x];
+			return distance[y][x];
 	}
 	
 	
