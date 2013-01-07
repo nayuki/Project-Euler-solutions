@@ -15,6 +15,7 @@ public final class p081 implements EulerSolution {
 	
 	
 	public String run() {
+		// Dynamic programming
 		for (int i = GRID.length - 1; i >= 0; i--) {
 			for (int j = GRID[i].length - 1; j >= 0; j--) {
 				int temp;

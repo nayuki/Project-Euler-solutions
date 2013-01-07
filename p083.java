@@ -19,37 +19,38 @@ public final class p083 implements EulerSolution {
 	private static final int INFINITY = Integer.MAX_VALUE / 2;
 	
 	
+	private int[][] distance;
+	
 	public String run() {
 		int h = GRID.length;
 		int w = GRID[0].length;
+		distance = new int[h][w];
+		for (int y = 0; y < h; y++)
+			Arrays.fill(distance[y], INFINITY);
 		
-		int[][] distance = new int[h][w];
-		for (int i = 0; i < h; i++)
-			Arrays.fill(distance[i], INFINITY);
-		
+		// Bellman–Ford algorithm
 		distance[0][0] = GRID[0][0];
 		for (int i = 0; i < w * h; i++) {
 			for (int y = 0; y < h; y++) {
 				for (int x = 0; x < w; x++) {
-					int dist = getValue(distance, x, y);
-					dist = Math.min(GRID[y][x] + getValue(distance, x - 1, y), dist);
-					dist = Math.min(GRID[y][x] + getValue(distance, x + 1, y), dist);
-					dist = Math.min(GRID[y][x] + getValue(distance, x, y - 1), dist);
-					dist = Math.min(GRID[y][x] + getValue(distance, x, y + 1), dist);
-					distance[y][x] = dist;
+					int temp = INFINITY;
+					temp = Math.min(getDistance(x - 1, y), temp);
+					temp = Math.min(getDistance(x + 1, y), temp);
+					temp = Math.min(getDistance(x, y - 1), temp);
+					temp = Math.min(getDistance(x, y + 1), temp);
+					distance[y][x] = Math.min(GRID[y][x] + temp, distance[y][x]);
 				}
 			}
 		}
-		
 		return Integer.toString(distance[h - 1][w - 1]);
 	}
 	
 	
-	private static int getValue(int[][] grid, int x, int y) {
-		if (y < 0 || y >= grid.length || x < 0 || x >= grid[y].length)
+	private int getDistance(int x, int y) {
+		if (y < 0 || y >= distance.length || x < 0 || x >= distance[y].length)
 			return INFINITY;
 		else
-			return grid[y][x];
+			return distance[y][x];
 	}
 	
 	

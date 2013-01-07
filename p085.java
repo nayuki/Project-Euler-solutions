@@ -14,13 +14,15 @@ public final class p085 implements EulerSolution {
 	}
 	
 	
+	private static final int TARGET = 2000000;
+	
 	public String run() {
-		int bestDiff = -1;
+		int bestDiff = Integer.MAX_VALUE;
 		int bestArea = -1;
-		for (int w = 1; w < 2000; w++) {
-			for (int h = 1; h < 2000; h++) {
-				int diff = Math.abs(numberOfRectangles(w, h) - 2000000);
-				if (bestDiff == -1 || diff < bestDiff) {
+		for (int w = 1; w <= Library.sqrt(TARGET); w++) {
+			for (int h = 1; h <= Library.sqrt(TARGET); h++) {
+				int diff = Math.abs(numberOfRectangles(w, h) - TARGET);
+				if (diff < bestDiff) {
 					bestDiff = diff;
 					bestArea = w * h;
 				}
@@ -31,7 +33,7 @@ public final class p085 implements EulerSolution {
 	
 	
 	private static int numberOfRectangles(int m, int n) {
-		return (m + 1) * m * (n + 1) * n / 4;
+		return (m + 1) * m * (n + 1) * n / 4;  // A bit more than m^2 n^2 / 4
 	}
 	
 }
