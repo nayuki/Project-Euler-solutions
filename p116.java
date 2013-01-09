@@ -30,7 +30,7 @@ public final class p116 implements EulerSolution {
 	 * Now assume n >= 1. Look at the leftmost item and sum up the possibilities.
 	 * - If the item is a black square, then the rest of the row
 	 *   is allowed to be anything of length n-1. Add ways[n-1].
-	 * - If the item is a colored tile of length m where m >= n, then the
+	 * - If the item is a colored tile of length m where m <= n, then the
 	 *   rest of the row can be anything of length n-m. Add ways[n-m].
 	 * 
 	 * At the end, return ways[length]-1 to exclude the case where the row is all black squares.
