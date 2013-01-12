@@ -56,13 +56,27 @@ public final class p407 implements EulerSolution {
 			}
 		}
 		
+		// Maximum size of set of prime factors where the product of the set <= LIMIT.
+		// This is important because the number of solutions for n is 2^N,
+		// where N is the number of distinct prime factors of n.
+		int maxNumPrimeFactors = 0;
+		for (int i = 2, prod = 1; i < smallestPrimeFactor.length; i++) {
+			if (smallestPrimeFactor[i] == i) {  // i is prime
+				if (LIMIT / prod < i)
+					break;
+				prod *= i;
+				maxNumPrimeFactors++;
+			}
+		}
+		
 		long sum = 0;
+		// Temporary arrays
+		int[] solns    = new int[1 << maxNumPrimeFactors];
+		int[] newsolns = new int[1 << maxNumPrimeFactors];
 		for (int i = 1; i <= LIMIT; i++) {
-			// Factorization as coprime prime powers
-			// e.g. 360 = {2^3, 3^2, 5^1}
+			// Compute factorization as coprime prime powers. e.g. 360 = {2^3, 3^2, 5^1}
 			List<Integer> factorization = new ArrayList<Integer>();
-			int j = i;
-			while (j != 1) {
+			for (int j = i; j != 1; ) {
 				int p = smallestPrimeFactor[j];
 				int q = 1;
 				do {
@@ -71,27 +85,37 @@ public final class p407 implements EulerSolution {
 				} while (j % p == 0);
 				factorization.add(q);
 			}
-			sum += maxSolution(factorization, 0, 0, 1);
+			
+			solns[0] = 0;
+			int solnslen = 1;
+			int modulus = 1;
+			for (int q : factorization) {
+				// Use Chinese remainder theorem; cache parts of it
+				int recip = reciprocalMod(q % modulus, modulus);
+				int newmod = q * modulus;
+				
+				int newsolnslen = 0;
+				for (int j = 0; j < solnslen; j++) {
+					newsolns[newsolnslen++] = ((0 + (int)((long)(solns[j] - 0 + modulus) * recip % modulus) * q) % newmod);
+					newsolns[newsolnslen++] = ((1 + (int)((long)(solns[j] - 1 + modulus) * recip % modulus) * q) % newmod);
+				}
+				
+				solnslen = newsolnslen;
+				modulus = newmod;
+				
+				// Flip buffers
+				int[] temp = solns;
+				solns = newsolns;
+				newsolns = temp;
+			}
+			
+			int max = 0;
+			for (int j = 0; j < solnslen; j++)
+				max = Math.max(solns[j], max);
+			sum += max;
 		}
 		
 		return Long.toString(sum);
-	}
-	
-	
-	private static int maxSolution(List<Integer> factorization, int i, int x, int mod) {
-		if (i == factorization.size())
-			return x;
-		else {
-			int factor = factorization.get(i);
-			return Math.max(
-					maxSolution(factorization, i + 1, chineseRemainderTheorem(0, factor, x, mod), factor * mod),
-					maxSolution(factorization, i + 1, chineseRemainderTheorem(1, factor, x, mod), factor * mod));
-		}
-	}
-	
-	
-	private static int chineseRemainderTheorem(int a, int p, int b, int q) {
-		return (a + (int)((long)(b - a + q) * reciprocalMod(p % q, q) % q) * p) % (p * q);
 	}
 	
 	
