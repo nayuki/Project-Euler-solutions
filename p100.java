@@ -16,97 +16,72 @@ public final class p100 implements EulerSolution {
 	}
 	
 	
+	/* 
+	 * Suppose the box has b blue discs and r red discs.
+	 * The probability of taking 2 blue discs is [b / (b + r)] * [(b - 1) / (b + r - 1)],
+	 * which we want to be equal to 1/2. Rearrange the equation:
+	 *   [b(b - 1)] / [(b + r)(b + r - 1)] = 1 / 2.
+	 *   2b(b - 1) = (b + r)(b + r - 1).
+	 *   2b^2 - 2b = b^2 + br - b + br + r^2 - r.
+	 *   b^2 - b = r^2 + 2br - r.
+	 *   b^2 - (2r + 1)b + (r - r^2) = 0.
+	 * Apply the quadratic equation to solve for b:
+	 *   b = [(2r + 1) +/- sqrt((2r + 1)^2 - 4(r - r^2))] / 2
+	 *     = r + [1 +/- sqrt(8r^2 + 1)]/2
+	 *     = r + [sqrt(8r^2 + 1) + 1]/2.  (Discard the minus solution because it would make b < r)
+	 * 
+	 * For b to be an integer, we need sqrt(8r^2 + 1) to be odd, and also 8r^2 + 1 be a perfect square.
+	 * Assume 8y^2 + 1 = x^2 for some integer x > 0.
+	 * We can see this is in fact a Pell's equation: x^2 - 8y^2 = 1.
+	 * 
+	 * Suppose we have the solution (x0, y0) such that x0 > 0 and x0 is as small as possible.
+	 * This is called the fundamental solution, and all other solutions be derived from it (proven elsewhere).
+	 * Suppose (x0, y0) and (x1, y1) are solutions. Then we have:
+	 *   x0^2 - 8*y0^2 = 1.
+	 *   (x0 + y0*sqrt(8))(x0 - y0*sqrt(8)) = 1.
+	 *   (x1 + y1*sqrt(8))(x1 - y1*sqrt(8)) = 1.  (Similarly)
+	 * Multiply them together:
+	 *   [(x0 + y0*sqrt(8))(x0 - y0*sqrt(8))][(x1 + y1*sqrt(8))(x1 - y1*sqrt(8))] = 1 * 1.
+	 *   [(x0 + y0*sqrt(8))(x1 + y1*sqrt(8))][(x0 - y0*sqrt(8))(x1 - y1*sqrt(8))] = 1.
+	 *   [x0*x1 + x0*y1*sqrt(8) + x1*y0*sqrt(8) + 8y0*y1][x0*x1 - x0*y1*sqrt(8) - x1*y0*sqrt(8) + 8y0*y1] = 1.
+	 *   [(x0*x1 + 8y0*y1) + (x0*y1 + x1*y0)*sqrt(8)][(x0*x1 + 8y0*y1) - (x0*y1 + x1*y0)*sqrt(8)] = 1.
+	 *   (x0*x1 + 8y0*y1)^2 - 8*(x0*y1 + x1*y0)^2 = 1.
+	 * Therefore (x0*x1 + 8y0*y1, x0*y1 + x1*y0) is also a solution.
+	 * By inspection, the fundamental solution is (3, 1).
+	 */
 	public String run() {
-		// Initialization
-		for (long i = 0; i < isSquare0.length; i++) isSquare0[(int)(i * i % isSquare0.length)] = true;
-		for (long i = 0; i < isSquare1.length; i++) isSquare1[(int)(i * i % isSquare1.length)] = true;
-		for (long i = 0; i < isSquare2.length; i++) isSquare2[(int)(i * i % isSquare2.length)] = true;
-		for (long i = 0; i < isSquare3.length; i++) isSquare3[(int)(i * i % isSquare3.length)] = true;
-		for (long i = 0; i < isSquare4.length; i++) isSquare4[(int)(i * i % isSquare4.length)] = true;
+		// Fundamental solution
+		BigInteger x0 = BigInteger.valueOf(3);
+		BigInteger y0 = BigInteger.valueOf(1);
 		
-		// Test candidates
-		long n = 1000000000000L;
-		int n0 = (int)(n % isSquare0.length);  // Always equal to n mod isSquare0.length
-		int n1 = (int)(n % isSquare1.length);  // Always equal to n mod isSquare1.length
+		// Current solution
+		BigInteger x = BigInteger.valueOf(3);
+		BigInteger y = BigInteger.valueOf(1);  // An alias for the number of red discs
 		while (true) {
-			if (isCandidate(n, n0, n1)) {
-				BigInteger x = BigInteger.valueOf(n);
-				BigInteger temp = x.shiftLeft(1).subtract(BigInteger.valueOf(2)).multiply(x).add(BigInteger.ONE);
-				BigInteger sqrt = sqrt(temp);
-				if (sqrt.testBit(0) && sqrt.multiply(sqrt).equals(temp))
-					return Long.toString((sqrt.longValue() + 1) / 2);
+			// Check if this solution is acceptable
+			BigInteger sqrt = sqrt(y.multiply(y).multiply(BigInteger.valueOf(8)).add(BigInteger.ONE));
+			if (sqrt.testBit(0)) {  // Is odd
+				BigInteger blue = sqrt.add(BigInteger.ONE).divide(BigInteger.valueOf(2)).add(y);
+				if (blue.add(y).compareTo(BigInteger.TEN.pow(12)) > 0)
+					return blue.toString();
 			}
 			
-			n++;
-			n0++;
-			n1++;
-			if (n0 == isSquare0.length)
-				n0 = 0;
-			if (n1 == isSquare1.length)
-				n1 = 0;
+			// Create the next bigger solution
+			BigInteger nextx = x.multiply(x0).add(y.multiply(y0).multiply(BigInteger.valueOf(8)));
+			BigInteger nexty = x.multiply(y0).add(y.multiply(x0));
+			x = nextx;
+			y = nexty;
 		}
 	}
 	
 	
-	private boolean[] isSquare0 = new boolean[3 * 5 * 7 * 11 * 13];
-	private boolean[] isSquare1 = new boolean[17 * 19 * 23];
-	private boolean[] isSquare2 = new boolean[29 * 31 * 37 * 41 * 43];
-	private boolean[] isSquare3 = new boolean[47 * 53 * 59 * 61];
-	private boolean[] isSquare4 = new boolean[67 * 71 * 73 * 79];
-	
-	
-	private boolean isCandidate(long n, int n0, int n1) {
-		if (!isSquare0[((2 * n0 - 2) * n0 + 1) % isSquare0.length])
-			return false;
-		
-		if (!isSquare1[((2 * n1 - 2) * n1 + 1) % isSquare1.length])
-			return false;
-		
-		long x = n % isSquare2.length;
-		x = (2 * x - 2) * x + 1;
-		if (!isSquare2[(int)(x % isSquare2.length)])
-			return false;
-		
-		x = n % isSquare3.length;
-		x = (2 * x - 2) * x + 1;
-		if (!isSquare3[(int)(x % isSquare3.length)])
-			return false;
-		
-		x = n % isSquare4.length;
-		x = (2 * x - 2) * x + 1;
-		if (!isSquare4[(int)(x % isSquare4.length)])
-			return false;
-		
-		return true;
-	}
-	
-	
-	// Returns floor(sqrt(x))
 	private static BigInteger sqrt(BigInteger x) {
-		// Find leftmost position
-		int i = 0;
-		while (BigInteger.TEN.pow(i * 2).compareTo(x) <= 0)
-			i++;
-		
-		// Extract square root from left to right using an algorithm like long division
 		BigInteger y = BigInteger.ZERO;
-		for (; i >= 0; i--) {
-			// Try every value for next digit
-			int j;
-			BigInteger delta = null;
-			for (j = 9; j >= 0; j--) {
-				BigInteger temp = BigInteger.valueOf(j).multiply(BigInteger.TEN.pow(i));
-				delta = y.shiftLeft(1).add(temp).multiply(temp);
-				if (delta.compareTo(x) <= 0)
-					break;
-			}
-			if (j < 0)
-				throw new AssertionError();
-			
-			x = x.subtract(delta);  // Adjust the remainder
-			y = y.add(BigInteger.valueOf(j).multiply(BigInteger.TEN.pow(i)));  // Add the new digit
+		for (int i = (x.bitLength() - 1) / 2; i >= 0; i--) {
+			y = y.setBit(i);
+			if (y.multiply(y).compareTo(x) > 0)
+				y = y.clearBit(i);
 		}
-		
 		return y;
 	}
 	
