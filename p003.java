@@ -14,16 +14,20 @@ public final class p003 implements EulerSolution {
 	}
 	
 	
+	/* 
+	 * Algorithm: Divide out all the smallest prime factors except the last one.
+	 * For example, 1596 = 2 * 2 * 3 * 7 * 19. The algorithm ensures that the smallest factors will be found first.
+	 * After dividing out the smallest factors, the last factor to be found will be equal to the quotient, so it must be the largest prime factor.
+	 */
 	public String run() {
 		long n = 600851475143L;
 		while (true) {
-			long k = smallestFactor(n);
-			if (k < n)
-				n /= k;
+			long p = smallestFactor(n);
+			if (p < n)
+				n /= p;
 			else
-				break;
+				return Long.toString(n);
 		}
-		return Long.toString(n);
 	}
 	
 	

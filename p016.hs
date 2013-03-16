@@ -7,11 +7,7 @@
  -}
 
 
-digits 0 = [0]
-digits n = reverse (digits' n)
-digits' 0 = []
-digits' n = (mod n 10) : (digits' (div n 10))
-
-ans = sum (digits (2^1000))
-
+digitSum 0 = 0
+digitSum n = (mod n 10) + (digitSum (div n 10))
+ans = digitSum (2^1000)
 main = putStrLn (show ans)
