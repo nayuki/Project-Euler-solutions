@@ -22,76 +22,38 @@ public final class p017 implements EulerSolution {
 	}
 	
 	
+	private static String[] ONES = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};  // Requires 0 <= n <= 9
+	private static String[] TEENS = {"ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"};
+	private static String[] TENS = {"twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"};
+	
+	
+	// Requires 0 <= n <= 99999
 	private static String toEnglish(int n) {
-		if (n < 0 || n >= 100000)
+		if (n < 0 || n > 99999)
 			throw new IllegalArgumentException();
 		
 		if (n < 100)
 			return tens(n);
 		else {
 			String big = "";
-			if (n >= 1000) big += tens(n / 1000) + "thousand";
-			if (n / 100 % 10 != 0) big += ones(n / 100 % 10) + "hundred";
+			if (n >= 1000)
+				big += tens(n / 1000) + "thousand";
+			if (n / 100 % 10 != 0)
+				big += ONES[n / 100 % 10] + "hundred";
 			
-			if (n % 100 == 0) return big;
-			else return big + "and" + tens(n % 100);
+			return big + (n % 100 != 0 ? "and" + tens(n % 100) : "");
 		}
 	}
 	
 	
+	// Requires 0 <= n <= 99
 	private static String tens(int n) {
-		if (n < 0 || n >= 100)
-			throw new IllegalArgumentException();
-		
-		if (n / 10 == 0)
-			return ones(n);
-		else if (n / 10 == 1) {  // Teens
-			switch (n) {
-				case 10:  return "ten";
-				case 11:  return "eleven";
-				case 12:  return "twelve";
-				case 13:  return "thirteen";
-				case 14:  return "fourteen";
-				case 15:  return "fifteen";
-				case 16:  return "sixteen";
-				case 17:  return "seventeen";
-				case 18:  return "eighteen";
-				case 19:  return "nineteen";
-				default:  throw new IllegalArgumentException();
-			}
-		} else {
-			String tens;
-			switch (n / 10) {
-				case 2:  tens = "twenty";   break;
-				case 3:  tens = "thirty";   break;
-				case 4:  tens = "forty";    break;
-				case 5:  tens = "fifty";    break;
-				case 6:  tens = "sixty";    break;
-				case 7:  tens = "seventy";  break;
-				case 8:  tens = "eighty";   break;
-				case 9:  tens = "ninety";   break;
-				default:  throw new IllegalArgumentException();
-			}
-			if (n % 10 == 0) return tens;
-			else return tens + ones(n % 10);
-		}
-	}
-	
-	
-	private static String ones(int n) {
-		switch (n) {
-			case 0:  return "zero";
-			case 1:  return "one";
-			case 2:  return "two";
-			case 3:  return "three";
-			case 4:  return "four";
-			case 5:  return "five";
-			case 6:  return "six";
-			case 7:  return "seven";
-			case 8:  return "eight";
-			case 9:  return "nine";
-			default:  throw new IllegalArgumentException();
-		}
+		if (n < 10)
+			return ONES[n];
+		else if (n < 20)  // Teens
+			return TEENS[n - 10];
+		else
+			return TENS[n / 10 - 2] + (n % 10 != 0 ? ONES[n % 10] : "");
 	}
 	
 }
