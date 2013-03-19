@@ -65,13 +65,11 @@ public final class p417 implements EulerSolution {
 				}
 			}
 		}
-		
 		totients = Library.listTotients(LIMIT);
 		
 		long sum = 0;
-		for (int i = 3; i <= LIMIT; i++) {
+		for (int i = 3; i <= LIMIT; i++)
 			sum += getCycleLength(i);
-		}
 		return Long.toString(sum);
 	}
 	
