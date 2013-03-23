@@ -245,3 +245,72 @@ final class Library {
 	}
 	
 }
+
+
+
+// Immutable unlimited precision fraction
+final class Fraction {
+	
+	public final BigInteger numerator;    // Always coprime with denominator
+	public final BigInteger denominator;  // Always positive
+	
+	
+	public Fraction(BigInteger numer, BigInteger denom) {
+		if (denom.signum() == 0)
+			throw new ArithmeticException("Division by zero");
+		
+		// Reduce to canonical form
+		if (denom.signum() == -1) {
+			numer = numer.negate();
+			denom = denom.negate();
+		}
+		BigInteger gcd = numer.gcd(denom);
+		if (!gcd.equals(BigInteger.ONE)) {
+			numer = numer.divide(gcd);
+			denom = denom.divide(gcd);
+		}
+		
+		numerator = numer;
+		denominator = denom;
+	}
+	
+	
+	public Fraction add(Fraction other) {
+		return new Fraction(numerator.multiply(other.denominator).add(other.numerator.multiply(denominator)), denominator.multiply(other.denominator));
+	}
+	
+	
+	public Fraction subtract(Fraction other) {
+		return new Fraction(numerator.multiply(other.denominator).subtract(other.numerator.multiply(denominator)), denominator.multiply(other.denominator));
+	}
+	
+	
+	public Fraction multiply(Fraction other) {
+		return new Fraction(numerator.multiply(other.numerator), denominator.multiply(other.denominator));
+	}
+	
+	
+	public Fraction divide(Fraction other) {
+		return new Fraction(numerator.multiply(other.denominator), denominator.multiply(other.numerator));
+	}
+	
+	
+	public boolean equals(Object obj) {
+		if (obj instanceof Fraction) {
+			Fraction other = (Fraction)obj;
+			return numerator.equals(other.numerator) && denominator.equals(other.denominator);
+		} else
+			return false;
+	}
+	
+	
+	public int hashCode() {
+		return numerator.hashCode() + denominator.hashCode();
+	}
+	
+	
+	public String toString() {
+		return numerator + "/" + denominator;
+	}
+	
+}
