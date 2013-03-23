@@ -90,6 +90,7 @@ Problem 085: 2772
 Problem 087: 1097343
 Problem 089: 743
 Problem 092: 8581146
+Problem 093: 1258
 Problem 094: 518408346
 Problem 095: 14316
 Problem 096: 24702
