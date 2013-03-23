@@ -22,25 +22,25 @@ public final class p119 implements EulerSolution {
 	private static final int INDEX = 30;  // 1-based
 	
 	/* 
-	 * Candidates have the form n^k, where n >= 10 and k >= 2. We also impose n^k < limit.
-	 * If there are at least 30 candidates under 'limit', then the 30th smallest candidate is the answer.
-	 * Otherwise we raise the limit and search again.
+	 * Candidates have the form n^k, where n >= 2, k >= 2, n^k >= 10, and isDigitSumPower(n^k) == true.
+	 * We also impose n^k < limit. If there are at least 30 candidates under 'limit',
+	 * then the 30th smallest candidate is the answer. Otherwise we raise the limit and search again.
 	 * 
-	 * We only need to try the exponents k until 10 (the smallest base) to the power of k exceeds the limit.
-	 * We only need to try the bases n until the power of the digit sum can no longer match n^k.
+	 * We only need to try the exponents k until 2^k exceeds the limit.
+	 * We only need to try the bases n until the power of the digit sum is too small to match n^k.
 	 * The power of the digit sum is digitSum(n^k)^k, which is at most (9 * digitLength(n^k))^k.
 	 */
 	public String run() {
-		for (BigInteger limit = BigInteger.valueOf(256); ; limit = limit.shiftLeft(8)) {
+		for (BigInteger limit = BigInteger.ONE; ; limit = limit.shiftLeft(8)) {
 			List<BigInteger> candidates = new ArrayList<BigInteger>();
-			for (int k = 2; BigInteger.valueOf(10).pow(k).compareTo(limit) < 0; k++) {
+			for (int k = 2; BigInteger.valueOf(2).pow(k).compareTo(limit) < 0; k++) {
 				BigInteger n = BigInteger.valueOf(2);
 				while (true) {
 					BigInteger pow = n.pow(k);
-					if (pow.compareTo(limit) >= 0 && BigInteger.valueOf(pow.toString().length() * 9).pow(k).compareTo(pow) < 0)
+					if (pow.compareTo(limit) >= 0 && BigInteger.valueOf(pow.toString().length() * 9).compareTo(n) < 0)
 						break;
 					
-					if (!candidates.contains(pow) && isDigitSumPower(pow))
+					if (pow.compareTo(BigInteger.TEN) >= 0 && !candidates.contains(pow) && isDigitSumPower(pow))
 						candidates.add(pow);
 					n = n.add(BigInteger.ONE);
 				}
@@ -60,14 +60,10 @@ public final class p119 implements EulerSolution {
 			return false;
 		
 		BigInteger base = BigInteger.valueOf(digitSum);
-		for (int i = 2; ; i++) {
-			BigInteger pow = base.pow(i);
-			int comp = pow.compareTo(x);
-			if (comp == 0)
-				return true;
-			else if (comp > 0)
-				return false;
-		}
+		BigInteger pow = base;
+		while (pow.compareTo(x) < 0)
+			pow = pow.multiply(base);
+		return pow.compareTo(x) == 0;
 	}
 	
 	
