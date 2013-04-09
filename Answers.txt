@@ -86,6 +86,7 @@ Problem 080: 40886
 Problem 081: 427337
 Problem 082: 260324
 Problem 083: 425185
+Problem 084: 101524
 Problem 085: 2772
 Problem 087: 1097343
 Problem 089: 743
