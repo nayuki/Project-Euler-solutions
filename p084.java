@@ -35,13 +35,16 @@ public final class p084 implements EulerSolution {
 			// Roll tetrahedral dice
 			int die0 = random.nextInt(4) + 1;
 			int die1 = random.nextInt(4) + 1;
-			if (die0 == die1) {
+			if (die0 == die1)
 				consecutiveDoubles++;
-				if (consecutiveDoubles == 3)
-					location = 30;
-			} else
+			else
 				consecutiveDoubles = 0;
-			location = (location + die0 + die1) % 40;
+			if (consecutiveDoubles < 3)
+				location = (location + die0 + die1) % 40;
+			else {
+				location = 30;
+				consecutiveDoubles = 0;
+			}
 			
 			// Process actions for some locations
 			switch (location) {
@@ -66,7 +69,15 @@ public final class p084 implements EulerSolution {
 						case 8:  // Next utility
 							location = location > 12 && location < 28 ? 28 : 12;
 							break;
-						case 9: location -= 3; break;
+						case 9:
+							location -= 3;
+							if (location == 33) {
+								switch (communityChest.nextCard()) {
+									case 0:  location =  0;  break;
+									case 1:  location = 10;  break;
+								}
+							}
+							break;
 					}
 					break;
 				
