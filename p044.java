@@ -16,17 +16,22 @@ public final class p044 implements EulerSolution {
 	
 	public String run() {
 		long minD = -1;
-		for (int i = 2; ; i++) {  // For each upper pentagonal number index, going upward
-			long penti = pentagonalNumber(i);
-			if (minD != -1 && penti - pentagonalNumber(i - 1) > minD)  // If the next number down is more than a found difference, then conclude searching
+		// For each upper pentagonal number index, going upward
+		for (int i = 2; ; i++) {
+			long pentI = pentagonalNumber(i);
+			// If the next number down is more than a found difference, then conclude searching
+			if (minD != -1 && pentI - pentagonalNumber(i - 1) > minD)
 				break;
-			for (int j = i - 1; j >= 1; j--) {  // For each lower pentagonal number index, going downward
-				long pentj = pentagonalNumber(j);
-				long diff = penti - pentj;
-				if (minD != -1 && diff >= minD)  // If the difference is at least as great as a found difference, then stop testing lower pentagonal numbers
+			
+			// For each lower pentagonal number index, going downward
+			for (int j = i - 1; j >= 1; j--) {
+				long pentJ = pentagonalNumber(j);
+				long diff = pentI - pentJ;
+				// If the difference is at least as big as a found difference, then stop testing lower pentagonal numbers
+				if (minD != -1 && diff >= minD)
 					break;
-				else if (isPentagonalNumber(penti + pentj) && isPentagonalNumber(diff) && (minD == -1 || diff < minD))
-					minD = diff;
+				else if (isPentagonalNumber(pentI + pentJ) && isPentagonalNumber(diff) && (minD == -1 || diff < minD))
+					minD = diff;  // Found a smaller difference
 			}
 		}
 		return Long.toString(minD);
