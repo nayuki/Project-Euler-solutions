@@ -48,13 +48,6 @@ public final class p084 implements EulerSolution {
 			
 			// Process actions for some locations
 			switch (location) {
-				case 2: case 17: case 33:  // Community chest
-					switch (communityChest.nextCard()) {
-						case 0:  location =  0;  break;
-						case 1:  location = 10;  break;
-					}
-					break;
-				
 				case 7: case 22: case 36:  // Chance
 					switch (chance.nextCard()) {
 						case 0:  location =  0;  break;
@@ -71,12 +64,6 @@ public final class p084 implements EulerSolution {
 							break;
 						case 9:
 							location -= 3;
-							if (location == 33) {
-								switch (communityChest.nextCard()) {
-									case 0:  location =  0;  break;
-									case 1:  location = 10;  break;
-								}
-							}
 							break;
 					}
 					break;
@@ -84,6 +71,14 @@ public final class p084 implements EulerSolution {
 				// Go to jail
 				case 30:
 					location = 10;
+					break;
+			}
+			switch (location) {
+				case 2: case 17: case 33:  // Community chest
+					switch (communityChest.nextCard()) {
+						case 0:  location =  0;  break;
+						case 1:  location = 10;  break;
+					}
 					break;
 			}
 			
