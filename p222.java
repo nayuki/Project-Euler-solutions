@@ -17,7 +17,7 @@ public final class p222 implements EulerSolution {
 	public String run() {
 		sphereRadii = new double[21];  // {30000, 31000, 32000, ..., 49000, 50000}
 		for (int i = 0; i < sphereRadii.length; i++)
-			sphereRadii[i] = (i + 30) * 1000.0;
+			sphereRadii[i] = (i + 30) * 1000;
 		minLength = new double[sphereRadii.length][1 << sphereRadii.length];
 		
 		double min = Double.POSITIVE_INFINITY;
@@ -33,7 +33,7 @@ public final class p222 implements EulerSolution {
 	 * minLength[i][j] is the minimum achievable length for fitting a set of spheres in a cylindrical tube
 	 * of radius 50000 micrometres, where the sphere of radius sphereRadii[i] is at the left end,
 	 * the bit vector j represents the set of spheres, and i must be in the set denoted by j.
-	 * (Bit k of the integer j denotes whether the sphere of radius sphereRadii[k] is in the set or not.)
+	 * (In the integer j, bit k denotes whether the sphere of radius sphereRadii[k] is in the set or not.)
 	 * The right-side length of the rightmost sphere is included, the length of the distance between spheres
 	 * (arranged in an optimal way) is included, but the left-side length of the leftmost sphere is excluded.
 	 * 
@@ -45,7 +45,7 @@ public final class p222 implements EulerSolution {
 	
 	private double findMinimumLength(int currentSphereIndex, int setOfSpheres) {
 		if ((setOfSpheres & (1 << currentSphereIndex)) == 0)
-			throw new AssertionError();
+			throw new IllegalArgumentException();
 		
 		// Memoization
 		if (minLength[currentSphereIndex][setOfSpheres] == 0) {

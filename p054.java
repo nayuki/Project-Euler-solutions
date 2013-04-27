@@ -6,10 +6,6 @@
  * https://github.com/nayuki/Project-Euler-solutions
  */
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-
 
 public final class p054 implements EulerSolution {
 	
@@ -40,71 +36,33 @@ public final class p054 implements EulerSolution {
 	
 	
 	private static int getScore(Card[] hand) {
-		// Build histograms
-		int[] ranks = new int[13];
-		int[] suits = new int[4];
-		for (int i = 0; i < hand.length; i++) {
-			ranks[hand[i].rank]++;
-			suits[hand[i].suit]++;
+		if (hand.length != 5)
+			throw new IllegalArgumentException();
+		
+		int[] rankCounts = new int[13];
+		int flushSuit = hand[0].suit;
+		for (Card card : hand) {
+			rankCounts[card.rank]++;
+			if (card.suit != flushSuit)
+				flushSuit = -1;
 		}
 		
-		// Build histograms of histograms
-		int[] ranksHist = new int[hand.length + 1];
-		int[] suitsHist = new int[hand.length + 1];
-		for (int i = 0; i < ranks.length; i++)
-			ranksHist[ranks[i]]++;
-		for (int i = 0; i < suits.length; i++)
-			suitsHist[suits[i]]++;
+		int[] rankCountHist = new int[6];
+		for (int i = 0; i < rankCounts.length; i++)
+			rankCountHist[rankCounts[i]]++;
 		
-		// Get some summary numbers
-		int bestCards = get5FrequentHighestCards(ranks, ranksHist);
-		int straightHighRank = getStraightHighRank(ranks);
-		int flushSuit = getFlushSuit(suits);
+		int bestCards = get5FrequentHighestCards(rankCounts, rankCountHist);
+		int straightHighRank = getStraightHighRank(rankCounts);
 		
-		// Straight flush
-		if (hasStraightFlush(hand, straightHighRank, flushSuit))
-			return 8 << 20 | straightHighRank;
-		
-		// Four of a kind
-		else if (ranksHist[4] >= 1)
-			return 7 << 20 | bestCards;
-		
-		// Full house
-		else if (ranksHist[3] >= 2 || ranksHist[3] >= 1 && ranksHist[2] >= 1)
-			return 6 << 20 | bestCards;
-		
-		// Flush
-		else if (flushSuit != -1) {
-			int[] flushRanks = new int[13];
-			for (Card card : hand) {
-				if (card.suit == flushSuit)
-					flushRanks[card.rank]++;
-			}
-			int[] flushRanksHist = new int[hand.length + 1];
-			for (int i = 0; i < ranks.length; i++)
-				flushRanksHist[flushRanks[i]]++;
-			return 5 << 20 | get5FrequentHighestCards(flushRanks, flushRanksHist);
-		}
-		
-		// Straight
-		else if (straightHighRank != -1)
-			return 4 << 20 | straightHighRank;
-		
-		// Three of a kind
-		else if (ranksHist[3] >= 1)
-			return 3 << 20 | bestCards;
-		
-		// Two pairs
-		else if (ranksHist[2] >= 2)
-			return 2 << 20 | bestCards;
-		
-		// One pair
-		else if (ranksHist[2] >= 1)
-			return 1 << 20 | bestCards;
-		
-		// High card
-		else
-			return 0 << 20 | bestCards;
+		if      (straightHighRank != -1 && flushSuit != -1     ) return 8 << 20 | straightHighRank;  // Straight flush
+		else if (rankCountHist[4] == 1                         ) return 7 << 20 | bestCards;         // Four of a kind
+		else if (rankCountHist[3] == 1 && rankCountHist[2] == 1) return 6 << 20 | bestCards;         // Full house
+		else if (flushSuit != -1                               ) return 5 << 20 | bestCards;         // Flush
+		else if (straightHighRank != -1                        ) return 4 << 20 | straightHighRank;  // Straight
+		else if (rankCountHist[3] == 1                         ) return 3 << 20 | bestCards;         // Three of a kind
+		else if (rankCountHist[2] == 2                         ) return 2 << 20 | bestCards;         // Two pairs
+		else if (rankCountHist[2] == 1                         ) return 1 << 20 | bestCards;         // One pair
+		else                                                     return 0 << 20 | bestCards;         // High card
 	}
 	
 	
@@ -124,31 +82,6 @@ public final class p054 implements EulerSolution {
 		if (count != 5)
 			throw new IllegalArgumentException();
 		return result;
-	}
-	
-	
-	private static boolean hasStraightFlush(Card[] hand, int straightHighRank, int flushSuit) {
-		if (straightHighRank == -1 || flushSuit == -1)
-			return false;
-		
-		Set<Card> tempHand = new HashSet<Card>();
-		Collections.addAll(tempHand, hand);
-		
-		for (int i = 0; i < 5; i++) {
-			int rank = (straightHighRank - i + 13) % 13;
-			if (!tempHand.contains(new Card(rank, flushSuit)))
-				return false;
-		}
-		return true;
-	}
-	
-	
-	private static int getFlushSuit(int[] suits) {
-		for (int i = 0; i < suits.length; i++) {
-			if (suits[i] >= 5)
-				return i;
-		}
-		return -1;
 	}
 	
 	
@@ -188,10 +121,8 @@ public final class p054 implements EulerSolution {
 		public boolean equals(Object obj) {
 			if (!(obj instanceof Card))
 				return false;
-			else {
-				Card other = (Card)obj;
-				return rank == other.rank && suit == other.suit;
-			}
+			Card other = (Card)obj;
+			return rank == other.rank && suit == other.suit;
 		}
 		
 		
