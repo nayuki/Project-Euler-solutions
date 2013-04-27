@@ -42,31 +42,7 @@ public final class p381 implements EulerSolution {
 	 * Every part of the equation is modulo a prime p > 4.
 	 */
 	private static int s(int p) {
-		return (int)((long)(p - 3) * reciprocalMod(8 % p, p) % p);
-	}
-	
-	
-	private static int reciprocalMod(int x, int m) {
-		if (m < 0 || x < 0 || x >= m)
-			throw new IllegalArgumentException();
-		
-		// Based on a simplification of the extended Euclidean algorithm
-		int y = x;
-		x = m;
-		int a = 0;
-		int b = 1;
-		while (y != 0) {
-			int z = x % y;
-			int c = a - x / y * b;
-			x = y;
-			y = z;
-			a = b;
-			b = c;
-		}
-		if (x == 1)
-			return (a + m) % m;
-		else
-			throw new IllegalArgumentException("Reciprocal does not exist");
+		return (int)((long)(p - 3) * Library.reciprocalMod(8 % p, p) % p);
 	}
 	
 }

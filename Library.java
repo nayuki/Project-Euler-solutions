@@ -83,6 +83,30 @@ final class Library {
 	}
 	
 	
+	public static int reciprocalMod(int x, int m) {
+		if (m < 0 || x < 0 || x >= m)
+			throw new IllegalArgumentException();
+		
+		// Based on a simplification of the extended Euclidean algorithm
+		int y = x;
+		x = m;
+		int a = 0;
+		int b = 1;
+		while (y != 0) {
+			int z = x % y;
+			int c = a - x / y * b;
+			x = y;
+			y = z;
+			a = b;
+			b = c;
+		}
+		if (x == 1)
+			return (a + m) % m;
+		else
+			throw new IllegalArgumentException("Reciprocal does not exist");
+	}
+	
+	
 	public static BigInteger binomial(int n, int k) {
 		return factorial(n).divide(factorial(n - k).multiply(factorial(k)));
 	}
