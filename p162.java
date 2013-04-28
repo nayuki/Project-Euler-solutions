@@ -55,20 +55,18 @@ public final class p162 implements EulerSolution {
 		BigInteger sum = BigInteger.ZERO;
 		for (int n = 1; n <= 16; n++) {
 			sum = sum
-				.add(BI_15.multiply(BI_16.pow(n - 1)))
-				.subtract(BI_43.multiply(BI_15.pow(n - 1)))
-				.add(BI_41.multiply(BI_14.pow(n - 1)))
-				.subtract(BI_13.pow(n));
+				.add(bi(15).multiply(bi(16).pow(n - 1)))
+				.subtract(bi(43).multiply(bi(15).pow(n - 1)))
+				.add(bi(41).multiply(bi(14).pow(n - 1)))
+				.subtract(bi(13).pow(n));
 		}
 		return sum.toString(16).toUpperCase();
 	}
 	
 	
-	private static final BigInteger BI_13 = BigInteger.valueOf(13);
-	private static final BigInteger BI_14 = BigInteger.valueOf(14);
-	private static final BigInteger BI_15 = BigInteger.valueOf(15);
-	private static final BigInteger BI_16 = BigInteger.valueOf(16);
-	private static final BigInteger BI_41 = BigInteger.valueOf(41);
-	private static final BigInteger BI_43 = BigInteger.valueOf(43);
+	// For syntatical convenience
+	private static BigInteger bi(int n) {
+		return BigInteger.valueOf(n);
+	}
 	
 }

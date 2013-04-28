@@ -7,7 +7,7 @@
  -}
 
 
-md n = mod n (10 ^ 5)  -- Modulo reduction
+md n = mod n (10^5)  -- Modulo reduction for this problem
 
 powMod _ 0 = 1
 powMod x y | mod y 2 == 0 = powMod (md $ x * x) (div y 2)
