@@ -20,7 +20,6 @@ public final class p124 implements EulerSolution {
 	
 	
 	public String run() {
-		
 		// Modification of the Sieve of Eratosthenes
 		int[] rads = new int[LIMIT + 1];
 		Arrays.fill(rads, 1);

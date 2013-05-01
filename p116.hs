@@ -23,7 +23,7 @@
 len = 50
 ways _ 0 = 1
 ways m n = (waysMemo !! m !! (n-1)) + (if n >= m then (waysMemo !! m !! (n-m)) else 0)
-waysMemo = map (\m -> map (ways m) [0..]) [0..]
+waysMemo = [[ways m n | n <- [0..]] | m <- [0..]]
 
 ans = sum [(ways m len) - 1 | m <- [2..4]]
 main = putStrLn (show ans)

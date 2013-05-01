@@ -23,7 +23,8 @@ public final class p214 implements EulerSolution {
 		int[] totientChainLength = new int[LIMIT + 1];
 		totientChainLength[0] = 0;
 		long sum = 0;
-		for (int i = 1; i < LIMIT; i++) {  // Fill table in ascending order because totients are strictly decreasing
+		// Fill table in ascending order because totient chains are strictly decreasing
+		for (int i = 1; i < LIMIT; i++) {
 			int chainlen = totientChainLength[totient[i]] + 1;
 			totientChainLength[i] = chainlen;
 			if (chainlen == 25 && totient[i] == i - 1)  // i is prime iff totient(i) = i-1

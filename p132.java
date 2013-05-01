@@ -18,7 +18,7 @@ public final class p132 implements EulerSolution {
 		int sum = 0;
 		int count = 0;
 		for (int i = 2; count < 40; i++) {
-			if (isPrime(i) && repunitMod(1000000000, i) == 0) {
+			if (Library.isPrime(i) && repunitMod(1000000000, i) == 0) {
 				sum += i;
 				count++;
 			}
@@ -29,15 +29,6 @@ public final class p132 implements EulerSolution {
 	
 	private static int repunitMod(int k, int m) {
 		return (Library.powMod(10, k, m * 9) - 1) / 9;
-	}
-	
-	
-	private boolean[] isPrime = {};
-	
-	private boolean isPrime(int n) {
-		if (n >= isPrime.length)
-			isPrime = Library.listPrimality(n * 4);
-		return isPrime[n];
 	}
 	
 }
