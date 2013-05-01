@@ -14,37 +14,42 @@ public final class p191 implements EulerSolution {
 	}
 	
 	
+	private static final int NUM_DAYS = 30;
+	private static final int MAX_ABSENT = 2;
+	private static final int MAX_LATE = 1;
+	
+	
 	public String run() {
-		long[][][] dp = new long[31][3][2];  // dp[i][j][k] is the number of prize strings of exactly length i with exactly j absences at the tail and exactly k lates in the whole string
-		
-		dp[0][0][0] = 1;
-		for (int i = 1; i < dp.length; i++) {
-			for (int j = 0; j < dp[i].length; j++) {
-				for (int k = 0; k < dp[i][j].length; k++) {
-					int sum = 0;
-					
-					// Select which state to append to the tail:
-					
-					// On time
-					if (j == 0)
-						sum += dp[i - 1][0][k] + dp[i - 1][1][k] + dp[i - 1][2][k];
-					
-					// Late
-					if (j == 0 && k == 1)
-						sum += dp[i - 1][0][0] + dp[i - 1][1][0] + dp[i - 1][2][0];
-					
-					// Absent
-					if (j == 1)
-						sum += dp[i - 1][0][k];
-					if (j == 2)
-						sum += dp[i - 1][1][k];
-					
-					dp[i][j][k] = sum;
+		// numPrizeStrings[i][j][k] is the number of prize strings of length i with
+		// exactly j absences at the tail and exactly k lates in the whole string
+		long[][][] numPrizeStrings = new long[NUM_DAYS + 1][MAX_ABSENT + 1][MAX_LATE + 1];
+		numPrizeStrings[0][0][0] = 1;
+		for (int i = 1; i <= NUM_DAYS; i++) {
+			for (int j = 0; j <= MAX_ABSENT; j++) {
+				for (int k = 0; k <= MAX_LATE; k++) {
+					// Count which states can be appended to the tail
+					long sum;
+					if (j == 0) {
+						sum = 0;
+						for (int l = 0; l <= MAX_ABSENT; l++)
+							sum += numPrizeStrings[i - 1][l][k];  // On time
+						if (k > 0) {
+							for (int l = 0; l <= MAX_ABSENT; l++)
+								sum += numPrizeStrings[i - 1][l][k - 1];  // Late
+						}
+					} else
+						sum = numPrizeStrings[i - 1][j - 1][k];  // Absent
+					numPrizeStrings[i][j][k] = sum;
 				}
 			}
 		}
 		
-		return Long.toString(dp[30][0][0] + dp[30][0][1] + dp[30][1][0] + dp[30][1][1] + dp[30][2][0] + dp[30][2][1]);
+		long sum = 0;
+		for (int j = 0; j <= MAX_ABSENT; j++) {
+			for (int k = 0; k <= MAX_LATE; k++)
+				sum += numPrizeStrings[NUM_DAYS][j][k];
+		}
+		return Long.toString(sum);
 	}
 	
 }
