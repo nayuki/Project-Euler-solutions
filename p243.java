@@ -42,9 +42,13 @@ public final class p243 implements EulerSolution {
 	
 	
 	private static int nextPrime(int n) {
-		if (n < 0 || n == 2147483647)
+		if (n < 0)
 			throw new IllegalArgumentException();
-		do n++;
+		do {
+			if (n == Integer.MAX_VALUE)
+				throw new IllegalArgumentException();
+			n++;
+		}
 		while (!Library.isPrime(n));
 		return n;
 	}
