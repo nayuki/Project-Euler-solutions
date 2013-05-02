@@ -31,7 +31,7 @@ public final class p012 implements EulerSolution {
 			if (n % i == 0)
 				count += 2;
 		}
-		if (n % end == 0)  // Perfect square
+		if (end * end == n)  // Perfect square
 			count++;
 		return count;
 	}
