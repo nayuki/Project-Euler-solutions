@@ -25,16 +25,11 @@ public final class p102 implements EulerSolution {
 	
 	
 	private static boolean isInTriangle(int index, int x, int y) {
-		int[] triangle = TRIANGLES[index];
-		int a = sign((triangle[0] - triangle[2]) * (y - triangle[1]) - (triangle[1] - triangle[3]) * (x - triangle[0]));
-		int b = sign((triangle[2] - triangle[4]) * (y - triangle[3]) - (triangle[3] - triangle[5]) * (x - triangle[2]));
-		int c = sign((triangle[4] - triangle[0]) * (y - triangle[5]) - (triangle[5] - triangle[1]) * (x - triangle[4]));
+		int[] t = TRIANGLES[index];
+		int a = Integer.signum((t[0] - t[2]) * (y - t[1]) - (t[1] - t[3]) * (x - t[0]));
+		int b = Integer.signum((t[2] - t[4]) * (y - t[3]) - (t[3] - t[5]) * (x - t[2]));
+		int c = Integer.signum((t[4] - t[0]) * (y - t[5]) - (t[5] - t[1]) * (x - t[4]));
 		return a == 0 || b == 0 || c == 0 || (a == b && b == c);
-	}
-	
-	
-	private static int sign(int x) {
-		return (x >> 31) | ((-x) >>> 31);
 	}
 	
 	
