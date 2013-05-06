@@ -37,7 +37,7 @@ public final class p166 implements EulerSolution {
 			int g = sum - d - e - f;  if (g < 0 || g > 9) continue;
 			if (a + num[5] + num[7] + d != sum || num[0] + num[4] + num[8] + g != sum) continue;
 			count++;
-		} while(increment(num));
+		} while (increment(num));
 		return Integer.toString(count);
 	}
 	
