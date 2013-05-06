@@ -22,7 +22,10 @@ public final class p160 implements EulerSolution {
 	// The last 5 digits of n!.
 	private static long factorialLast(long n) {
 		long twos = countFactors(n, 2) - countFactors(n, 5);  // Always non-negative for every n
-		return factorialish(n) * powMod(2, twos, 100000) % 100000;
+		// We can reduce 'twos' because there is a cycle: 2^5 = 2^2505 = 32 mod 100000
+		if (twos >= 2505)
+			twos = (twos - 5) % 2500 + 5;
+		return factorialish(n) * Library.powMod(2, (int)twos, 100000) % 100000;
 	}
 	
 	
@@ -73,18 +76,6 @@ public final class p160 implements EulerSolution {
 			return 0;
 		else
 			return end / n + countFactors(end / n, n);
-	}
-	
-	
-	private static long powMod(long x, long y, long m) {
-		if (y < 0)
-			throw new IllegalArgumentException();
-		long z = 1;
-		for (; y != 0; y >>>= 1, x = x * x % m) {
-			if ((y & 1) != 0)
-				z = z * x % m;
-		}
-		return z;
 	}
 	
 }
