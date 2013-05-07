@@ -11,21 +11,25 @@ import java.math.BigInteger;
 
 final class Library {
 	
+	// Returns the reverse of the given string.
 	public static String reverse(String s) {
 		return new StringBuilder(s).reverse().toString();
 	}
 	
 	
-	public static boolean isPalindrome(int x) {
-		return isPalindrome(Integer.toString(x));
-	}
-	
-	
+	// Tests whether the given string is a palindrome.
 	public static boolean isPalindrome(String s) {
 		return s.equals(reverse(s));
 	}
 	
 	
+	// Tests whether the given integer is a palindrome in decimal.
+	public static boolean isPalindrome(int x) {
+		return isPalindrome(Integer.toString(x));
+	}
+	
+	
+	// Returns floor(sqrt(x)).
 	public static int sqrt(int x) {
 		if (x < 0)
 			throw new IllegalArgumentException("Square root of negative number");
@@ -39,6 +43,7 @@ final class Library {
 	}
 	
 	
+	// Returns floor(sqrt(x)).
 	public static long sqrt(long x) {
 		if (x < 0)
 			throw new IllegalArgumentException("Square root of negative number");
@@ -52,17 +57,21 @@ final class Library {
 	}
 	
 	
-	// Does not check for overflow
+	// Returns x to the power of y.
 	public static int pow(int x, int y) {
 		if (y < 0)
 			throw new IllegalArgumentException("Negative exponent");
 		int z = 1;
-		for (int i = 0; i < y; i++)
+		for (int i = 0; i < y; i++) {
+			if (Integer.MAX_VALUE / z < x)
+				throw new ArithmeticException("Overflow");
 			z *= x;
+		}
 		return z;
 	}
 	
 	
+	// Returns x^y mod m.
 	public static int powMod(int x, int y, int m) {
 		if (x < 0)
 			throw new IllegalArgumentException("Negative base not handled");
@@ -83,6 +92,7 @@ final class Library {
 	}
 	
 	
+	// Returns x^-1 mod m. Note that x * x^-1 mod m = x^-1 * x mod m = 1.
 	public static int reciprocalMod(int x, int m) {
 		if (m < 0 || x < 0 || x >= m)
 			throw new IllegalArgumentException();
@@ -107,11 +117,7 @@ final class Library {
 	}
 	
 	
-	public static BigInteger binomial(int n, int k) {
-		return factorial(n).divide(factorial(n - k).multiply(factorial(k)));
-	}
-	
-	
+	// Returns n!.
 	public static BigInteger factorial(int n) {
 		if (n < 0)
 			throw new IllegalArgumentException("Factorial of negative number");
@@ -122,6 +128,13 @@ final class Library {
 	}
 	
 	
+	// Returns n choose k.
+	public static BigInteger binomial(int n, int k) {
+		return factorial(n).divide(factorial(n - k).multiply(factorial(k)));
+	}
+	
+	
+	// Returns the largest non-negative integer that divides both x and y.
 	public static int gcd(int x, int y) {
 		while (y != 0) {
 			int z = x % y;
@@ -132,9 +145,10 @@ final class Library {
 	}
 	
 	
+	// Tests whether the given integer is prime.
 	public static boolean isPrime(int x) {
 		if (x < 0)
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Negative number");
 		if (x == 0 || x == 1)
 			return false;
 		else if (x == 2)
@@ -151,9 +165,12 @@ final class Library {
 	}
 	
 	
+	// Returns a Boolean array 'isPrime' where isPrime[i] indicates whether i is prime, for 0 <= i <= n.
+	// For a large batch of queries, this is faster than calling isPrime() for each integer. 
+	// For example: listPrimality(100) = {false, false, true, true, false, true, false, true, false, false, ...}.
 	public static boolean[] listPrimality(int n) {
 		if (n < 0)
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Negative size");
 		boolean[] prime = new boolean[n + 1];
 		if (n >= 2)
 			prime[2] = true;
@@ -170,7 +187,11 @@ final class Library {
 	}
 	
 	
+	// Returns all the prime numbers less than or equal to n, in ascending order.
+	// For example: listPrimes(100) = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, ..., 83, 89, 97}.
 	public static int[] listPrimes(int n) {
+		if (n < 0)
+			throw new IllegalArgumentException("Negative size");
 		boolean[] isPrime = listPrimality(n);
 		int count = 0;
 		for (boolean b : isPrime) {
@@ -188,28 +209,34 @@ final class Library {
 	}
 	
 	
-	public static int totient(int x) {
-		if (x <= 0)
+	// Returns the number of integers in the range [1, n] that are coprime with n.
+	// For example, totient(12) = 4 because these integers are coprime with 12: 1, 5, 7, 11.
+	public static int totient(int n) {
+		if (n <= 0)
 			throw new IllegalArgumentException("Totient of non-positive integer");
 		int p = 1;
-		for (int i = 2, end = Library.sqrt(x); i <= end; i++) {  // Trial division
-			if (x % i == 0) {  // Found a factor
+		for (int i = 2, end = Library.sqrt(n); i <= end; i++) {  // Trial division
+			if (n % i == 0) {  // Found a factor
 				p *= i - 1;
-				x /= i;
-				while (x % i == 0) {
+				n /= i;
+				while (n % i == 0) {
 					p *= i;
-					x /= i;
+					n /= i;
 				}
-				end = Library.sqrt(x);
+				end = Library.sqrt(n);
 			}
 		}
-		if (x != 1)
-			p *= x - 1;
+		if (n != 1)
+			p *= n - 1;
 		return p;
 	}
 	
 	
+	// Returns an array 'totients' where totients[i] == totient(i), for 0 <= i <= n.
+	// For a large batch of queries, this is faster than calling totient() for each integer.
 	public static int[] listTotients(int n) {
+		if (n < 0)
+			throw new IllegalArgumentException("Negative size");
 		int[] totients = new int[n + 1];
 		for (int i = 0; i <= n; i++)
 			totients[i] = i;
@@ -224,6 +251,7 @@ final class Library {
 	}
 	
 	
+	// Returns the same result as x.multiply(y), but is faster for large integers.
 	public static BigInteger multiply(BigInteger x, BigInteger y) {
 		final int CUTOFF = 1536;
 		if (x.bitLength() <= CUTOFF || y.bitLength() <= CUTOFF) {  // Base case
@@ -247,6 +275,11 @@ final class Library {
 	}
 	
 	
+	// Advances the given sequence to the next permutation and returns whether a permutation was performed.
+	// If no permutation was performed, then the input state was already the last possible permutation (a non-ascending sequence).
+	// For example:
+	// - nextPermutation({0,0,1}) changes the argument array to {0,1,0} and returns true.
+	// - nextPermutation({1,0,0}) leaves the argument array unchanged and returns false.
 	public static boolean nextPermutation(int[] a) {
 		int i, n = a.length;
 		for (i = n - 2; ; i--) {
