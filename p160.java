@@ -15,12 +15,12 @@ public final class p160 implements EulerSolution {
 	
 	
 	public String run() {
-		return Long.toString(factorialLast(1000000000000L));
+		return Long.toString(factorialSuffix(1000000000000L));
 	}
 	
 	
-	// The last 5 digits of n!.
-	private static long factorialLast(long n) {
+	// The last 5 digits of n!, excluding trailing zeros.
+	private static long factorialSuffix(long n) {
 		long twos = countFactors(n, 2) - countFactors(n, 5);  // Always non-negative for every n
 		// We can reduce 'twos' because there is a cycle: 2^5 = 2^2505 = 32 mod 100000
 		if (twos >= 2505)
@@ -30,14 +30,14 @@ public final class p160 implements EulerSolution {
 	
 	
 	// Equal to n! but with all factors of 2 and 5 removed and then modulo 10^5.
-	// The identity f(n) = of(n) * ef(n) (mod 10^5) is true by definition.
+	// The identity factorialIsh(n) = oddFactorialish(n) * evenFactorialish(n) (mod 10^5) is true by definition.
 	private static long factorialish(long n) {
 		return evenFactorialish(n) * oddFactorialish(n) % 100000;
 	}
 	
 	
-	// The product of {all even numbers up to and including n}, but with all factors of 2 and 5 removed and then modulo 10^5.
-	// For example, ef(9) only considers the numbers {2, 4, 6, 8}. Divide each number by 2 to get {1, 2, 3, 4}. Thus ef(9) = f(4).
+	// The product of {all even numbers from 1 to n}, but with all factors of 2 and 5 removed and then modulo 10^5.
+	// For example, evenFactorialish(9) only considers the numbers {2, 4, 6, 8}. Divide each number by 2 to get {1, 2, 3, 4}. Thus evenFactorialish(9) = factorialish(4).
 	private static long evenFactorialish(long n) {
 		if (n == 0)
 			return 1;
@@ -46,19 +46,20 @@ public final class p160 implements EulerSolution {
 	}
 	
 	
-	// The product of {all odd numbers up to and including n}, but with all factors of 2 and 5 removed and then modulo 10^5.
-	// By definition, of() never considers any number that has a factor of 2. The product of the numbers that not a multiple of 5 are accumulated by factorialoid(). Those that are a multiple of 5 are handled recursively by of(), noting that they are still odd after dividing by 5.
+	// The product of {all odd numbers from 1 to n}, but with all factors of 2 and 5 removed and then modulo 10^5.
+	// By definition, oddFactorialish() never considers any number that has a factor of 2. The product of the numbers that not a multiple of 5 are accumulated by factorialCoprime().
+	// Those that are a multiple of 5 are handled recursively by oddFactorialish(), noting that they are still odd after dividing by 5.
 	private static long oddFactorialish(long n) {
 		if (n == 0)
 			return 1;
 		else
-			return oddFactorialish(n / 5) * factorialoid(n) % 100000;
+			return oddFactorialish(n / 5) * factorialCoprime(n) % 100000;
 	}
 	
 	
-	// The product of {all numbers coprime with 10 up to and including n}, modulo 10^5.
-	// The input argument can be taken modulo 10^5 because factorialoid(10^5) = 1 and the processing behaves the same for each block of 10^5 consecutive numbers.
-	private static long factorialoid(long n) {
+	// The product of {all numbers from 1 to n that are coprime with 10}, modulo 10^5.
+	// The input argument can be taken modulo 10^5 because factorialoid(10^5) = 1, and each block of 10^5 numbers behaves the same.
+	private static long factorialCoprime(long n) {
 		n %= 100000;
 		long product = 1;
 		for (int i = 1; i <= n; i++) {
