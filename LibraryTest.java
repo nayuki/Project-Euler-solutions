@@ -1,7 +1,9 @@
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.math.BigInteger;
 import java.util.Arrays;
 
 import org.junit.Test;
@@ -133,6 +135,56 @@ public final class LibraryTest {
 	
 	
 	@Test
+	public void testFactorial() {
+		assertEquals(new BigInteger("1"), Library.factorial(0));
+		assertEquals(new BigInteger("1"), Library.factorial(1));
+		assertEquals(new BigInteger("2"), Library.factorial(2));
+		assertEquals(new BigInteger("6"), Library.factorial(3));
+		assertEquals(new BigInteger("24"), Library.factorial(4));
+		assertEquals(new BigInteger("120"), Library.factorial(5));
+		assertEquals(new BigInteger("720"), Library.factorial(6));
+		assertEquals(new BigInteger("6227020800"), Library.factorial(13));
+		assertEquals(new BigInteger("51090942171709440000"), Library.factorial(21));
+		assertEquals(new BigInteger("265252859812191058636308480000000"), Library.factorial(30));
+	}
+	
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testFactorialInvalid0() {
+		Library.factorial(-1);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testFactorialInvalid1() {
+		Library.factorial(-563);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testFactorialInvalid2() {
+		Library.factorial(Integer.MIN_VALUE);
+	}
+	
+	
+	@Test
+	public void testBinomial() {
+		assertEquals(new BigInteger("1"), Library.binomial(0, 0));
+		assertEquals(new BigInteger("1"), Library.binomial(1, 0));
+		assertEquals(new BigInteger("1"), Library.binomial(1, 1));
+		assertEquals(new BigInteger("1"), Library.binomial(2, 0));
+		assertEquals(new BigInteger("2"), Library.binomial(2, 1));
+		assertEquals(new BigInteger("1"), Library.binomial(2, 2));
+		assertEquals(new BigInteger("1"), Library.binomial(3, 0));
+		assertEquals(new BigInteger("3"), Library.binomial(3, 1));
+		assertEquals(new BigInteger("3"), Library.binomial(3, 2));
+		assertEquals(new BigInteger("1"), Library.binomial(3, 3));
+		assertEquals(new BigInteger("35"), Library.binomial(7, 4));
+		assertEquals(new BigInteger("120"), Library.binomial(10, 7));
+		assertEquals(new BigInteger("21"), Library.binomial(21, 20));
+		assertEquals(new BigInteger("88749815264600"), Library.binomial(50, 28));
+	}
+	
+	
+	@Test
 	public void testGcd() {
 		assertEquals(0, Library.gcd(0, 0));
 		assertEquals(1, Library.gcd(0, 1));
@@ -179,11 +231,33 @@ public final class LibraryTest {
 	}
 	
 	
+	@Test(expected=IllegalArgumentException.class)
+	public void testIsPrimeInvalid0() {
+		Library.isPrime(-1);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testIsPrimeInvalid1() {
+		Library.isPrime(-3000);
+	}
+	
+	
 	@Test
 	public void testListPrimality() {
 		boolean[] isPrime = Library.listPrimality(1000);
 		for (int i = 0; i < isPrime.length; i++)
 			assertEquals(Library.isPrime(i), isPrime[i]);
+	}
+	
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testListPrimalityInvalid0() {
+		Library.listPrimality(-1);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testListPrimalityInvalid1() {
+		Library.listPrimality(-3000);
 	}
 	
 	
@@ -195,6 +269,17 @@ public final class LibraryTest {
 			assertTrue(primes[i] < primes[i + 1]);
 		for (int i = 0; i <= limit; i++)
 			assertEquals(Library.isPrime(i), Arrays.binarySearch(primes, i) >= 0);
+	}
+	
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testListPrimesInvalid0() {
+		Library.listPrimes(-1);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testListPrimesInvalid1() {
+		Library.listPrimes(-3000);
 	}
 	
 	
@@ -223,11 +308,60 @@ public final class LibraryTest {
 	}
 	
 	
+	@Test(expected=IllegalArgumentException.class)
+	public void testTotientInvalid0() {
+		Library.totient(-1);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testTotientInvalid1() {
+		Library.totient(-3000);
+	}
+	
+	
 	@Test
 	public void testListTotients() {
 		int[] totients = Library.listTotients(1000);
 		for (int i = 1; i < totients.length; i++)
 			assertEquals(Library.totient(i), totients[i]);
+	}
+	
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testListTotientsInvalid0() {
+		Library.listTotients(-1);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testListTotientsInvalid1() {
+		Library.listTotients(-3000);
+	}
+	
+	
+	@Test
+	public void testNextPermutation() {
+		int[] arr;
+		
+		assertFalse(Library.nextPermutation(new int[0]));
+		
+		arr = new int[]{0, 0, 1};
+		assertTrue(Library.nextPermutation(arr));  assertArrayEquals(new int[]{0, 1, 0}, arr);
+		assertTrue(Library.nextPermutation(arr));  assertArrayEquals(new int[]{1, 0, 0}, arr);
+		assertFalse(Library.nextPermutation(arr));  assertArrayEquals(new int[]{1, 0, 0}, arr);
+		
+		arr = new int[]{1, 2, 3, 5, 9};
+		assertTrue(Library.nextPermutation(arr));  assertArrayEquals(new int[]{1, 2, 3, 9, 5}, arr);
+		assertTrue(Library.nextPermutation(arr));  assertArrayEquals(new int[]{1, 2, 5, 3, 9}, arr);
+		assertTrue(Library.nextPermutation(arr));  assertArrayEquals(new int[]{1, 2, 5, 9, 3}, arr);
+		assertTrue(Library.nextPermutation(arr));  assertArrayEquals(new int[]{1, 2, 9, 3, 5}, arr);
+		assertTrue(Library.nextPermutation(arr));  assertArrayEquals(new int[]{1, 2, 9, 5, 3}, arr);
+		assertTrue(Library.nextPermutation(arr));  assertArrayEquals(new int[]{1, 3, 2, 5, 9}, arr);
+		assertTrue(Library.nextPermutation(arr));  assertArrayEquals(new int[]{1, 3, 2, 9, 5}, arr);
+		assertTrue(Library.nextPermutation(arr));  assertArrayEquals(new int[]{1, 3, 5, 2, 9}, arr);
+		assertTrue(Library.nextPermutation(arr));  assertArrayEquals(new int[]{1, 3, 5, 9, 2}, arr);
+		for (int i = 0; i < 110; i++)
+			assertTrue(Library.nextPermutation(arr));
+		assertFalse(Library.nextPermutation(arr));  assertArrayEquals(new int[]{9, 5, 3, 2, 1}, arr);
 	}
 	
 }
