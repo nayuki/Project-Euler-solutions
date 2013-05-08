@@ -23,7 +23,7 @@
  - * Blue tile    (n>=4): Rest of the row can be anything of length n-4. Add ways[n-4].
  -}
 ways 0 = 1
-ways n = sum (take (min n 4) (drop (max (n-4) 0) waysMemo))
+ways n = sum $ take (min n 4) $ drop (max (n-4) 0) waysMemo
 waysMemo = map ways [0..]
 
 ans = ways 50

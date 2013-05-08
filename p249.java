@@ -41,14 +41,8 @@ public final class p249 implements EulerSolution {
 		
 		long sum = 0;
 		for (int i = 0; i < numSubsets.length; i++) {
-			if (isPrime[i]) {
-				// Optimization of modulo because we know 0 <= sum + numSubsets[i] < 2 * MODULUS
-				long temp = sum + numSubsets[i];
-				if (temp < MODULUS)
-					sum = temp;
-				else
-					sum = temp - MODULUS;
-			}
+			if (isPrime[i])
+				sum = (sum + numSubsets[i]) % MODULUS;
 		}
 		return Long.toString(sum);
 	}

@@ -14,14 +14,18 @@ public final class p357 implements EulerSolution {
 	}
 	
 	
-	private boolean[] isPrime = Library.listPrimality(100000001);
+	private static final int LIMIT = 100000000;
+	
+	
+	// Because the maximum value of (i + n/i) is (n + 1)
+	private boolean[] isPrime = Library.listPrimality(LIMIT + 1);
 	
 	
 	public String run() {
 		long sum = 0;
-		for (int i = 0; i <= 100000000; i++) {
-			if (isPrimeGenerating(i))
-				sum += i;
+		for (int n = 0; n <= LIMIT; n++) {
+			if (isPrimeGenerating(n))
+				sum += n;
 		}
 		return Long.toString(sum);
 	}

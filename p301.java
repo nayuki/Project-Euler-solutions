@@ -15,12 +15,12 @@ public final class p301 implements EulerSolution {
 	
 	
 	public String run() {
-		long count = 0;
+		int count = 0;
 		for (int i = 1; i <= (1 << 30); i++) {
 			if ((i ^ (i * 2) ^ (i * 3)) == 0)
 				count++;
 		}
-		return Long.toString(count);
+		return Integer.toString(count);
 	}
 	
 }
