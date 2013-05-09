@@ -7,11 +7,7 @@
  -}
 
 
-factorial 0 = 1
-factorial n = n * (factorial (n - 1))
-
-binomial n k = div (factorial n) ((factorial (n - k)) * (factorial k))
-
-ans = sum [1 | n <- [1..100], r <- [1..n], binomial n r > 1000000]
-
 main = putStrLn (show ans)
+ans = length [() | n <- [1..100], r <- [0..n], binomial n r > 10^6]
+
+binomial n r = div (product [n-r+1..n]) (product [1..r])
