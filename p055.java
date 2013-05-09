@@ -28,9 +28,8 @@ public final class p055 implements EulerSolution {
 	
 	private static boolean isLychrel(int n) {
 		BigInteger temp = BigInteger.valueOf(n);
-		for (int i = 0; i < 50; i++) {
+		for (int i = 0; i < 49; i++) {
 			temp = temp.add(new BigInteger(Library.reverse(temp.toString())));
-			
 			if (Library.isPalindrome(temp.toString()))
 				return false;
 		}
