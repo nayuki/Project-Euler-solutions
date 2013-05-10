@@ -14,12 +14,13 @@ public final class p173 implements EulerSolution {
 	}
 	
 	
+	private static final int TILES = 1000000;
+	
 	public String run() {
 		int count = 0;
-		for (int a = 3; a <= 1000000; a++) {  // Outer square length
-			for (int b = a - 2; b >= 1; b -= 2) {  // Inner square length
-				long tiles = (long)a * a - (long)b * b;
-				if (tiles > 1000000)
+		for (int n = 3; n <= TILES / 4 + 1; n++) {  // Outer square length
+			for (int k = n - 2; k >= 1; k -= 2) {   // Inner square length
+				if ((long)n * n - (long)k * k > TILES)
 					break;
 				count++;
 			}
