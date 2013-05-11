@@ -9,6 +9,9 @@
 import Data.Bits (shiftL, shiftR)
 
 
+main = putStrLn (show ans)
+ans = head $ filter (\n -> (divisors n) > 500) $ map triangleNumber [0..]
+
 triangleNumber i = div (i * (i + 1)) 2
 
 divisors :: Int -> Int
@@ -23,6 +26,3 @@ sqrtInt n = sqrtAlpha 1 where
 		| otherwise = sqrtAlpha (shiftL i 1)
 	sqrtBeta 0 acc = acc
 	sqrtBeta i acc = sqrtBeta (div i 2) (if (i + acc)^2 <= n then i + acc else acc)
-
-ans = head $ filter (\n -> (divisors n) > 500) $ map triangleNumber [0..]
-main = putStrLn (show ans)

@@ -7,11 +7,11 @@
  -}
 
 
+main = putStrLn (show ans)
+ans = largestPrimeFactor 600851475143
+
 largestPrimeFactor n
 	| smallestPrimeFactor == n = n
 	| otherwise = largestPrimeFactor (div n smallestPrimeFactor)
 	where
 		smallestPrimeFactor = head [k | k <- [2..n], mod n k == 0]
-
-ans = largestPrimeFactor 600851475143
-main = putStrLn (show ans)

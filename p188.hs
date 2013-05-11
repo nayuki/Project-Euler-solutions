@@ -7,6 +7,9 @@
  -}
 
 
+main = putStrLn (show ans)
+ans = tetrationMod 1777 1855 (10^8)
+
 -- Need to use Integer instead of Int to prevent silent overflow
 
 tetrationMod :: Integer -> Integer -> Integer -> Integer
@@ -23,6 +26,3 @@ powMod x y m
 
 totient :: Integer -> Integer
 totient x = fromIntegral $ length [() | y <- [1..x], gcd x y == 1]
-
-ans = tetrationMod 1777 1855 (10^8)
-main = putStrLn (show ans)

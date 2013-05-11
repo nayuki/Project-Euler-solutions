@@ -22,9 +22,9 @@
  - * Green tile   (n>=3): Rest of the row can be anything of length n-3. Add ways[n-3].
  - * Blue tile    (n>=4): Rest of the row can be anything of length n-4. Add ways[n-4].
  -}
+main = putStrLn (show ans)
+ans = ways 50
+
 ways 0 = 1
 ways n = sum $ take (min n 4) $ drop (max (n-4) 0) waysMemo
 waysMemo = map ways [0..]
-
-ans = ways 50
-main = putStrLn (show ans)

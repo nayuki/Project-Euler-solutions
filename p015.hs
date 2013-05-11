@@ -7,8 +7,7 @@
  -}
 
 
-binomial n r = div (product [n-r+1..n]) (product [1..r])
-
+main = putStrLn (show ans)
 ans = binomial 40 20
 
-main = putStrLn (show ans)
+binomial n r = div (product [n-r+1..n]) (product [1..r])

@@ -21,11 +21,11 @@
  -     by anything of length n-k-1. So add ways[n-m-1] + ways[n-m-2] + ... + ways[0].
  -}
 m = 50
+main = putStrLn (show ans)
+ans = findExceeding 0
+
 ways 0 = 1
 ways n = (waysMemo !! (n-1)) + (if n >= m then (1 + (sum (take (n-m) waysMemo))) else 0)
 waysMemo = map ways [0..]
 
 findExceeding n = if (ways n) > 1000000 then n else (findExceeding (n+1))
-
-ans = findExceeding 0
-main = putStrLn (show ans)

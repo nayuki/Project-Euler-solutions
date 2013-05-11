@@ -29,5 +29,5 @@
  - In conclusion, if a is even, the maximum remainder is a(a-2);
  - otherwise a is odd, the maximum remainder is a(a-1).
  -}
-ans = sum [a * (a - (if (mod a 2) == 0 then 2 else 1)) | a <- [3..1000]]
 main = putStrLn (show ans)
+ans = sum [a * (a - (if (mod a 2) == 0 then 2 else 1)) | a <- [3..1000]]

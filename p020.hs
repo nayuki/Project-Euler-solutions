@@ -7,13 +7,12 @@
  -}
 
 
-factorial n = product [1..n]
+main = putStrLn (show ans)
+ans = sum (digits (factorial 100))
 
 digits 0 = [0]
 digits n = reverse (digits' n) where
 	digits' 0 = []
 	digits' n = (mod n 10) : (digits' (div n 10))
 
-ans = sum (digits (factorial 100))
-
-main = putStrLn (show ans)
+factorial n = product [1..n]

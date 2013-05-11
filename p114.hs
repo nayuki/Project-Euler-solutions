@@ -19,11 +19,11 @@
  -   * Otherwise k < n, this red block is followed by a black square, then followed
  -     by anything of length n-k-1. So add ways[n-4] + ways[n-5] + ... + ways[0].
  -}
+main = putStrLn (show ans)
+ans = ways 50
+
 ways 0 = 1
 ways 1 = 1
 ways 2 = 1
 ways n = (waysMemo !! (n-1)) + 1 + (sum (take (n-3) waysMemo))
 waysMemo = map ways [0..]
-
-ans = ways 50
-main = putStrLn (show ans)

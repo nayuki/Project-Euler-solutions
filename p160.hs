@@ -7,14 +7,8 @@
  -}
 
 
-md n = mod n (10^5)  -- Modulo reduction for this problem
-
-powMod _ 0 = md 1
-powMod x y
-	| mod y 2 == 0 = temp
-	| otherwise    = md (temp * x)
-	where
-		temp = powMod (md (x * x)) (div y 2)
+main = putStrLn (show ans)
+ans = f (10^12 :: Integer)
 
 -- factorialSuffix
 f n = md $ (g n) * (powMod 2 ((c 2 n) - (c 5 n)))
@@ -37,6 +31,12 @@ h n = foldl (\x y -> md $ x * y) 1 [k | k <- [1..md n], (mod k 2) /= 0 && (mod k
 c n 0 = 0
 c n m = (div m n) + (c n (div m n))
 
--- main
-ans = f (10^12 :: Integer)
-main = putStrLn (show ans)
+-- Modular arithmetic
+powMod _ 0 = md 1
+powMod x y
+	| mod y 2 == 0 = temp
+	| otherwise    = md (temp * x)
+	where
+		temp = powMod (md (x * x)) (div y 2)
+
+md n = mod n (10^5)  -- Modulo reduction for this problem

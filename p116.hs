@@ -21,9 +21,9 @@
  - At the end, return ways[length]-1 to exclude the case where the row is all black squares.
  -}
 len = 50
+main = putStrLn (show ans)
+ans = sum [(ways m len) - 1 | m <- [2..4]]
+
 ways _ 0 = 1
 ways m n = (waysMemo !! m !! (n-1)) + (if n >= m then (waysMemo !! m !! (n-m)) else 0)
 waysMemo = [[ways m n | n <- [0..]] | m <- [0..]]
-
-ans = sum [(ways m len) - 1 | m <- [2..4]]
-main = putStrLn (show ans)

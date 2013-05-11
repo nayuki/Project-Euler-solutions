@@ -16,6 +16,9 @@ initialLimit = 100000
 setSize = 5
 
 
+main = putStrLn (show ans)
+ans = findSmallerSetSum initialLimit (-1)
+
 findSmallerSetSum :: Int -> Int -> Int
 findSmallerSetSum limit bestAns = let nextAns = (findSetSum [] limit primes) in
 	if nextAns /= -1 then (findSmallerSetSum (nextAns - 1) nextAns) else bestAns
@@ -35,6 +38,3 @@ findSetSum foundSet limit nextPrimes
 isConcatPrime :: Int -> Int -> Bool
 isConcatPrime x y = (isPrime $ readInt $ show x ++ show y) && (isPrime $ readInt $ show y ++ show x)
 	where readInt = read :: String -> Int
-
-ans = findSmallerSetSum initialLimit (-1)
-main = putStrLn (show ans)

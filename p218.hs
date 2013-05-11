@@ -75,6 +75,5 @@
  - then their sum mod 7 is not a residue, so r^2 != s^2 + t^2. Therefore it must be that s^2 = t^2 mod 7
  - (e.g. s = 3 mod 7, t = 4, r = 2 mod 7).
  -}
-
-ans = 0
 main = putStrLn (show ans)
+ans = 0
