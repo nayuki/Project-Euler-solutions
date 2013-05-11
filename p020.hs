@@ -7,13 +7,12 @@
  -}
 
 
-factorial 0 = 1
-factorial n = n * (factorial (n - 1))
+factorial n = product [1..n]
 
 digits 0 = [0]
-digits n = reverse (digits' n)
-digits' 0 = []
-digits' n = (mod n 10) : (digits' (div n 10))
+digits n = reverse (digits' n) where
+	digits' 0 = []
+	digits' n = (mod n 10) : (digits' (div n 10))
 
 ans = sum (digits (factorial 100))
 

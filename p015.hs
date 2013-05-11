@@ -7,10 +7,7 @@
  -}
 
 
-factorial 0 = 1
-factorial n = n * (factorial (n - 1))
-
-binomial n k = div (factorial n) ((factorial (n - k)) * (factorial k))
+binomial n r = div (product [n-r+1..n]) (product [1..r])
 
 ans = binomial 40 20
 

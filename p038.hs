@@ -11,9 +11,9 @@ import List (sort)
 
 
 digits 0 = [0]
-digits n = digits' n
-digits' 0 = []
-digits' n = (digits' (div n 10)) ++ [mod n 10]
+digits n = digits' n where
+	digits' 0 = []
+	digits' n = (digits' (div n 10)) ++ [mod n 10]
 
 number d = number' d 0
 number' [] acc = acc
