@@ -29,8 +29,7 @@ public final class p047 implements EulerSolution {
 	
 	private static int countDistinctPrimeFactors(int n) {
 		int count = 0;
-		int end = Library.sqrt(n);
-		for (int i = 2; i <= end; i++) {
+		for (int i = 2, end = Library.sqrt(n); i <= end; i++) {
 			if (n % i == 0) {
 				do n /= i;
 				while (n % i == 0);

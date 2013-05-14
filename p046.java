@@ -15,18 +15,32 @@ public final class p046 implements EulerSolution {
 	
 	
 	public String run() {
-		boolean[] isPrime = Library.listPrimality(10000);
-		outer:
-		for (int i = 3; i < isPrime.length; i += 2) {
-			if (!isPrime[i]) {
-				for (int j = 1; 2 * j * j <= i; j++) {
-					if (isPrime[i - 2 * j * j])
-						continue outer;
-				}
+		for (int i = 2; ; i++) {
+			if (!satisfiesConjecture(i))
 				return Integer.toString(i);
-			}
 		}
-		throw new RuntimeException("Not found");
+	}
+	
+	
+	private boolean satisfiesConjecture(int n) {
+		if (n % 2 == 0 || isPrime(n))
+			return true;
+		
+		// Now n is an odd composite number
+		for (int i = 1; i * i * 2 <= n; i++) {
+			if (isPrime(n - i * i * 2))
+				return true;
+		}
+		return false;
+	}
+	
+	
+	private boolean[] isPrime = {};
+	
+	private boolean isPrime(int n) {
+		if (n >= isPrime.length)
+			isPrime = Library.listPrimality(n * 2);
+		return isPrime[n];
 	}
 	
 }

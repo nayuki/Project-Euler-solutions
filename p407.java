@@ -114,7 +114,6 @@ public final class p407 implements EulerSolution {
 				max = Math.max(solns[j], max);
 			sum += max;
 		}
-		
 		return Long.toString(sum);
 	}
 	

@@ -11,5 +11,5 @@
 
 CountDigits[n_] := Length[IntegerDigits[n]]
 ContFrac[n_] := FromContinuedFraction[ContinuedFraction[Sqrt[2], n]]
-NumExceedDenom[n_] := CountDigits[Numerator[ContFrac[n]]] > CountDigits[Denominator[ContFrac[n]]]
-Length[Select[Range[2, 1001], NumExceedDenom]]
+NumExceedDenomQ[n_] := CountDigits[Numerator[ContFrac[n]]] > CountDigits[Denominator[ContFrac[n]]]
+Length[Select[Range[2, 1001], NumExceedDenomQ]]

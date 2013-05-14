@@ -71,6 +71,7 @@ Problem 063: 49
 Problem 064: 1322
 Problem 065: 272
 Problem 067: 7273
+Problem 068: 6531031914842725
 Problem 069: 510510
 Problem 070: 8319823
 Problem 071: 428570
@@ -90,6 +91,7 @@ Problem 084: 101524
 Problem 085: 2772
 Problem 087: 1097343
 Problem 089: 743
+Problem 091: 14234
 Problem 092: 8581146
 Problem 093: 1258
 Problem 094: 518408346
