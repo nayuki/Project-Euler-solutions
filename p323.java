@@ -24,12 +24,12 @@ public final class p323 implements EulerSolution {
 	 *     This is the cumulative distribution function that we want.
 	 *   The probability that some digit is 0 is 1 - (1 - 1/2^n)^32.
 	 * 
-	 * The probability distribution function is simply pdf(n) = cdf(n) - cdf(n-1).
+	 * The probability density function is simply pdf(n) = cdf(n) - cdf(n-1).
 	 * So the expected value of the index where the number becomes all 1's is
 	 * sum(n * pdf(n) for n = 0 to infinity).
 	 */
 	public String run() {
-		// Computes an approximate answer using floating-point; not guaranteed to be correct.
+		// Computes an approximate answer using floating-point, not guaranteed to be correct.
 		// However, the Mathematica version of the solution is exact.
 		double sum = 0;
 		for (int n = 1; ; n++) {
