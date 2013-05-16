@@ -91,7 +91,9 @@ public final class EulerTest {
 	@Test public void testP085() { assertEquals("2772"               , new p085().run()); }
 	@Test public void testP086() { assertEquals("1818"               , new p086().run()); }
 	@Test public void testP087() { assertEquals("1097343"            , new p087().run()); }
+	@Test public void testP088() { assertEquals("7587457"            , new p088().run()); }
 	@Test public void testP089() { assertEquals("743"                , new p089().run()); }
+	@Test public void testP090() { assertEquals("1217"               , new p090().run()); }
 	@Test public void testP091() { assertEquals("14234"              , new p091().run()); }
 	@Test public void testP092() { assertEquals("8581146"            , new p092().run()); }
 	@Test public void testP093() { assertEquals("1258"               , new p093().run()); }
