@@ -19,8 +19,9 @@ public final class p085 implements EulerSolution {
 	public String run() {
 		int bestDiff = Integer.MAX_VALUE;
 		int bestArea = -1;
-		for (int w = 1; w <= Library.sqrt(TARGET); w++) {
-			for (int h = 1; h <= Library.sqrt(TARGET); h++) {
+		int sqrt = Library.sqrt(TARGET);
+		for (int w = 1; w <= sqrt; w++) {
+			for (int h = 1; h <= sqrt; h++) {
 				int diff = Math.abs(numberOfRectangles(w, h) - TARGET);
 				if (diff < bestDiff) {
 					bestDiff = diff;
