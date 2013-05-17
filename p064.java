@@ -7,8 +7,8 @@
  */
 
 import java.math.BigInteger;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public final class p064 implements EulerSolution {
@@ -30,28 +30,13 @@ public final class p064 implements EulerSolution {
 	
 	// Returns the period of the continued fraction of sqrt(n)
 	private static int getSqrtContinuedFractionPeriod(int n) {
-		BigInteger d = BigInteger.valueOf(n);
-		QuadraticSurd val = new QuadraticSurd(BigInteger.ZERO, BigInteger.ONE, BigInteger.ONE, d);
-		val = iterate(val);
-		Set<QuadraticSurd> seen = new HashSet<QuadraticSurd>();
-		while (!seen.contains(val)) {
-			seen.add(val);
-			val = iterate(val);
-		}
-		
-		int i = 0;
-		QuadraticSurd start = val;
+		Map<QuadraticSurd,Integer> seen = new HashMap<QuadraticSurd,Integer>();
+		QuadraticSurd val = new QuadraticSurd(BigInteger.ZERO, BigInteger.ONE, BigInteger.ONE, BigInteger.valueOf(n));
 		do {
-			val = iterate(val);
-			i++;
-		} while (!val.equals(start));
-		return i;
-	}
-	
-	
-	// Returns 1 / (x - floor(x))
-	private static QuadraticSurd iterate(QuadraticSurd x) {
-		return x.subtract(new QuadraticSurd(x.floor(), BigInteger.ZERO, BigInteger.ONE, x.d)).reciprocal();
+			seen.put(val, seen.size());
+			val = val.subtract(new QuadraticSurd(val.floor(), BigInteger.ZERO, BigInteger.ONE, val.d)).reciprocal();
+		} while (!seen.containsKey(val));
+		return seen.size() - seen.get(val);
 	}
 	
 	
