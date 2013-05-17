@@ -37,7 +37,7 @@ public final class p066 implements EulerSolution {
 		int minN = -1;
 		BigInteger maxX = BigInteger.ZERO;
 		for (int n = 2; n <= 1000; n++) {
-			if (Library.sqrt(n) * Library.sqrt(n) == n)
+			if (Library.isSquare(n))
 				continue;
 			BigInteger x = smallestSolutionX(n);
 			if (x.compareTo(maxX) > 0) {

@@ -21,10 +21,7 @@ public final class p064 implements EulerSolution {
 	public String run() {
 		int count = 0;
 		for (int i = 1; i <= 10000; i++) {
-			int sqrt = Library.sqrt(i);
-			if (sqrt * sqrt == i)
-				continue;
-			if (getSqrtContinuedFractionPeriod(i) % 2 == 1)
+			if (!Library.isSquare(i) && getSqrtContinuedFractionPeriod(i) % 2 == 1)
 				count++;
 		}
 		return Integer.toString(count);

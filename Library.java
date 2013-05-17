@@ -57,6 +57,15 @@ final class Library {
 	}
 	
 	
+	// Tests whether x is a perfect square.
+	public static boolean isSquare(int x) {
+		if (x < 0)
+			return false;
+		int sqrt = Library.sqrt(x);
+		return sqrt * sqrt == x;
+	}
+	
+	
 	// Returns x to the power of y.
 	public static int pow(int x, int y) {
 		if (y < 0)

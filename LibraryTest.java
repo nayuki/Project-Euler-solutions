@@ -135,6 +135,38 @@ public final class LibraryTest {
 	
 	
 	@Test
+	public void testIsSquare() {
+		assertTrue(Library.isSquare(0));
+		assertTrue(Library.isSquare(1));
+		assertTrue(Library.isSquare(4));
+		assertTrue(Library.isSquare(9));
+		assertTrue(Library.isSquare(16));
+		assertTrue(Library.isSquare(25));
+		assertTrue(Library.isSquare(36));
+		assertTrue(Library.isSquare(100));
+		assertTrue(Library.isSquare(65536));
+		assertTrue(Library.isSquare(2147302921));
+		assertTrue(Library.isSquare(2147395600));
+		assertFalse(Library.isSquare(Integer.MIN_VALUE));
+		assertFalse(Library.isSquare(Integer.MIN_VALUE + 1));
+		assertFalse(Library.isSquare(-8654038));
+		assertFalse(Library.isSquare(-300));
+		assertFalse(Library.isSquare(-4));
+		assertFalse(Library.isSquare(-1));
+		assertFalse(Library.isSquare(2));
+		assertFalse(Library.isSquare(3));
+		assertFalse(Library.isSquare(5));
+		assertFalse(Library.isSquare(6));
+		assertFalse(Library.isSquare(7));
+		assertFalse(Library.isSquare(8));
+		assertFalse(Library.isSquare(120));
+		assertFalse(Library.isSquare(9999));
+		assertFalse(Library.isSquare(Integer.MAX_VALUE - 1));
+		assertFalse(Library.isSquare(Integer.MAX_VALUE));
+	}
+	
+	
+	@Test
 	public void testFactorial() {
 		assertEquals(new BigInteger("1"), Library.factorial(0));
 		assertEquals(new BigInteger("1"), Library.factorial(1));

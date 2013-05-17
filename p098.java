@@ -55,7 +55,7 @@ public final class p098 implements EulerSolution {
 				aNum = aNum * 10 + assignments[a.charAt(i)];
 				bNum = bNum * 10 + assignments[b.charAt(i)];
 			}
-			if (isSquare(aNum) && isSquare(bNum))
+			if (Library.isSquare(aNum) && Library.isSquare(bNum))
 				return Math.max(aNum, bNum);
 			else
 				return 0;
@@ -83,12 +83,6 @@ public final class p098 implements EulerSolution {
 		char[] c = s.toCharArray();
 		Arrays.sort(c);
 		return new String(c);
-	}
-	
-	
-	private static boolean isSquare(int n) {
-		int sqrt = Library.sqrt(n);
-		return sqrt * sqrt == n;
 	}
 	
 	

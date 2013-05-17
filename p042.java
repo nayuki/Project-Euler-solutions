@@ -34,7 +34,7 @@ public final class p042 implements EulerSolution {
 		// Finally, we need y to be an integer, and y to be at least 1 (we don't want things that come before the first triangle number).
 		
 		int det = 8 * x + 1;
-		if (Library.sqrt(det) * Library.sqrt(det) != det)
+		if (!Library.isSquare(det))
 			return false;
 		
 		int temp = Library.sqrt(det) - 1;
