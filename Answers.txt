@@ -70,6 +70,7 @@ Problem 062: 127035954683
 Problem 063: 49
 Problem 064: 1322
 Problem 065: 272
+Problem 066: 661
 Problem 067: 7273
 Problem 068: 6531031914842725
 Problem 069: 510510
