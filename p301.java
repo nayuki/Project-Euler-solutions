@@ -32,12 +32,17 @@ public final class p301 implements EulerSolution {
 	 *   iff the binary representation of n does not have consecutive '1' bits.
 	 */
 	public String run() {
-		int count = 0;
-		for (int n = 1; n <= (1 << 30); n++) {
-			if ((n & (n << 1)) == 0)
-				count++;
+		// numStrings[i][j] is the number of bit strings with length i that begin with the bit j and has no consecutive 1's
+		int[][] numStrings = new int[31][2];
+		numStrings[1][0] = numStrings[1][1] = 1;
+		for (int i = 2; i < numStrings.length; i++) {  // Dynamic programming
+			numStrings[i][0] = numStrings[i - 1][0] + numStrings[i - 1][1];
+			numStrings[i][1] = numStrings[i - 1][0];
 		}
-		return Integer.toString(count);
+		
+		// The value numStrings[0][30] + numStrings[1][30] is almost the final answer we want. It considers bit strings in the range [0, 2^30).
+		// But according to the problem description, we want to exclude 0 and include 2^30. Both are losing positions, so the adjustments cancel out.
+		return Integer.toString(numStrings[30][0] + numStrings[30][1]);
 	}
 	
 }

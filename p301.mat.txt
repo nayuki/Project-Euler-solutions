@@ -25,8 +25,10 @@
  *   iff (n & 2n) << 1 = 0                    (by cancelling on both sides)
  *   iff n & 2n = 0                           (left-shifting doesn't change zeroness)
  *   iff the binary representation of n does not have consecutive '1' bits.
+ * 
+ * numStrings[i, j] is the number of bit strings with length i that begin with the bit j and has no consecutive 1's.
+ * The value numStrings[30, 0] + numStrings[30, 1] is almost the final answer we want. It considers bit strings in the range [0, 2^30).
+ * But according to the problem description, we want to exclude 0 and include 2^30. Both are losing positions, so the adjustments cancel out.
  *)
-cnt = 0;
-For[n = 1, n <= 2^30, n++,
-  If[BitAnd[n, 2n] == 0, cnt++]]
-cnt
+numStrings[i_, j_] := numStrings[i, j] = If[i < 2, i, numStrings[i - 1, 0] + If[j == 0, numStrings[i - 1, 1], 0]]  (* Memoization *)
+numStrings[30, 0] + numStrings[30, 1]

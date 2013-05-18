@@ -6,8 +6,6 @@
  - https://github.com/nayuki/Project-Euler-solutions
  -}
 
-import Data.Bits ((.&.))
-
 
 {- 
  - In a game of Nim where both players play with perfect strategy, if the current state is a collection (multiset) of piles
@@ -27,4 +25,10 @@ import Data.Bits ((.&.))
  -   iff the binary representation of n does not have consecutive '1' bits.
  -}
 main = putStrLn (show ans)
-ans = length [() | n <- ([1..2^30] :: [Integer]), n .&. (n * 2) == 0]
+ans = (numStrings0 !! 30) + (numStrings1 !! 30)
+-- The value (numStrings0 !! 30) + (numStrings1 !! 30) is almost the final answer we want. It considers bit strings in the range [0, 2^30).
+-- But according to the problem description, we want to exclude 0 and include 2^30. Both are losing positions, so the adjustments cancel out.
+
+-- numStrings_j !! i is the number of bit strings with length i that begin with the bit j and has no consecutive 1's
+numStrings0 = 0 : 1 : [(numStrings0 !! (i-1)) + (numStrings1 !! (i-1)) | i <- [2..]]
+numStrings1 = 0 : 1 : (tail numStrings0)
