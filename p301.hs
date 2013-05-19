@@ -23,12 +23,26 @@
  -   iff (n & 2n) << 1 = 0                    (by cancelling on both sides)
  -   iff n & 2n = 0                           (left-shifting doesn't change zeroness)
  -   iff the binary representation of n does not have consecutive '1' bits.
+ - 
+ - How many binary strings of length i have no consecutive 1's?
+ -   First partition the set into strings that begin with a 0 and strings that begin with a 1.
+ -   For those that begin with a 0, the rest of the string can be any string of length i-1 that doesn't have consecutive 1's.
+ -   For those that begin with a 1, the rest of the string can be any string of length i-1 that begins with a 0 and doesn't have consecutive 1's.
+ - Let numStrings(i, j) be the number of bit strings of length i that begin with the bit j and have no consecutive 1's. Then:
+ -   numStrings(1, 0) = 1.  (base case)
+ -   numStrings(1, 1) = 1.  (base case)
+ -   numStrings(i, 0) = numStrings(i-1, 0) + numStrings(i-1, 1).  (for i >= 2)
+ -   numStrings(i, 1) = numStrings(i-1, 0).                       (for i >= 2)
+ - This corresponds to a shifted Fibonacci sequence, because:
+ -   numStrings(i, 0) = numStrings(i-1, 0) + numStrings(i-2, 0).  (substitute)
+ -   numStrings(1, 0) = 1.  (base case)
+ -   numStrings(2, 0) = 2.  (derived)
+ -   So numStrings(i, 0) = fibonacci(i + 1).
+ - What we want is numStrings(30, 0) + numStrings(30, 1) = numStrings(31, 0) = fibonacci(32).
+ - 
+ - Actually, that answer considers numbers in the range [0, 2^30), which is not exactly what we want.
+ - According to the problem statement, we need to exclude 0 and include 2^30. But both are losing positions, so the adjustments cancel out.
  -}
 main = putStrLn (show ans)
-ans = (numStrings0 !! 30) + (numStrings1 !! 30)
--- The value (numStrings0 !! 30) + (numStrings1 !! 30) is almost the final answer we want. It considers bit strings in the range [0, 2^30).
--- But according to the problem description, we want to exclude 0 and include 2^30. Both are losing positions, so the adjustments cancel out.
-
--- numStrings_j !! i is the number of bit strings with length i that begin with the bit j and has no consecutive 1's
-numStrings0 = 0 : 1 : [(numStrings0 !! (i-1)) + (numStrings1 !! (i-1)) | i <- [2..]]
-numStrings1 = 0 : 1 : (tail numStrings0)
+ans = fibonacci 32
+fibonacci = 0 : 1 : (zipWith (+) fibonacci (tail fibonacci))
