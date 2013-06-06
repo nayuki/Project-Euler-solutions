@@ -1,0 +1,15 @@
+(* 
+ * Solution to Project Euler problem 121
+ * By Nayuki Minase
+ * 
+ * http://nayuki.eigenstate.org/page/project-euler-solutions
+ * https://github.com/nayuki/Project-Euler-solutions
+ *)
+
+
+(* Use this in Wolfram Mathematica *)
+
+WinProb[n_, i_, b_] = If[i == n, Boole[2b > n],
+  (i + 1) / (i + 2) * WinProb[n, i + 1, b + 0] +
+  1       / (i + 2) * WinProb[n, i + 1, b + 1]];
+Floor[1/WinProb[15, 0, 0]]
