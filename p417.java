@@ -18,32 +18,12 @@ public final class p417 implements EulerSolution {
 	
 	private static final int LIMIT = Library.pow(10, 8);
 	
-	private int[] primePowers;  // Sorted powers of all primes except 2 and 5, up to LIMIT - e.g. 3, 7, 9, 11, 13, 17, 19, 23, 27, 29, ...
-	private int[] orders;       // orders[i] is the smallest positive integer such that 10^orders[i] = 1 mod primePowers[i]
-	private int[] smallestPrimeFactor;  // Requires 400 MB
-	
 	
 	public String run() {
 		int[] primes = Library.listPrimes(LIMIT);
 		
-		// Build sorted array of prime powers
-		int len = 0;
-		primePowers = new int[primes.length * 2];
-		for (int p : primes) {
-			if (p == 2 || p == 5)
-				continue;
-			for (long temp = p; temp <= LIMIT; temp *= p) {
-				if (len == primePowers.length)
-					primePowers = Arrays.copyOf(primePowers, len * 2);
-				primePowers[len] = (int)temp;
-				len++;
-			}
-		}
-		primePowers = Arrays.copyOf(primePowers, len);
-		Arrays.sort(primePowers);
-		
-		// Build array of smallest prime factors
-		smallestPrimeFactor = new int[LIMIT + 1];
+		// Compute all smallest prime factors
+		int[] smallestPrimeFactor = new int[LIMIT + 1];  // Requires 400 MB
 		for (int p : primes) {
 			smallestPrimeFactor[p] = p;
 			if ((long)p * p <= LIMIT) {
@@ -54,11 +34,27 @@ public final class p417 implements EulerSolution {
 			}
 		}
 		
-		// Build array of orders
-		orders = new int[primePowers.length];
-		for (int i = 0; i < primePowers.length; i++) {
-			int p = primePowers[i];
-			int ord = totient(p);
+		// Build sorted array of prime powers.
+		// primePowersAndTotients[i] = ((p^k) << 32) | (totient(p^k)), for some prime p and some integer k >= 1
+		// p is all the primes in 'primes' except 2 and 5. k is such that all p^k <= LIMIT.
+		// The array is sorted in ascending order of p^k. The sequence of p^k begins with 3, 7, 9, 11, 13, 17, 19, 23, 27, 29, ... .
+		DynamicArray ppTotTemp = new DynamicArray(primes.length * 2);
+		for (int p : primes) {
+			if (p == 2 || p == 5)
+				continue;
+			for (long temp = p, tot = p - 1; temp <= LIMIT; temp *= p, tot *= p)
+				ppTotTemp.add(temp << 32 | tot);
+		}
+		long[] primePowersAndTotients = ppTotTemp.toArray();
+		Arrays.sort(primePowersAndTotients);
+		
+		// Build array of cycle lengths
+		// ppcl[i] is the smallest positive integer such that 10^ppcl[i] = 1 mod primePowers[i]
+		int[] primePowerCycleLengths = new int[primePowersAndTotients.length];
+		for (int i = 0; i < primePowersAndTotients.length; i++) {
+			long ppTot = primePowersAndTotients[i];
+			int p = (int)(ppTot >>> 32);
+			int ord = (int)ppTot;
 			int remainingFactors = ord;
 			while (remainingFactors > 1) {
 				int q = smallestPrimeFactor[remainingFactors];
@@ -66,53 +62,72 @@ public final class p417 implements EulerSolution {
 					ord /= q;
 				remainingFactors /= q;
 			}
-			orders[i] = ord;
+			primePowerCycleLengths[i] = ord;
 		}
+		// smallestPrimeFactor is now dead
 		
+		// Compute cycle lengths from building numbers using prime powers
+		int[] cycleLengths = new int[LIMIT + 1];
+		cycleLengths[1] = 1;  // Starter value for accumulating LCM
+		for (int i = 0; i < primePowersAndTotients.length; i++) {
+			int p = (int)(primePowersAndTotients[i] >>> 32);
+			int ord = primePowerCycleLengths[i];
+			for (int j = 0, end = LIMIT / p; j <= end; j++) {
+				if (cycleLengths[j] != 0)
+					cycleLengths[j * p] = lcm(cycleLengths[j], ord);
+			}
+		}
+		cycleLengths[1] = 0;  // The true value that we want
+		
+		// Add up the cycle lengths
 		long sum = 0;
-		for (int i = 3; i <= LIMIT; i++)
-			sum += getCycleLength(i);
+		for (int i = 3; i <= LIMIT; i++) {
+			// Remove factors of 2 and 5
+			int n = i;
+			while ((n & 1) == 0)
+				n >>>= 1;
+			while (n % 5 == 0)
+				n /= 5;
+			if (n > 1 && cycleLengths[n] == 0)
+				throw new AssertionError();
+			sum += cycleLengths[n];
+		}
 		return Long.toString(sum);
-	}
-	
-	
-	private int getCycleLength(int n) {
-		// Remove factors of 2 and 5
-		while ((n & 1) == 0)
-			n >>>= 1;
-		while (n % 5 == 0)
-			n /= 5;
-		if (n == 1)
-			return 0;
-		
-		int result = 1;
-		while (n > 1) {
-			int p = smallestPrimeFactor[n];
-			int q = p;
-			for (n /= p; n % p == 0; n /= p)
-				q *= p;
-			// q is p^k, where p is the smallest prime that divides n (primary criteria) and k is maximal (secondary criteria)
-			int i = Arrays.binarySearch(primePowers, q);
-			result = lcm(orders[i], result);
-		}
-		return result;
-	}
-	
-	
-	private int totient(int n) {
-		int result = 1;
-		while (n > 1) {
-			int p = smallestPrimeFactor[n];
-			result *= p - 1;
-			for (n /= p; n % p == 0; n /= p)
-				result *= p;
-		}
-		return result;
 	}
 	
 	
 	private static int lcm(int x, int y) {
 		return x / Library.gcd(x, y) * y;
+	}
+	
+	
+	
+	private static class DynamicArray {
+		
+		private long[] data;
+		private int length;
+		
+		
+		public DynamicArray(int initCapacity) {
+			if (initCapacity < 1)
+				throw new IllegalArgumentException();
+			data = new long[initCapacity];
+			length = 0;
+		}
+		
+		
+		public void add(long x) {
+			if (length == data.length)
+				data = Arrays.copyOf(data, length * 2);
+			data[length] = x;
+			length++;
+		}
+		
+		
+		public long[] toArray() {
+			return Arrays.copyOf(data, length);  // Trim
+		}
+		
 	}
 	
 }
