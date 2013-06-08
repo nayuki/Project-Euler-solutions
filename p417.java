@@ -6,6 +6,8 @@
  * https://github.com/nayuki/Project-Euler-solutions
  */
 
+import java.util.Arrays;
+
 
 public final class p417 implements EulerSolution {
 	
@@ -16,56 +18,56 @@ public final class p417 implements EulerSolution {
 	
 	private static final int LIMIT = Library.pow(10, 8);
 	
+	private int[] primePowers;  // Sorted powers of all primes except 2 and 5, up to LIMIT - e.g. 3, 7, 9, 11, 13, 17, 19, 23, 27, 29, ...
+	private int[] orders;       // orders[i] is the smallest positive integer such that 10^orders[i] = 1 mod primePowers[i]
 	private int[] smallestPrimeFactor;  // Requires 400 MB
-	private int[] totients;  // Also requires 400 MB
 	
 	
-	/* 
-	 * To calculate the decimal expansion of 1/n digit by digit, we emulate the long division algorithm.
-	 * We use a sequence of variables x_0, x_1, etc. to denote the numerical state of the algorithm, starting with x_0 = 1.
-	 * To generate the i'th digit, we compute floor(x_i / n). (However, we do not need to do this for this problem.)
-	 * To calculate the next state, we compute x_{i+1} = (x_i * 10) mod n. (This is what we will analyze.)
-	 * 
-	 * We can see that with x_0 = 1, the i'th state is x_i = 10^i mod n.
-	 * The decimal expansion cycles if and only if the states are the same at two indexes - in other
-	 * words, there are some natural numbers i and j such that x_i = (10^i mod n) = (10^j mod n) = x_j.
-	 * 
-	 * First, consider the simple case where n is coprime with 10. Then 10 is invertible modulo n,
-	 * so we divide by 10^j on both sides, getting 10^{i-j} = 1 mod n. This is our condition for cycling.
-	 * By Euler's theorem, 10^totient(n) = 1 mod n, so the decimal expansion is guaranteed to cycle
-	 * every totient(n) digits. The actual cycle length is defined to be the smallest positive integer k
-	 * such that 10^k = 1 mod n. From group theory, we know that k must divide totient(n);
-	 * in other words, k is a factor of totient(n).
-	 * 
-	 * Otherwise, the harder case is where n is not coprime with 10. Then factorize out all the 2's and 5's
-	 * so that n = 2^a * 5^b * m, where a and b are as large as possible, thus m is coprime with 10.
-	 * If we get m = 1, then the decimal expansion will terminate, so we exit this case with a cycle length of 0.
-	 * For the first max(a, b) states of x_i, the state necessarily does not repeat because x_i keeps gaining
-	 * factors of 2 or 5 or both, which it never loses afterward. After this, for i >= max(a, b), we always have
-	 * x_i = 0 mod 2^a and x_i = 0 mod 5^b. So for i >= max(a, b), when trying to find cycles, we only need
-	 * to consider the behavior of 10^i mod m, which reduces back to the simple case. Therefore, we divide out
-	 * all the factors of 2 and 5 from n, and then we apply the same logic as the simple case on m instead of n.
-	 * 
-	 * To find the smallest positive k such that 10^k = 1 mod n, already knowing that 10^totient(n) = 1 mod n,
-	 * first let's take k = totient(n). Now take some p > 1 (not necessarily prime) as a factor of k.
-	 * If 10^(k/p) = 1 mod n, then take the new k as k/p. We keep removing factors from k as long as the equation
-	 * 10^k = 1 mod n still holds. When all the remaining factors are essential (i.e. removing any one of them
-	 * will break the equation), we will have found the smallest satisfactory number k. This is the cycle length.
-	 */
 	public String run() {
+		int[] primes = Library.listPrimes(LIMIT);
+		
+		// Build sorted array of prime powers
+		int len = 0;
+		primePowers = new int[primes.length * 2];
+		for (int p : primes) {
+			if (p == 2 || p == 5)
+				continue;
+			for (long temp = p; temp <= LIMIT; temp *= p) {
+				if (len == primePowers.length)
+					primePowers = Arrays.copyOf(primePowers, len * 2);
+				primePowers[len] = (int)temp;
+				len++;
+			}
+		}
+		primePowers = Arrays.copyOf(primePowers, len);
+		Arrays.sort(primePowers);
+		
+		// Build array of smallest prime factors
 		smallestPrimeFactor = new int[LIMIT + 1];
-		for (int i = 2; i < smallestPrimeFactor.length; i++) {
-			if (smallestPrimeFactor[i] == 0) {
-				smallestPrimeFactor[i] = i;
-				if ((long)i * i <= LIMIT) {
-					for (int j = i * i; j <= LIMIT; j += i) {
-						if (smallestPrimeFactor[j] == 0)
-							smallestPrimeFactor[j] = i;
-					}
+		for (int p : primes) {
+			smallestPrimeFactor[p] = p;
+			if ((long)p * p <= LIMIT) {
+				for (int i = p * p; i <= LIMIT; i += p) {
+					if (smallestPrimeFactor[i] == 0)
+						smallestPrimeFactor[i] = p;
 				}
 			}
 		}
-		totients = Library.listTotients(LIMIT);
+		
+		// Build array of orders
+		orders = new int[primePowers.length];
+		for (int i = 0; i < primePowers.length; i++) {
+			int p = primePowers[i];
+			int ord = totient(p);
+			int remainingFactors = ord;
+			while (remainingFactors > 1) {
+				int q = smallestPrimeFactor[remainingFactors];
+				if (Library.powMod(10, ord / q, p) == 1)
+					ord /= q;
+				remainingFactors /= q;
+			}
+			orders[i] = ord;
+		}
 		
 		long sum = 0;
 		for (int i = 3; i <= LIMIT; i++)
@@ -75,22 +77,42 @@ public final class p417 implements EulerSolution {
 	
 	
 	private int getCycleLength(int n) {
-		while (n % 2 == 0)
-			n /= 2;
+		// Remove factors of 2 and 5
+		while ((n & 1) == 0)
+			n >>>= 1;
 		while (n % 5 == 0)
 			n /= 5;
 		if (n == 1)
 			return 0;
 		
-		int result = totients[n];
-		int remainingFactors = result;
-		while (remainingFactors > 1) {
-			int p = smallestPrimeFactor[remainingFactors];
-			if (Library.powMod(10, result / p, n) == 1)
-				result /= p;
-			remainingFactors /= p;
+		int result = 1;
+		while (n > 1) {
+			int p = smallestPrimeFactor[n];
+			int q = p;
+			for (n /= p; n % p == 0; n /= p)
+				q *= p;
+			// q is p^k, where p is the smallest prime that divides n (primary criteria) and k is maximal (secondary criteria)
+			int i = Arrays.binarySearch(primePowers, q);
+			result = lcm(orders[i], result);
 		}
 		return result;
+	}
+	
+	
+	private int totient(int n) {
+		int result = 1;
+		while (n > 1) {
+			int p = smallestPrimeFactor[n];
+			result *= p - 1;
+			for (n /= p; n % p == 0; n /= p)
+				result *= p;
+		}
+		return result;
+	}
+	
+	
+	private static int lcm(int x, int y) {
+		return x / Library.gcd(x, y) * y;
 	}
 	
 }
