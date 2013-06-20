@@ -14,8 +14,8 @@
  * of sqrt(n) to get the minimum solution to the Pell's equation x^2 - n y^2 = 1.
  *)
 MinSolutionX[n_] := If[IntegerQ[Sqrt[n]], 0,
-  With[{w = ContinuedFraction[Sqrt[n]]},
-    With[{z = FromContinuedFraction[Join[Most[w], Most[Last[w]]]]},
+  Block[{w = ContinuedFraction[Sqrt[n]]},
+    Block[{z = FromContinuedFraction[Join[Most[w], Most[Last[w]]]]},
       If[Mod[Length[Last[w]], 2] == 0, Numerator[z], Numerator[z]^2 + Denominator[z]^2]]]]
 minXs = Map[MinSolutionX, Range[1000]];
 Position[minXs, Max[minXs]]
