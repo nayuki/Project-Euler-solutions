@@ -163,6 +163,7 @@ public final class EulerTest {
 	@Test public void testP280() { assertEquals("430.088247"         , new p280().run()); }
 	@Test public void testP301() { assertEquals("2178309"            , new p301().run()); }
 	@Test public void testP303() { assertEquals("1111981904675169"   , new p303().run()); }
+	@Test public void testP304() { assertEquals("283988410192"       , new p304().run()); }
 	@Test public void testP323() { assertEquals("6.3551758451"       , new p323().run()); }
 	@Test public void testP345() { assertEquals("13938"              , new p345().run()); }
 	@Test public void testP357() { assertEquals("1739023853137"      , new p357().run()); }
