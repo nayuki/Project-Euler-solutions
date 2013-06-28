@@ -67,6 +67,8 @@ public final class p433 implements EulerSolution {
 	 * The smallest Fibonacci number that is at least as large as LIMIT is F(34) = 5702887.
 	 * We can compute that E(F(33), F(34)) = 33. So we know for all 1 <= x, y <= LIMIT < F(34), we have E(x, y) < 33.
 	 * Therefore the sum of E(x, y) for all 1 <= x, y <= LIMIT is less than 33 * LIMIT^2 ~= 2^49.55, which is less than 63 bits.
+	 * 
+	 * Note: This computation takes 3.0 days on my CPU. Expect something within this order of magnitude on yours.
 	 */
 	
 	private long sum = 0;
@@ -74,7 +76,7 @@ public final class p433 implements EulerSolution {
 	public String run() {
 		for (int i = 1; i <= LIMIT; i++)
 			exploreGcds(i, 0, 0);
-		return Long.toString(sum * 2 + LIMIT * (LIMIT + 1) / 2);
+		return Long.toString(sum * 2 + (long)LIMIT * (LIMIT + 1) / 2);
 	}
 	
 	
