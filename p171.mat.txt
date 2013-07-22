@@ -1,0 +1,19 @@
+(* 
+ * Solution to Project Euler problem 171
+ * By Nayuki Minase
+ * 
+ * http://nayuki.eigenstate.org/page/project-euler-solutions
+ * https://github.com/nayuki/Project-Euler-solutions
+ *)
+
+
+(* Use this in Wolfram Mathematica *)
+
+len = 20;
+base = 10;
+md = 10^9;
+
+NumSum[n_, s_] := NumSum[n, s] = If[n == 0, 0, If[s >= 0, Sum[NumSum[n - 1, s - k^2] + k * base^(n - 1) * NumCount[n - 1, s - k^2], {k, 0, base - 1}], 0]]
+NumCount[n_, s_] := NumCount[n, s] = If[n == 0, Boole[s == 0], If[s >= 0, Sum[NumCount[n - 1, s - k^2], {k, 0, base - 1}], 0]]
+
+Mod[Sum[NumSum[len, k^2], {k, Floor[Sqrt[(base - 1)^2 * len]]}], md]
