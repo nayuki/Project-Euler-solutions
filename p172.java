@@ -81,40 +81,41 @@ public final class p172 implements EulerSolution {
 	 * Now, all of the arguments above have no made use of the specific digit values, so there is a certain symmetry in the set of desired sequences.
 	 * In particular, this means exactly 9/10th of all items have a leading zero, hence we multiply by 9/10 to get the final answer.
 	 */
-	private BigInteger totalWays = BigInteger.ZERO;
-	
 	public String run() {
-		partitionAndCount(LENGTH, MAX_COUNT, new ArrayList<Integer>());
+		BigInteger ways = partitionAndCount(LENGTH, MAX_COUNT, new ArrayList<Integer>());
 		
 		// Multiply by (base - 1) / base to discount sequences with leading zeros
 		BigInteger BASE_BI = BigInteger.valueOf(BASE);
-		totalWays = totalWays.multiply(BASE_BI.subtract(BigInteger.ONE));
-		if (totalWays.mod(BASE_BI).signum() != 0)
-			throw new AssertionError();
-		totalWays = totalWays.divide(BASE_BI);
+		ways = ways.multiply(BASE_BI.subtract(BigInteger.ONE));
+		ways = divideExactly(ways, BASE_BI);
 		
-		return totalWays.toString();
+		return ways.toString();
 	}
 	
 	
 	// Expresses 'LENGTH' as a sum of 'BASE' non-increasing terms, where terms to be added are in the range [0, max].
 	// e.g. partitionAndCount(7, 2, [3, 3, 2, 2, 1]) asks us to express 18 as a sum of 5 more terms,
 	// where the new terms have a sum of 7 and each is no greater than 2 and all terms are non-increasing.
-	private void partitionAndCount(int sum, int max, List<Integer> terms) {
+	private BigInteger partitionAndCount(int sum, int max, List<Integer> terms) {
 		if (terms.size() == BASE) {
 			if (sum == 0)
-				countWays(terms);
+				return countWays(terms);
+			else
+				return BigInteger.ZERO;
+			
 		} else {
+			BigInteger result = BigInteger.ZERO;
 			for (int i = Math.min(max, sum); i >= 0; i--) {
 				terms.add(i);
-				partitionAndCount(sum - i, i, terms);
+				result = result.add(partitionAndCount(sum - i, i, terms));
 				terms.remove(terms.size() - 1);
 			}
+			return result;
 		}
 	}
 	
 	
-	private void countWays(List<Integer> freqs) {
+	private BigInteger countWays(List<Integer> freqs) {
 		// The number of times each frequency value occurs
 		int[] histogram = new int[MAX_COUNT + 1];
 		for (int x : freqs)
@@ -130,7 +131,15 @@ public final class p172 implements EulerSolution {
 		for (int x : freqs)
 			ways = ways.divide(Library.factorial(x));
 		
-		totalWays = totalWays.add(ways);
+		return ways;
+	}
+	
+	
+	private static BigInteger divideExactly(BigInteger x, BigInteger y) {
+		BigInteger[] temp = x.divideAndRemainder(y);
+		if (temp[1].signum() != 0)
+			throw new IllegalArgumentException("Not divisible");
+		return temp[0];
 	}
 	
 }
