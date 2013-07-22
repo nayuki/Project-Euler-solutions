@@ -23,7 +23,7 @@ public final class p061 implements EulerSolution {
 	
 	@SuppressWarnings("unchecked")
 	public String run() {
-		// Build table of numbers 
+		// Build table of numbers
 		numbers = new Set[9][100];
 		for (int i = 0; i < numbers.length; i++) {
 			for (int j = 0; j < numbers[i].length; j++)

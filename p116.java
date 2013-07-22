@@ -42,7 +42,7 @@ public final class p116 implements EulerSolution {
 		for (int n = 1; n <= length; n++) {
 			ways[n] += ways[n - 1];
 			if (n >= m)
-				ways[n] += ways[n - m];  
+				ways[n] += ways[n - m];
 		}
 		return ways[length] - 1;
 	}

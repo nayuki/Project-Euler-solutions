@@ -25,7 +25,7 @@ public final class p407 implements EulerSolution {
 	 * Let's focus on the moduli that are prime powers, p^k.
 	 * 
 	 * Claim: The only solutions of a^2 = a mod p^k are a = 0, 1 mod p^k.
-	 * Proof: 
+	 * Proof:
 	 *   First note that a = 0 mod p^k is always a solution. Now consider the case of 0 < a < p^k.
 	 *   Let a = b * p^j, where 0 < b < p^j and b is coprime with p (thus j is as large as possible).
 	 *   Then (b p^j)^2 = b p^j mod p^k, expanding to b^2 p^2j = b p^j mod p^k.

@@ -32,7 +32,7 @@ public final class p280 implements EulerSolution {
 		}
 		
 		double sum = 0;
-		double[] probs = new double[State.NUMBER_OF_STATES]; 
+		double[] probs = new double[State.NUMBER_OF_STATES];
 		probs[State.START_STATE.getId()] = 1;
 		for (int i = 1; ; i++) {
 			// Note: The done state has no outgoing neighbors, so its probability disappears in the next iteration

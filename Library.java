@@ -175,7 +175,7 @@ final class Library {
 	
 	
 	// Returns a Boolean array 'isPrime' where isPrime[i] indicates whether i is prime, for 0 <= i <= n.
-	// For a large batch of queries, this is faster than calling isPrime() for each integer. 
+	// For a large batch of queries, this is faster than calling isPrime() for each integer.
 	// For example: listPrimality(100) = {false, false, true, true, false, true, false, true, false, false, ...}.
 	public static boolean[] listPrimality(int n) {
 		if (n < 0)

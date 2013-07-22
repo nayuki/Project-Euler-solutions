@@ -15,7 +15,7 @@ public final class p073 implements EulerSolution {
 	
 	
 	/* 
-	 * The Stern-Brocot tree is an infinite binary search tree of all positive rational numbers, 
+	 * The Stern-Brocot tree is an infinite binary search tree of all positive rational numbers,
 	 * where each number appears only once and is in lowest terms.
 	 * It is formed by starting with the two sentinels 0/1 and 1/1. Iterating infinitely in any order,
 	 * between any two currently adjacent fractions Ln/Ld and Rn/Rd, insert a new fraction (Ln+Rn)/(Ld+Rd).

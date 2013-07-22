@@ -13,10 +13,10 @@ main = putStrLn (show ans)
 ans = foldl1 max (map product reversedWantedSubstrings)
 
 -- [7, 3, 1, 6, 7, 1, 7, 6, 5, 3, ...]
-digits = map (\c -> (ord c) - (ord '0')) number  
+digits = map (\c -> (ord c) - (ord '0')) number
 
 -- [[], [7], [3,7], [1,3,7], [6,1,3,7], ...]
-reversedPrefixes = scanl (\lst n -> n:lst) [] digits  
+reversedPrefixes = scanl (\lst n -> n:lst) [] digits
 
 -- [[7,6,1,3,7], [1,7,6,1,3], [7,1,7,6,1], ...]
 reversedWantedSubstrings = [take 5 lst | lst <- reversedPrefixes, (length lst) >= 5]

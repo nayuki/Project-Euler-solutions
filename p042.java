@@ -41,7 +41,7 @@ public final class p042 implements EulerSolution {
 		if (temp % 2 != 0)
 			return false;
 		
-		// Now y satisfies 1/2 * y * (y + 1) = x, so x is some kind of extended triangle 
+		// Now y satisfies 1/2 * y * (y + 1) = x, so x is some kind of extended triangle
 		int y = temp / 2;
 		return y >= 1;
 	}

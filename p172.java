@@ -71,7 +71,7 @@ public final class p172 implements EulerSolution {
 	 * Now that we have a partition and a digit value assignment to the frequencies, we can generate permutations.
 	 * For the example above, one possible sequence (and the lexicographically lowest) is 011122233344458899 (length 18).
 	 * If we permute this sequence, the partition and digit-frequency assignments will remain the same.
-	 * So we want to count how many permutations this sequence has. 
+	 * So we want to count how many permutations this sequence has.
 	 * 
 	 * Given a partition and a digit-frequency assignment, how many sequences have this classification?
 	 * Because there are 18 digits, there are 18! raw arrangements of digits for the sequence.
