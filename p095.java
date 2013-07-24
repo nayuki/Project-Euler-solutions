@@ -19,45 +19,39 @@ public final class p095 implements EulerSolution {
 	
 	private static final int LIMIT = 1000000;
 	
-	
 	public String run() {
+		// divisorSum[n] is the sum of all the proper divisors of n
 		int[] divisorSum = new int[LIMIT + 1];
 		for (int i = 1; i <= LIMIT; i++) {
 			for (int j = i * 2; j <= LIMIT; j += i)
 				divisorSum[j] += i;
 		}
 		
-		int[] amicableChainLen = new int[LIMIT + 1];
+		// Analyze the amicable chain length for each number in ascending order
+		int maxChainLen = 0;
+		int minChainElem = -1;
 		for (int i = 0; i <= LIMIT; i++) {
-			int count = 1;
 			Set<Integer> visited = new HashSet<Integer>();
-			visited.add(i);
-			int temp = i;
-			while (true) {
-				int next = divisorSum[temp];
+			for (int count = 1, cur = i; ; count++) {
+				// 'count' is the length of the this amicable chain
+				visited.add(cur);
+				int next = divisorSum[cur];
 				if (next == i) {
-					amicableChainLen[i] = count;
+					if (count > maxChainLen) {
+						minChainElem = i;
+						maxChainLen = count;
+					}
 					break;
-				} else if (next > LIMIT || visited.contains(next)) {
-					amicableChainLen[i] = 0;  // Illegal
-					break;
-				} else {
-					visited.add(next);
-					temp = next;
 				}
-				count++;
+				// Exceeds limit or not a chain (a rho shape instead)
+				else if (next > LIMIT || visited.contains(next))
+					break;
+				else
+					cur = next;
 			}
 		}
 		
-		int maxChainLen = 0;
-		for (int x : amicableChainLen)
-			maxChainLen = Math.max(x, maxChainLen);
-		
-		for (int i = 0; i <= LIMIT; i++) {
-			if (amicableChainLen[i] == maxChainLen)
-				return Integer.toString(i);
-		}
-		throw new AssertionError();
+		return Integer.toString(minChainElem);
 	}
 	
 }
