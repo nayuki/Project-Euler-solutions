@@ -15,41 +15,30 @@ public final class p037 implements EulerSolution {
 	
 	
 	public String run() {
-		int count = 0;
-		int sum = 0;
-		
-		int i = 10;
-		while (count < 11) {
-			if (isTruncatablePrime(i)) {
+		long sum = 0;
+		for (int count = 0, n = 10; count < 11; n++) {
+			if (isTruncatablePrime(n)) {
+				sum += n;
 				count++;
-				sum += i;
 			}
-			i++;
+		}
+		return Long.toString(sum);
+	}
+	
+	
+	private static boolean isTruncatablePrime(int n) {
+		// Test if left-truncatable
+		for (long i = 10; i <= n; i *= 10) {
+			if (!Library.isPrime(n % (int)i))
+				return false;
 		}
 		
-		return Integer.toString(sum);
-	}
-	
-	
-	private static boolean isTruncatablePrime(int x) {
-		return isRightTruncatablePrime(x) && isLeftTruncatablePrime(x);
-	}
-	
-	
-	private static boolean isLeftTruncatablePrime(int x) {
-		for (int i = Library.pow(10, 9); i != 1; i /= 10) {
-			if (!Library.isPrime(x % i))
+		// Test if right-truncatable
+		for (; n != 0; n /= 10) {
+			if (!Library.isPrime(n))
 				return false;
 		}
-		return true;
-	}
-	
-	
-	private static boolean isRightTruncatablePrime(int x) {
-		for (; x != 0; x /= 10) {
-			if (!Library.isPrime(x))
-				return false;
-		}
+		
 		return true;
 	}
 	
