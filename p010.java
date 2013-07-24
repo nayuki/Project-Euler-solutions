@@ -16,14 +16,10 @@ public final class p010 implements EulerSolution {
 	
 	private static final int LIMIT = 2000000;
 	
-	
 	public String run() {
-		boolean[] isPrime = Library.listPrimality(LIMIT - 1);
 		long sum = 0;
-		for (int i = 0; i < isPrime.length; i++) {
-			if (isPrime[i])
-				sum += i;
-		}
+		for (int p : Library.listPrimes(LIMIT - 1))
+			sum += p;
 		return Long.toString(sum);
 	}
 	
