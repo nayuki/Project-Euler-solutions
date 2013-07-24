@@ -17,7 +17,7 @@ public final class p014 implements EulerSolution {
 	
 	
 	private static final int LIMIT = Library.pow(10, 6);
-	private static final BigInteger CACHE_SIZE = BigInteger.valueOf(LIMIT);
+	private static final BigInteger CACHE_SIZE = BigInteger.valueOf(LIMIT);  // Any non-negative number, though there are diminishing returns
 	
 	
 	public String run() {
@@ -41,27 +41,23 @@ public final class p014 implements EulerSolution {
 		if (n.signum() < 0)
 			throw new IllegalArgumentException();
 		
-		int index;
-		if (n.compareTo(CACHE_SIZE) < 0)
-			index = n.intValue();
-		else
-			index = -1;
+		if (n.compareTo(CACHE_SIZE) >= 0)  // Caching not available
+			return collatzChainLengthDirect(n);
 		
-		if (index != -1 && collatzChainLength[index] != 0)
-			return collatzChainLength[index];
-		
-		int result;
-		if (n.equals(BigInteger.ONE))
-			result = 1;
+		int index = n.intValue();  // Index in the cache
+		if (collatzChainLength[index] == 0)
+			collatzChainLength[index] = collatzChainLengthDirect(n);
+		return collatzChainLength[index];
+	}
+	
+	
+	private int collatzChainLengthDirect(BigInteger n) {
+		if (n.equals(BigInteger.ONE))  // Base case
+			return 1;
 		else if (!n.testBit(0))  // If n is even
-			result = collatzChainLength(n.shiftRight(1)) + 1;
+			return collatzChainLength(n.shiftRight(1)) + 1;
 		else  // Else n is odd
-			result = collatzChainLength(n.multiply(BigInteger.valueOf(3)).add(BigInteger.ONE)) + 1;
-		
-		if (index != -1)
-			collatzChainLength[index] = result;
-		
-		return result;
+			return collatzChainLength(n.multiply(BigInteger.valueOf(3)).add(BigInteger.ONE)) + 1;
 	}
 	
 }
