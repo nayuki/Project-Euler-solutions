@@ -19,24 +19,10 @@ public final class p040 implements EulerSolution {
 		for (int i = 1; i < 1000000; i++)
 			sb.append(i);
 		
-		return Integer.toString(
-			  getDigit(sb, 1)
-			* getDigit(sb, 10)
-			* getDigit(sb, 100)
-			* getDigit(sb, 1000)
-			* getDigit(sb, 10000)
-			* getDigit(sb, 100000)
-			* getDigit(sb, 1000000)
-		);
-	}
-	
-	
-	private static int getDigit(StringBuilder sb, int i) {
-		char c = sb.charAt(i - 1);
-		if (c >= '0' && c <= '9')
-			return c - '0';
-		else
-			throw new IllegalArgumentException();
+		int prod = 1;
+		for (int i = 0; i <= 6; i++)
+			prod *= Integer.parseInt(sb.charAt(Library.pow(10, i) - 1) + "");
+		return Integer.toString(prod);
 	}
 	
 }
