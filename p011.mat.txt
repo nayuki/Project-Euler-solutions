@@ -34,7 +34,7 @@ square = {
 
 InBounds[x_, y_] := y >= 1 && y <= Length[square] && x >= 1 && x <= Length[square[[y]]]
 LineProduct[dx_, dy_, n_] := If[InBounds[x + (n - 1) * dx, y + (n - 1) * dy],
-  Product[square[[y + i * dy]][[x + i * dx]], {i, 0, n - 1}], -1]
+  Product[square[[y + i * dy, x + i * dx]], {i, 0, n - 1}], -1]
 AllLineProducts[dx_, dy_, n_] := Flatten[Table[LineProduct[dx, dy, n], {y, 1, Length[square]}, {x, 1, Length[square[[y]]]}]]
 
 Max[
