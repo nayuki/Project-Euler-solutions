@@ -45,6 +45,5 @@
  *     = 15*16^(n-1) - 43*15^(n-1) + 41*14^(n-1) - 13^n.
  *)
 
-HexDigits = Characters["0123456789ABCDEF"];
-ToHex[n_] := If[n == 0, "0", Block[{x = n, s = ""}, While[x != 0, s = HexDigits[[Mod[x, 16] + 1]] <> s; x = Floor[x/16]]; s]]
+ToHex[n_] := StringJoin[Map[Function[d, StringTake["0123456789ABCDEF", {d + 1, d + 1}]], IntegerDigits[n, 16]]]
 ToHex[Sum[15*16^(n-1) - 43*15^(n-1) + 41*14^(n-1) - 13^n, {n, 1, 16}]]

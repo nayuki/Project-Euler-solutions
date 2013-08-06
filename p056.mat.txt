@@ -9,4 +9,4 @@
 
 (* Use this in Wolfram Mathematica *)
 
-Max[Map[Function[x, Total[IntegerDigits[x]]], Flatten[Table[Table[a^b, {b, 100}], {a, 100}]]]]
+Max[Flatten[Table[Total[IntegerDigits[a^b]], {a, 100}, {b, 100}]]]
