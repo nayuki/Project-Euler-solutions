@@ -1,0 +1,21 @@
+(* 
+ * Solution to Project Euler problem 23
+ * By Nayuki Minase
+ * 
+ * http://nayuki.eigenstate.org/page/project-euler-solutions
+ * https://github.com/nayuki/Project-Euler-solutions
+ *)
+
+
+(* Use this in Wolfram Mathematica *)
+
+lim = 28123;
+
+isAbundant = Table[DivisorSigma[1, n] - n > n, {n, lim}];
+abundants = Pick[Range[lim], isAbundant];
+SumOfTwoAbundantsQ[n_] := Block[{i},
+  For[i = 1, i < Length[abundants] && abundants[[i]] < n, i++,
+    If[isAbundant[[n - abundants[[i]]]],
+      Return[True]]]; False]
+
+Total[Select[Range[lim], (!SumOfTwoAbundantsQ[#])&]]
