@@ -14,13 +14,21 @@ public final class p028 implements EulerSolution {
 	}
 	
 	
+	/* 
+	 * From the diagram, let's observe the four corners of an n * n square (where n is odd).
+	 * It's not hard to convince yourself that the top right corner always has the value n^2.
+	 * Working counterclockwise (backwards), the top left corner has the value n^2 - (n - 1),
+	 * the bottom left corner has the value n^2 - 2(n - 1), and the bottom right is n^2 - 3(n - 1).
+	 * Putting it all together, this outermost ring contributes 4n^2 - 6(n - 1) to the final sum.
+	 * 
+	 * Incidentally, the closed form of this sum is (4m^3 + 3m^2 + 8m - 9) / 6, where m = size.
+	 */
+	private static final int SIZE = 1001;  // Must be odd
+	
 	public String run() {
-		int sum = 1;
-		for (int i = 0; i < 500; i++) {  // 500 rings
-			int n = i * 2 + 3;
-			int n2 = n * n;
-			sum += n2 + (n2 - (n - 1)) + (n2 - (n - 1) * 2) + (n2 - (n - 1) * 3);
-		}
+		int sum = 1;  // Special case for size 1
+		for (int n = 3; n <= SIZE; n += 2)
+			sum += 4 * n * n - 6 * (n - 1);
 		return Integer.toString(sum);
 	}
 	

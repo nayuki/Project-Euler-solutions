@@ -7,5 +7,16 @@
  -}
 
 
+{- 
+ - From the diagram, let's observe the four corners of an n * n square (where n is odd).
+ - It's not hard to convince yourself that the top right corner always has the value n^2.
+ - Working counterclockwise (backwards), the top left corner has the value n^2 - (n - 1),
+ - the bottom left corner has the value n^2 - 2(n - 1), and the bottom right is n^2 - 3(n - 1).
+ - Putting it all together, this outermost ring contributes 4n^2 - 6(n - 1) to the final sum.
+ - 
+ - Incidentally, the closed form of this sum is (4m^3 + 3m^2 + 8m - 9) / 6, where m = size.
+ -}
+
+size = 1001  -- Must be odd
 main = putStrLn (show ans)
-ans = 1 + sum [let n = (i * 2 + 3); n2 = (n * n) in (n2 + (n2 - (n - 1)) + (n2 - (n - 1) * 2) + (n2 - (n - 1) * 3)) | i <- [0..499]]
+ans = 1 + sum [4 * n * n - 6 * (n - 1) | n <- [3, 5 .. size]]
