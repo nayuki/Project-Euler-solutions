@@ -14,8 +14,9 @@ public final class p023 implements EulerSolution {
 	}
 	
 	
-	private boolean[] isAbundant = new boolean[28124];
+	private static final int LIMIT = 28123;
 	
+	private boolean[] isAbundant = new boolean[LIMIT + 1];
 	
 	public String run() {
 		// Compute look-up table
@@ -23,7 +24,7 @@ public final class p023 implements EulerSolution {
 			isAbundant[i] = isAbundant(i);
 		
 		int sum = 0;
-		for (int i = 1; i <= 28123; i++) {
+		for (int i = 1; i <= LIMIT; i++) {
 			if (!isSumOf2Abundants(i))
 				sum += i;
 		}
@@ -44,7 +45,7 @@ public final class p023 implements EulerSolution {
 		if (n < 1)
 			throw new IllegalArgumentException();
 		
-		int sum = 1;  // Sum of factors
+		int sum = 1;  // Sum of factors less than n
 		int end = Library.sqrt(n);
 		for (int i = 2; i <= end; i++) {
 			if (n % i == 0)
