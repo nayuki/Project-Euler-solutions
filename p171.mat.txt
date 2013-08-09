@@ -29,6 +29,7 @@ len = 20;
 base = 10;
 md = 10^9;
 
+(* Memoization *)
 NumSum[n_, s_] := NumSum[n, s] = If[n == 0, 0, If[s >= 0, Sum[NumSum[n - 1, s - k^2] + k * base^(n - 1) * NumCount[n - 1, s - k^2], {k, 0, base - 1}], 0]]
 NumCount[n_, s_] := NumCount[n, s] = If[n == 0, Boole[s == 0], If[s >= 0, Sum[NumCount[n - 1, s - k^2], {k, 0, base - 1}], 0]]
 

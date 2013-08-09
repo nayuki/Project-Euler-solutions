@@ -18,4 +18,4 @@ MinSolutionX[n_] := If[IntegerQ[Sqrt[n]], 0,
     Block[{z = FromContinuedFraction[Join[Most[w], Most[Last[w]]]]},
       If[Mod[Length[Last[w]], 2] == 0, Numerator[z], Numerator[z]^2 + Denominator[z]^2]]]]
 minXs = Map[MinSolutionX, Range[1000]];
-Position[minXs, Max[minXs]]
+Position[minXs, Max[minXs]][[1, 1]]

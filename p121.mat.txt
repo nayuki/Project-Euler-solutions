@@ -33,5 +33,5 @@
 turns = 15;
 Ways[0, 0] = 1;
 Ways[0, _] = 0;
-Ways[k_, b_] := k * Ways[k - 1, b] + Ways[k - 1, b - 1];
+Ways[k_, b_] := k * Ways[k - 1, b] + Ways[k - 1, b - 1]
 Floor[(turns + 1)! / Sum[Ways[turns, i], {i, Ceiling[(turns + 1) / 2], turns}]]
