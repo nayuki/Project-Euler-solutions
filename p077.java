@@ -6,8 +6,6 @@
  * https://github.com/nayuki/Project-Euler-solutions
  */
 
-import java.util.Arrays;
-
 
 public final class p077 implements EulerSolution {
 	
@@ -16,45 +14,37 @@ public final class p077 implements EulerSolution {
 	}
 	
 	
-	private static final int LIMIT = 1000;
-	
-	private int[] primes = Library.listPrimes(LIMIT);
-	
+	private static final int TARGET = 5000;
 	
 	public String run() {
-		primePartitions = new int[LIMIT][LIMIT];
-		for (int[] array : primePartitions)
-			Arrays.fill(array, -1);
-		
-		for (int i = 2; i < LIMIT; i++) {
-			if (primePartitions(i, i) > 5000)
-				return Integer.toString(i);
+		for (int limit = 1; ; limit *= 2) {
+			int result = search(limit);
+			if (result != -1)
+				return Integer.toString(result);
 		}
-		throw new RuntimeException("Not found");
 	}
 	
 	
-	private int[][] primePartitions;  // Memoization
-	
-	private int primePartitions(int n, int max) {
-		if (primePartitions[n][max] != -1)
-			return primePartitions[n][max];
-		
-		else {
-			int result;
-			if (n == 0)
-				result = 1;
-			else {
-				result = 0;
-				for (int p : primes) {
-					if (p <= n && p <= max)
-						result += primePartitions(n - p, p);
-				}
+	private static int search(int limit) {
+		int[] primes = Library.listPrimes(limit);
+		// partitions[i][j] is the number of ways (with upper saturation at TARGET)
+		// that j can be written as an unordered sum with terms drawn from the first i prime numbers
+		int[][] partitions = new int[primes.length + 1][limit + 1];
+		partitions[0][0] = 1;
+		for (int i = 0; i < primes.length; i++) {
+			int p = primes[i];
+			for (int j = 0; j <= limit; j++) {
+				int sum = partitions[i][j];
+				if (j >= p)
+					sum += partitions[i + 1][j - p];
+				partitions[i + 1][j] = Math.min(sum, TARGET);  // Saturate to prevent overflow
 			}
-			
-			primePartitions[n][max] = result;
-			return result;
 		}
+		for (int i = 0; i <= limit; i++) {
+			if (partitions[primes.length][i] >= TARGET)
+				return i;
+		}
+		return -1;
 	}
 	
 }

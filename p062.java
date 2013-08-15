@@ -6,6 +6,7 @@
  * https://github.com/nayuki/Project-Euler-solutions
  */
 
+import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,36 +19,46 @@ public final class p062 implements EulerSolution {
 	}
 	
 	
-	private static final int LIMIT = 10000;  // Arbitrary search cut-off
-	
-	
 	public String run() {
-		Map<Long,Integer> count = new HashMap<Long,Integer>();
-		for (int i = 0; i < LIMIT; i++) {
-			long numClass = getNumberClass((long)i * i * i);
-			int oldCount;
-			if (!count.containsKey(numClass)) oldCount = 0;
-			else oldCount = count.get(numClass);
-			count.put(numClass, oldCount + 1);
-		}
-		
-		int min = -1;
-		for (long numClass : count.keySet()) {
-			if (count.get(numClass) == 5) {
-				for (int i = 0; i < LIMIT; i++) {
-					if (getNumberClass((long)i * i * i) == numClass && (min == -1 || i < min))
-						min = i;
+		int numDigits = 0;
+		Map<String,Integer> lowest = new HashMap<String,Integer>();
+		Map<String,Integer> counts = new HashMap<String,Integer>();
+		for (int i = 0; ; i++) {
+			String numClass = getCubeNumberClass(i);
+			
+			if (numClass.length() > numDigits) {
+				// Process and flush data for smaller number of digits
+				int min = Integer.MAX_VALUE;
+				for (String nc : counts.keySet()) {
+					if (counts.get(nc) == 5)
+						min = Math.min(lowest.get(nc), min);
 				}
+				if (min != Integer.MAX_VALUE)
+					return cube(min).toString();
+				
+				lowest.clear();
+				counts.clear();
+				numDigits = numClass.length();
 			}
+			
+			if (!lowest.containsKey(numClass)) {
+				lowest.put(numClass, i);
+				counts.put(numClass, 0);
+			}
+			counts.put(numClass, counts.get(numClass) + 1);
 		}
-		return Long.toString((long)min * min * min);
 	}
 	
 	
-	private static long getNumberClass(long x) {
-		char[] digits = Long.toString(x).toCharArray();
+	private static String getCubeNumberClass(int x) {
+		char[] digits = cube(x).toString().toCharArray();
 		Arrays.sort(digits);
-		return Long.parseLong(Library.reverse(new String(digits)));
+		return new String(digits);
+	}
+	
+	
+	private static BigInteger cube(int x) {
+		return BigInteger.valueOf(x).pow(3);
 	}
 	
 }
