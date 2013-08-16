@@ -6,6 +6,8 @@
  * https://github.com/nayuki/Project-Euler-solutions
  */
 
+import java.math.BigInteger;
+
 
 public final class p133 implements EulerSolution {
 	
@@ -15,45 +17,53 @@ public final class p133 implements EulerSolution {
 	
 	
 	/* 
-	 * R(k) = (10^k - 1) / 9.
-	 * R(10^n) = (10^(10^n) - 1) / 9.
+	 * Repunit formula: R(k) = (10^k - 1) / 9. (Using geometric series)
 	 * 
-	 * R(10^n) mod p = 0
-	 * <=> (10^(10^n) - 1) / 9 = 0 mod p
-	 * <=> 10^(10^n) - 1 = 0 mod 9p
-	 * <=> 10^(10^n) = 1 mod 9p.
+	 * For the rest of the argument, let n be an arbitrary integer that is coprime with 10.
 	 * 
-	 * 10^(10^(n+1)) = 10^(10^n * 10) = (10^(10^n))^10.
-	 * Therefore 9*R(10^(n+1)) + 1 = (9*R(10^n) + 1)^10.
+	 * Let k = A(n) be the smallest positive integer such that R(k) = 0 mod n.
+	 * From problem #129, we know k exists and satisfies 1 <= k < n.
 	 * 
-	 * Let f(x) = x^10. For an arbitrary p, consider the infinite sequence (9R(10^0)+1 mod 9p, 9R(10^1)+1 mod 9p, 9R(10^2)+1 mod 9p, ...),
-	 * which is equal to (9R(1)+1 mod 9p, f(9R(1)+1) mod 9p, f(f(9R(1)+1)) mod 9p, ...). Note that f(x mod 9p) mod 9p = f(x) mod 9p.
-	 * Since the elements of the sequence have at most 9p different values, the sequence must cycle under the iterated application of f.
-	 * If 1 is in the sequence, then clearly there exists an n such that R(10^n) is divisible by p.
-	 * Otherwise after 9p terms with no 1, there must not be a 1 in the rest of the infinite sequence due to cycling.
+	 * Lemma: For each natural number m, R(m) = 0 mod n if and only if m is a multiple of k.
+	 * Proof:
+	 *   Backward direction:
+	 *     Assume m is a multiple of k. Then factorize m = jk, where j is an integer.
+	 *     Look at R(m) = R(jk) = 1...1 ... 1...1 (j groups of k 1's) = 10...010...010...01 * R(k) (informally)
+	 *                  = (sum of 10^(ik) for i = 0 to s-1) * R(k).
+	 *     We already have R(k) = 0 mod n, thus (sum of 10^(ik) for i = 0 to s-1) * R(k) = R(m) = 0 mod n.
+	 *   Forward direction (by converse):
+	 *     Assume m is not a multiple of k. Suppose for contradiction that R(m) = 0 mod n.
+	 *     Similar the previous argument, we can zeroize blocks of k 1's while preserving the value of R(m) mod n.
+	 *     Namely, we delete the top k 1's by subtracting R(k) * 10^(m-k), which is 0 mod n because R(k) = 0 mod n.
+	 *     After repeated deletion of the most significant 1's, we can get m' = m mod k, so that 0 < m' < k.
+	 *     (m' != 0 because we assumed m is not a multiple of k.) But with R(m') = R(m) = 0 mod n, and m' < k,
+	 *     this contradicts the definition of k = A(n), the smallest value such that R(k) = 0 mod n.
+	 *     Hence the supposition that R(m) = 0 mod n is false.
+	 * 
+	 * Does there exist an x such that R(10^x) is a multiple of n? By the lemma, this is true if and only if
+	 * there exists an x such that 10^x is a multiple of k. This means k must be a product of 2's and 5's.
+	 * 
+	 * Actually, we don't need to compute k = A(n) to perform this test. If k = 2^a * 5^b, then all sufficiently large
+	 * powers of 10 are a multiple of k. (If k has other prime factors, then no power of 10 is a multiple of k.)
+	 * We know 1 <= k < n, so in this problem 1 <= k < 10^5. For k in this range, the largest exponent among a and b is 16
+	 * (for the number 2^16 = 65536). (In general, the largest exponent is floor(log2(limit)); in this case limit = 10^5.)
+	 * So we only need to test if 10^16 is a multiple of k, equivalent to testing if R(10^16) is a multiple of n.
 	 */
-	private static final int LIMIT = Library.pow(10, 5);
-	
 	public String run() {
-		int[] primes = Library.listPrimes(LIMIT);
-		int sum = 0;
-		for (int p : primes) {
-			if (!hasDivisibleRepunit(p))
+		long sum = 0;
+		for (int p : Library.listPrimes(100000)) {
+			if (p == 2 || p == 5 || !hasDivisibleRepunit(p))
 				sum += p;
 		}
-		return Integer.toString(sum);
+		return Long.toString(sum);
 	}
 	
 	
-	// Tests whether there exists an n such that R(10^n) is a multiple of p.
+	private static final BigInteger EXPONENT = BigInteger.TEN.pow(16);
+	
+	// Tests whether there exists a k such that R(10^k) is a multiple of p
 	private static boolean hasDivisibleRepunit(int p) {
-		int r = 10 % (p * 9);  // Always equal to 10^(10^i) mod 9p
-		for (int i = 0; i < p * 9; i++) {
-			if (r == 1)
-				return true;
-			r = Library.powMod(r, 10, p * 9);
-		}
-		return false;
+		return (BigInteger.TEN.modPow(EXPONENT, BigInteger.valueOf(p * 9)).intValue() - 1) / 9 % p == 0;
 	}
 	
 }
