@@ -22,7 +22,7 @@ public final class p133 implements EulerSolution {
 	 * For the rest of the argument, let n be an arbitrary integer that is coprime with 10.
 	 * 
 	 * Let k = A(n) be the smallest positive integer such that R(k) = 0 mod n.
-	 * From problem #129, we know k exists and satisfies 1 <= k < n.
+	 * From problem #129, we know k exists and satisfies 1 <= k <= n.
 	 * 
 	 * Lemma: For each natural number m, R(m) = 0 mod n if and only if m is a multiple of k.
 	 * Proof:

@@ -16,7 +16,7 @@ public final class p129 implements EulerSolution {
 	
 	/* 
 	 * Let n >= 1 be arbitrary but assume that it is coprime with 10.
-	 * We want to find the smallest k such that R(k) = 0 mod n, and we'll show that 1 <= k < n.
+	 * We want to find the smallest k such that R(k) = 0 mod n, and we'll show that 1 <= k <= n.
 	 * 
 	 * Let "the sequence" of n values be (R(1) mod n, R(2) mod n, R(3) mod n, ..., R(n) mod n).
 	 * For the sake of contradiction, assume that none of the values in the sequence are 0.
@@ -36,9 +36,6 @@ public final class p129 implements EulerSolution {
 	 * 
 	 * We know 1 <= j - i <= n - 1. Then R(i - j) mod n, which is 0, is in the sequence.
 	 * This contradicts our assumption that none of (R(1), R(2), ... R(n)) is 0 mod n.
-	 * 
-	 * Furthermore, since R(j - i) is one possible solution,
-	 * we know k <= j - i <= n - 1, which gives us k <= n - 1 as wanted.
 	 * 
 	 * Therefore if we want to find an n whose solution k is such that
 	 * k > 1000000, then we need to have n > 1000000.
