@@ -6,6 +6,7 @@
  * https://github.com/nayuki/Project-Euler-solutions
  */
 
+import java.math.BigInteger;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,36 +19,45 @@ public final class p203 implements EulerSolution {
 	
 	
 	public String run() {
-		int[] primes = Library.listPrimes(1 << 24);
-		long[] primesSquared = new long[primes.length];
+		// Collect unique numbers in Pascal's triangle
+		Set<Long> numbers = new HashSet<Long>();
+		long max = 0;
+		for (int n = 0; n <= 50; n++) {
+			for(int k = 0; k <= n; k++) {
+				BigInteger x = Library.binomial(n, k);
+				if (x.bitLength() >= 64)
+					throw new AssertionError("Number too large to handle");
+				numbers.add(x.longValue());
+				max = Math.max(x.longValue(), max);
+			}
+		}
+		
+		// Prepare list of squared primes
+		int[] primes = Library.listPrimes((int)Library.sqrt(max));
+		primesSquared = new long[primes.length];
 		for (int i = 0; i < primes.length; i++)
 			primesSquared[i] = (long)primes[i] * primes[i];
 		
-		Set<Long> numbers = new HashSet<Long>();
-		long[] row = new long[51];
-		row[0] = 1;
-		for (int i = 0; i <= 50; i++) {  // Row number
-			middle:
-			for (long x : row) {
-				if (x == 0)
-					break;
-				for (long p : primesSquared) {
-					if (p > x)
-						break;
-					if (x % p == 0)
-						continue middle;
-				}
-				numbers.add(x);
-			}
-			
-			for (int j = row.length - 2; j >= 1; j--)  // Compute next row
-				row[j] += row[j - 1];
-		}
-		
+		// Sum up the squarefree numbers
 		long sum = 0;
-		for (long x : numbers)
-			sum += x;
+		for (long n : numbers) {
+			if (isSquarefree(n))
+				sum += n;
+		}
 		return Long.toString(sum);
+	}
+	
+	
+	private long[] primesSquared;
+	
+	private boolean isSquarefree(long n) {
+		for (long p2 : primesSquared) {
+			if (p2 > n)
+				break;
+			if (n % p2 == 0)
+				return false;
+		}
+		return true;
 	}
 	
 }
