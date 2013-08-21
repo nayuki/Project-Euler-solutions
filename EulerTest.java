@@ -140,6 +140,7 @@ public final class EulerTest {
 	@Test public void testP149() { assertEquals("52852124"           , new p149().run()); }
 	@Test public void testP150() { assertEquals("-271248680"         , new p150().run()); }
 	@Test public void testP151() { assertEquals("0.464399"           , new p151().run()); }
+	@Test public void testP155() { assertEquals("3857447"            , new p155().run()); }
 	@Test public void testP160() { assertEquals("16576"              , new p160().run()); }
 	@Test public void testP162() { assertEquals("3D58725572C62302"   , new p162().run()); }
 	@Test public void testP164() { assertEquals("378158756814587"    , new p164().run()); }
@@ -163,6 +164,7 @@ public final class EulerTest {
 	@Test public void testP214() { assertEquals("1677366278943"      , new p214().run()); }
 	@Test public void testP218() { assertEquals("0"                  , new p218().run()); }
 	@Test public void testP222() { assertEquals("1590933"            , new p222().run()); }
+	@Test public void testP225() { assertEquals("2009"               , new p225().run()); }
 	@Test public void testP231() { assertEquals("7526965179680"      , new p231().run()); }
 	@Test public void testP243() { assertEquals("892371480"          , new p243().run()); }
 	@Test public void testP249() { assertEquals("9275262564250418"   , new p249().run()); }
