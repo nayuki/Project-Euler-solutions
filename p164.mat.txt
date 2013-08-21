@@ -1,0 +1,21 @@
+(* 
+ * Solution to Project Euler problem 164
+ * By Nayuki Minase
+ * 
+ * http://nayuki.eigenstate.org/page/project-euler-solutions
+ * https://github.com/nayuki/Project-Euler-solutions
+ *)
+
+
+(* Use this in Wolfram Mathematica *)
+
+base = 10;
+digits = 20;
+consecutive = 3;
+maxSum = 9;
+
+Ways[d_, p_] := Ways[d, p] = If[d == 0, Boole[p == 0],
+  If[Total[IntegerDigits[p]] > maxSum, 0,
+    Sum[Ways[d - 1, Mod[p, base^(consecutive - 1)] * base + i], {i, 0, base - 1}]]]
+
+Sum[Ways[digits, p], {p, base^(consecutive - 1), base^consecutive - 1}]
