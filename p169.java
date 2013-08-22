@@ -1,0 +1,56 @@
+/* 
+ * Solution to Project Euler problem 169
+ * By Nayuki Minase
+ * 
+ * http://nayuki.eigenstate.org/page/project-euler-solutions
+ * https://github.com/nayuki/Project-Euler-solutions
+ */
+
+import java.math.BigInteger;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+
+public final class p169 implements EulerSolution {
+	
+	public static void main(String[] args) {
+		System.out.println(new p169().run());
+	}
+	
+	
+	private static final BigInteger NUMBER = BigInteger.TEN.pow(25);
+	
+	public String run() {
+		return countWays(NUMBER, NUMBER.bitLength() - 1, 2).toString();
+	}
+	
+	
+	/* 
+	 * Ways[n, i, j] is the number of ways that the number n can be expressed as an unordered sum of powers of 2 such that
+	 * the highest possible power is 2^i, this term is used between 0 and j times, and all lower powers of 2 are used no more than 2 times.
+	 */
+	
+	private Map<List<BigInteger>,BigInteger> ways = new HashMap<List<BigInteger>,BigInteger>();
+	
+	private BigInteger countWays(BigInteger number, int exponent, int repetitions) {
+		List<BigInteger> key = Arrays.asList(number, BigInteger.valueOf(exponent), BigInteger.valueOf(repetitions));
+		if (ways.containsKey(key))
+			return ways.get(key);
+		
+		BigInteger result;
+		if (exponent < 0)
+			result = number.equals(BigInteger.ZERO) ? BigInteger.ONE : BigInteger.ZERO;
+		else {
+			result = countWays(number, exponent - 1, 2);
+			BigInteger pow = BigInteger.ONE.shiftLeft(exponent);
+			BigInteger upper = pow.multiply(BigInteger.valueOf(repetitions + 2));
+			if (repetitions > 0 && pow.compareTo(number) <= 0 && number.compareTo(upper) < 0)
+				result = result.add(countWays(number.subtract(pow), exponent, repetitions - 1));
+		}
+		ways.put(key, result);
+		return result;
+	}
+	
+}
