@@ -17,11 +17,11 @@ public final class p048 implements EulerSolution {
 	
 	
 	public String run() {
-		BigInteger modulus = BigInteger.valueOf(10).pow(10);
+		BigInteger modulus = BigInteger.TEN.pow(10);
 		BigInteger sum = BigInteger.ZERO;
 		for (int i = 1; i <= 1000; i++)
-			sum = sum.add(BigInteger.valueOf(i).modPow(BigInteger.valueOf(i), modulus)).mod(modulus);
-		return sum.toString();
+			sum = sum.add(BigInteger.valueOf(i).modPow(BigInteger.valueOf(i), modulus));
+		return sum.mod(modulus).toString();
 	}
 	
 }

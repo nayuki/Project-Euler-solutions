@@ -26,10 +26,10 @@ public final class p028 implements EulerSolution {
 	private static final int SIZE = 1001;  // Must be odd
 	
 	public String run() {
-		int sum = 1;  // Special case for size 1
+		long sum = 1;  // Special case for size 1
 		for (int n = 3; n <= SIZE; n += 2)
 			sum += 4 * n * n - 6 * (n - 1);
-		return Integer.toString(sum);
+		return Long.toString(sum);
 	}
 	
 }

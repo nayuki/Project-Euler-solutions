@@ -21,7 +21,7 @@ public final class p040 implements EulerSolution {
 		
 		int prod = 1;
 		for (int i = 0; i <= 6; i++)
-			prod *= Integer.parseInt(sb.charAt(Library.pow(10, i) - 1) + "");
+			prod *= sb.charAt(Library.pow(10, i) - 1) - '0';
 		return Integer.toString(prod);
 	}
 	

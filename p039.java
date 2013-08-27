@@ -15,8 +15,8 @@ public final class p039 implements EulerSolution {
 	
 	
 	public String run() {
-		int maxPerimeter = -1;
-		int maxTriangles = Integer.MIN_VALUE;
+		int maxPerimeter = 0;
+		int maxTriangles = 0;
 		for (int p = 1; p <= 1000; p++) {
 			int triangles = countSolutions(p);
 			if (triangles > maxTriangles) {

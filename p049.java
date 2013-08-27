@@ -16,18 +16,20 @@ public final class p049 implements EulerSolution {
 	}
 	
 	
+	private static final int LIMIT = 10000;
+	
 	public String run() {
-		boolean[] isPrime = Library.listPrimality(10000);
-		for (int base = 1000; base < 10000; base++) {
-			if (!isPrime[base])
-				continue;
-			for (int step = 1; step < 10000; step++) {
-				int a = base + step * 1;
-				int b = base + step * 2;
-				if (       a < 10000 && isPrime[a] && hasSameDigits(a, base)
-				        && b < 10000 && isPrime[b] && hasSameDigits(b, base)
-				        && (base != 1487 || step != 3330))
-					return "" + base + a + b;
+		boolean[] isPrime = Library.listPrimality(LIMIT - 1);
+		for (int base = 1000; base < LIMIT; base++) {
+			if (isPrime[base]) {
+				for (int step = 1; step < LIMIT; step++) {
+					int a = base + step;
+					int b = a    + step;
+					if (       a < LIMIT && isPrime[a] && hasSameDigits(a, base)
+					        && b < LIMIT && isPrime[b] && hasSameDigits(b, base)
+					        && (base != 1487 || a != 4817))
+						return "" + base + a + b;
+				}
 			}
 		}
 		throw new RuntimeException("Not found");

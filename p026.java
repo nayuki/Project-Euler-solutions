@@ -18,17 +18,15 @@ public final class p026 implements EulerSolution {
 	
 	
 	public String run() {
-		int bestNumber = -1;
-		int bestLength = -1;
-		
+		int bestNumber = 0;
+		int bestLength = 0;
 		for (int i = 1; i <= 1000; i++) {
 			int len = getCycleLength(i);
-			if (bestLength == -1 || len > bestLength) {
+			if (len > bestLength) {
 				bestNumber = i;
 				bestLength = len;
 			}
 		}
-		
 		return Integer.toString(bestNumber);
 	}
 	

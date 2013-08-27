@@ -18,11 +18,9 @@ public final class p070 implements EulerSolution {
 	
 	private static final int LIMIT = Library.pow(10, 7);
 	
-	
 	public String run() {
 		int[] totients = Library.listTotients(LIMIT);
-		
-		int minNumer = 1;  // Dummy initial values
+		int minNumer = 1;  // Initially infinity
 		int minDenom = 0;
 		for (int i = 2; i < LIMIT; i++) {
 			int tot = totients[i];
@@ -31,6 +29,8 @@ public final class p070 implements EulerSolution {
 				minDenom = tot;
 			}
 		}
+		if (minDenom == 0)
+			throw new RuntimeException("Not found");
 		return Integer.toString(minNumer);
 	}
 	

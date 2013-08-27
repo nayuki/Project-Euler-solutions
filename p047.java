@@ -16,7 +16,10 @@ public final class p047 implements EulerSolution {
 	
 	public String run() {
 		for (int i = 2; ; i++) {
-			if (has4PrimeFactors(i) && has4PrimeFactors(i + 1) && has4PrimeFactors(i + 2) && has4PrimeFactors(i + 3))
+			if (       has4PrimeFactors(i + 0)
+			        && has4PrimeFactors(i + 1)
+			        && has4PrimeFactors(i + 2)
+			        && has4PrimeFactors(i + 3))
 				return Integer.toString(i);
 		}
 	}

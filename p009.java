@@ -18,7 +18,7 @@ public final class p009 implements EulerSolution {
 		for (int a = 1; a < 1000; a++) {
 			for (int b = a + 1; b < 1000; b++) {
 				int c = 1000 - a - b;
-				if (c > b && a * a + b * b == c * c)
+				if (a * a + b * b == c * c)  // Note: This implies b < c
 					return Integer.toString(a * b * c);
 			}
 		}

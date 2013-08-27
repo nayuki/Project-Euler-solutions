@@ -16,13 +16,16 @@ public final class p025 implements EulerSolution {
 	}
 	
 	
+	private static final int DIGITS = 1000;
+	
 	public String run() {
-		BigInteger lowerthres = BigInteger.TEN.pow( 999);
-		BigInteger upperthres = BigInteger.TEN.pow(1000);
+		BigInteger lowerthres = BigInteger.TEN.pow(DIGITS - 1);
+		BigInteger upperthres = BigInteger.TEN.pow(DIGITS);
 		BigInteger prev = BigInteger.ONE;
 		BigInteger cur = BigInteger.ZERO;
 		int i = 0;
 		while (true) {
+			// At this point, prev = fibonacci(i - 1) and cur = fibonacci(i)
 			if (cur.compareTo(lowerthres) >= 0)
 				return Integer.toString(i);
 			else if (cur.compareTo(upperthres) >= 0)

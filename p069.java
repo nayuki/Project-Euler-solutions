@@ -14,14 +14,18 @@ public final class p069 implements EulerSolution {
 	}
 	
 	
+	private static final int LIMIT = Library.pow(10, 6);
+	
 	public String run() {
-		double maxVal = -1;
 		int maxNum = -1;
-		for (int i = 1; i <= 1000000; i++) {
-			double val = (double)i / Library.totient(i);
-			if (maxNum == -1 || val > maxVal) {
-				maxVal = val;
-				maxNum = i;
+		int maxNumer = 0;
+		int maxDenom = 1;
+		int[] totients = Library.listTotients(LIMIT);
+		for (int n = 1; n <= 1000000; n++) {
+			if ((long)n * maxDenom > (long)maxNumer * totients[n]) {
+				maxNumer = n;
+				maxDenom = totients[n];
+				maxNum = n;
 			}
 		}
 		return Integer.toString(maxNum);

@@ -17,7 +17,8 @@ public final class p032 implements EulerSolution {
 	
 	
 	public String run() {
-		// A candidate has at most 4 digits. This is because if it has 4 digits, then expressing it as a product of two numbers uses at least 4 digits.
+		// A candidate product has at most 4 digits. This is because if it has 5 digits,
+		// then the two multiplicands must have at least 5 digits put together.
 		int sum = 0;
 		for (int i = 1; i < 10000; i++) {
 			if (hasPandigitalProduct(i))

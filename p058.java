@@ -14,33 +14,28 @@ public final class p058 implements EulerSolution {
 	}
 	
 	
+	/* 
+	 * From the diagram, let's observe the four corners of an n * n square (where n is odd).
+	 * It's not hard to convince yourself that:
+	 * - The bottom right corner always has the value n^2.
+	 * Working clockwise (backwards):
+	 * - The bottom left corner has the value n^2 - (n - 1).
+	 * - The top left corner has the value n^2 - 2(n - 1).
+	 * - The top right has the value n^2 - 3(n - 1).
+	 * 
+	 * Furthermore, the number of elements on the diagonal is 2n - 1.
+	 */
 	public String run() {
-		int diagonalSize = 1;
 		int numPrimes = 0;
-		int i = 1;
-		while (true) {
-			if (Library.isPrime(getSpiralNumber( i,  i))) numPrimes++;
-			if (Library.isPrime(getSpiralNumber( i, -i))) numPrimes++;
-			if (Library.isPrime(getSpiralNumber(-i,  i))) numPrimes++;
-			if (Library.isPrime(getSpiralNumber(-i, -i))) numPrimes++;
-			diagonalSize += 4;
-			if (numPrimes * 10 < diagonalSize)
-				break;
-			i++;
+		for (int n = 1; ; n += 2) {
+			for (int i = 0; i < 4; i++) {
+				if (Library.isPrime(n * n - i * (n - 1)))
+					numPrimes++;
+			}
+			if (n > 1 && numPrimes * 10 < n * 2 - 1)
+				return Integer.toString(n);
 		}
-		return Integer.toString(i * 2 + 1);
-	}
-	
-	
-	private static int getSpiralNumber(int x, int y) {
-		if (Math.abs(x) != Math.abs(y))
-			throw new UnsupportedOperationException("Only diagonals are supported");
-		int n = Math.abs(x) * 2 + 1;
-		int n2 = n * n;
-		if      (x > 0 && y < 0) return n2 - (n - 1) * 0;
-		else if (x < 0 && y < 0) return n2 - (n - 1) * 1;
-		else if (x < 0 && y > 0) return n2 - (n - 1) * 2;
-		else                     return n2 - (n - 1) * 3;
+		
 	}
 	
 }

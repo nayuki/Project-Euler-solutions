@@ -22,10 +22,8 @@ public final class p079 implements EulerSolution {
 	public String run() {
 		// Preprocessing
 		packedSubseqs = new char[SUBSEQS.length * 3];
-		for (int i = 0; i < SUBSEQS.length; i++) {
-			for (int j = 0; j < 3; j++)
-				packedSubseqs[i * 3 + j] = SUBSEQS[i].charAt(j);
-		}
+		for (int i = 0; i < packedSubseqs.length; i++)
+			packedSubseqs[i] = SUBSEQS[i / 3].charAt(i % 3);
 		
 		// Try ascending lengths
 		for (int len = 3; len <= 10; len++) {
