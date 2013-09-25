@@ -14,9 +14,11 @@ public final class p092 implements EulerSolution {
 	}
 	
 	
+	private static final int LIMIT = Library.pow(10, 7);
+	
 	public String run() {
 		int count = 0;
-		for (int i = 1, end = Library.pow(10, 7); i < end; i++) {
+		for (int i = 1; i < LIMIT; i++) {
 			if (isClass89(i))
 				count++;
 		}

@@ -17,9 +17,11 @@ public final class p074 implements EulerSolution {
 	}
 	
 	
+	private static final int LIMIT = Library.pow(10, 6);
+	
 	public String run() {
 		int count = 0;
-		for (int i = 0; i < 1000000; i++) {
+		for (int i = 0; i < LIMIT; i++) {
 			if (getChainLength(i) == 60)
 				count++;
 		}
