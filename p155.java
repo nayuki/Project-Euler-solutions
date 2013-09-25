@@ -33,7 +33,6 @@ public final class p155 implements EulerSolution {
 		for (int i = 2; i <= SIZE; i++) {
 			Set<Fraction> poss = new HashSet<Fraction>();
 			for (int j = 1; j <= i - j; j++) {
-				System.out.println(i+" "+j);
 				for (Fraction a : possible[j]) {
 					for (Fraction b : possible[i - j]) {
 						poss.add(a.add(b));
