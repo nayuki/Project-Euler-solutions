@@ -18,7 +18,6 @@ public final class p124 implements EulerSolution {
 	
 	private static final int LIMIT = 100000;
 	
-	
 	public String run() {
 		// Modification of the Sieve of Eratosthenes
 		int[] rads = new int[LIMIT + 1];

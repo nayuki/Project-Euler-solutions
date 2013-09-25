@@ -17,7 +17,6 @@ public final class p123 implements EulerSolution {
 	private static final int PRIME_LIMIT = 1000000;
 	private static final long THRESHOLD = 10000000000L;
 	
-	
 	public String run() {
 		int[] primes = Library.listPrimes(PRIME_LIMIT);
 		for (int n = 5; n <= primes.length; n += 2) {

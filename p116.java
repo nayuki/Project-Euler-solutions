@@ -16,7 +16,6 @@ public final class p116 implements EulerSolution {
 	
 	private static final int LENGTH = 50;
 	
-	
 	public String run() {
 		return Long.toString(countWays(LENGTH, 2) + countWays(LENGTH, 3) + countWays(LENGTH, 4));
 	}

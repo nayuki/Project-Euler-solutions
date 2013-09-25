@@ -16,7 +16,6 @@ public final class p091 implements EulerSolution {
 	
 	private static final int LIMIT = 50;
 	
-	
 	public String run() {
 		int count = 0;
 		for (int x1 = 0; x1 <= LIMIT; x1++) {

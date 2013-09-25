@@ -19,7 +19,6 @@ public final class p075 implements EulerSolution {
 	
 	private static final int LIMIT = 1500000;
 	
-	
 	public String run() {
 		/* 
 		 * Pythagorean triples theorem:

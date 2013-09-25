@@ -19,7 +19,6 @@ public final class p087 implements EulerSolution {
 	
 	private static final int LIMIT = 50000000;
 	
-	
 	public String run() {
 		int[] primes = Library.listPrimes(Library.sqrt(LIMIT));
 		
