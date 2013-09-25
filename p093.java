@@ -39,65 +39,61 @@ public final class p093 implements EulerSolution {
 	}
 	
 	
+	// Assumes 1 <= a < b < c < d <= 9
 	private static int longestConsecutive(int a, int b, int c, int d) {
 		Set<Integer> expressible = new HashSet<Integer>();
 		
 		// Try all possible orderings of operands and operators
-		int[] interleaving = {0, 0, 0, 0, 1, 1, 1};  // 0 = operand, 1 = operator
+		int[] ops = {0, 0, 0, a, b, c, d};  // 0 = operator slot, 1 to 9 = literal operand
 		outer:
 		do {
-			// Try all possibilities for operands
-			int[] operands = {a, b, c, d};
-			do {
-				// Try all possibilities for operators
-				tryOperators:
-				for (int i = 0; i < 64; i++) {
-					Stack<Fraction> stack = new Stack<Fraction>();
-					int j = 0;  // Operand index
-					int k = 0;  // Operator index
-					for (int op : interleaving) {
-						if (op == 0) {
-							stack.push(new Fraction(BigInteger.valueOf(operands[j]), BigInteger.ONE));
-							j++;
-						} else if (op == 1) {
-							if (stack.size() < 2)
-								continue outer;  // Malformed RPN expression; skip this interleaving
-							Fraction right = stack.pop();
-							Fraction left = stack.pop();
-							switch ((i >>> (k * 2)) & 3) {
-								case 0:
-									stack.push(left.add(right));
-									break;
-								case 1:
-									stack.push(left.subtract(right));
-									break;
-								case 2:
-									stack.push(left.multiply(right));
-									break;
-								case 3:
-									if (right.numerator.signum() == 0)
-										continue tryOperators;  // Skip the result for this case
-									stack.push(left.divide(right));
-									break;
-								default:
-									throw new AssertionError();
-							}
-							k++;
-						} else
-							throw new AssertionError();
-					}
-					if (stack.size() != 1)
+			// Try all possibilities for the 3 operators
+			inner:
+			for (int i = 0; i < 64; i++) {
+				Stack<Fraction> stack = new Stack<Fraction>();
+				int j = 0;  // Operator index
+				for (int op : ops) {
+					if (1 <= op && op <= 9) {  // Operand
+						stack.push(new Fraction(BigInteger.valueOf(op), BigInteger.ONE));
+					} else if (op == 0) {  // Operator
+						if (stack.size() < 2)
+							continue outer;  // Stack underflow; skip this ordering
+						Fraction right = stack.pop();
+						Fraction left = stack.pop();
+						switch ((i >>> (j * 2)) & 3) {
+							case 0:
+								stack.push(left.add(right));
+								break;
+							case 1:
+								stack.push(left.subtract(right));
+								break;
+							case 2:
+								stack.push(left.multiply(right));
+								break;
+							case 3:
+								if (right.numerator.signum() == 0)
+									continue inner;  // Division by zero; skip the result for this case
+								stack.push(left.divide(right));
+								break;
+							default:
+								throw new AssertionError();
+						}
+						j++;  // Consume an operator
+					} else
 						throw new AssertionError();
-					Fraction result = stack.pop();
-					if (result.denominator.equals(BigInteger.ONE))
-						expressible.add(result.numerator.intValue());
 				}
-			} while (Library.nextPermutation(operands));
-		} while (Library.nextPermutation(interleaving));
+				if (stack.size() != 1)
+					throw new AssertionError();
+				Fraction result = stack.pop();
+				if (result.denominator.equals(BigInteger.ONE))
+					expressible.add(result.numerator.intValue());
+			}
+		} while (Library.nextPermutation(ops));
 		
-		for (int i = 1; ; i++) {
-			if (!expressible.contains(i))
-				return i - 1;
+		// Find largest set of consecutive expressible integers starting from 1
+		for (int i = 0; ; i++) {
+			if (!expressible.contains(i + 1))
+				return i;
 		}
 	}
 	

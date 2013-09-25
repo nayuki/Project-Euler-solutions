@@ -18,8 +18,7 @@ public final class p096 implements EulerSolution {
 		int sum = 0;
 		for (String puz : PUZZLES) {
 			SudokuSolver ss = new SudokuSolver(puz);
-			ss.solve();
-			if (!ss.isValid())
+			if (!ss.solve())
 				throw new AssertionError();
 			sum += ss.board[0][0] * 100 + ss.board[0][1] * 10 + ss.board[0][2];
 		}
@@ -32,60 +31,59 @@ public final class p096 implements EulerSolution {
 		
 		public int[][] board;
 		
+		// Used by solve() only
 		private boolean[][] usedInRow;
-		
 		private boolean[][] usedInColumn;
-		
 		private boolean[][][] usedInBox;
 		
 		
 		
 		public SudokuSolver(String nums) {
 			if (nums.length() != 81)
-				throw new IllegalArgumentException();
-			
+				throw new IllegalArgumentException("Invalid length");
 			board = new int[9][9];
-			for (int y = 0; y < 9; y++) {
-				for (int x = 0; x < 9; x++)
-					board[y][x] = nums.charAt(y * 9 + x) - '0';
-			}
+			for (int i = 0; i < 81; i++)
+				board[i / 9][i % 9] = nums.charAt(i) - '0';
 		}
 		
 		
 		
 		public boolean solve() {
-			usedInRow = new boolean[9][9];
+			usedInRow    = new boolean[9][9];
 			usedInColumn = new boolean[9][9];
-			usedInBox = new boolean[3][3][9];
+			usedInBox    = new boolean[3][3][9];
 			for (int y = 0; y < 9; y++) {
 				for (int x = 0; x < 9; x++) {
 					if (board[y][x] == 0)
 						continue;
-					int value = board[y][x] - 1;
-					usedInRow[y][value] = true;
-					usedInColumn[x][value] = true;
-					usedInBox[y / 3][x / 3][value] = true;
+					int val = board[y][x] - 1;
+					usedInRow   [y][val] = true;
+					usedInColumn[x][val] = true;
+					usedInBox[y / 3][x / 3][val] = true;
 				}
 			}
-			return solve(0);
+			return solve(0) && isValid();
 		}
 		
 		
 		private boolean solve(int index) {
+			// Skip over nonzero (already solved) cells
 			for (; index < 81 && board[index / 9][index % 9] != 0; index++);
 			if (index == 81)
 				return true;
+			
+			// Try all 9 digits in this cell and recurse
 			int x = index % 9;
 			int y = index / 9;
 			for (int i = 0; i < 9; i++) {
 				if (!usedInRow[y][i] && !usedInColumn[x][i] && !usedInBox[y / 3][x / 3][i]) {
 					board[y][x] = i + 1;
-					usedInRow[y][i] = true;
+					usedInRow   [y][i] = true;
 					usedInColumn[x][i] = true;
 					usedInBox[y / 3][x / 3][i] = true;
 					if (solve(index + 1))
 						return true;
-					usedInRow[y][i] = false;
+					usedInRow   [y][i] = false;
 					usedInColumn[x][i] = false;
 					usedInBox[y / 3][x / 3][i] = false;
 				}
@@ -95,6 +93,7 @@ public final class p096 implements EulerSolution {
 		}
 		
 		
+		// Checks for contradictions using the basic rules
 		private boolean isValid() {
 			boolean[][] rowused = new boolean[9][9];
 			boolean[][] colused = new boolean[9][9];
@@ -103,10 +102,10 @@ public final class p096 implements EulerSolution {
 				for (int x = 0; x < 9; x++) {
 					if (board[y][x] == 0)
 						continue;
-					int value = board[y][x] - 1;
-					if (rowused[y][value] || colused[x][value] || boxused[y / 3][x / 3][value])
+					int val = board[y][x] - 1;
+					if (rowused[y][val] || colused[x][val] || boxused[y / 3][x / 3][val])
 						return false;
-					rowused[y][value] = colused[x][value] = boxused[y / 3][x / 3][value] = true;
+					rowused[y][val] = colused[x][val] = boxused[y / 3][x / 3][val] = true;
 				}
 			}
 			return true;
@@ -166,7 +165,7 @@ public final class p096 implements EulerSolution {
 		"000700800006000031040002000024070000010030080000060290000800070860000500002006000",
 		"001007090590080001030000080000005800050060020004100000080000030100020079020700400",
 		"000003017015009008060000000100007000009000200000500004000000020500600340340200000",
-		"300200000000107000706030500070009080900020004010800050009040301000702000000008006"
+		"300200000000107000706030500070009080900020004010800050009040301000702000000008006",
 	};
 	
 }
