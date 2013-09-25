@@ -22,7 +22,7 @@ public final class p164 implements EulerSolution {
 	private static final int MAX_SUM = 9;
 	
 	public String run() {
-		BigInteger[][] ways = new BigInteger[DIGITS + CONSECUTIVE + 1][pow(BASE, CONSECUTIVE)];
+		BigInteger[][] ways = new BigInteger[DIGITS + CONSECUTIVE + 1][Library.pow(BASE, CONSECUTIVE)];
 		
 		ways[0][0] = BigInteger.ONE;
 		for (int prefix = 1; prefix < ways[0].length; prefix++)
@@ -33,7 +33,7 @@ public final class p164 implements EulerSolution {
 				BigInteger sum = BigInteger.ZERO;
 				if (digitSum(prefix) <= MAX_SUM) {
 					for (int nextDigit = 0; nextDigit < BASE; nextDigit++)
-						sum = sum.add(ways[digits - 1][prefix % pow(BASE, CONSECUTIVE - 1) * BASE + nextDigit]);
+						sum = sum.add(ways[digits - 1][prefix % Library.pow(BASE, CONSECUTIVE - 1) * BASE + nextDigit]);
 				}
 				ways[digits][prefix] = sum;
 			}
@@ -48,12 +48,6 @@ public final class p164 implements EulerSolution {
 		for (; n != 0; n /= 10)
 			sum += n % 10;
 		return sum;
-	}
-	
-	
-	// A shorthand, because we can't statically import a member of a class in the root package
-	private static int pow(int x, int y) {
-		return Library.pow(x, y);
 	}
 	
 }

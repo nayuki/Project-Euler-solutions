@@ -16,16 +16,15 @@ public final class p102 implements EulerSolution {
 	
 	public String run() {
 		int count = 0;
-		for (int i = 0; i < TRIANGLES.length; i++) {
-			if (isInTriangle(i, 0, 0))
+		for (int[] t : TRIANGLES) {
+			if (isInTriangle(t, 0, 0))
 				count++;
 		}
 		return Integer.toString(count);
 	}
 	
 	
-	private static boolean isInTriangle(int index, int x, int y) {
-		int[] t = TRIANGLES[index];
+	private static boolean isInTriangle(int[] t, int x, int y) {
 		int a = Integer.signum((t[0] - t[2]) * (y - t[1]) - (t[1] - t[3]) * (x - t[0]));
 		int b = Integer.signum((t[2] - t[4]) * (y - t[3]) - (t[3] - t[5]) * (x - t[2]));
 		int c = Integer.signum((t[4] - t[0]) * (y - t[5]) - (t[5] - t[1]) * (x - t[4]));

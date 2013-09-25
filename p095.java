@@ -17,7 +17,7 @@ public final class p095 implements EulerSolution {
 	}
 	
 	
-	private static final int LIMIT = 1000000;
+	private static final int LIMIT = Library.pow(10, 6);
 	
 	public String run() {
 		// divisorSum[n] is the sum of all the proper divisors of n

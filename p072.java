@@ -14,11 +14,13 @@ public final class p072 implements EulerSolution {
 	}
 	
 	
+	private static final int LIMIT = Library.pow(10, 6);
+	
 	public String run() {
-		int[] totient = Library.listTotients(Library.pow(10, 6));
 		long sum = 0;
-		for (int i = 2; i < totient.length; i++)
-			sum += totient[i];
+		int[] totients = Library.listTotients(LIMIT);
+		for (int i = 2; i < totients.length; i++)
+			sum += totients[i];
 		return Long.toString(sum);
 	}
 	

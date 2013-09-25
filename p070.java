@@ -19,13 +19,13 @@ public final class p070 implements EulerSolution {
 	private static final int LIMIT = Library.pow(10, 7);
 	
 	public String run() {
-		int[] totients = Library.listTotients(LIMIT);
 		int minNumer = 1;  // Initially infinity
 		int minDenom = 0;
-		for (int i = 2; i < LIMIT; i++) {
-			int tot = totients[i];
-			if ((long)i * minDenom < (long)minNumer * tot && hasSameDigits(i, tot)) {
-				minNumer = i;
+		int[] totients = Library.listTotients(LIMIT - 1);
+		for (int n = 2; n < totients.length; n++) {
+			int tot = totients[n];
+			if ((long)n * minDenom < (long)minNumer * tot && hasSameDigits(n, tot)) {
+				minNumer = n;
 				minDenom = tot;
 			}
 		}
