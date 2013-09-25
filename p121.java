@@ -16,8 +16,6 @@ public final class p121 implements EulerSolution {
 	}
 	
 	
-	private static final int TURNS = 15;
-	
 	/* 
 	 * At the beginning of turn number k (0-based), there are k + 2 discs to choose from.
 	 * Hence a game that has n turns has (n+1) * n * ... * 1 = (n + 1)! outcomes.
@@ -39,6 +37,9 @@ public final class p121 implements EulerSolution {
 	 * For any game where the cost of playing is 1 and the probability of winning is p,
 	 * the maximum sustainable prize is 1 / p, therefore the maximum sustainable integer prize is floor(1 / p).
 	 */
+	
+	private static final int TURNS = 15;
+	
 	public String run() {
 		// Dynamic programming
 		BigInteger[][] ways = new BigInteger[TURNS + 1][];

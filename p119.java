@@ -19,8 +19,6 @@ public final class p119 implements EulerSolution {
 	}
 	
 	
-	private static final int INDEX = 30;  // 1-based
-	
 	/* 
 	 * Candidates have the form n^k, where n >= 2, k >= 2, n^k >= 10, and isDigitSumPower(n^k) == true.
 	 * We also impose n^k < limit. If there are at least 30 candidates under 'limit',
@@ -30,6 +28,9 @@ public final class p119 implements EulerSolution {
 	 * We only need to try the bases n until the power of the digit sum is too small to match n^k.
 	 * The power of the digit sum is digitSum(n^k)^k, which is at most (9 * digitLength(n^k))^k.
 	 */
+	
+	private static final int INDEX = 30;  // 1-based
+	
 	public String run() {
 		for (BigInteger limit = BigInteger.ONE; ; limit = limit.shiftLeft(8)) {
 			List<BigInteger> candidates = new ArrayList<BigInteger>();

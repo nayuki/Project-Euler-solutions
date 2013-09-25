@@ -17,9 +17,6 @@ public final class p115 implements EulerSolution {
 	}
 	
 	
-	private static final int M = 50;
-	
-	
 	/* 
 	 * How many ways can a row n units long be filled, where red blocks are
 	 * at least m units long? Denote this quantity as ways[n].
@@ -33,6 +30,9 @@ public final class p115 implements EulerSolution {
 	 *   - Otherwise k < n, this red block is followed by a black square, then followed
 	 *     by anything of length n-k-1. So add ways[n-m-1] + ways[n-m-2] + ... + ways[0].
 	 */
+	
+	private static final int M = 50;
+	
 	public String run() {
 		// Dynamic programming
 		List<Long> ways = new ArrayList<Long>();

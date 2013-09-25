@@ -14,9 +14,6 @@ public final class p114 implements EulerSolution {
 	}
 	
 	
-	private static final int LENGTH = 50;
-	
-	
 	/* 
 	 * How many ways can a row n units long be filled? Denote this quantity as ways[n].
 	 * Compute n = 0, 1, 2 manually as base cases.
@@ -29,6 +26,9 @@ public final class p114 implements EulerSolution {
 	 *   - Otherwise k < n, this red block is followed by a black square, then followed
 	 *     by anything of length n-k-1. So add ways[n-4] + ways[n-5] + ... + ways[0].
 	 */
+	
+	private static final int LENGTH = 50;
+	
 	public String run() {
 		// Dynamic programming
 		long[] ways = new long[LENGTH + 1];

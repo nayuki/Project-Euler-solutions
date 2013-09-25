@@ -14,9 +14,6 @@ public final class p117 implements EulerSolution {
 	}
 	
 	
-	private static final int LENGTH = 50;
-	
-	
 	/* 
 	 * How many ways can a row n units long be filled with:
 	 * - Black squares 1 unit long
@@ -32,6 +29,9 @@ public final class p117 implements EulerSolution {
 	 * - Green tile   (n>=3): Rest of the row can be anything of length n-3. Add ways[n-3].
 	 * - Blue tile    (n>=4): Rest of the row can be anything of length n-4. Add ways[n-4].
 	 */
+	
+	private static final int LENGTH = 50;
+	
 	public String run() {
 		// Dynamic programming
 		long[] ways = new long[LENGTH + 1];

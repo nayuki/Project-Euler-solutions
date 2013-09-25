@@ -16,8 +16,6 @@ public final class p101 implements EulerSolution {
 	}
 	
 	
-	private static final int DEGREE = 10;
-	
 	/* 
 	 * The generating function u(n) is a polynomial of degree 10.
 	 * OP(k, n) is a polynomial of degree at most k-1, which can be obtained
@@ -41,6 +39,9 @@ public final class p101 implements EulerSolution {
 	 * In conclusion, BOPs exist for and only for 1 <= k <= 10. For each k in that range,
 	 * the first incorrect term (FIT) of OP(k, n) exists for some n in {k+1, k+2, ..., 11}.
 	 */
+	
+	private static final int DEGREE = 10;
+	
 	public String run() {
 		Fraction sum = new Fraction(BigInteger.ZERO, BigInteger.ONE);
 		for (int k = 1; k <= DEGREE; k++) {

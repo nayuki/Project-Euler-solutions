@@ -14,8 +14,6 @@ public final class p135 implements EulerSolution {
 	}
 	
 	
-	private static final int LIMIT = Library.pow(10, 6);
-	
 	/* 
 	 * Let x = m, y = m - k, z = m - 2k (this is an arithmetic sequence).
 	 * By tedious but straightforward algebra, x^2 - y^2 - z^2 = (m - k)(5k - m).
@@ -29,6 +27,9 @@ public final class p135 implements EulerSolution {
 	 * we know that (m - k)(5k - m) >= m - k > m/2. So m/2 < x^2 - y^2 - z^2 < 10^6.
 	 * This means we search with 0 < m < 2 * 10^6.
 	 */
+	
+	private static final int LIMIT = Library.pow(10, 6);
+	
 	public String run() {
 		int[] solutions = new int[LIMIT];
 		for (int m = 1; m < LIMIT * 2; m++) {

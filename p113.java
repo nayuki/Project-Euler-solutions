@@ -16,9 +16,6 @@ public final class p113 implements EulerSolution {
 	}
 	
 	
-	private static final int DIGITS = 100;
-	
-	
 	/* 
 	 * Let n be the number of digits. To count the number of increasing or decreasing numbers using combinatorics,
 	 * let's view each number as a sequence of digit readout slots and operations. For example, suppose n=5 and
@@ -45,6 +42,9 @@ public final class p113 implements EulerSolution {
 	 * 
 	 * (Technically, in the problem statement and this solution, "increasing" actually means "nondecreasing" and "decreasing" means "nonincreasing".)
 	 */
+	
+	private static final int DIGITS = 100;
+	
 	public String run() {
 		BigInteger increasing = Library.binomial(DIGITS + 9, 9).subtract(BigInteger.ONE);
 		BigInteger decreasing = Library.binomial(DIGITS + 10, 10).subtract(BigInteger.valueOf(DIGITS + 1));

@@ -14,9 +14,6 @@ public final class p094 implements EulerSolution {
 	}
 	
 	
-	private static final int LIMIT = Library.pow(10, 9);
-	
-	
 	/* 
 	 * Consider an arbitrary almost equilateral triangle with side lengths (c, c, c +/- 1).
 	 * Split it down the middle to get a right triangle, and label the new sides.
@@ -49,6 +46,9 @@ public final class p094 implements EulerSolution {
 	 *   Every primitive Pythagorean triple with a odd and b even can be expressed as
 	 *   a = st, b = (s^2-t^2)/2, c = (s^2+t^2)/2, where s > t > 0 are coprime odd integers.
 	 */
+	
+	private static final int LIMIT = Library.pow(10, 9);
+	
 	public String run() {
 		long sum = 0;
 		/* 
