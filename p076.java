@@ -22,6 +22,7 @@ public final class p076 implements EulerSolution {
 	
 	
 	private static BigInteger partitions(int n, int k) {
+		// Dynamic programming
 		BigInteger[][] table = new BigInteger[n + 1][n + 1];
 		for (int i = 0; i <= n; i++) {
 			for (int j = n; j >= 0; j--) {

@@ -63,8 +63,8 @@ public final class p089 implements EulerSolution {
 			throw new IllegalArgumentException();
 		
 		int count = 0;
-		if (n >= 4000)  // Because 4000 is MMMM; it doesn't have a two-letter form
-			count += 2;
+		if (n >= 4000)   // 4000 is MMMM, which doesn't have a two-letter form
+			count += 2;  // Compensate for this fact
 		for (; n != 0; n /= 10)
 			count += DIGIT_LENGTHS[n % 10];
 		return count;
