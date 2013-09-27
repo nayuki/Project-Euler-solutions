@@ -28,10 +28,14 @@ public final class p169 implements EulerSolution {
 	
 	
 	/* 
-	 * Ways[n, i, j] is the number of ways that the number n can be expressed as an unordered sum of powers of 2 such that
-	 * the highest possible power is 2^i, this term is used between 0 and j times, and all lower powers of 2 are used no more than 2 times.
+	 * ways(n, i, j) is the number of ways that the number n can be expressed as
+	 * an unordered sum of powers of 2 such that all these conditions are true:
+	 * - The highest possible power is 2^i
+	 * - The 2^i term is used between 0 and j times
+	 * - All lower powers of 2 are used no more than 2 times
 	 */
 	
+	// Memoization
 	private Map<List<BigInteger>,BigInteger> ways = new HashMap<List<BigInteger>,BigInteger>();
 	
 	private BigInteger countWays(BigInteger number, int exponent, int repetitions) {
