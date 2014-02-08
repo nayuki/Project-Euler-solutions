@@ -18,18 +18,7 @@ public final class p231 implements EulerSolution {
 	private static final int K = 15000000;
 	
 	public String run() {
-		int[] smallestPrimeFactor = new int[N + 1];
-		for (int i = 2; i < smallestPrimeFactor.length; i++) {
-			if (smallestPrimeFactor[i] == 0) {
-				smallestPrimeFactor[i] = i;
-				if ((long)i * i < smallestPrimeFactor.length) {
-					for (int j = i * i; j < smallestPrimeFactor.length; j += i) {
-						if (smallestPrimeFactor[j] == 0)
-							smallestPrimeFactor[j] = i;
-					}
-				}
-			}
-		}
+		int[] smallestPrimeFactor = Library.listSmallestPrimeFactors(N);
 		
 		long sum = factorialPrimeFactorSum(N, smallestPrimeFactor);
 		sum -= factorialPrimeFactorSum(K, smallestPrimeFactor);

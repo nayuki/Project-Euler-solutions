@@ -17,18 +17,7 @@ public final class p127 implements EulerSolution {
 	private static final int LIMIT = 120000;
 	
 	public String run() {
-		int[] smallestPrimeFactor = new int[LIMIT];
-		for (int i = 2; i < smallestPrimeFactor.length; i++) {
-			if (smallestPrimeFactor[i] == 0) {
-				smallestPrimeFactor[i] = i;
-				if ((long)i * i < LIMIT) {
-					for (int j = i * i; j < LIMIT; j += i) {
-						if (smallestPrimeFactor[j] == 0)
-							smallestPrimeFactor[j] = i;
-					}
-				}
-			}
-		}
+		int[] smallestPrimeFactor = Library.listSmallestPrimeFactors(LIMIT - 1);
 		
 		int[] rads = new int[LIMIT];
 		for (int i = 1; i < rads.length; i++) {

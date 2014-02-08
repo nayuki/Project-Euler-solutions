@@ -26,18 +26,7 @@ public final class p451 implements EulerSolution {
 	
 	public String run() {
 		// Build table of smallest prime factors
-		smallestPrimeFactor = new int[LIMIT + 1];
-		for (int i = 2; i < smallestPrimeFactor.length; i++) {
-			if (smallestPrimeFactor[i] == 0) {
-				smallestPrimeFactor[i] = i;
-				if ((long)i * i <= LIMIT) {
-					for (int j = i * i; j <= LIMIT; j += i) {
-						if (smallestPrimeFactor[j] == 0)
-							smallestPrimeFactor[j] = i;
-					}
-				}
-			}
-		}
+		smallestPrimeFactor = Library.listSmallestPrimeFactors(LIMIT);
 		
 		// Process every integer in range
 		solutions = new IntArrayArray(LIMIT / 2 + 1);  // Uses about 2 GiB of memory

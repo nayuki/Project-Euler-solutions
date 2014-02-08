@@ -43,18 +43,7 @@ public final class p407 implements EulerSolution {
 	 * The largest solution among these is what we want for the M() function.
 	 */
 	public String run() {
-		int[] smallestPrimeFactor = new int[LIMIT + 1];
-		for (int i = 2; i < smallestPrimeFactor.length; i++) {
-			if (smallestPrimeFactor[i] == 0) {
-				smallestPrimeFactor[i] = i;
-				if ((long)i * i <= LIMIT) {
-					for (int j = i * i; j <= LIMIT; j += i) {
-						if (smallestPrimeFactor[j] == 0)
-							smallestPrimeFactor[j] = i;
-					}
-				}
-			}
-		}
+		int[] smallestPrimeFactor = Library.listSmallestPrimeFactors(LIMIT);
 		
 		// Maximum size of set of prime factors where the product of the set <= LIMIT.
 		// This is important because the number of solutions for n is 2^N,

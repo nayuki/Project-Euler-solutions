@@ -218,6 +218,25 @@ final class Library {
 	}
 	
 	
+	// Returns an array spf where spf[k] is the smallest prime factor of k, valid for 0 <= k <= n.
+	// For example: listSmallestPrimeFactors(10) = {0, 0, 2, 3, 2, 5, 2, 7, 2, 3, 2}.
+	public static int[] listSmallestPrimeFactors(int n) {
+		int[] result = new int[n + 1];
+		for (int i = 2; i < result.length; i++) {
+			if (result[i] == 0) {
+				result[i] = i;
+				if ((long)i * i <= n) {
+					for (int j = i * i; j <= n; j += i) {
+						if (result[j] == 0)
+							result[j] = i;
+					}
+				}
+			}
+		}
+		return result;
+	}
+	
+	
 	// Returns the number of integers in the range [1, n] that are coprime with n.
 	// For example, totient(12) = 4 because these integers are coprime with 12: 1, 5, 7, 11.
 	public static int totient(int n) {

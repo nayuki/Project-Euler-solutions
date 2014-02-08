@@ -18,18 +18,7 @@ public final class p179 implements EulerSolution {
 	
 	
 	public String run() {
-		int[] smallestPrimeFactor = new int[LIMIT + 1];
-		for (int i = 2; i < smallestPrimeFactor.length; i++) {
-			if (smallestPrimeFactor[i] == 0) {
-				smallestPrimeFactor[i] = i;
-				if ((long)i * i <= LIMIT) {
-					for (int j = i * i; j <= LIMIT; j += i) {
-						if (smallestPrimeFactor[j] == 0)
-							smallestPrimeFactor[j] = i;
-					}
-				}
-			}
-		}
+		int[] smallestPrimeFactor = Library.listSmallestPrimeFactors(LIMIT);
 		
 		int[] numDivisors = new int[LIMIT + 1];
 		numDivisors[1] = 1;
