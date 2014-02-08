@@ -46,11 +46,12 @@ public final class p429 implements EulerSolution {
 	}
 	
 	
-	private static int countFactors(int end, int n) {
-		if (end == 0)
+	// Returns the number of factors of p (prime) in factorial(n)
+	private static int countFactors(int n, int p) {
+		if (n == 0)
 			return 0;
 		else
-			return end / n + countFactors(end / n, n);
+			return n / p + countFactors(n / p, p);
 	}
 	
 }
