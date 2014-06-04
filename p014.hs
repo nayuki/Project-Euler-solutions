@@ -8,14 +8,17 @@
 
 
 main = putStrLn (show ans)
-ans = argmax (map collatz [0..10^6])
+ans = indexMax (map collatz [0..10^6])
 
+collatz :: Integer -> Int
 collatz 0 = 0
 collatz 1 = 1
 collatz n = (collatz (if mod n 2 == 0 then (div n 2) else (n * 3 + 1))) + 1
 
-argmax xs = argmax' 0 (-1) 0 xs
-argmax' _ j _ [] = j
-argmax' i j v (x:xs) = if (j == -1 || x > v)
-	then (argmax' (i+1) i x xs)
-	else (argmax' (i+1) j v xs)
+indexMax :: [Int] -> Int
+indexMax = indexMax' 0 (-1) 0
+indexMax' _ j _ [] = j  -- Current index, max index, max value
+indexMax' i j v (x:xs) =
+	if (j == -1 || x > v)
+	then (indexMax' (i+1) i x xs)
+	else (indexMax' (i+1) j v xs)

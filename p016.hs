@@ -8,7 +8,7 @@
 
 
 main = putStrLn (show ans)
-ans = digitSum (2^1000)
+ans = digitSum (2^1000 :: Integer)
 
 digitSum 0 = 0
 digitSum n = (mod n 10) + (digitSum (div n 10))

@@ -8,11 +8,9 @@
 
 
 main = putStrLn (show ans)
-ans = sum (digits (factorial 100))
+ans = digitSum (factorial 100 :: Integer)
 
-digits 0 = [0]
-digits n = reverse (digits' n) where
-	digits' 0 = []
-	digits' n = (mod n 10) : (digits' (div n 10))
+digitSum 0 = 0
+digitSum n = (mod n 10) + (digitSum (div n 10))
 
 factorial n = product [1..n]

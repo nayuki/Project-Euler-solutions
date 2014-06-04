@@ -7,8 +7,9 @@
  -}
 
 
+p = 1000
 main = putStrLn (show ans)
-ans = [a * b * (1000 - a - b) | a <- [1..1000], b <- [1..1000], cond a b]
-cond a b = a <= b && b <= c
-        && a * a + b * b == c * c
-        where c = 1000 - a - b
+ans = head [a * b * (p - a - b) | a <- [1..p], b <- [1..p], isRight a b]
+isRight a b = a <= b && b <= c
+	&& a * a + b * b == c * c
+	where c = p - a - b

@@ -14,4 +14,4 @@
  -}
 n = 100
 main = putStrLn (show ans)
-ans = (sum [1..100]) ^ 2 - (sum (map (^2) [1..100]))
+ans = (sum [1..n])^2 - (sum (map (^2) [1..n]))
