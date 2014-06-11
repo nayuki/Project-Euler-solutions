@@ -25,4 +25,4 @@ powMod x y m
 		temp = powMod (mod (x * x) m) (div y 2) m
 
 totient :: Integer -> Integer
-totient x = fromIntegral $ length [() | y <- [1..x], gcd x y == 1]
+totient x = fromIntegral $ sum [1 | y <- [1..x], gcd x y == 1]

@@ -8,7 +8,7 @@
 
 
 main = putStrLn (show ans)
-ans = length [() | n <- [1..21], i <- [1..9], (numLength (i^n :: Integer)) == n]
+ans = sum [1 | n <- [1..21], i <- [1..9], (numLength (i^n :: Integer)) == n]
 
 numLength :: Integer -> Int
 numLength n | n < 10    = 1

@@ -15,7 +15,7 @@ ans = head $ filter (\n -> (divisors n) > 500) $ map triangleNumber [0..]
 triangleNumber i = div (i * (i + 1)) 2
 
 divisors :: Int -> Int
-divisors n = (length [() | k <- [1 .. (sqrtInt n)], mod n k == 0]) * 2 - (if (sqrtInt n)^2 == n then 1 else 0)
+divisors n = (sum [1 | k <- [1 .. (sqrtInt n)], mod n k == 0]) * 2 - (if (sqrtInt n)^2 == n then 1 else 0)
 
 -- sqrtInt n = floor(sqrt(n)).
 -- Implemented entirely in integer arithmetic; guaranteed no rounding error.

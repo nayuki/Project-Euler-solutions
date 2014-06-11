@@ -8,7 +8,7 @@
 
 
 main = putStrLn (show ans)
-ans = length [() | y <- [1901..2000], m <- [1..12], dayOfWeek y m 1 == 0]
+ans = sum [1 | y <- [1901..2000], m <- [1..12], dayOfWeek y m 1 == 0]
 
 -- The day of week, where Sunday = 0, Monday = 1, etc.
 dayOfWeek :: Int -> Int -> Int -> Int
