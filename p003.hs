@@ -8,10 +8,13 @@
 
 
 main = putStrLn (show ans)
-ans = largestPrimeFactor 600851475143
+ans = largestPrimeFactor (600851475143 :: Integer)
 
-largestPrimeFactor n
-	| smallestPrimeFactor == n = n
-	| otherwise = largestPrimeFactor (div n smallestPrimeFactor)
-	where
-		smallestPrimeFactor = head [k | k <- [2..n], mod n k == 0]
+largestPrimeFactor n =
+	let
+		p = smallestPrimeFactor n
+	in
+		if p == n then p
+		else largestPrimeFactor (div n p)
+
+smallestPrimeFactor n = head [k | k <- [2..n], mod n k == 0]

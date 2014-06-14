@@ -8,5 +8,5 @@
 
 
 main = putStrLn (show ans)
-ans = binomial 40 20 :: Integer
-binomial n r = div (product [n-r+1..n]) (product [1..r])
+ans = (binomial 40 20) :: Integer
+binomial n k = div (product [(n - k + 1) .. n]) (product [1..k])

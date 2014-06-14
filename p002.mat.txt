@@ -9,6 +9,8 @@
 
 (* Use this in Wolfram Mathematica *)
 
-sum = 0;
-For[i = 0, Fibonacci[i] <= 4000000, i++, If[EvenQ[Fibonacci[i]], sum += Fibonacci[i]]]
-sum
+s = 0;
+For[i = 0, (f = Fibonacci[i]) <= 4000000, i++,
+  If[EvenQ[f],
+    s += f]]
+s
