@@ -167,6 +167,30 @@ public final class LibraryTest {
 	
 	
 	@Test
+	public void testPowMod() {
+		assertEquals(0, Library.powMod(0, 0, 1));
+		assertEquals(0, Library.powMod(1, 0, 1));
+		assertEquals(0, Library.powMod(0, 1, 1));
+		assertEquals(0, Library.powMod(1, 1, 1));
+		assertEquals(0, Library.powMod(2, 3, 1));
+		assertEquals(1, Library.powMod(0, 0, 2));
+		assertEquals(1, Library.powMod(1, 0, 2));
+		assertEquals(1, Library.powMod(2, 0, 2));
+		assertEquals(0, Library.powMod(0, 1, 2));
+		assertEquals(1, Library.powMod(1, 1, 2));
+		assertEquals(0, Library.powMod(2, 1, 2));
+		assertEquals(0, Library.powMod(0, 2, 2));
+		assertEquals(1, Library.powMod(1, 2, 2));
+		assertEquals(0, Library.powMod(2, 2, 2));
+		assertEquals(1, Library.powMod(2, 2, 3));
+		assertEquals(4, Library.powMod(4, 3, 5));
+		assertEquals(3, Library.powMod(7, 7, 10));
+		assertEquals(326216098, Library.powMod(78051657, 234602, 456087413));
+		assertEquals(1488576545, Library.powMod(2147480000, 2147483645, 2147483647));
+	}
+	
+	
+	@Test
 	public void testFactorial() {
 		assertEquals(new BigInteger("1"), Library.factorial(0));
 		assertEquals(new BigInteger("1"), Library.factorial(1));
