@@ -88,6 +88,8 @@ final class Library {
 			throw new IllegalArgumentException("Reciprocal not handled");
 		if (m <= 0)
 			throw new IllegalArgumentException("Invalid modulus");
+		if (m == 1)
+			return 0;
 		
 		// Exponentiation by squaring
 		int z = 1;
