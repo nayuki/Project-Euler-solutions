@@ -1,8 +1,7 @@
 Project Euler solutions
 =======================
 
-This package contains Nayuki Minase's solution code for over 180 Project Euler
-problems.
+This package contains Nayuki's solution code for over 180 Project Euler problems.
 
 Each solved problem has a program written in Java. Additionally, some solutions
 have Mathematica and Haskell programs. All problems from #1 to #100 are solved.
@@ -15,6 +14,6 @@ This code is provided for reference only. You need prior written permission to
 do any of the following: republish the code verbatim, publish the code with
 modifications, incorporate parts of the code into your own work, etc.
 
-Copyright © 2014 Nayuki Minase. All rights reserved. No warranty.
+Copyright © 2014 Project Nayuki. All rights reserved. No warranty.
 
-Home page: http://nayuki.eigenstate.org/page/project-euler-solutions
+Home page: http://www.nayuki.io/page/project-euler-solutions
