@@ -1,8 +1,8 @@
 {- 
  - Solution to Project Euler problem 102
- - By Nayuki Minase
+ - by Project Nayuki
  - 
- - http://nayuki.eigenstate.org/page/project-euler-solutions
+ - http://www.nayuki.io/page/project-euler-solutions
  - https://github.com/nayuki/Project-Euler-solutions
  -}
 
