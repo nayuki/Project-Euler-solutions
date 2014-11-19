@@ -1,3 +1,11 @@
+/* 
+ * Tests for Project Euler library code
+ * by Project Nayuki
+ * 
+ * http://www.nayuki.io/page/project-euler-solutions
+ * https://github.com/nayuki/Project-Euler-solutions
+ */
+
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
