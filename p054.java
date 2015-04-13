@@ -1134,7 +1134,7 @@ public final class p054 implements EulerSolution {
 		"AD 3D TS KS 7H JH 2D JS QD AC",
 		"9C JD 7C 6D TC 6H 6C JC 3D 3S",
 		"QC KC 3S JC KD 2C 8D AH QS TS",
-		"AS KD 3D JD 8H 7C 8C 5C QD 6C"
+		"AS KD 3D JD 8H 7C 8C 5C QD 6C",
 	};
 	
 }
