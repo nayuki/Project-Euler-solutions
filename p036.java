@@ -15,12 +15,12 @@ public final class p036 implements EulerSolution {
 	
 	
 	public String run() {
-		int sum = 0;
+		long sum = 0;
 		for (int i = 1; i < 1000000; i++) {
 			if (Library.isPalindrome(Integer.toString(i, 10)) && Library.isPalindrome(Integer.toString(i, 2)))
 				sum += i;
 		}
-		return Integer.toString(sum);
+		return Long.toString(sum);
 	}
 	
 }

@@ -26,6 +26,7 @@ public final class p019 implements EulerSolution {
 	}
 	
 	
+	// Zeller's congruence
 	private static int dayOfWeek(int year, int month, int day) {
 		long m = mod((long)month - 3, 4800);
 		long y = mod(year + m / 12, 400);

@@ -16,7 +16,6 @@ public final class p006 implements EulerSolution {
 	
 	private static final int N = 100;
 	
-	
 	public String run() {
 		int sum = 0;
 		int sum2 = 0;
