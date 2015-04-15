@@ -6,9 +6,6 @@
  * https://github.com/nayuki/Project-Euler-solutions
  */
 
-import java.util.HashMap;
-import java.util.Map;
-
 
 public final class p078 implements EulerSolution {
 	
@@ -19,57 +16,33 @@ public final class p078 implements EulerSolution {
 	
 	private static final int MODULUS = Library.pow(10, 6);
 	
-	
 	public String run() {
-		for (int i = 0; ; i++) {
-			if (partition(i) == 0)
-				return Integer.toString(i);
+		for (int limit = 1; ; limit *= 2) {
+			int result = search(limit);
+			if (result != -1)
+				return Integer.toString(result);
 		}
 	}
 	
 	
-	private static Map<Integer,Integer> partitionMemo = new HashMap<Integer,Integer>();
-	
-	private static int partition(int n) {  // Modulo the modulus
-		if (!partitionMemo.containsKey(n)) {
-			int result;
-			if (n < 0)  // Won't actually invoke this case
-				return 0;
-			else if (n == 0)
-				return 1;
-			else {
-				/* 
-				 * Theorem:
-				 *   p(n) = 0, if n < 0
-				 *   p(0) = 1
-				 *   p(n) = ... p(n-15) - p(n-7) + p(n-2) + p(n-1) - p(n-5) + p(n-12) ...
-				 *        = sum of (-1)^(i+1) p(n - pent(i)) for i from -inf to inf excluding 0
-				 *        when n > 0
-				 * The last equation is based on the pentagonal number theorem.
-				 * Note: pent(n) = n(3n - 1) / 2
-				 */
-				result = 0;
-				for (int i = 1; ; i++) {
-					int temp = pentagon(i);
-					if (temp > n)
-						break;
-					result = (result + (i % 2 == 0 ? -1 : 1) * partition(n - temp) + MODULUS) % MODULUS;
-				}
-				for (int i = -1; ; i--) {
-					int temp = pentagon(i);
-					if (temp > n)
-						break;
-					result = (result + (i % 2 == 0 ? -1 : 1) * partition(n - temp) + MODULUS) % MODULUS;
-				}
-			}
-			partitionMemo.put(n, result);
+	private static int search(int limit) {
+		/* 
+		 * partitions[i] is {the number of ways i can be written
+		 * as an unordered sum of positive integers} mod 10^6.
+		 * Note that the partition function P(n, k) can be computed with
+		 * dynamic programming using only 1 dimension for memoization.
+		 */
+		int[] partitions = new int[limit];
+		partitions[0] = 1;
+		for (int i = 1; i < limit; i++) {
+			for (int j = i; j < limit; j++)
+				partitions[j] = (partitions[j] + partitions[j - i]) % MODULUS;
 		}
-		return partitionMemo.get(n);
-	}
-	
-	
-	private static int pentagon(int n) {
-		return n * (n * 3 - 1) / 2;
+		for (int i = 0; i < limit; i++) {
+			if (partitions[i] == 0)
+				return i;
+		}
+		return -1;
 	}
 	
 }
