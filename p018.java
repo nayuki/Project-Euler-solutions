@@ -23,7 +23,7 @@ public final class p018 implements EulerSolution {
 	}
 	
 	
-	private int[][] triangle = {
+	private int[][] triangle = {  // Mutable
 		{75},
 		{95,64},
 		{17,47,82},

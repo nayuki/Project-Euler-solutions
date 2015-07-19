@@ -35,13 +35,14 @@ public final class p017 implements EulerSolution {
 		if (n < 100)
 			return tens(n);
 		else {
-			String big = "";
+			String result = "";
 			if (n >= 1000)
-				big += tens(n / 1000) + "thousand";
+				result += tens(n / 1000) + "thousand";
 			if (n / 100 % 10 != 0)
-				big += ONES[n / 100 % 10] + "hundred";
-			
-			return big + (n % 100 != 0 ? "and" + tens(n % 100) : "");
+				result += ONES[n / 100 % 10] + "hundred";
+			if (n % 100 != 0)
+				result += "and" + tens(n % 100);
+			return result;
 		}
 	}
 	
