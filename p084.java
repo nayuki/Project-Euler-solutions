@@ -65,20 +65,25 @@ public final class p084 implements EulerSolution {
 						case 9:
 							location -= 3;
 							break;
+						default:
+							break;
 					}
 					break;
-				
-				// Go to jail
-				case 30:
+				case 30:  // Go to jail
 					location = 10;
+					break;
+				default:
 					break;
 			}
 			switch (location) {
 				case 2: case 17: case 33:  // Community chest
 					switch (communityChest.nextCard()) {
-						case 0:  location =  0;  break;
-						case 1:  location = 10;  break;
+						case 0 :  location =  0;  break;
+						case 1 :  location = 10;  break;
+						default:  break;
 					}
+					break;
+				default:
 					break;
 			}
 			
