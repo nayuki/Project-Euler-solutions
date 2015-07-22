@@ -6,6 +6,8 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
+import eulerlib
+
 
 def compute():
 	i = 1
@@ -18,22 +20,9 @@ def compute():
 	return str(triangular)
 
 
-# Given integer x, this returns the integer floor(sqrt(x)).
-def sqrt(x):
-	i = 1
-	while i * i <= x:
-		i *= 2
-	y = 0
-	while i > 0:
-		if (y + i)**2 <= x:
-			y += i
-		i //= 2
-	return y
-
-
 def num_divisors(x):
 	result = 0
-	k = sqrt(x)
+	k = eulerlib.sqrt(x)
 	for i in range(1, k + 1):
 		if x % i == 0:
 			result += 2

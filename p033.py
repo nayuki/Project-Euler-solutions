@@ -6,6 +6,8 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
+import eulerlib
+
 
 def compute():
 	# Consider an arbitrary fraction n/d:
@@ -36,13 +38,7 @@ def compute():
 			if (n1 == d0 and n0 * d == n * d1) or (n0 == d1 and n1 * d == n * d0):
 				numer *= n
 				denom *= d
-	return str(denom // gcd(numer, denom))
-
-
-def gcd(x, y):
-	while y != 0:
-		x, y = y, x % y
-	return x
+	return str(denom // eulerlib.gcd(numer, denom))
 
 
 if __name__ == "__main__":

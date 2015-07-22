@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import itertools
+import eulerlib, itertools
 
 
 def compute():
@@ -21,31 +21,9 @@ def compute():
 	return str(ans)
 
 
-# Given integer x, this returns the integer floor(sqrt(x)).
-def sqrt(x):
-	i = 1
-	while i * i <= x:
-		i *= 2
-	y = 0
-	while i > 0:
-		if (y + i)**2 <= x:
-			y += i
-		i //= 2
-	return y
-
-
-def is_prime(x):
-	if x < 2:
-		return False
-	for i in range(2, sqrt(x) + 1):
-		if x % i == 0:
-			return False
-	return True
-
-
 def count_consecutive_primes(a, b):
 	for i in itertools.count():
-		if not is_prime(i * i + i * a + b):
+		if not eulerlib.is_prime(i * i + i * a + b):
 			return i
 
 

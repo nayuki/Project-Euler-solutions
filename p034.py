@@ -6,6 +6,8 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
+import eulerlib
+
 
 def compute():
 	# As stated in the problem, 1 = 1! and 2 = 2! are excluded.
@@ -18,7 +20,7 @@ def compute():
 	return str(ans)
 
 
-FACTORIAL = [1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880]
+FACTORIAL = list(map(eulerlib.factorial, range(10)))
 
 def factorial_digit_sum(n):
 	return sum([FACTORIAL[int(c)] for c in str(n)])
