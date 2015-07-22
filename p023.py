@@ -20,6 +20,8 @@ def compute():
 		for j in abundantnums:
 			if i + j < LIMIT:
 				expressible[i + j] = True
+			else:
+				break
 	
 	ans = 0
 	for (i, x) in enumerate(expressible):

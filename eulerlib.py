@@ -33,10 +33,15 @@ def sqrt(x):
 def is_prime(x):
 	if x <= 1:
 		return False
-	for i in range(2, sqrt(x) + 1):
-		if x % i == 0:
-			return False
-	return True
+	elif x <= 3:
+		return True
+	elif x % 2 == 0:
+		return False
+	else:
+		for i in range(3, sqrt(x) + 1, 2):
+			if x % i == 0:
+				return False
+		return True
 
 
 # Returns the factorial of the given non-negative integer.

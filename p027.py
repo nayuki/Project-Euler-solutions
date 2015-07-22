@@ -21,9 +21,12 @@ def compute():
 	return str(ans)
 
 
+isprimecache = list(map(eulerlib.is_prime, range(1000)))
+
 def count_consecutive_primes(a, b):
 	for i in itertools.count():
-		if not eulerlib.is_prime(i * i + i * a + b):
+		n = i * i + i * a + b
+		if n <= 1 or (n < len(isprimecache) and not isprimecache[n]) or not eulerlib.is_prime(n):
 			return i
 
 

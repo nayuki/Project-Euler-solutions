@@ -23,7 +23,11 @@ def compute():
 FACTORIAL = list(map(eulerlib.factorial, range(10)))
 
 def factorial_digit_sum(n):
-	return sum([FACTORIAL[int(c)] for c in str(n)])
+	result = 0
+	while n > 0:
+		result += FACTORIAL[n % 10]
+		n //= 10
+	return result
 
 
 if __name__ == "__main__":
