@@ -8,11 +8,11 @@
 
 
 def compute():
-	ans = set()
+	seen = set()
 	for a in range(2, 101):
 		for b in range(2, 101):
-			ans.add(a ** b)
-	return str(len(ans))
+			seen.add(a ** b)
+	return str(len(seen))
 
 
 if __name__ == "__main__":

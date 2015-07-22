@@ -16,8 +16,7 @@ def compute():
 		if k != n:
 			n //= k
 		else:
-			break
-	return str(n)
+			return str(n)
 
 
 def smallest_prime_factor(x):

@@ -14,9 +14,9 @@ def compute():
 	return str(ans)
 
 
-ONES = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
+ONES  = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
 TEENS = ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"]
-TENS = ["twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
+TENS  = ["twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
 
 
 def to_english(n):

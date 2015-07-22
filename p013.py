@@ -8,8 +8,7 @@
 
 
 def compute():
-	s = str(sum(NUMBERS))
-	return s[ : 10]
+	return str(sum(NUMBERS))[ : 10]
 
 
 NUMBERS = [
