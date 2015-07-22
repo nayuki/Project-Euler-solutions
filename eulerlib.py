@@ -7,7 +7,9 @@
 # 
 
 
+# Returns the greatest common denominator of the given non-negative integers.
 def gcd(x, y):
+	assert x >= 0 and y >= 0
 	while y != 0:
 		x, y = y, x % y
 	return x
@@ -15,6 +17,7 @@ def gcd(x, y):
 
 # Given integer x, this returns the integer floor(sqrt(x)).
 def sqrt(x):
+	assert x >= 0
 	i = 1
 	while i * i <= x:
 		i *= 2
@@ -26,6 +29,7 @@ def sqrt(x):
 	return y
 
 
+# Tests whether the given integer is a prime number.
 def is_prime(x):
 	if x <= 1:
 		return False
@@ -35,7 +39,9 @@ def is_prime(x):
 	return True
 
 
+# Returns the factorial of the given non-negative integer.
 def factorial(n):
+	assert n >= 0
 	result = 1
 	for i in range(1, n + 1):
 		result *= i
