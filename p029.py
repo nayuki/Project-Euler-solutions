@@ -7,8 +7,13 @@
 # 
 
 
-ans = set()
-for a in range(2, 101):
-	for b in range(2, 101):
-		ans.add(a ** b)
-print(len(ans))
+def compute():
+	ans = set()
+	for a in range(2, 101):
+		for b in range(2, 101):
+			ans.add(a ** b)
+	return str(len(ans))
+
+
+if __name__ == "__main__":
+	print(compute())

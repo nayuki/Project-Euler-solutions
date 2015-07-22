@@ -7,6 +7,17 @@
 # 
 
 
+def compute():
+	ans = 0
+	maxsoln = 0
+	for p in range(1, 1001):
+		soln = count_solutions(p)
+		if soln > maxsoln:
+			ans = p
+			maxsoln = soln
+	return str(ans)
+
+
 def count_solutions(p):
 	result = 0
 	for a in range(1, p + 1):
@@ -17,11 +28,5 @@ def count_solutions(p):
 	return result
 
 
-ans = 0
-maxsoln = 0
-for p in range(1, 1001):
-	soln = count_solutions(p)
-	if soln > maxsoln:
-		ans = p
-		maxsoln = soln
-print(ans)
+if __name__ == "__main__":
+	print(compute())

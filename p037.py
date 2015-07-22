@@ -7,6 +7,18 @@
 # 
 
 
+def compute():
+	ans = 0
+	found = 0
+	n = 10
+	while found < 11:
+		if is_truncatable_prime(n):
+			ans += n
+			found += 1
+		n += 1
+	return str(ans)
+
+
 # Given integer x, this returns the integer floor(sqrt(x)).
 def sqrt(x):
 	i = 1
@@ -46,12 +58,5 @@ def is_truncatable_prime(n):
 	return True
 
 
-ans = 0
-found = 0
-n = 10
-while found < 11:
-	if is_truncatable_prime(n):
-		ans += n
-		found += 1
-	n += 1
-print(ans)
+if __name__ == "__main__":
+	print(compute())

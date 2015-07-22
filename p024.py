@@ -7,6 +7,13 @@
 # 
 
 
+def compute():
+	arr = list(range(10))
+	for i in range(999999):
+		next_permutation(arr)
+	return "".join([str(x) for x in arr])
+
+
 def next_permutation(arr):
 	i = len(arr) - 1
 	while i > 0 and arr[i - 1] >= arr[i]:
@@ -21,7 +28,5 @@ def next_permutation(arr):
 	return True
 
 
-arr = list(range(10))
-for i in range(999999):
-	next_permutation(arr)
-print("".join([str(x) for x in arr]))
+if __name__ == "__main__":
+	print(compute())

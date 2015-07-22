@@ -7,9 +7,14 @@
 # 
 
 
-sum = 0
-sum2 = 0
-for i in range(1, 101):
-	sum += i
-	sum2 += i**2
-print(sum**2 - sum2)
+def compute():
+	sum = 0
+	sum2 = 0
+	for i in range(1, 101):
+		sum += i
+		sum2 += i**2
+	return str(sum**2 - sum2)
+
+
+if __name__ == "__main__":
+	print(compute())

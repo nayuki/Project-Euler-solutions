@@ -7,6 +7,18 @@
 # 
 
 
+def compute():
+	n = 2
+	count = 0
+	while True:
+		if is_prime(n):
+			count += 1
+			if count == 10001:
+				break
+		n += 1
+	return str(n)
+
+
 # Given integer x, this returns the integer floor(sqrt(x)).
 def sqrt(x):
 	i = 1
@@ -29,12 +41,5 @@ def is_prime(x):
 	return True
 
 
-n = 2
-count = 0
-while True:
-	if is_prime(n):
-		count += 1
-		if count == 10001:
-			break
-	n += 1
-print(n)
+if __name__ == "__main__":
+	print(compute())

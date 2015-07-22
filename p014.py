@@ -7,6 +7,17 @@
 # 
 
 
+def compute():
+	ans = 0
+	maxlen = 0
+	for i in range(1, 1000000):
+		colzlen = collatz_chain_length(i)
+		if colzlen > maxlen:
+			ans = i
+			maxlen = colzlen
+	return str(ans)
+
+
 collatz_cache = {1: 1}
 
 def collatz_chain_length(x):
@@ -19,11 +30,5 @@ def collatz_chain_length(x):
 	return collatz_cache[x]
 
 
-ans = 0
-maxlen = 0
-for i in range(1, 1000000):
-	colzlen = collatz_chain_length(i)
-	if colzlen > maxlen:
-		ans = i
-		maxlen = colzlen
-print(ans)
+if __name__ == "__main__":
+	print(compute())

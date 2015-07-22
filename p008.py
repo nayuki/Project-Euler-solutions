@@ -7,6 +7,13 @@
 # 
 
 
+def compute():
+	ans = 0
+	for i in range(len(NUMBER) - ADJACENT + 1):
+		ans = max(digit_product(NUMBER[i : i + ADJACENT]), ans)
+	return str(ans)
+
+
 def digit_product(s):
 	result = 1
 	for c in s:
@@ -18,7 +25,5 @@ NUMBER = "7316717653133062491922511967442657474235534919493496983520312774506326
 ADJACENT = 13
 
 
-ans = 0
-for i in range(len(NUMBER) - ADJACENT + 1):
-	ans = max(digit_product(NUMBER[i : i + ADJACENT]), ans)
-print(ans)
+if __name__ == "__main__":
+	print(compute())

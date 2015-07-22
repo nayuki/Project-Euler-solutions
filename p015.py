@@ -7,6 +7,10 @@
 # 
 
 
+def compute():
+	return str(binomial(40, 20))
+
+
 def factorial(n):
 	result = 1
 	for i in range(1, n + 1):
@@ -18,4 +22,5 @@ def binomial(n, k):
 	return factorial(n) // (factorial(k) * factorial(n - k))
 
 
-print(binomial(40, 20))
+if __name__ == "__main__":
+	print(compute())

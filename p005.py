@@ -7,13 +7,18 @@
 # 
 
 
+def compute():
+	ans = 1
+	for i in range(1, 21):
+		ans *= i // gcd(i, ans)
+	return str(ans)
+
+
 def gcd(x, y):
 	while y != 0:
 		x, y = y, x % y
 	return x
 
 
-ans = 1
-for i in range(1, 21):
-	ans *= i // gcd(i, ans)
-print(ans)
+if __name__ == "__main__":
+	print(compute())

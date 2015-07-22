@@ -7,6 +7,12 @@
 # 
 
 
+def compute():
+	n = factorial(100)
+	ans = sum(map(int, str(n)))
+	return str(ans)
+
+
 def factorial(n):
 	result = 1
 	for i in range(1, n + 1):
@@ -14,6 +20,5 @@ def factorial(n):
 	return result
 
 
-n = factorial(100)
-ans = sum(map(int, str(n)))
-print(ans)
+if __name__ == "__main__":
+	print(compute())

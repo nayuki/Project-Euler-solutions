@@ -9,6 +9,18 @@
 import itertools
 
 
+def compute():
+	ans = 0
+	maxconsec = 0
+	for a in range(-999, 1000):
+		for b in range(-999, 1000):
+			consec = count_consecutive_primes(a, b)
+			if consec > maxconsec:
+				ans = a * b
+				maxconsec = consec
+	return str(ans)
+
+
 # Given integer x, this returns the integer floor(sqrt(x)).
 def sqrt(x):
 	i = 1
@@ -37,12 +49,5 @@ def count_consecutive_primes(a, b):
 			return i
 
 
-ans = 0
-maxconsec = 0
-for a in range(-999, 1000):
-	for b in range(-999, 1000):
-		consec = count_consecutive_primes(a, b)
-		if consec > maxconsec:
-			ans = a * b
-			maxconsec = consec
-print(ans)
+if __name__ == "__main__":
+	print(compute())

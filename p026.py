@@ -7,6 +7,17 @@
 # 
 
 
+def compute():
+	ans = 0
+	maxcyclelen = 0
+	for i in range(1, 1000):
+		cylen = reciprocal_cycle_len(i)
+		if cylen > maxcyclelen:
+			ans = i
+			maxcyclelen = cylen
+	return str(ans)
+
+
 def reciprocal_cycle_len(n):
 	seen = {}
 	x = 1
@@ -18,11 +29,5 @@ def reciprocal_cycle_len(n):
 	return i - seen[x]
 
 
-ans = 0
-maxcyclelen = 0
-for i in range(1, 1000):
-	cylen = reciprocal_cycle_len(i)
-	if cylen > maxcyclelen:
-		ans = i
-		maxcyclelen = cylen
-print(ans)
+if __name__ == "__main__":
+	print(compute())

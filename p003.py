@@ -7,6 +7,17 @@
 # 
 
 
+def compute():
+	n = 600851475143
+	while True:
+		k = smallest_prime_factor(n)
+		if k != n:
+			n //= k
+		else:
+			break
+	return str(n)
+
+
 # Given integer x, this returns the integer floor(sqrt(x)).
 def sqrt(x):
 	i = 1
@@ -27,11 +38,5 @@ def smallest_prime_factor(x):
 	return x
 
 
-n = 600851475143
-while True:
-	k = smallest_prime_factor(n)
-	if k != n:
-		n //= k
-	else:
-		break
-print(n)
+if __name__ == "__main__":
+	print(compute())

@@ -7,6 +7,14 @@
 # 
 
 
+def compute():
+	ans = 0
+	for (i, name) in enumerate(sorted(NAMES)):
+		for c in name:
+			ans += (i + 1) * (ord(c) - ord('A') + 1)
+	return str(ans)
+
+
 NAMES = [
 	"MARY",
 	"PATRICIA",
@@ -5173,8 +5181,6 @@ NAMES = [
 	"ALONSO",
 ]
 
-ans = 0
-for (i, name) in enumerate(sorted(NAMES)):
-	for c in name:
-		ans += (i + 1) * (ord(c) - ord('A') + 1)
-print(ans)
+
+if __name__ == "__main__":
+	print(compute())

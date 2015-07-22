@@ -7,6 +7,23 @@
 # 
 
 
+def compute():
+	ans = 0
+	width = len(GRID[0])
+	height = len(GRID)
+	for y in range(height):
+		for x in range(width):
+			if x + CONSECUTIVE <= width:
+				ans = max(grid_product(x, y,  1, 0, CONSECUTIVE), ans)
+			if y + CONSECUTIVE <= height:
+				ans = max(grid_product(x, y,  0, 1, CONSECUTIVE), ans)
+			if x + CONSECUTIVE <= width and y + CONSECUTIVE <= height:
+				ans = max(grid_product(x, y,  1, 1, CONSECUTIVE), ans)
+			if x - CONSECUTIVE >= -1    and y + CONSECUTIVE <= height:
+				ans = max(grid_product(x, y, -1, 1, CONSECUTIVE), ans)
+	return str(ans)
+
+
 GRID = [
 	[ 8, 2,22,97,38,15, 0,40, 0,75, 4, 5, 7,78,52,12,50,77,91, 8],
 	[49,49,99,40,17,81,18,57,60,87,17,40,98,43,69,48, 4,56,62, 0],
@@ -39,17 +56,5 @@ def grid_product(ox, oy, dx, dy, n):
 	return result
 
 
-ans = 0
-width = len(GRID[0])
-height = len(GRID)
-for y in range(height):
-	for x in range(width):
-		if x + CONSECUTIVE <= width:
-			ans = max(grid_product(x, y,  1, 0, CONSECUTIVE), ans)
-		if y + CONSECUTIVE <= height:
-			ans = max(grid_product(x, y,  0, 1, CONSECUTIVE), ans)
-		if x + CONSECUTIVE <= width and y + CONSECUTIVE <= height:
-			ans = max(grid_product(x, y,  1, 1, CONSECUTIVE), ans)
-		if x - CONSECUTIVE >= -1    and y + CONSECUTIVE <= height:
-			ans = max(grid_product(x, y, -1, 1, CONSECUTIVE), ans)
-print(ans)
+if __name__ == "__main__":
+	print(compute())

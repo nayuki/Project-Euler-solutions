@@ -7,6 +7,13 @@
 # 
 
 
+def compute():
+	ans = 0
+	for i in range(1, 1001):
+		ans += len(to_english(i))
+	return str(ans)
+
+
 ONES = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
 TEENS = ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"]
 TENS = ["twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
@@ -36,7 +43,5 @@ def tens(n):
 		return TENS[n // 10 - 2] + (ONES[n % 10] if n % 10 != 0 else "")
 
 
-ans = 0
-for i in range(1, 1001):
-	ans += len(to_english(i))
-print(ans)
+if __name__ == "__main__":
+	print(compute())

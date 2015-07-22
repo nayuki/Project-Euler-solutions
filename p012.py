@@ -7,6 +7,17 @@
 # 
 
 
+def compute():
+	i = 1
+	triangular = 0
+	while True:
+		triangular += i
+		if num_divisors(triangular) > 500:
+			break
+		i += 1
+	return str(triangular)
+
+
 # Given integer x, this returns the integer floor(sqrt(x)).
 def sqrt(x):
 	i = 1
@@ -31,11 +42,5 @@ def num_divisors(x):
 	return result
 
 
-i = 1
-triangular = 0
-while True:
-	triangular += i
-	if num_divisors(triangular) > 500:
-		break
-	i += 1
-print(triangular)
+if __name__ == "__main__":
+	print(compute())
