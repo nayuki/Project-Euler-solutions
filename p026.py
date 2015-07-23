@@ -8,13 +8,7 @@
 
 
 def compute():
-	ans = 0
-	maxcyclelen = 0
-	for i in range(1, 1000):
-		cylen = reciprocal_cycle_len(i)
-		if cylen > maxcyclelen:
-			ans = i
-			maxcyclelen = cylen
+	ans = max(range(1, 1000), key=reciprocal_cycle_len)
 	return str(ans)
 
 

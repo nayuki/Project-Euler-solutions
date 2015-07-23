@@ -13,10 +13,9 @@ def compute():
 	n = 600851475143
 	while True:
 		k = smallest_prime_factor(n)
-		if k != n:
-			n //= k
-		else:
+		if k == n:
 			return str(n)
+		n //= k
 
 
 def smallest_prime_factor(x):

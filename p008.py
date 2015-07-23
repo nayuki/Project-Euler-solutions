@@ -8,9 +8,7 @@
 
 
 def compute():
-	ans = 0
-	for i in range(len(NUMBER) - ADJACENT + 1):
-		ans = max(digit_product(NUMBER[i : i + ADJACENT]), ans)
+	ans = max(digit_product(NUMBER[i : i + ADJACENT]) for i in range(len(NUMBER) - ADJACENT + 1))
 	return str(ans)
 
 

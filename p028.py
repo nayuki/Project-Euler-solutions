@@ -17,8 +17,7 @@ def compute():
 	# Incidentally, the closed form of this sum is (4m^3 + 3m^2 + 8m - 9) / 6, where m = size.
 	SIZE = 1001  # Must be odd
 	ans = 1  # Special case for size 1
-	for i in range(3, SIZE + 1, 2):
-		ans += 4 * i * i - 6 * (i - 1)
+	ans += sum(4 * i * i - 6 * (i - 1) for i in range(3, SIZE + 1, 2))
 	return str(ans)
 
 

@@ -8,9 +8,7 @@
 
 
 def compute():
-	ans = 0
-	for i in range(1, 1001):
-		ans += len(to_english(i))
+	ans = sum(len(to_english(i)) for i in range(1, 1001))
 	return str(ans)
 
 

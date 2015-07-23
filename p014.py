@@ -8,13 +8,7 @@
 
 
 def compute():
-	ans = 0
-	maxlen = 0
-	for i in range(1, 1000000):
-		colzlen = collatz_chain_length(i)
-		if colzlen > maxlen:
-			ans = i
-			maxlen = colzlen
+	ans = max((i for i in range(1, 1000000)), key=collatz_chain_length)
 	return str(ans)
 
 

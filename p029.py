@@ -8,10 +8,7 @@
 
 
 def compute():
-	seen = set()
-	for a in range(2, 101):
-		for b in range(2, 101):
-			seen.add(a ** b)
+	seen = set(a**b for a in range(2, 101) for b in range(2, 101))
 	return str(len(seen))
 
 

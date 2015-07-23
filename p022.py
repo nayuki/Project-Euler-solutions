@@ -8,10 +8,9 @@
 
 
 def compute():
-	ans = 0
-	for (i, name) in enumerate(sorted(NAMES)):
-		for c in name:
-			ans += (i + 1) * (ord(c) - ord('A') + 1)
+	ans = sum((i + 1) * (ord(c) - ord('A') + 1)
+		for (i, name) in enumerate(sorted(NAMES))
+		for c in name)
 	return str(ans)
 
 
