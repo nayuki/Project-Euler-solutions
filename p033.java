@@ -31,7 +31,8 @@ public final class p033 implements EulerSolution {
 	 * Similarly, we cannot have a simplification with n1 = d1 for the same reason.
 	 * 
 	 * Therefore we only need to consider the cases where n0 = d1 or n1 = d0.
-	 * In the first case, check that n1/d0 = n/d; in the second case, check that n0/d1 = n/d.
+	 * In the first case, check that n1/d0 = n/d;
+	 * in the second case, check that n0/d1 = n/d.
 	 */
 	public String run() {
 		int numer = 1;
