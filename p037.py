@@ -30,11 +30,10 @@ def is_truncatable_prime(n):
 		i *= 10
 	
 	# Test if right-truncatable
-	x = n
-	while x > 0:
-		if not eulerlib.is_prime(x):
+	while n > 0:
+		if not eulerlib.is_prime(n):
 			return False
-		x //= 10
+		n //= 10
 	return True
 
 

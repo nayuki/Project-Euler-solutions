@@ -8,13 +8,7 @@
 
 
 def compute():
-	ans = 0
-	maxsoln = 0
-	for p in range(1, 1001):
-		soln = count_solutions(p)
-		if soln > maxsoln:
-			ans = p
-			maxsoln = soln
+	ans = max((p for p in range(1, 1001)), key=count_solutions)
 	return str(ans)
 
 

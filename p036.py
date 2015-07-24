@@ -8,14 +8,16 @@
 
 
 def compute():
-	ans = 0
-	for i in range(1000000):
-		s = str(i)
-		if s == s[::-1]:
-			t = bin(i)[2 : ]
-			if t == t[::-1]:
-				ans += i
+	ans = sum(i for i in range(1000000) if is_decimal_binary_palindrome(i))
 	return str(ans)
+
+
+def is_decimal_binary_palindrome(n):
+	s = str(n)
+	if s != s[::-1]:
+		return False
+	t = bin(n)[2 : ]
+	return t == t[::-1]
 
 
 if __name__ == "__main__":

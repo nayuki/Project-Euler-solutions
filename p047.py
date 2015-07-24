@@ -11,10 +11,7 @@ import eulerlib, itertools
 
 def compute():
 	for i in itertools.count():
-		for j in range(4):
-			if count_distinct_prime_factors(i + j) != 4:
-				break
-		else:
+		if all((count_distinct_prime_factors(i + j) == 4) for j in range(4)):
 			return str(i)
 
 
@@ -23,21 +20,19 @@ distinctprimefactorscache = {}
 def count_distinct_prime_factors(n):
 	if n not in distinctprimefactorscache:
 		count = 0
-		while n > 1:
+		x = n
+		while x > 1:
 			count += 1
-			k = smallest_prime_factor(n)
-			n //= k
-			while n % k == 0:
-				n //= k
+			for i in range(2, eulerlib.sqrt(x) + 1):
+				if x % i == 0:
+					x //= i
+					while x % i == 0:
+						x //= i
+					break
+			else:
+				break  # x is prime
 		distinctprimefactorscache[n] = count
 	return distinctprimefactorscache[n]
-
-
-def smallest_prime_factor(x):
-	for i in range(2, eulerlib.sqrt(x) + 1):
-		if x % i == 0:
-			return i
-	return x
 
 
 if __name__ == "__main__":

@@ -16,7 +16,7 @@ def compute():
 		pentagon = j * (j * 3 - 1) // 2
 		hexagon  = k * (k * 2 - 1)
 		minimum = min(triangle, pentagon, hexagon)
-		if minimum == triangle and minimum == pentagon and minimum == hexagon:
+		if minimum == max(triangle, pentagon, hexagon):
 			return str(triangle)
 		if minimum == triangle: i += 1
 		if minimum == pentagon: j += 1

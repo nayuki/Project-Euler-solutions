@@ -11,9 +11,7 @@ def compute():
 	ans = 0
 	for n in range(2, 10):
 		for i in range(1, 10**(9 // n)):
-			s = ""
-			for j in range(1, n + 1):
-				s += str(i * j)
+			s = "".join(str(i * j) for j in range(1, n + 1))
 			if "".join(sorted(s)) == "123456789":
 				ans = max(int(s), ans)
 	return str(ans)
