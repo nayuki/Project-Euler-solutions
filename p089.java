@@ -1071,7 +1071,7 @@ public final class p089 implements EulerSolution {
 		"DCXCII",
 		"MMXXVIII",
 		"MMMMCCCXXX",
-		"XXXXVIIII"
+		"XXXXVIIII",
 	};
 	
 }
