@@ -1,5 +1,5 @@
 /* 
- * Tests for Project Euler all Java solutions
+ * Test suite for Project Euler all Java solutions
  * by Project Nayuki
  * 
  * http://www.nayuki.io/page/project-euler-solutions

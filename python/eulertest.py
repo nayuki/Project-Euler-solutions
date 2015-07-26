@@ -1,3 +1,11 @@
+# 
+# Test suite for Project Euler all Python solutions
+# by Project Nayuki
+# 
+# http://www.nayuki.io/page/project-euler-solutions
+# https://github.com/nayuki/Project-Euler-solutions
+# 
+
 import importlib, time
 
 
