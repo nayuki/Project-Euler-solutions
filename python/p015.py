@@ -10,11 +10,7 @@ import eulerlib
 
 
 def compute():
-	return str(binomial(40, 20))
-
-
-def binomial(n, k):
-	return eulerlib.factorial(n) // (eulerlib.factorial(k) * eulerlib.factorial(n - k))
+	return str(eulerlib.binomial(40, 20))
 
 
 if __name__ == "__main__":

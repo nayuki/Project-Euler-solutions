@@ -51,3 +51,8 @@ def factorial(n):
 	for i in range(1, n + 1):
 		result *= i
 	return result
+
+
+def binomial(n, k):
+	assert n >= 0 and 0 <= k <= n
+	return factorial(n) // (factorial(k) * factorial(n - k))
