@@ -1,0 +1,30 @@
+# 
+# Solution to Project Euler problem 92
+# by Project Nayuki
+# 
+# http://www.nayuki.io/page/project-euler-solutions
+# https://github.com/nayuki/Project-Euler-solutions
+# 
+
+
+def compute():
+	ans = 0
+	for i in range(1, 10000000):
+		while i != 1 and i != 89:
+			i = square_digit_sum(i)
+		if i == 89:
+			ans += 1
+	return str(ans)
+
+
+def square_digit_sum(n):
+	result = 0
+	while n > 0:
+		x = n % 10
+		result += x * x
+		n //= 10
+	return result
+
+
+if __name__ == "__main__":
+	print(compute())
