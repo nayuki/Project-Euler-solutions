@@ -17,7 +17,7 @@ def compute():
 	minnumer = 1
 	mindenom = 0
 	for (i, tot) in enumerate(totients[2 : ], 2):
-		if sorted(str(i)) == sorted(str(tot)) and i * mindenom < minnumer * tot:
+		if i * mindenom < minnumer * tot and sorted(str(i)) == sorted(str(tot)):
 			minnumer = i
 			mindenom = totients[i]
 	return str(minnumer)

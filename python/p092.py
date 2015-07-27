@@ -20,10 +20,11 @@ def compute():
 def square_digit_sum(n):
 	result = 0
 	while n > 0:
-		x = n % 10
-		result += x * x
-		n //= 10
+		result += SQUARE_DIGITS_SUM[n % 1000]
+		n //= 1000
 	return result
+
+SQUARE_DIGITS_SUM = [sum(int(c)**2 for c in str(i)) for i in range(1000)]
 
 
 if __name__ == "__main__":
