@@ -24,22 +24,27 @@
 def compute():
 	LIMIT = 10**8
 	MOD = 1000000009
-	
-	# Sieve of Eratosthenes
-	isprime = [True] * (LIMIT + 1)
-	isprime[0] = isprime[1] = False
-	for i in range(len(isprime)):
-		if isprime[i]:
-			for j in range(i * i, len(isprime), i):
-				isprime[j] = False
-	primes = [n for (n, x) in enumerate(isprime) if x]
-	
 	ans = 1
-	for p in primes:
+	for p in prime_generator(LIMIT):
 		power = count_factors(LIMIT, p)
 		ans *= 1 + pow(p, power * 2, MOD)
 		ans %= MOD
 	return str(ans)
+
+
+# Yields prime numbers in ascending order from 2 to limit (inclusive).
+def prime_generator(limit):
+	if limit >= 2:
+		yield 2
+	
+	# Sieve of Eratosthenes, storing only odd numbers starting at 3
+	isprime = [True] * ((limit - 1) // 2)
+	for i in range(len(isprime)):
+		if isprime[i]:
+			p = i * 2 + 3
+			yield p
+			for j in range((p * p - 3) >> 1, len(isprime), p):
+				isprime[j] = False
 
 
 # Returns the number of factors of p (prime) in factorial(n).
