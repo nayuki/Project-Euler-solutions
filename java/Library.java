@@ -23,13 +23,13 @@ final class Library {
 	}
 	
 	
-	// Tests whether the given integer is a palindrome in decimal.
+	// Tests whether the given integer is a palindrome in decimal (base 10).
 	public static boolean isPalindrome(int x) {
 		return isPalindrome(Integer.toString(x));
 	}
 	
 	
-	// Returns floor(sqrt(x)).
+	// Returns floor(sqrt(x)), for x >= 0.
 	public static int sqrt(int x) {
 		if (x < 0)
 			throw new IllegalArgumentException("Square root of negative number");
@@ -43,7 +43,7 @@ final class Library {
 	}
 	
 	
-	// Returns floor(sqrt(x)).
+	// Returns floor(sqrt(x)), for x >= 0.
 	public static long sqrt(long x) {
 		if (x < 0)
 			throw new IllegalArgumentException("Square root of negative number");
@@ -57,7 +57,7 @@ final class Library {
 	}
 	
 	
-	// Tests whether x is a perfect square.
+	// Tests whether x is a perfect square, for any value x.
 	public static boolean isSquare(int x) {
 		if (x < 0)
 			return false;
@@ -66,7 +66,7 @@ final class Library {
 	}
 	
 	
-	// Returns x to the power of y.
+	// Returns x to the power of y, throwing an exception if the result overflows an int.
 	public static int pow(int x, int y) {
 		if (y < 0)
 			throw new IllegalArgumentException("Negative exponent");
@@ -103,7 +103,7 @@ final class Library {
 	}
 	
 	
-	// Returns x^-1 mod m. Note that x * x^-1 mod m = x^-1 * x mod m = 1.
+	// Returns x^-1 mod m, where the result is in the range [0, m). Note that (x * x^-1) mod m = (x^-1 * x) mod m = 1.
 	public static int reciprocalMod(int x, int m) {
 		if (m < 0 || x < 0 || x >= m)
 			throw new IllegalArgumentException();
@@ -178,7 +178,7 @@ final class Library {
 	
 	// Returns a Boolean array 'isPrime' where isPrime[i] indicates whether i is prime, for 0 <= i <= n.
 	// For a large batch of queries, this is faster than calling isPrime() for each integer.
-	// For example: listPrimality(100) = {false, false, true, true, false, true, false, true, false, false, ...}.
+	// For example: listPrimality(100) = {false, false, true, true, false, true, false, true, false, false, ...} (array length 101).
 	public static boolean[] listPrimality(int n) {
 		if (n < 0)
 			throw new IllegalArgumentException("Negative size");
@@ -199,7 +199,7 @@ final class Library {
 	
 	
 	// Returns all the prime numbers less than or equal to n, in ascending order.
-	// For example: listPrimes(100) = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, ..., 83, 89, 97}.
+	// For example: listPrimes(97) = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, ..., 83, 89, 97}.
 	public static int[] listPrimes(int n) {
 		if (n < 0)
 			throw new IllegalArgumentException("Negative size");
