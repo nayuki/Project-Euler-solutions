@@ -68,6 +68,8 @@ final class Library {
 	
 	// Returns x to the power of y, throwing an exception if the result overflows an int.
 	public static int pow(int x, int y) {
+		if (x < 0)
+			throw new IllegalArgumentException("Negative base not supported");
 		if (y < 0)
 			throw new IllegalArgumentException("Negative exponent");
 		int z = 1;
@@ -83,11 +85,11 @@ final class Library {
 	// Returns x^y mod m.
 	public static int powMod(int x, int y, int m) {
 		if (x < 0)
-			throw new IllegalArgumentException("Negative base not handled");
+			throw new IllegalArgumentException("Negative base not supported");
 		if (y < 0)
-			throw new IllegalArgumentException("Reciprocal not handled");
+			throw new IllegalArgumentException("Modular reciprocal not supported");
 		if (m <= 0)
-			throw new IllegalArgumentException("Invalid modulus");
+			throw new IllegalArgumentException("Modulus must be positive");
 		if (m == 1)
 			return 0;
 		
@@ -105,7 +107,7 @@ final class Library {
 	
 	// Returns x^-1 mod m, where the result is in the range [0, m). Note that (x * x^-1) mod m = (x^-1 * x) mod m = 1.
 	public static int reciprocalMod(int x, int m) {
-		if (m < 0 || x < 0 || x >= m)
+		if (!(m > 0 && 0 <= x && x < m))
 			throw new IllegalArgumentException();
 		
 		// Based on a simplification of the extended Euclidean algorithm
@@ -147,6 +149,8 @@ final class Library {
 	
 	// Returns the largest non-negative integer that divides both x and y.
 	public static int gcd(int x, int y) {
+		if (x < 0 || y < 0)
+			throw new IllegalArgumentException("Negative number");
 		while (y != 0) {
 			int z = x % y;
 			x = y;
@@ -181,7 +185,7 @@ final class Library {
 	// For example: listPrimality(100) = {false, false, true, true, false, true, false, true, false, false, ...} (array length 101).
 	public static boolean[] listPrimality(int n) {
 		if (n < 0)
-			throw new IllegalArgumentException("Negative size");
+			throw new IllegalArgumentException("Negative array size");
 		boolean[] result = new boolean[n + 1];
 		if (n >= 2)
 			result[2] = true;
@@ -202,8 +206,6 @@ final class Library {
 	// Returns all the prime numbers less than or equal to n, in ascending order.
 	// For example: listPrimes(97) = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, ..., 83, 89, 97}.
 	public static int[] listPrimes(int n) {
-		if (n < 0)
-			throw new IllegalArgumentException("Negative size");
 		boolean[] isprime = listPrimality(n);
 		int count = 0;
 		for (boolean b : isprime) {
@@ -226,10 +228,11 @@ final class Library {
 	// For example: listSmallestPrimeFactors(10) = {0, 0, 2, 3, 2, 5, 2, 7, 2, 3, 2}.
 	public static int[] listSmallestPrimeFactors(int n) {
 		int[] result = new int[n + 1];
+		int limit = sqrt(n);
 		for (int i = 2; i < result.length; i++) {
 			if (result[i] == 0) {
 				result[i] = i;
-				if ((long)i * i <= n) {
+				if (i <= limit) {
 					for (int j = i * i; j <= n; j += i) {
 						if (result[j] == 0)
 							result[j] = i;
@@ -268,7 +271,7 @@ final class Library {
 	// For a large batch of queries, this is faster than calling totient() for each integer.
 	public static int[] listTotients(int n) {
 		if (n < 0)
-			throw new IllegalArgumentException("Negative size");
+			throw new IllegalArgumentException("Negative array size");
 		int[] totients = new int[n + 1];
 		for (int i = 0; i <= n; i++)
 			totients[i] = i;
