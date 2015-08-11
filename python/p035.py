@@ -6,17 +6,12 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
+import eulerlib
 
-isprime = [True] * 1000000
+
+isprime = eulerlib.list_primality(999999)
 
 def compute():
-	# Sieve of Eratosthenes
-	isprime[0] = isprime[1] = False
-	for i in range(len(isprime)):
-		if isprime[i]:
-			for j in range(i * i, len(isprime), i):
-				isprime[j] = False
-	
 	ans = 0
 	for i in range(len(isprime)):
 		if is_circular_prime(i):

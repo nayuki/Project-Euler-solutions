@@ -6,18 +6,13 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
+import eulerlib
+
 
 def compute():
-	# Sieve of Eratosthenes
-	isprime = [True] * 1000000
-	isprime[0] = isprime[1] = False
-	for i in range(len(isprime)):
-		if isprime[i]:
-			for j in range(i * i, len(isprime), i):
-				isprime[j] = False
-	primes = [n for (n, x) in enumerate(isprime) if x]
-	
 	ans = 0
+	isprime = eulerlib.list_primality(999999)
+	primes = eulerlib.list_primes(999999)
 	consecutive = 0
 	for i in range(len(primes)):
 		sum = primes[i]

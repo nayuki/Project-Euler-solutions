@@ -44,6 +44,40 @@ def is_prime(x):
 		return True
 
 
+# Returns a list of True and False indicating whether each number is prime.
+# For 0 <= i <= n, result[i] is True if i is a prime number, False otherwise.
+def list_primality(n):
+	# Sieve of Eratosthenes
+	result = [True] * (n + 1)
+	result[0] = result[1] = False
+	for i in range(sqrt(n) + 1):
+		if result[i]:
+			for j in range(i * i, len(result), i):
+				result[j] = False
+	return result
+
+
+# Returns all the prime numbers less than or equal to n, in ascending order.
+# For example: listPrimes(97) = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, ..., 83, 89, 97].
+def list_primes(n):
+	return [i for (i, isprime) in enumerate(list_primality(n)) if isprime]
+
+
+# Yields prime numbers in ascending order from 2 to limit (inclusive).
+def prime_generator(limit):
+	if limit >= 2:
+		yield 2
+	
+	# Sieve of Eratosthenes, storing only odd numbers starting at 3
+	isprime = [True] * ((limit - 1) // 2)
+	for i in range(len(isprime)):
+		if isprime[i]:
+			p = i * 2 + 3
+			yield p
+			for j in range((p * p - 3) >> 1, len(isprime), p):
+				isprime[j] = False
+
+
 # Returns the factorial of the given non-negative integer.
 def factorial(n):
 	assert n >= 0

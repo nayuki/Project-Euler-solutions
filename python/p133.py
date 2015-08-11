@@ -6,6 +6,8 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
+import eulerlib
+
 
 # Repunit formula: R(k) = (10^k - 1) / 9. (Using geometric series)
 # 
@@ -39,16 +41,8 @@
 # (for the number 2^16 = 65536). (In general, the largest exponent is floor(log2(limit)); in this case limit = 10^5.)
 # So we only need to test if 10^16 is a multiple of k, equivalent to testing if R(10^16) is a multiple of n.
 def compute():
-	# Sieve of Eratosthenes
-	isprime = [True] * 100001
-	isprime[0] = isprime[1] = False
-	for i in range(len(isprime)):
-		if isprime[i]:
-			for j in range(i * i, len(isprime), i):
-				isprime[j] = False
-	primes = [n for (n, x) in enumerate(isprime) if x]
-	
 	ans = 0
+	primes = eulerlib.list_primes(100000)
 	for p in primes:
 		if p == 2 or p == 5 or not has_divisible_repunit(p):
 			ans += p

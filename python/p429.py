@@ -6,6 +6,8 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
+import eulerlib
+
 
 # Let n be an arbitrary positive integer. Suppose n is factorized as p1^k1 * p2^k2 * ... * {p_m}^{k_m},
 # where the p's are prime and distinct (thus the k's are as large as possible).
@@ -25,26 +27,11 @@ def compute():
 	LIMIT = 10**8
 	MOD = 1000000009
 	ans = 1
-	for p in prime_generator(LIMIT):
+	for p in eulerlib.prime_generator(LIMIT):
 		power = count_factors(LIMIT, p)
 		ans *= 1 + pow(p, power * 2, MOD)
 		ans %= MOD
 	return str(ans)
-
-
-# Yields prime numbers in ascending order from 2 to limit (inclusive).
-def prime_generator(limit):
-	if limit >= 2:
-		yield 2
-	
-	# Sieve of Eratosthenes, storing only odd numbers starting at 3
-	isprime = [True] * ((limit - 1) // 2)
-	for i in range(len(isprime)):
-		if isprime[i]:
-			p = i * 2 + 3
-			yield p
-			for j in range((p * p - 3) >> 1, len(isprime), p):
-				isprime[j] = False
 
 
 # Returns the number of factors of p (prime) in factorial(n).

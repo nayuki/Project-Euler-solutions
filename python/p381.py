@@ -27,18 +27,10 @@ def compute():
 	def s(p):
 		return (p - 3) * reciprocal_mod(8 % p, p) % p
 	
-	# Sieve of Eratosthenes
-	isprime = [True] * (10**8)
-	isprime[0] = isprime[1] = False
-	for i in range(eulerlib.sqrt(len(isprime)) + 1):
-		if isprime[i]:
-			for j in range(i * i, len(isprime), i):
-				isprime[j] = False
-	
 	ans = 0
-	for i in range(5, len(isprime)):
-		if isprime[i]:
-			ans += s(i)
+	for p in eulerlib.prime_generator(10**8):
+		if p >= 5:
+			ans += s(p)
 	return str(ans)
 
 
