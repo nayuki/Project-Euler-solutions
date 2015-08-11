@@ -61,8 +61,8 @@ final class Library {
 	public static boolean isSquare(int x) {
 		if (x < 0)
 			return false;
-		int sqrt = Library.sqrt(x);
-		return sqrt * sqrt == x;
+		int y = Library.sqrt(x);
+		return y * y == x;
 	}
 	
 	
@@ -182,19 +182,20 @@ final class Library {
 	public static boolean[] listPrimality(int n) {
 		if (n < 0)
 			throw new IllegalArgumentException("Negative size");
-		boolean[] prime = new boolean[n + 1];
+		boolean[] result = new boolean[n + 1];
 		if (n >= 2)
-			prime[2] = true;
+			result[2] = true;
 		for (int i = 3; i <= n; i += 2)
-			prime[i] = true;
+			result[i] = true;
 		// Sieve of Eratosthenes
 		for (int i = 3, end = sqrt(n); i <= end; i += 2) {
-			if (prime[i]) {
+			if (result[i]) {
+				// Note: i * i does not overflow
 				for (int j = i * i; j <= n; j += i << 1)
-					prime[j] = false;
+					result[j] = false;
 			}
 		}
-		return prime;
+		return result;
 	}
 	
 	
@@ -203,20 +204,21 @@ final class Library {
 	public static int[] listPrimes(int n) {
 		if (n < 0)
 			throw new IllegalArgumentException("Negative size");
-		boolean[] isPrime = listPrimality(n);
+		boolean[] isprime = listPrimality(n);
 		int count = 0;
-		for (boolean b : isPrime) {
+		for (boolean b : isprime) {
 			if (b)
 				count++;
 		}
-		int[] primes = new int[count];
-		for (int i = 0, j = 0; i < isPrime.length; i++) {
-			if (isPrime[i]) {
-				primes[j] = i;
+		
+		int[] result = new int[count];
+		for (int i = 0, j = 0; i < isprime.length; i++) {
+			if (isprime[i]) {
+				result[j] = i;
 				j++;
 			}
 		}
-		return primes;
+		return result;
 	}
 	
 	
@@ -311,19 +313,18 @@ final class Library {
 	// - nextPermutation({0,0,1}) changes the argument array to {0,1,0} and returns true.
 	// - nextPermutation({1,0,0}) leaves the argument array unchanged and returns false.
 	public static boolean nextPermutation(int[] a) {
-		int i, n = a.length;
+		int n = a.length, i, j;
 		for (i = n - 2; ; i--) {
 			if (i < 0)
 				return false;
 			if (a[i] < a[i + 1])
 				break;
 		}
-		for (int j = 1; i + j < n - j; j++) {
+		for (j = 1; i + j < n - j; j++) {
 			int tp = a[i + j];
 			a[i + j] = a[n - j];
 			a[n - j] = tp;
 		}
-		int j;
 		for (j = i + 1; a[j] <= a[i]; j++);
 		int tp = a[i];
 		a[i] = a[j];
@@ -383,11 +384,10 @@ final class Fraction {
 	
 	
 	public boolean equals(Object obj) {
-		if (obj instanceof Fraction) {
-			Fraction other = (Fraction)obj;
-			return numerator.equals(other.numerator) && denominator.equals(other.denominator);
-		} else
+		if (!(obj instanceof Fraction))
 			return false;
+		Fraction other = (Fraction)obj;
+		return numerator.equals(other.numerator) && denominator.equals(other.denominator);
 	}
 	
 	
