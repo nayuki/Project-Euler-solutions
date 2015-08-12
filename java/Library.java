@@ -143,7 +143,12 @@ final class Library {
 	
 	// Returns n choose k.
 	public static BigInteger binomial(int n, int k) {
-		return factorial(n).divide(factorial(n - k).multiply(factorial(k)));
+		if (k < 0 || k > n)
+			throw new IllegalArgumentException();
+		BigInteger product = BigInteger.ONE;
+		for (int i = 0; i < k; i++)
+			product = product.multiply(BigInteger.valueOf(n - i));
+		return product.divide(factorial(k));
 	}
 	
 	
@@ -340,7 +345,7 @@ final class Library {
 
 
 // Immutable unlimited precision fraction
-final class Fraction {
+final class Fraction implements Comparable<Fraction> {
 	
 	public final BigInteger numerator;    // Always coprime with denominator
 	public final BigInteger denominator;  // Always positive
@@ -391,6 +396,11 @@ final class Fraction {
 			return false;
 		Fraction other = (Fraction)obj;
 		return numerator.equals(other.numerator) && denominator.equals(other.denominator);
+	}
+	
+	
+	public int compareTo(Fraction other) {
+		return numerator.multiply(other.denominator).compareTo(other.numerator.multiply(denominator));
 	}
 	
 	
