@@ -14,20 +14,28 @@ public final class p345 implements EulerSolution {
 	}
 	
 	
+	/* 
+	 * With memoization we achieve a run time of O(n^2 * 2^n), instead of brute-forcing all O(n!) permutations.
+	 * This is the same idea as the Held-Karp algorithm for the travelling salesman problem.
+	 */
 	public String run() {
-		maxSum = new int[MATRIX.length][1 << MATRIX[0].length];
-		return Integer.toString(findMaximumSum(0, (1 << MATRIX[0].length) - 1));
+		if (COLUMNS > 30)
+			throw new AssertionError();
+		maxSum = new int[ROWS][1 << COLUMNS];  // Initialized to 0 because all the matrix elements are positive
+		return Integer.toString(findMaximumSum(0, (1 << COLUMNS) - 1));
 	}
+	
 	
 	
 	private int[][] maxSum;  // Memoization
 	
+	// Returns the maximum sum when considering the submatrix from row 'startRow' until the bottom,
+	// with the bit set 'setOfCols' indicating which column indexes are still free to be used.
 	private int findMaximumSum(int startRow, int setOfCols) {
-		if (startRow == MATRIX.length) {
-			if (setOfCols == 0)
-				return 0;
-			else
-				throw new IllegalArgumentException();
+		if (startRow == ROWS) {
+			if (Integer.bitCount(setOfCols) != COLUMNS - ROWS)
+				throw new AssertionError();
+			return 0;
 		}
 		
 		if (maxSum[startRow][setOfCols] == 0) {
@@ -42,7 +50,7 @@ public final class p345 implements EulerSolution {
 	}
 	
 	
-	private static int[][] MATRIX = {
+	private static int[][] MATRIX = {  // Must have rows <= columns <= 30
 		{  7,  53, 183, 439, 863, 497, 383, 563,  79, 973, 287,  63, 343, 169, 583},
 		{627, 343, 773, 959, 943, 767, 473, 103, 699, 303, 957, 703, 583, 639, 913},
 		{447, 283, 463,  29,  23, 487, 463, 993, 119, 883, 327, 493, 423, 159, 743},
@@ -59,5 +67,8 @@ public final class p345 implements EulerSolution {
 		{815, 559, 813, 459, 522, 788, 168, 586, 966, 232, 308, 833, 251, 631, 107},
 		{813, 883, 451, 509, 615,  77, 281, 613, 459, 205, 380, 274, 302,  35, 805},
 	};
+	
+	private static int ROWS = MATRIX.length;
+	private static int COLUMNS = MATRIX[0].length;
 	
 }
