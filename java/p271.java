@@ -57,7 +57,7 @@ public final class p271 implements EulerSolution {
 	
 	/*
 	 * Given that for an unknown x, x = a mod p and x = b mod q (where p and q are coprime),
-	 * returns an integer 0 <= x < pq satisfying these congruences.
+	 * returns an integer 0 <= x < p*q satisfying these congruences.
 	 */
 	private static BigInteger chineseRemainderTheorem(BigInteger a, BigInteger p, BigInteger b, BigInteger q) {
 		return a.add(b.subtract(a).multiply(p.modInverse(q)).multiply(p)).mod(p.multiply(q));

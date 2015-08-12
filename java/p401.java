@@ -40,7 +40,7 @@ public final class p401 implements EulerSolution {
 	 * So instead of considering each integer and summing its squared divisors, we can consider
 	 * each divisor from 1 to n and compute how much it contributes to the final sum, namely floor(n / k) * k^2.
 	 * 
-	 * A futher observation is that when k is large, the count factor of floor(n / k) does not change often.
+	 * A further observation is that when k is large, the count factor of floor(n / k) does not change often.
 	 * (For example, for k from floor(n/2)+1 to n, this count is always 1.)
 	 * So we can calculate the squared divisor sum for many numbers at a time.
 	 * This is helpful for k > sqrt(n), and we can bring the run time from O(n) down to O(sqrt(n)).

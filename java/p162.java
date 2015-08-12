@@ -64,7 +64,7 @@ public final class p162 implements EulerSolution {
 	}
 	
 	
-	// For syntatical convenience
+	// For syntactical convenience
 	private static BigInteger bi(int n) {
 		return BigInteger.valueOf(n);
 	}

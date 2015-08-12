@@ -39,9 +39,9 @@ public final class p150 implements EulerSolution {
 		long minSum = 0;
 		for (int i = 0; i < triangle.length; i++) {
 			for (int j = 0; j < triangle[i].length; j++) {
-				// Apex element selected
+				// Apex element selected at triangle[i][j]
 				long curSum = 0;
-				for (int k = i; k < triangle.length; k++) {  // Ending row
+				for (int k = i; k < triangle.length; k++) {  // Ending row (inclusive)
 					curSum += rowSums[k][k - i + 1 + j] - rowSums[k][j];
 					minSum = Math.min(curSum, minSum);
 				}

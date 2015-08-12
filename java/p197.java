@@ -38,13 +38,13 @@ public final class p197 implements EulerSolution {
 		for (; remain > 0; remain--)
 			x = f(x);
 		double answer = x + f(x);
-		answer = Math.floor(answer * Math.pow(10, 9)) / Math.pow(10, 9);  // Truncate to 9 digits after the decimal point
+		answer = Math.floor(answer * 1e9) / 1e9;  // Truncate to 9 digits after the decimal point
 		return String.format("%.9f", answer);
 	}
 	
 	
 	private static double f(double x) {
-		return Math.floor(Math.pow(2, 30.403243784 - x * x)) * Math.pow(10, -9);
+		return Math.floor(Math.pow(2, 30.403243784 - x * x)) / 1e9;
 	}
 	
 }
