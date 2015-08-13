@@ -44,7 +44,7 @@ def compute():
 	ans = 0
 	for n in range(1, 17):
 		ans += 15 * 16**(n-1) - 43 * 15**(n-1) + 41 * 14**(n-1) - 13**n
-	return hex(ans)[2 : ].upper()
+	return hex(ans)[2 : ].rstrip("L").upper()  # The rstrip is for Python 2
 
 
 if __name__ == "__main__":

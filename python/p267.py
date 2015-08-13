@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib, fractions, math
+import eulerlib, fractions, math, sys
 
 
 # When you win a coin toss, your capital is multiplied by (1 + 2f).
@@ -73,8 +73,19 @@ def round_to_decimal(fracnum, places):
 	assert places > 0
 	if fracnum < 0:
 		return "-" + round_to_decimal(-fracnum, places)
-	r = round(fracnum * 10**places)  # Round half to even
-	s = str(r).zfill(places + 1)
+	
+	# Round half to even
+	fracnum *= 10**places
+	if sys.version_info.major == 2:
+		rounded = fracnum.numerator // fracnum.denominator
+		frac = fracnum - rounded
+		HALF = fractions.Fraction(1, 2)
+		if frac > HALF or (frac == HALF and rounded % 2 == 1):
+			rounded += 1
+	else:
+		rounded = round(fracnum)
+	
+	s = str(rounded).zfill(places + 1)
 	return s[ : -places] + "." + s[-places : ]
 
 

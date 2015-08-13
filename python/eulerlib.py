@@ -6,6 +6,10 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
+import sys
+if sys.version_info.major == 2:
+	range = xrange
+
 
 # Returns the greatest common denominator of the given non-negative integers.
 def gcd(x, y):
@@ -70,12 +74,14 @@ def prime_generator(limit):
 	
 	# Sieve of Eratosthenes, storing only odd numbers starting at 3
 	isprime = [True] * ((limit - 1) // 2)
+	sieveend = sqrt(limit)
 	for i in range(len(isprime)):
 		if isprime[i]:
 			p = i * 2 + 3
 			yield p
-			for j in range((p * p - 3) >> 1, len(isprime), p):
-				isprime[j] = False
+			if i <= sieveend:
+				for j in range((p * p - 3) >> 1, len(isprime), p):
+					isprime[j] = False
 
 
 # Returns the factorial of the given non-negative integer.
