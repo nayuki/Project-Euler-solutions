@@ -6,6 +6,10 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
+import sys
+if sys.version_info.major == 2:
+    range = xrange
+
 
 def compute():
 	totients = list(range(10000000))

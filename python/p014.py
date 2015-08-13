@@ -6,6 +6,10 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
+import sys
+if sys.version_info.major == 2:
+    range = xrange
+
 
 def compute():
 	ans = max((i for i in range(1, 1000000)), key=collatz_chain_length)
