@@ -8,10 +8,7 @@
 
 
 def compute():
-	ans = 0
-	for coords in TRIANGLES:
-		if is_origin_in_triangle(*coords):
-			ans += 1
+	ans = sum(1 for coords in TRIANGLES if is_origin_in_triangle(*coords))
 	return str(ans)
 
 

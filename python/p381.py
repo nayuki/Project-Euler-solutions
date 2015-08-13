@@ -27,10 +27,7 @@ def compute():
 	def s(p):
 		return (p - 3) * reciprocal_mod(8 % p, p) % p
 	
-	ans = 0
-	for p in eulerlib.prime_generator(10**8):
-		if p >= 5:
-			ans += s(p)
+	ans = sum(s(p) for p in eulerlib.prime_generator(10**8) if p >= 5)
 	return str(ans)
 
 

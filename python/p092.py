@@ -9,8 +9,9 @@
 
 def compute():
 	ans = 0
+	terminals = (1, 89)
 	for i in range(1, 10000000):
-		while i != 1 and i != 89:
+		while i not in terminals:
 			i = square_digit_sum(i)
 		if i == 89:
 			ans += 1

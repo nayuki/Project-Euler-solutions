@@ -171,11 +171,11 @@ def compute():
 	TARGET = 2000  # Must be at least 3
 	count = 2  # Because n = 1 and 2 satisfy PD(n) = 3
 	for ring in itertools.count(2):
-		if eulerlib.is_prime(ring * 6 - 1) and eulerlib.is_prime(ring * 6 + 1) and eulerlib.is_prime(ring * 12 + 5):
+		if all(map(eulerlib.is_prime, (ring * 6 - 1, ring * 6 + 1, ring * 12 + 5))):
 			count += 1
 			if count == TARGET:
 				return str(ring * (ring - 1) * 3 + 2)
-		if eulerlib.is_prime(ring * 6 - 1) and eulerlib.is_prime(ring * 6 + 5) and eulerlib.is_prime(ring * 12 - 7):
+		if all(map(eulerlib.is_prime, (ring * 6 - 1, ring * 6 + 5, ring * 12 - 7))):
 			count += 1
 			if count == TARGET:
 				return str(ring * (ring + 1) * 3 + 1)

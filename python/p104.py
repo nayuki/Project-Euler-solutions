@@ -6,21 +6,24 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
+import itertools
+
 
 def compute():
 	MOD = 10**9
 	a = 0
 	b = 1
-	i = 0
-	while True:
-		if "".join(sorted(str(a))) == "123456789" and "".join(sorted(str(fibonacci(i)[0])[ : 9])) == "123456789":
-			return str(i)
+	for i in itertools.count():
+		# Loop invariants: a == fib(i) % MOD, b == fib(i+1) % MOD
+		if "".join(sorted(str(a))) == "123456789":  # If suffix is pandigital
+			f = fibonacci(i)[0]
+			if "".join(sorted(str(f)[ : 9])) == "123456789":  # If prefix is pandigital
+				return str(i)
 		a, b = b, (a + b) % MOD
-		i += 1
 	return str(ans)
 
 
-# Returns the tuple (F(n), F(n+1)).
+# Returns the tuple (F(n), F(n+1)), computed by the fast doubling method.
 def fibonacci(n):
     if n == 0:
         return (0, 1)

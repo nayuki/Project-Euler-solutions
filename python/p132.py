@@ -6,19 +6,18 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib
+import eulerlib, itertools
 
 
 def compute():
-	sum = 0
+	ans = 0
 	count = 0
-	i = 2
-	while count < 40:
+	for i in itertools.count(2):
 		if eulerlib.is_prime(i) and repunit_mod(10**9, i) == 0:
-			sum += i
+			ans += i
 			count += 1
-		i += 1
-	return str(sum)
+			if count == 40:
+				return str(ans)
 
 
 def repunit_mod(k, m):

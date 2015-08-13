@@ -18,11 +18,9 @@ def compute():
 	minunconcealedp = min(numunconcealedp)
 	minunconcealedq = min(numunconcealedq)
 	
-	ans = 0
-	for e in range(TOTIENT):
-		if numunconcealedp[e % (P - 1)] == minunconcealedp and \
-		   numunconcealedq[e % (Q - 1)] == minunconcealedq:
-			ans += e
+	ans = sum(e for e in range(TOTIENT) if
+		numunconcealedp[e % (P - 1)] == minunconcealedp and
+		numunconcealedq[e % (Q - 1)] == minunconcealedq)
 	return str(ans)
 
 
