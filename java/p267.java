@@ -59,11 +59,9 @@ public final class p267 implements EulerSolution {
 		}
 		
 		// Calculate the cumulative probability: binomialSum = sum (n choose k) for 0 <= k < maxIndex
-		long l = System.nanoTime();
 		BigInteger binomialSum = BigInteger.ZERO;
 		for (int i = 0; i < maxIndex; i++)
 			binomialSum = binomialSum.add(Library.binomial(TRIALS, i));
-		System.out.println((System.nanoTime()-l)/1e6);
 		BigInteger denominator = BigInteger.ONE.shiftLeft(TRIALS);
 		return roundToDecimal(new Fraction(binomialSum, denominator), 12);
 	}
