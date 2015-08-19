@@ -6,6 +6,8 @@
  * https://github.com/nayuki/Project-Euler-solutions
  */
 
+import java.util.Arrays;
+
 
 public final class p179 implements EulerSolution {
 	
@@ -16,22 +18,16 @@ public final class p179 implements EulerSolution {
 	
 	private static final int LIMIT = Library.pow(10, 7);
 	
-	
 	public String run() {
-		int[] smallestPrimeFactor = Library.listSmallestPrimeFactors(LIMIT);
-		
 		int[] numDivisors = new int[LIMIT + 1];
-		numDivisors[1] = 1;
+		Arrays.fill(numDivisors, 2);  // Invalid for indexes 0 and 1
 		for (int i = 2; i < numDivisors.length; i++) {
-			int p = smallestPrimeFactor[i];
-			int exp = 0;
-			int j = i;
-			for (; j % p == 0; j /= p, exp++);
-			numDivisors[i] = (exp + 1) * numDivisors[j];
+			for (int j = i * 2; j < numDivisors.length; j += i)
+				numDivisors[j]++;
 		}
 		
 		int count = 0;
-		for (int i = 2; i < LIMIT; i++) {
+		for (int i = 2; i < numDivisors.length - 1; i++) {
 			if (numDivisors[i] == numDivisors[i + 1])
 				count++;
 		}
