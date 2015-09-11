@@ -18,12 +18,12 @@ def compute():
 	count[0] = 1
 	s = 0  # Sum of all primes seen so far, and thus the highest index among nonzero entries in 'count'
 	for p in eulerlib.list_primes(LIMIT):
-		for i in range(s, -1, -1):
+		for i in reversed(range(s + 1)):
 			count[i + p] = (count[i + p] + count[i]) % MODULUS
 		s += p
 	
-	isprime = eulerlib.list_primality(len(count))
-	ans = sum(count[i] for i in range(len(count)) if isprime[i]) % MODULUS
+	isprime = eulerlib.list_primality(s + 1)
+	ans = sum(count[i] for i in range(s + 1) if isprime[i]) % MODULUS
 	return str(ans)
 
 

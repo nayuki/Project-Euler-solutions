@@ -25,8 +25,7 @@ def solve(puzzlestr):
 	boxfree = [set(range(1, 10)) for i in range(9)]
 	for y in range(9):
 		for x in range(9):
-			i = y * 9 + x
-			d = state[i]
+			d = state[y * 9 + x]
 			if d != 0:
 				colfree[x].remove(d)
 				rowfree[y].remove(d)
@@ -52,6 +51,7 @@ def solve(puzzlestr):
 				boxfree[j].remove(d)
 				if recurse(i + 1):
 					return True
+				# Otherwise backtrack
 				colfree[x].add(d)
 				rowfree[y].add(d)
 				boxfree[j].add(d)
