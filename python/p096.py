@@ -36,12 +36,11 @@ def solve(puzzlestr):
 	def recurse(i):
 		if i == 81:
 			return True
-		
-		x = i % 9
-		y = i // 9
-		if state[i] != 0:
+		elif state[i] != 0:
 			return recurse(i + 1)
 		else:
+			x = i % 9
+			y = i // 9
 			j = y // 3 * 3 + x // 3
 			candidates = colfree[x].intersection(rowfree[y], boxfree[j])
 			for d in candidates:

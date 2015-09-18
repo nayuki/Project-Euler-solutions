@@ -11,15 +11,11 @@ import eulerlib
 
 def compute():
 	TARGET = 2000000
-	bestdiff = None
 	end = eulerlib.sqrt(TARGET) + 1
-	for w in range(1, end):
-		for h in range(1, end):
-			diff = abs(num_rectangles(w, h) - TARGET)
-			if bestdiff is None or diff < bestdiff:
-				ans = w * h
-				bestdiff = diff
-	return str(ans)
+	gen = ((w, h) for w in range(1, end) for h in range(1, end))
+	func = lambda wh: abs(num_rectangles(wh[0], wh[1]) - TARGET)
+	ans = min(gen, key=func)
+	return str(ans[0] * ans[1])
 
 
 def num_rectangles(m, n):
