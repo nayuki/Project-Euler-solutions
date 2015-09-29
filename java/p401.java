@@ -1,5 +1,3 @@
-import java.math.BigInteger;
-
 /* 
  * Solution to Project Euler problem 401
  * by Project Nayuki
@@ -7,6 +5,8 @@ import java.math.BigInteger;
  * http://www.nayuki.io/page/project-euler-solutions
  * https://github.com/nayuki/Project-Euler-solutions
  */
+
+import java.math.BigInteger;
 
 
 public final class p401 implements EulerSolution {
@@ -16,24 +16,21 @@ public final class p401 implements EulerSolution {
 	}
 	
 	
-	// Must be less than 2^56
-	private static long LIMIT = 1000000000000000L;
-	
-	// Should be less than 2^30
-	private static final long MODULUS = Library.pow(10, 9);
+	private static final long LIMIT = 1000000000000000L;  // Must be less than 2^56
+	private static final long MODULUS = Library.pow(10, 9);  // Should be less than 2^30
 	
 	
 	/* 
-	 * Consider all integers from 1 to n, inclusive: {1, 2, ..., n}.
-	 * Now consider the set of divisors for each number:
+	 * Consider the set of all integers from 1 to n, inclusive: {1, 2, ..., n}.
+	 * Now form the set of divisors for each number:
 	 *   1: {1}
 	 *   2: {1, 2}
 	 *   3: {1, 3}
 	 *   4: {1, 2, 4}
 	 *   5: {1, 5}
 	 *   6: {1, 2, 3, 6}
-	 *   etc.
-	 * Furthermore, consider the multiset union of all these sets.
+	 *   et cetera until n.
+	 * Next consider the multiset union of all these sets of divisors.
 	 * 
 	 * We know that for a given integer k > 0, it occurs as a divisor in this multiset
 	 * exactly floor(n / k) times (we call this the "count"), which are namely the multiples of k.
@@ -86,8 +83,9 @@ public final class p401 implements EulerSolution {
 	private static final BigInteger SIX_BI = BigInteger.valueOf(6);
 	
 	
-	// Returns 1^2 + 2^2 + 3^2 + ... + n^2 mod MODULUS
+	// Returns 1^2 + 2^2 + 3^2 + ... + n^2 mod MODULUS.
 	private static long sumSquaresMod(long n) {
+		// Compute y = (n)(n + 1)(2n + 1) / 6 mod MODULUS
 		BigInteger x = BigInteger.valueOf(n);
 		BigInteger y = x.multiply(x.add(BigInteger.ONE));
 		y = y.multiply(x.shiftLeft(1).add(BigInteger.ONE));
