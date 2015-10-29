@@ -17,10 +17,10 @@ public final class p054 implements EulerSolution {
 	public String run() {
 		int count = 0;
 		for (String hand : HANDS) {
+			// Parse cards and divide among players
 			String[] cards = hand.split(" ");
 			if (cards.length != 10)
 				throw new AssertionError();
-			
 			Card[] player1 = new Card[5];
 			Card[] player2 = new Card[5];
 			for (int i = 0; i < 5; i++) {
@@ -28,6 +28,7 @@ public final class p054 implements EulerSolution {
 				player2[i] = new Card(cards[i + 5]);
 			}
 			
+			// Compare hand scores
 			if (getScore(player1) > getScore(player2))
 				count++;
 		}
@@ -35,25 +36,32 @@ public final class p054 implements EulerSolution {
 	}
 	
 	
+	// Returns a score for the given hand. If handX beats handY then getScore(handX) > getScore(handY), and if
+	// handX is a draw with handY then getScore(handX) = getScore(handY) (even if the hands have different cards).
+	// Note that scores need not be consecutive - for example even if scores 1 and 3 exist, there might be no
+	// hand that produces a score of 2. The comparison property is the only guarantee provided by getScore().
 	private static int getScore(Card[] hand) {
 		if (hand.length != 5)
 			throw new IllegalArgumentException();
 		
-		int[] rankCounts = new int[13];
-		int flushSuit = hand[0].suit;
+		int[] rankCounts = new int[13];  // rankCounts[i] is the number of cards with the rank of i
+		int flushSuit = hand[0].suit;    // flushSuit is in the range [0,3] if all cards have that suit; otherwise -1
 		for (Card card : hand) {
 			rankCounts[card.rank]++;
 			if (card.suit != flushSuit)
 				flushSuit = -1;
 		}
 		
+		// rankCountHist[i] is the number of times a rank count of i occurs.
+		// For example if there is exactly one triplet, then rankCountHist[3] = 1.
 		int[] rankCountHist = new int[6];
-		for (int i = 0; i < rankCounts.length; i++)
-			rankCountHist[rankCounts[i]]++;
+		for (int count : rankCounts)
+			rankCountHist[count]++;
 		
 		int bestCards = get5FrequentHighestCards(rankCounts, rankCountHist);
 		int straightHighRank = getStraightHighRank(rankCounts);
 		
+		// Main idea: Encode the hand type in the top bits, then encode up to 5 cards in big-endian (4 bits each).
 		if      (straightHighRank != -1 && flushSuit != -1     ) return 8 << 20 | straightHighRank;  // Straight flush
 		else if (rankCountHist[4] == 1                         ) return 7 << 20 | bestCards;         // Four of a kind
 		else if (rankCountHist[3] == 1 && rankCountHist[2] == 1) return 6 << 20 | bestCards;         // Full house
@@ -66,6 +74,9 @@ public final class p054 implements EulerSolution {
 	}
 	
 	
+	// Encodes 5 card ranks into 20 bits in big-endian, starting with the most frequent cards,
+	// breaking ties by highest rank. For example, the set of ranks {5,5,T,8,T} is encoded as
+	// the sequence [T,T,5,5,8] because pairs come before singles and highest pairs come first.
 	private static int get5FrequentHighestCards(int[] ranks, int[] ranksHist) {
 		int result = 0;
 		int count = 0;
@@ -85,14 +96,16 @@ public final class p054 implements EulerSolution {
 	}
 	
 	
+	// Returns the rank of the highest card in the straight, or -1 if the set of cards does not form a straight.
+	// This takes into account the fact that ace can be rank 0 (i.e. face value 1) or rank 13 (value immediately after king).
 	private static int getStraightHighRank(int[] ranks) {
 		outer:
 		for (int i = ranks.length - 1; i >= 3; i--) {
 			for (int j = 0; j < 5; j++) {
 				if (ranks[(i - j + 13) % 13] == 0)
-					continue outer;
+					continue outer;  // Current offset is not a straight
 			}
-			return i;
+			return i;  // Straight found
 		}
 		return -1;
 	}
