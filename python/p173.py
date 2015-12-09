@@ -8,7 +8,7 @@
 
 import sys
 if sys.version_info.major == 2:
-    range = xrange  # Very important to let the inner loop terminate early
+	range = xrange  # Very important to let the inner loop terminate early
 
 
 def compute():

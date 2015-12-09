@@ -8,7 +8,7 @@
 
 import eulerlib, sys
 if sys.version_info.major == 2:
-    range = xrange
+	range = xrange
 
 
 def compute():
