@@ -130,7 +130,7 @@ public final class p066 implements EulerSolution {
 		
 		
 		public BigInteger floor() {
-			BigInteger temp = sqrt(b.multiply(b).multiply(d));
+			BigInteger temp = Library.sqrt(b.multiply(b).multiply(d));
 			if (b.signum() == -1)
 				temp = temp.add(BigInteger.ONE).negate();
 			temp = temp.add(a);
@@ -157,17 +157,6 @@ public final class p066 implements EulerSolution {
 		
 		public String toString() {
 			return String.format("(%d + %d*sqrt(%d)) / %d", a, b, d, c);
-		}
-		
-		
-		private static BigInteger sqrt(BigInteger x) {
-			BigInteger y = BigInteger.ZERO;
-			for (int i = (x.bitLength() - 1) / 2; i >= 0; i--) {
-				y = y.setBit(i);
-				if (y.multiply(y).compareTo(x) > 0)
-					y = y.clearBit(i);
-			}
-			return y;
 		}
 		
 	}
