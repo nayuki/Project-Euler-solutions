@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 tosimplify = {
   "MMMMDCLXXII",
   "MMDCCCLXXXIII",

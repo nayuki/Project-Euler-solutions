@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 (* 
  * Let n be the number of digits. To count the number of increasing or decreasing numbers using combinatorics,
  * let's view each number as a sequence of digit readout slots and operations. For example, suppose n=5 and

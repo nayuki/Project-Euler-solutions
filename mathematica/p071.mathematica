@@ -7,6 +7,4 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 Numerator[Max[Table[If[Mod[i, 7] != 0, Floor[3 / 7 * i] / i, 0], {i, 1000000}]]]

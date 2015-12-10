@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 PermutationQ[x_, y_] := DigitCount[x] == DigitCount[y]
 minVal = 0;
 minArg = 0;

@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 DayOfWeek[year_, month_, day_] := Block[
   {m1 = Mod[month - 3, 4800], y = Mod[year + Floor[m1 / 12], 400], m = Mod[m1, 12]},
   Mod[y + Floor[y / 4] - Floor[y / 100] + Floor[(13 * m + 2) / 5] + day + 2, 7]]

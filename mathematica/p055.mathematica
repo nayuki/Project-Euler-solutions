@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 ReverseInt[x_] := FromDigits[Reverse[IntegerDigits[x]]]
 PalindromeQ[x_] := IntegerDigits[x] == Reverse[IntegerDigits[x]]
 LychrelQ[x_] := LychrelQ[x, 49]

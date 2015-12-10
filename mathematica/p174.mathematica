@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 sizeLimit = 10^6;
 typeLimit = 10;
 

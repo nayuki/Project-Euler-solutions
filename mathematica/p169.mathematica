@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 num = 10^25;
 $RecursionLimit = Max[10 * Floor[Log[2, num]], 1000];
 

@@ -7,6 +7,4 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 Total[IntegerDigits[100!]]

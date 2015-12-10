@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 len = 18;
 maxCount = 3;
 base = 10;

@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 len = 50;
 Ways[_, 0] = 1;
 Ways[m_, n_] := Ways[m, n] = Ways[m, n - 1] + If[n >= m, Ways[m, n - m], 0]  (* Memoization *)

@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 iterations = 10^12;
 F[x_] := Floor[2^(30403243784/10^9 - x^2)] / 10^9
 

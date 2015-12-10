@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 PentaNumber[x_] := x * (x * 3 - 1) / 2
 PentaNumberQ[y_] := y > 0 && Block[{z = Sqrt[y * 24 + 1]}, IntegerQ[z] && Mod[z, 6] == 5]
 

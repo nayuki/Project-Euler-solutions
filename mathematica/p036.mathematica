@@ -7,7 +7,5 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 PalindromeQ[n_, b_] := IntegerDigits[n, b] == Reverse[IntegerDigits[n, b]]
 Total[Select[Range[999999], Function[x, PalindromeQ[x, 2] && PalindromeQ[x, 10]]]]

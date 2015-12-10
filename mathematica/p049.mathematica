@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 HasSameDigits[x_, y_] := DigitCount[x] == DigitCount[y]
 FindTriplet[] := Block[{i, j, base, a, b},
   i = 1;

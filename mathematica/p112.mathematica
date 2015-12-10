@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 BouncyQ[n_] := Block[{d = IntegerDigits[n]},
   Block[{s = Sort[d]}, d != s && d != Reverse[s]]]
 

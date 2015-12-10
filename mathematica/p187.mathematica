@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 SemiprimeQ[n_] := Total[Map[Function[a, a[[2]]], FactorInteger[n]]] == 2
 s = 0;
 For[i = 1, i < 10^8, i++,

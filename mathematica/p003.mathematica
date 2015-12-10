@@ -7,6 +7,4 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 First[Last[FactorInteger[600851475143]]]

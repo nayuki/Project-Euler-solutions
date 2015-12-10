@@ -7,6 +7,4 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 Mod[Sum[n^n, {n, 1000}], 10^10]

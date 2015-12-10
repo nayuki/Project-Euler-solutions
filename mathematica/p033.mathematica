@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 (* 
  * Consider an arbitrary fraction n/d:
  *   Let n = 10 * n1 + n0 be the numerator.

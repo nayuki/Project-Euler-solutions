@@ -7,6 +7,4 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 Max[Flatten[Table[Total[IntegerDigits[a^b]], {a, 100}, {b, 100}]]]

@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 i = 0;
 prevfibmod = 1;  (* Loop invariant: Equal to Fibonacci[i - 1] *)
 fibmod = 0;  (* Loop invariant: Equal to Fibonacci[i] *)

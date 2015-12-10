@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 (* 
  * In a game of Nim where both players play with perfect strategy, if the current state is a collection (multiset) of piles
  * with sizes {n1, n2, ..., n_m}, then the current player will lose if and only if n1 XOR n2 XOR ... XOR n_m = 0.

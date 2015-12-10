@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 (* 
  * From the diagram, let's observe the four corners of an n * n square (where n is odd).
  * It's not hard to convince yourself that the top right corner always has the value n^2.

@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 CountConsecutivePrimes[a_, b_] := Block[{i}, For[i = 0, PrimeQ[i^2 + a * i + b], i++]; i]
 
 maxConsecutive = 0;

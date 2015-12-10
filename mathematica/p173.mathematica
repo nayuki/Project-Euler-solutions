@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 (* 
  * Let n be the side length of the lamina, k be the side length of the hole, and T be the number of tiles we have.
  * 

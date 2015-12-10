@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 TriangleNumber[n_] = Sum[i, {i, n}];
 i = 1;
 While[DivisorSigma[0, TriangleNumber[i]] <= 500, i++]

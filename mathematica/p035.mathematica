@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 RotateInt[n_, k_] := FromDigits[RotateLeft[IntegerDigits[n], i]]
 CircularPrimeQ[n_] := Apply[And, Table[PrimeQ[RotateInt[n, i]], {i, Length[IntegerDigits[n]]}]]
 Length[Select[Range[2, 999999], CircularPrimeQ]]

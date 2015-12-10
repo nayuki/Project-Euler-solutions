@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 data = {
   {519432,525806},
   {632382,518061},

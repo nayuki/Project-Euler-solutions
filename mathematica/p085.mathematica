@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 target = 2000000;
 
 NumRect[m_, n_] := (m + 1) * m * (n + 1) * n / 4  (* A bit more than m^2 n^2 / 4 *)

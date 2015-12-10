@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 PrimeFactorSum[n_] := Total[Map[Function[a, a[[1]] * a[[2]]], FactorInteger[n]]]
 
 (* 

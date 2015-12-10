@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 PrevPermutation[s_] := Block[{i, j},
   (* Find non-decreasing suffix. e.g.: 1 3 [2 2 4 5] *)
   For[i = Length[s], i > 1 && s[[i - 1]] <= s[[i]], i--];

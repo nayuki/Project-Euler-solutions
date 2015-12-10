@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 (* By Wilson's theorem, (p-1)! = -1 mod p if and only if p is prime. *)
 S[p_] := Mod[Sum[-1 * Product[PowerMod[-j, -1, p], {j, k - 1}], {k, 5}], p]
 

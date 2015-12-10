@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 (* 
  * Among the set of n-digit hexadecimal numbers, how many of them:
  *   

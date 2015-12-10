@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 (* 
  * Let n >= 1 be arbitrary but assume that it is coprime with 10.
  * We want to find the smallest k such that R(k) = 0 mod n, and we'll show that 1 <= k <= n.

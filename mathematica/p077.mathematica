@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 (* 
  * Let P(i, n) denote the number of ways that n can be written as an
  * unordered sum of prime numbers where no prime is greater than i.

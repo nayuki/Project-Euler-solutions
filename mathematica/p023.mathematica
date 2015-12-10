@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 lim = 28123;
 
 isAbundant = Table[DivisorSigma[1, n] - n > n, {n, lim}];

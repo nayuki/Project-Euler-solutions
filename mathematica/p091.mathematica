@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 n = 50;
 
 (* Tests whether {(0,0), (x1,y1), (x2,y2)} forms a right triangle *)

@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 (* 
  * Based on an insane theorem about truncating the last term of the periodic continued fraction
  * of sqrt(n) to get the minimum solution to the Pell's equation x^2 - n y^2 = 1.

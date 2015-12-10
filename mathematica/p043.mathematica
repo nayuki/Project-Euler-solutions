@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 NextPermutation[s_] := Block[{i, j},
   For[i = Length[s], i > 1 && s[[i - 1]] >= s[[i]], i--];
   If[i <= 1, Abort[]];

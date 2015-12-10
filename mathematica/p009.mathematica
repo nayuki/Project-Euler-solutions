@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 For[a = 1, a <= 1000, a++,
   For[b = a, b <= 1000, b++,
     Block[{c = 1000 - a - b},

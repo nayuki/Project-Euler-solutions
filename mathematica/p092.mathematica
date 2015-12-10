@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 SquareDigitSum[x_] := Total[Map[(#^2)&, IntegerDigits[x]]]
 EightyNineQ[1] = False;
 EightyNineQ[89] = True;

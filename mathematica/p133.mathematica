@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 (* 
  * Repunit formula: R(k) = (10^k - 1) / 9. (Using geometric series)
  * 

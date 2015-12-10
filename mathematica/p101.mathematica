@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 (* 
  * The generating function u(n) is a polynomial of degree 10.
  * OP(k, n) is a polynomial of degree at most k-1, which can be obtained

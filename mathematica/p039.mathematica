@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 NumTriangles[p_] := Sum[Boole[Block[{c = p - a - b}, c >= b && a^2 + b^2 == c^2]],
   {a, 1, Floor[p / 3]}, {b, a, Floor[(p - a) / 2]}]
 maxnum = 0;

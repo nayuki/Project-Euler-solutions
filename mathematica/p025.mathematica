@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 i = 0;
 While[Fibonacci[i] < 10^999, i++]
 i

@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 DiceProbs[sides_, dice_] := CoefficientList[(Sum[x^i, {i, 1, sides}] / sides)^dice, x];
 pyramidal = DiceProbs[4, 9];
 cubic = DiceProbs[6, 6];

@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 (* 
  * Consider the set of all integers from 1 to n, inclusive: {1, 2, ..., n}.
  * Now form the set of divisors for each number:

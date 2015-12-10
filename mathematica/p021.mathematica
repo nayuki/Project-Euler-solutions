@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 DivisorSum[n_] := DivisorSigma[1, n] - n
 AmicableQ[n_] := DivisorSum[n] != n && DivisorSum[DivisorSum[n]] == n
 Total[Select[Range[9999], AmicableQ]]

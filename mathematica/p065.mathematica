@@ -7,6 +7,4 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 Total[IntegerDigits[Numerator[FromContinuedFraction[ContinuedFraction[E, 100]]]]]

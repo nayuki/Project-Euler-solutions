@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 CountDigits[n_] := Length[IntegerDigits[n]]
 ContFrac[n_] := FromContinuedFraction[ContinuedFraction[Sqrt[2], n]]
 NumExceedDenomQ[n_] := CountDigits[Numerator[ContFrac[n]]] > CountDigits[Denominator[ContFrac[n]]]

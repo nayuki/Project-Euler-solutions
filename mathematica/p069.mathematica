@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 maxVal = 0;
 maxArg = 0;
 For[n = 1, n <= 10^6, n++,

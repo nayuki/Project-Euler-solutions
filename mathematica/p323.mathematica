@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 (* 
  * Suppose that n 32-bit integers have been OR'd together.
  * For any arbitrary digit:

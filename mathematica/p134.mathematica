@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 (* 
  * Let p and q be the two primes. Let k be the smallest power of 10 that exceeds p.
  * The number that we seek is n = mk + p, where n is divisible by q, and m is minimized.

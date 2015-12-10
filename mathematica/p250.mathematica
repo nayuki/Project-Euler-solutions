@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 numSubsets = Table[Boole[i == 250], {i, 250}];
 For[i = 1, i <= 250250, i++,
   Block[{temp = PowerMod[i, i, 250]},

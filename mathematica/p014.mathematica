@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 Collatz[0] := 0
 Collatz[1] := 1
 Collatz[n_] := Block[{res = Collatz[If[EvenQ[n], n / 2, n * 3 + 1]] + 1},

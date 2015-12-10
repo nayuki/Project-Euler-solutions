@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 $RecursionLimit = 2000;
 TetrationMod[x_, 1 , m_] := Mod[x, m]
 TetrationMod[x_, y_, m_] := PowerMod[x, TetrationMod[x, y - 1, EulerPhi[m]], m]

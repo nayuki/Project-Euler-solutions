@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 DecimalPrefix[x_, n_] := Floor[x * 10^(n - 1 - Floor[Log[10, x]])]
 DecimalPrefixDigitSum[x_, n_] := Total[IntegerDigits[DecimalPrefix[x, n]]]
 

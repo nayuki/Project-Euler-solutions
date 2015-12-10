@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 triangles = {
   {-340,495,-153,-910,835,-947},
   {-175,41,-421,-714,574,-645},

@@ -7,6 +7,4 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 Length[Union[Flatten[Table[a^b, {a, 2, 100}, {b, 2, 100}]]]]

@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 (* 
  * Let's examine n^k for different values of n and k and see which
  * choices cannot possibly work (i.e. not being exactly k digits long).

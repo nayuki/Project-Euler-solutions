@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 base = 10;
 digits = 20;
 consecutive = 3;

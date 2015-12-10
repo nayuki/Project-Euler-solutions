@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 Ways[0] = 1;
 Ways[n_] := Ways[n] = Sum[Ways[k], {k, Max[n - 4, 0], n - 1}]  (* Memoization *)
 Ways[50]

@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 Ones[n_] := {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"}[[n + 1]]
 Tens[n_] := If[n < 10, Ones[n],
   If[n < 20, {"ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"}[[n - 9]],

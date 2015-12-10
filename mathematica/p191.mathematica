@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 numDays = 30;
 maxAbsent = 2;
 maxLate = 1;

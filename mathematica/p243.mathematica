@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 target = 15499/94744;
 i = 1;
 d = Null;

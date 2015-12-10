@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 PandigitalQ[x_] := DigitCount[x] == {1, 1, 1, 1, 1, 1, 1, 1, 1, 0}
 Max[
   Select[

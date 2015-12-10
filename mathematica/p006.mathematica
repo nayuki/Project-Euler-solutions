@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 (* 
  * For the mathematically inclined:
  *   Sum[k  , {k, n}] = n(n + 1) / 2.

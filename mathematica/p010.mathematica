@@ -7,6 +7,4 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 Total[Select[Range[1999999], PrimeQ]]

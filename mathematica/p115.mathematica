@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 m = 50;
 Ways[0] = 1;
 Ways[n_] := Ways[n] = Ways[n - 1] + If[n >= m, 1 + Sum[Ways[k], {k, 0, n - m - 1}], 0]  (* Memoization *)

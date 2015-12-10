@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 lim = 10^6;
 
 bestLen = 0;

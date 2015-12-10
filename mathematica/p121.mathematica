@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 (* 
  * At the beginning of turn number k (0-based), there are k + 2 discs to choose from.
  * Hence a game that has n turns has (n+1) * n * ... * 1 = (n + 1)! outcomes.

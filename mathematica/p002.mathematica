@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 s = 0;
 For[i = 0, (f = Fibonacci[i]) <= 4000000, i++,
   If[EvenQ[f],

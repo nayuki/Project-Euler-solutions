@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 TruncatablePrimeQ[p_] := Block[{n = Floor[Log[10, p]]},
   Apply[And, Table[PrimeQ[Floor[p/10^i]] && PrimeQ[Mod[p, 10^(i + 1)]], {i, 0, n}]]]
 

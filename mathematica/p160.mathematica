@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 modulus = 10^5;
 F [n_] := Mod[G[n] * PowerMod[2, CF[n, 2] - CF[n, 5], modulus], modulus]
 G [n_] := Mod[GE[n] * GO[n], modulus]

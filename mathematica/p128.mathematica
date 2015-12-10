@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 (*
  * Let's do mathematical analysis to drastically reduce the amount of
  * logic we need to implement and calculation the computer needs to do.

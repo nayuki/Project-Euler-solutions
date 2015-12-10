@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 (* 
  * Note:
  * Repunit[n_] := Sum[10^k, {k, 0, n - 1}]

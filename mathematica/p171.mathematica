@@ -7,8 +7,6 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 (* 
  * The key insight is to use dynamic programming to build up the answer one digit at a time.
  * 

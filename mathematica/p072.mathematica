@@ -7,6 +7,4 @@
  *)
 
 
-(* Use this in Wolfram Mathematica *)
-
 Total[Map[EulerPhi, Range[2, 10^6]]]
