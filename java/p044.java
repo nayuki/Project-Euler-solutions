@@ -15,12 +15,12 @@ public final class p044 implements EulerSolution {
 	
 	
 	public String run() {
-		long minD = -1;
+		long minD = -1;  // -1 means not found yet, positive number means found a candidate
 		// For each upper pentagonal number index, going upward
 		for (int i = 2; ; i++) {
 			long pentI = pentagonalNumber(i);
-			// If the next number down is more than a found difference, then conclude searching
-			if (minD != -1 && pentI - pentagonalNumber(i - 1) > minD)
+			// If the next number down is at least as big as a found difference, then conclude searching
+			if (minD != -1 && pentI - pentagonalNumber(i - 1) >= minD)
 				break;
 			
 			// For each lower pentagonal number index, going downward
@@ -30,7 +30,7 @@ public final class p044 implements EulerSolution {
 				// If the difference is at least as big as a found difference, then stop testing lower pentagonal numbers
 				if (minD != -1 && diff >= minD)
 					break;
-				else if (isPentagonalNumber(pentI + pentJ) && isPentagonalNumber(diff) && (minD == -1 || diff < minD))
+				else if (isPentagonalNumber(pentI + pentJ) && isPentagonalNumber(diff))
 					minD = diff;  // Found a smaller difference
 			}
 		}
