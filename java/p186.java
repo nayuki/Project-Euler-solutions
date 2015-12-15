@@ -15,12 +15,12 @@ public final class p186 implements EulerSolution {
 	
 	
 	public String run() {
-		DisjointSets ds = new DisjointSets(1000000);
-		LfgRandom random = new LfgRandom();
+		DisjointSet ds = new DisjointSet(1000000);
+		LfgRandom rand = new LfgRandom();
 		int i = 0;
 		while (ds.size(524287) < 990000) {
-			int caller = random.next();
-			int callee = random.next();
+			int caller = rand.next();
+			int callee = rand.next();
 			if (caller != callee) {
 				ds.union(caller, callee);
 				i++;
@@ -31,31 +31,27 @@ public final class p186 implements EulerSolution {
 	
 	
 	
-	private static final class DisjointSets {
+	private static final class DisjointSet {
 		
 		private Node[] nodes;
 		
 		
-		public DisjointSets(int size) {
+		public DisjointSet(int size) {
 			nodes = new Node[size];
 			for (int i = 0; i < size; i++)
 				nodes[i] = new Node();
 		}
 		
 		
-		public Node find(int i) {
-			Node node = nodes[i];
-			if (node.parent == node)
-				return node;
-			else {
-				Node temp = node;
-				while (temp.parent != temp)
-					temp = temp.parent;
-				node.parent = temp;  // Path compression
-				temp.size += node.size;
-				node.size = 0;
-				return temp;
-			}
+		private Node find(int i) {
+			return find(nodes[i]);
+		}
+		
+		
+		private static Node find(Node node) {
+			if (node.parent != node)
+				node.parent = find(node.parent);  // Path compression
+			return node.parent;
 		}
 		
 		
@@ -64,46 +60,34 @@ public final class p186 implements EulerSolution {
 			Node y = find(j);
 			if (x == y)
 				return;
+			if (x.rank == y.rank)
+				x.rank++;
 			else if (x.rank < y.rank) {
-				x.parent = y;
-				y.size += x.size;
-				x.size = 0;
-			} else if (x.rank > y.rank) {
-				y.parent = x;
-				x.size += y.size;
-				y.size = 0;
-			} else {
-				x.parent = y;
-				y.rank++;
-				y.size += x.size;
-				x.size = 0;
+				Node z = x;
+				x = y;
+				y = z;
 			}
+			y.parent = x;
+			x.size += y.size;
+			y.size = 0;
 		}
 		
 		
 		public int size(int i) {
-			Node node = nodes[i];
-			while (node.parent != node)
-				node = node.parent;
-			return node.size;
+			return find(i).size;
 		}
 		
-	}
-	
-	
-	private static final class Node {
 		
-		public Node parent;
-		
-		public int rank;
-		
-		public int size;  // The size of the set that this node belongs to, valid if this node is the representative
-		
-		
-		public Node() {
-			parent = this;
-			rank = 0;
-			size = 1;
+		private static final class Node {
+			public Node parent;
+			public int rank;
+			public int size;
+			
+			public Node() {
+				parent = this;
+				rank = 0;
+				size = 1;
+			}
 		}
 		
 	}
@@ -128,15 +112,16 @@ public final class p186 implements EulerSolution {
 		
 		public int next() {
 			int result;
-			if (k <= 55) result = (int)((100003L - 200003L*k + 300007L*k*k*k) % 1000000);
-			else result = (getHistory(24) + getHistory(55)) % 1000000;
-			k++;
+			if (k <= 55) {
+				result = (int)((100003L - 200003L*k + 300007L*k*k*k) % 1000000);
+				k++;
+			} else
+				result = (getHistory(24) + getHistory(55)) % 1000000;
 			
 			history[index] = result;
 			index++;
 			if (index == history.length)
 				index = 0;
-			
 			return result;
 		}
 		
