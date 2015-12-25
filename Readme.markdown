@@ -10,6 +10,8 @@ mathematical explanation/proof in the source code to justify the program logic.
 All problems from #1 to #100 have a Java program, and #1 to #50 have Python and Mathematica programs.
 The project codebase contains at least 185 solutions in Java, 120 in Python, 115 in Mathematica, and 65 in Haskell.
 
+Java solutions require JDK 5 or above. Python solutions are tested to work on CPython 2.7.10 and 3.4.3. Mathematica solutions are tested to work on Mathematica 5.1.
+
 ---
 
 Home page: [http://www.nayuki.io/page/project-euler-solutions](http://www.nayuki.io/page/project-euler-solutions)
