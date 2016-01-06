@@ -24,4 +24,4 @@ P[i_, n_] := P[i, n] = If[PrimeQ[i] && i <= n, P[i, n - i], 0] + P[i - 1, n]  (*
 
 i = 2;
 While[P[i, i] <= 5000, i++]
-Print[i]
+i

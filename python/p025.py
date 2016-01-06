@@ -12,6 +12,7 @@ def compute():
 	b = 1
 	i = 1
 	while len(str(a)) != 1000:
+		# Loop invariant: At this point, a == fib(i) and b == fib(i+1)
 		a, b = b, a + b
 		i += 1
 	return str(i)

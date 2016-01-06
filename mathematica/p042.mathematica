@@ -20,6 +20,6 @@ words = {"A","ABILITY","ABLE","ABOUT","ABOVE","ABSENCE","ABSOLUTELY","ACADEMIC",
  * So we have n = (-1/2 + sqrt(1/4 + 2t)) / 2, simplified to n = (sqrt(8t + 1) - 1) / 2.
  * Check that 8t+1 is square, sqrt(8t+1)-1 is even, and the result is positive.
  *)
-WordValue[s_] := Total[ToCharacterCode[s]] - (ToCharacterCode["A"][[1]] - 1) * StringLength[s]
-Length[Select[words,
-  Function[s, IntegerQ[(Sqrt[8 * WordValue[s] + 1] - 1) / 2]]]]
+WordValue[s_] := Total[ToCharacterCode[s] - (ToCharacterCode["A"][[1]] - 1)]
+TriangleNumberQ[n_] := IntegerQ[(Sqrt[8 * n + 1] - 1) / 2]
+Length[Select[words, Composition[TriangleNumberQ, WordValue]]]
