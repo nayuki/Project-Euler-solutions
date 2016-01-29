@@ -17,102 +17,45 @@ public final class p096 implements EulerSolution {
 	public String run() {
 		int sum = 0;
 		for (String puz : PUZZLES) {
-			SudokuSolver ss = new SudokuSolver(puz);
-			if (!ss.solve())
-				throw new AssertionError();
-			sum += ss.board[0][0] * 100 + ss.board[0][1] * 10 + ss.board[0][2];
+			if (puz.length() != 81)
+				throw new IllegalArgumentException();
+			int[] board = new int[puz.length()];
+			for (int i = 0; i < board.length; i++)
+				board[i] = Integer.parseInt(puz.substring(i, i + 1));
+			if (!solveSudoku(board, 0))
+				throw new IllegalArgumentException("Unsolvable");
+			sum += board[0] * 100 + board[1] * 10 + board[2];
 		}
 		return Integer.toString(sum);
 	}
 	
 	
-	
-	private static final class SudokuSolver {
-		
-		public int[][] board;
-		
-		// Used by solve() only
-		private boolean[][] usedInRow;
-		private boolean[][] usedInColumn;
-		private boolean[][][] usedInBox;
-		
-		
-		
-		public SudokuSolver(String nums) {
-			if (nums.length() != 81)
-				throw new IllegalArgumentException("Invalid length");
-			board = new int[9][9];
-			for (int i = 0; i < 81; i++)
-				board[i / 9][i % 9] = nums.charAt(i) - '0';
-		}
-		
-		
-		
-		public boolean solve() {
-			usedInRow    = new boolean[9][9];
-			usedInColumn = new boolean[9][9];
-			usedInBox    = new boolean[3][3][9];
-			for (int y = 0; y < 9; y++) {
-				for (int x = 0; x < 9; x++) {
-					if (board[y][x] == 0)
-						continue;
-					int val = board[y][x] - 1;
-					usedInRow   [y][val] = true;
-					usedInColumn[x][val] = true;
-					usedInBox[y / 3][x / 3][val] = true;
+	private static boolean solveSudoku(int[] board, int index) {
+		if (index == 81)
+			return true;
+		else if (board[index] != 0)
+			return solveSudoku(board, index + 1);
+		else {  // Empty cell
+			outer:
+			for (int digit = 1; digit <= 9; digit++) {  // Try each possible value
+				int x = index % 9;
+				int y = index / 9;
+				int b = y / 3 * 27 + x / 3 * 3;
+				for (int i = 0; i < 9; i++) {
+					if (board[y * 9 + i            ] == digit) continue outer;  // Check row
+					if (board[i * 9 + x            ] == digit) continue outer;  // Check column
+					if (board[b + i / 3 * 9 + i % 3] == digit) continue outer;  // Check box
 				}
+				// No checks failed
+				board[index] = digit;
+				if (solveSudoku(board, index + 1))
+					return true;
 			}
-			return solve(0) && isValid();
-		}
-		
-		
-		private boolean solve(int index) {
-			// Skip over nonzero (already solved) cells
-			for (; index < 81 && board[index / 9][index % 9] != 0; index++);
-			if (index == 81)
-				return true;
-			
-			// Try all 9 digits in this cell and recurse
-			int x = index % 9;
-			int y = index / 9;
-			for (int i = 0; i < 9; i++) {
-				if (!usedInRow[y][i] && !usedInColumn[x][i] && !usedInBox[y / 3][x / 3][i]) {
-					board[y][x] = i + 1;
-					usedInRow   [y][i] = true;
-					usedInColumn[x][i] = true;
-					usedInBox[y / 3][x / 3][i] = true;
-					if (solve(index + 1))
-						return true;
-					usedInRow   [y][i] = false;
-					usedInColumn[x][i] = false;
-					usedInBox[y / 3][x / 3][i] = false;
-				}
-			}
-			board[y][x] = 0;
+			// Backtrack
+			board[index] = 0;
 			return false;
 		}
-		
-		
-		// Checks for contradictions using the basic rules
-		private boolean isValid() {
-			boolean[][] rowused = new boolean[9][9];
-			boolean[][] colused = new boolean[9][9];
-			boolean[][][] boxused = new boolean[3][3][9];
-			for (int y = 0; y < 9; y++) {
-				for (int x = 0; x < 9; x++) {
-					if (board[y][x] == 0)
-						continue;
-					int val = board[y][x] - 1;
-					if (rowused[y][val] || colused[x][val] || boxused[y / 3][x / 3][val])
-						return false;
-					rowused[y][val] = colused[x][val] = boxused[y / 3][x / 3][val] = true;
-				}
-			}
-			return true;
-		}
-		
 	}
-	
 	
 	
 	private static String[] PUZZLES = {

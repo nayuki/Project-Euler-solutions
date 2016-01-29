@@ -16,7 +16,7 @@ def is_origin_in_triangle(x0, y0, x1, y1, x2, y2):
 	a = sign((y0 - y1) * x0 - (x0 - x1) * y0)
 	b = sign((y1 - y2) * x1 - (x1 - x2) * y1)
 	c = sign((y2 - y0) * x2 - (x2 - x0) * y2)
-	return a == 0 or b == 0 or c == 0 or (a == b and b == c)
+	return 0 in (a, b, c) or a == b == c
 
 
 def sign(x):
