@@ -2,7 +2,7 @@
  * Tests for Project Euler library code
  * by Project Nayuki
  * 
- * http://www.nayuki.io/page/project-euler-solutions
+ * https://www.nayuki.io/page/project-euler-solutions
  * https://github.com/nayuki/Project-Euler-solutions
  */
 

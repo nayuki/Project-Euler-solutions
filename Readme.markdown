@@ -14,7 +14,7 @@ Java solutions require JDK 5 or above. Python solutions are tested to work on CP
 
 ---
 
-Home page: [http://www.nayuki.io/page/project-euler-solutions](http://www.nayuki.io/page/project-euler-solutions)
+Home page: [https://www.nayuki.io/page/project-euler-solutions](https://www.nayuki.io/page/project-euler-solutions)
 
 This code is provided for reference only. You need prior written permission
 to do any of the following: republish the code verbatim, publish the code

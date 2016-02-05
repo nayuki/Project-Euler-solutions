@@ -2,7 +2,7 @@
  * Solution to Project Euler problem 58
  * by Project Nayuki
  * 
- * http://www.nayuki.io/page/project-euler-solutions
+ * https://www.nayuki.io/page/project-euler-solutions
  * https://github.com/nayuki/Project-Euler-solutions
  *)
 
