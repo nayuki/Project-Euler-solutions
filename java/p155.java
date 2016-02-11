@@ -18,25 +18,27 @@ public final class p155 implements EulerSolution {
 	}
 	
 	
-	// Requires about 5 GiB of memory
 	private static final int SIZE = 18;
 	
+	// Warning: Running this solution requires about 600 MiB of memory
 	public String run() {
 		@SuppressWarnings("unchecked")
-		Set<Fraction>[] possible = new Set[SIZE + 1];
-		Set<Fraction> all = new HashSet<Fraction>();
-		possible[0] = new HashSet<Fraction>();
-		possible[1] = new HashSet<Fraction>();
-		possible[1].add(new Fraction(BigInteger.valueOf(60), BigInteger.ONE));
+		// possible[i] holds all the possible capacitance values of a series/parallel
+		// capacitor network that uses exactly i capacitors of 60 uF each
+		Set<FastFraction>[] possible = new Set[SIZE + 1];
+		Set<FastFraction> all = new HashSet<FastFraction>();  // Union of every possible[i]
+		possible[0] = new HashSet<FastFraction>();
+		possible[1] = new HashSet<FastFraction>();
+		possible[1].add(new FastFraction(60, 1));
 		all.addAll(possible[1]);
 		
 		for (int i = 2; i <= SIZE; i++) {
-			Set<Fraction> poss = new HashSet<Fraction>();
+			Set<FastFraction> poss = new HashSet<FastFraction>();
 			for (int j = 1; j <= i - j; j++) {
-				for (Fraction a : possible[j]) {
-					for (Fraction b : possible[i - j]) {
-						poss.add(a.add(b));
-						poss.add(a.multiply(b).divide(a.add(b)));
+				for (FastFraction a : possible[j]) {
+					for (FastFraction b : possible[i - j]) {
+						poss.add(a.add(b));  // Parallel
+						poss.add(a.reciprocalAdd(b));  // Series
 					}
 				}
 			}
@@ -44,6 +46,104 @@ public final class p155 implements EulerSolution {
 			all.addAll(poss);
 		}
 		return Integer.toString(all.size());
+	}
+	
+	
+	
+	// A fraction that uses int for storage and long for computation, but switches to BigInteger when necessary.
+	private static final class FastFraction {
+		
+		public final int numerator;
+		public final int denominator;
+		public final Fraction bigFraction;
+		
+		
+		public FastFraction(long num, long den) {
+			if (den <= 0)
+				throw new IllegalArgumentException();
+			int n = (int)num;
+			int d = (int)den;
+			if (n == num && d == den) {
+				int gcd = Library.gcd(n, d);
+				if (gcd > 1) {
+					n /= gcd;
+					d /= gcd;
+				}
+				numerator = n;
+				denominator = d;
+				bigFraction = null;
+			} else {
+				FastFraction temp = new FastFraction(new Fraction(BigInteger.valueOf(num), BigInteger.valueOf(den)));
+				numerator = temp.numerator;
+				denominator = temp.denominator;
+				bigFraction = temp.bigFraction;
+			}
+		}
+		
+		
+		public FastFraction(Fraction frac) {
+			if (frac.numerator.bitLength() <= 31 && frac.denominator.bitLength() <= 31) {
+				numerator = frac.numerator.intValue();
+				denominator = frac.denominator.intValue();
+				bigFraction = null;
+			} else {
+				numerator = 0;
+				denominator = 0;
+				bigFraction = frac;
+			}
+		}
+		
+		
+		public Fraction toFraction() {
+			if (bigFraction == null)
+				return new Fraction(BigInteger.valueOf(numerator), BigInteger.valueOf(denominator));
+			else
+				return bigFraction;
+		}
+		
+		
+		public FastFraction add(FastFraction other) {
+			if (bigFraction == null && other.bigFraction == null) {
+				long num = (long)numerator * other.denominator + (long)other.numerator * denominator;
+				long den = (long)denominator * other.denominator;
+				return new FastFraction(num, den);
+			} else
+				return new FastFraction(toFraction().add(other.toFraction()));
+		}
+		
+		
+		// Returns 1 / (1/this + 1/other), also equal to (this * other) / (this + other).
+		public FastFraction reciprocalAdd(FastFraction other) {
+			if (bigFraction == null && other.bigFraction == null) {
+				long num = (long)numerator * other.numerator;
+				long den = (long)numerator * other.denominator + (long)other.numerator * denominator;
+				return new FastFraction(num, den);
+			} else {
+				Fraction x = this.toFraction();
+				Fraction y = other.toFraction();
+				return new FastFraction(x.multiply(y).divide(x.add(y)));
+			}
+		}
+		
+		
+		public boolean equals(Object obj) {
+			if (!(obj instanceof FastFraction))
+				return false;
+			FastFraction other = (FastFraction)obj;
+			if (bigFraction == null && other.bigFraction == null)
+				return numerator == other.numerator && denominator == other.denominator;
+			else
+				return toFraction().equals(other.toFraction());
+		}
+		
+		
+		public int hashCode() {
+			if (bigFraction == null)
+				return numerator + denominator * 1204805;  // Some arbitrary constant to spread around the bits
+			else
+				return bigFraction.hashCode();
+		}
+		
 	}
 	
 }
