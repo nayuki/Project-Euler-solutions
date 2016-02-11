@@ -11,14 +11,6 @@ if sys.version_info.major == 2:
 	range = xrange
 
 
-# Returns the greatest common denominator of the given non-negative integers.
-def gcd(x, y):
-	assert x >= 0 and y >= 0
-	while y != 0:
-		x, y = y, x % y
-	return x
-
-
 # Given integer x, this returns the integer floor(sqrt(x)).
 def sqrt(x):
 	assert x >= 0

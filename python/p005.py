@@ -6,13 +6,13 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib
+import fractions
 
 
 def compute():
 	ans = 1
 	for i in range(1, 21):
-		ans *= i // eulerlib.gcd(i, ans)
+		ans *= i // fractions.gcd(i, ans)
 	return str(ans)
 
 
