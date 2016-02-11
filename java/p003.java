@@ -15,10 +15,10 @@ public final class p003 implements EulerSolution {
 	
 	
 	/* 
-	 * Algorithm: Divide out all the smallest prime factors except the last one.
-	 * For example, 1596 = 2 * 2 * 3 * 7 * 19. The algorithm ensures that the smallest factors will be found first.
-	 * After dividing out the smallest factors, the last factor to be found will
-	 * be equal to the current quotient, so it must be the largest prime factor.
+	 * By the fundamental theorem of arithmetic, every integer n > 1 has a unique factorization as a product of prime numbers.
+	 * In other words, the theorem says that n = p_0 * p_1 * ... * p_{m-1}, where each p_i > 1 is prime but not necessarily unique.
+	 * Now if we take the number n and repeatedly divide out its smallest factor (which must also be prime), then the last
+	 * factor that we divide out must be the largest prime factor of n. For reference, 600851475143 = 71 * 839 * 1471 * 6857.
 	 */
 	public String run() {
 		long n = 600851475143L;
