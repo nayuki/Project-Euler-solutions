@@ -32,8 +32,7 @@ public final class p075 implements EulerSolution {
 					int a = s * t;
 					int b = (s * s - t * t) / 2;
 					int c = (s * s + t * t) / 2;
-					int sum = a + b + c;
-					if (sum <= LIMIT)
+					if (a + b + c <= LIMIT)
 						triples.add(new IntTriple(a, b, c));
 				}
 			}
@@ -42,8 +41,8 @@ public final class p075 implements EulerSolution {
 		byte[] ways = new byte[LIMIT + 1];
 		for (IntTriple triple : triples) {
 			int sum = triple.a + triple.b + triple.c;
-			for (int i = 1; i * sum <= LIMIT; i++)
-				ways[i * sum] = (byte)Math.min(ways[i * sum] + 1, 2);  // Increment but saturate at 2
+			for (int i = sum; i < ways.length; i += sum)
+				ways[i] = (byte)Math.min(ways[i] + 1, 2);  // Increment but saturate at 2
 		}
 		
 		int count = 0;
