@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib, sys
+import fractions, sys
 if sys.version_info.major == 2:
 	range = xrange
 
@@ -29,7 +29,7 @@ def compute():
 def count_all_unconcealed(prime):
 	result = []
 	for e in range(prime - 1):
-		if eulerlib.gcd(e, prime - 1) == 1:
+		if fractions.gcd(e, prime - 1) == 1:
 			result.append(count_unconcealed(prime, e))
 		else:
 			result.append(10**20)  # Sentinel
