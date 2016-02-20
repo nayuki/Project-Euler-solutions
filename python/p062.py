@@ -11,33 +11,25 @@ import itertools
 
 def compute():
 	numdigits = 0
-	lowest = {}
-	counts = {}
+	data = {}  # str numclass -> (int lowest, int count)
 	for i in itertools.count():
-		numclass = get_cube_number_class(i)
+		digits = [int(c) for c in str(i**3)]
+		digits.sort()
+		numclass = "".join(str(d) for d in digits)
 		
 		if len(numclass) > numdigits:
 			# Process and flush data for smaller number of digits
 			min = None
-			for nc in counts:
-				if counts[nc] == 5 and (min is None or lowest[nc] < min):
-					min = lowest[nc]
+			for (nc, vals) in data.items():
+				if vals[1] == 5 and (min is None or vals[0] < min):
+					min = vals[0]
 			if min is not None:
 				return str(min**3)
-			lowest = {}
-			counts = {}
+			data = {}
 			numdigits = len(numclass)
 		
-		if numclass not in lowest:
-			lowest[numclass] = i
-			counts[numclass] = 0
-		counts[numclass] += 1
-
-
-def get_cube_number_class(n):
-	digits = [int(c) for c in str(n**3)]
-	digits.sort()
-	return "".join(str(d) for d in digits)
+		lowest, count = data.get(numclass, (i, 0))
+		data[numclass] = (lowest, count + 1)
 
 
 if __name__ == "__main__":
