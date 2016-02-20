@@ -25,8 +25,8 @@ public final class p083 implements EulerSolution {
 		int h = GRID.length;
 		int w = GRID[0].length;
 		distance = new int[h][w];
-		for (int y = 0; y < h; y++)
-			Arrays.fill(distance[y], INFINITY);
+		for (int[] row : distance)
+			Arrays.fill(row, INFINITY);
 		
 		// Bellman–Ford algorithm
 		distance[0][0] = GRID[0][0];
