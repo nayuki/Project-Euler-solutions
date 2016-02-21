@@ -8,8 +8,8 @@
 
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 
 public final class p119 implements EulerSolution {
@@ -33,23 +33,18 @@ public final class p119 implements EulerSolution {
 	
 	public String run() {
 		for (BigInteger limit = BigInteger.ONE; ; limit = limit.shiftLeft(8)) {
-			List<BigInteger> candidates = new ArrayList<BigInteger>();
-			for (int k = 2; BigInteger.valueOf(2).pow(k).compareTo(limit) < 0; k++) {
-				BigInteger n = BigInteger.valueOf(2);
-				while (true) {
-					BigInteger pow = n.pow(k);
-					if (pow.compareTo(limit) >= 0 && BigInteger.valueOf(pow.toString().length() * 9).compareTo(n) < 0)
+			SortedSet<BigInteger> candidates = new TreeSet<BigInteger>();
+			for (int k = 2; BigInteger.valueOf(1).shiftLeft(k).compareTo(limit) < 0; k++) {
+				for (int n = 2; ; n++) {
+					BigInteger pow = BigInteger.valueOf(n).pow(k);
+					if (pow.compareTo(limit) >= 0 && pow.toString().length() * 9 < n)
 						break;
-					
-					if (pow.compareTo(BigInteger.TEN) >= 0 && !candidates.contains(pow) && isDigitSumPower(pow))
+					if (pow.compareTo(BigInteger.TEN) >= 0 && isDigitSumPower(pow))
 						candidates.add(pow);
-					n = n.add(BigInteger.ONE);
 				}
 			}
-			if (candidates.size() >= INDEX) {
-				Collections.sort(candidates);
-				return candidates.get(INDEX - 1).toString();
-			}
+			if (candidates.size() >= INDEX)
+				return new ArrayList<BigInteger>(candidates).get(INDEX - 1).toString();
 		}
 	}
 	
@@ -64,7 +59,7 @@ public final class p119 implements EulerSolution {
 		BigInteger pow = base;
 		while (pow.compareTo(x) < 0)
 			pow = pow.multiply(base);
-		return pow.compareTo(x) == 0;
+		return pow.equals(x);
 	}
 	
 	
