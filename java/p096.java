@@ -19,25 +19,23 @@ public final class p096 implements EulerSolution {
 		for (String puz : PUZZLES) {
 			if (puz.length() != 81)
 				throw new IllegalArgumentException();
-			int[] board = new int[puz.length()];
-			for (int i = 0; i < board.length; i++)
-				board[i] = Integer.parseInt(puz.substring(i, i + 1));
+			char[] board = puz.toCharArray();
 			if (!solveSudoku(board, 0))
 				throw new IllegalArgumentException("Unsolvable");
-			sum += board[0] * 100 + board[1] * 10 + board[2];
+			sum += Integer.parseInt("" + board[0] + board[1] + board[2]);
 		}
 		return Integer.toString(sum);
 	}
 	
 	
-	private static boolean solveSudoku(int[] board, int index) {
-		if (index == 81)
+	private static boolean solveSudoku(char[] board, int index) {
+		if (index == board.length)
 			return true;
-		else if (board[index] != 0)
+		else if (board[index] != '0')
 			return solveSudoku(board, index + 1);
 		else {  // Empty cell
 			outer:
-			for (int digit = 1; digit <= 9; digit++) {  // Try each possible value
+			for (char digit = '1'; digit <= '9'; digit++) {  // Try each possible value
 				int x = index % 9;
 				int y = index / 9;
 				int b = y / 3 * 27 + x / 3 * 3;
@@ -46,13 +44,13 @@ public final class p096 implements EulerSolution {
 					if (board[i * 9 + x            ] == digit) continue outer;  // Check column
 					if (board[b + i / 3 * 9 + i % 3] == digit) continue outer;  // Check box
 				}
-				// No checks failed
+				// No checks failed, recurse on next index
 				board[index] = digit;
 				if (solveSudoku(board, index + 1))
-					return true;
+					return true;  // Full solution found
 			}
 			// Backtrack
-			board[index] = 0;
+			board[index] = '0';
 			return false;
 		}
 	}
