@@ -19,17 +19,21 @@ def compute():
 		else:
 			return distance[y][x]
 	
-	# Bellman-Ford algorithm
+	# Bellman-Ford algorithm with early exit
 	distance[0][0] = GRID[0][0]
-	for i in range(w * h):
+	changed = True
+	while changed:  # Note: The worst-case number of iterations is w*h
+		changed = False
 		for y in range(h):
 			for x in range(w):
-				temp = min(
+				temp = GRID[y][x] + min(
 					get_distance(x - 1, y),
 					get_distance(x + 1, y),
 					get_distance(x, y - 1),
 					get_distance(x, y + 1))
-				distance[y][x] = min(GRID[y][x] + temp, distance[y][x])
+				if temp < distance[y][x]:
+					distance[y][x] = temp
+					changed = True
 	return str(distance[h - 1][w - 1])
 
 

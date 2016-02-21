@@ -19,24 +19,25 @@ public final class p051 implements EulerSolution {
 	public String run() {
 		boolean[] isPrime = Library.listPrimality(1000000);
 		for (int i = 0; i < isPrime.length; i++) {
-			if (isPrime[i]) {
-				int[] n = toDigits(i);
-				for (int mask = 0; mask < (1 << n.length); mask++) {
-					int[] digits = doMask(n, mask);
-					int count = 0;
+			if (!isPrime[i])
+				continue;
+			
+			int[] n = toDigits(i);
+			for (int mask = 0; mask < (1 << n.length); mask++) {
+				int[] digits = doMask(n, mask);
+				int count = 0;
+				for (int j = 0; j < 10; j++) {
+					if (digits[0] != 0 && isPrime[toNumber(digits)])
+						count++;
+					digits = addMask(digits, mask);
+				}
+				
+				if (count == 8) {
+					digits = doMask(n, mask);
 					for (int j = 0; j < 10; j++) {
 						if (digits[0] != 0 && isPrime[toNumber(digits)])
-							count++;
+							return Integer.toString(toNumber(digits));
 						digits = addMask(digits, mask);
-					}
-					
-					if (count == 8) {
-						digits = doMask(n, mask);
-						for (int j = 0; j < 10; j++) {
-							if (digits[0] != 0 && isPrime[toNumber(digits)])
-								return Integer.toString(toNumber(digits));
-							digits = addMask(digits, mask);
-						}
 					}
 				}
 			}
@@ -46,14 +47,14 @@ public final class p051 implements EulerSolution {
 	
 	
 	private static int[] toDigits(int n) {
-		int[] temp = new int[10];
-		int len = 0;
+		int[] buf = new int[10];
+		int i = buf.length;
 		do {
-			temp[temp.length - 1 - len] = n % 10;
+			i--;
+			buf[i] = n % 10;
 			n /= 10;
-			len++;
 		} while (n != 0);
-		return Arrays.copyOfRange(temp, temp.length - len, temp.length);
+		return Arrays.copyOfRange(buf, i, buf.length);
 	}
 	
 	

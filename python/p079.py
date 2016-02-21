@@ -10,12 +10,26 @@ import itertools
 
 
 def compute():
+	# Only guess characters that appear in the attempts
+	charsused = sorted(set().union(*SUBSEQS))
+	base = len(charsused)
+	
 	# Try ascending lengths
-	for len in itertools.count(3):
-		for i in range(10**len):
-			guess = str(i).zfill(len)
+	for length in itertools.count(base):
+		indices = [0] * length
+		while True:
+			guess = "".join(charsused[d] for d in indices)
 			if is_consistent(guess):
 				return guess
+			
+			# Increment indices
+			i = 0
+			while i < length and indices[i] == base - 1:
+				indices[i] = 0
+				i += 1
+			if i == length:
+				break
+			indices[i] += 1
 
 
 def is_consistent(guess):

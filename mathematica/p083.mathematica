@@ -95,19 +95,18 @@ w = Length[grid[[1]]];
 minpath = Table[Infinity, {i, h}, {j, w}];
 GetMin[x_, y_] := If[1 <= x <= w && 1 <= y <= h, minpath[[y, x]], Infinity]
 
-(* Bellman-Ford algorithm *)
+(* Bellman-Ford algorithm with early exit *)
 minpath[[1, 1]] = grid[[1, 1]];
 For[i = 0, i < w * h, i++,
   changed = False;
   For[y = 1, y <= h, y++,
     For[x = 1, x <= w, x++,
-      temp = Min[minpath[[y, x]],
-        grid[[y, x]] + Min[
-          GetMin[x - 1, y],
-          GetMin[x + 1, y],
-          GetMin[x, y - 1],
-          GetMin[x, y + 1]]];
-      If[temp != minpath[[y, x]],
+      temp = grid[[y, x]] + Min[
+        GetMin[x - 1, y],
+        GetMin[x + 1, y],
+        GetMin[x, y - 1],
+        GetMin[x, y + 1]];
+      If[temp < minpath[[y, x]],
         minpath[[y, x]] = temp;
         changed = True;]]]
   If[!changed, Break[]]]
