@@ -27,7 +27,6 @@ public final class p204 implements EulerSolution {
 	private int count(int primeIndex, long product) {
 		if (primeIndex == primes.length)
 			return product <= LIMIT ? 1 : 0;
-		
 		else {
 			int count = 0;
 			while (product <= LIMIT) {

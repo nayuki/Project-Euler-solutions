@@ -47,7 +47,7 @@ public final class p122 implements EulerSolution {
 		for (int i = chain.size() - 1; i >= 0; i--) {
 			for (int j = i; j >= 0; j--) {
 				int next = chain.get(i) + chain.get(j);
-				if (next > largest && next <= 200) {
+				if (largest < next && next <= 200) {
 					chain.add(next);
 					exploreChains(chain);
 					chain.remove(chain.size() - 1);

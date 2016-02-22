@@ -6,12 +6,14 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
+import array
 
-# Requires about 2000 MB of memory
+
+# Requires about 400 MB of memory
 def compute():
 	LIMIT = 40000000
-	totient = list_totients(LIMIT)
-	totientchainlen = [0, 1]
+	totient = list_totients(LIMIT - 1)
+	totientchainlen = array.array("L", [0, 1])
 	ans = 0
 	# Fill table in ascending order because totient chains are strictly decreasing
 	for i in range(len(totientchainlen), len(totient)):
@@ -23,7 +25,8 @@ def compute():
 
 
 def list_totients(n):
-	result = list(range(n + 1))
+	assert n < (1 << 32)
+	result = array.array("L", range(n + 1))
 	for i in range(2, n + 1):
 		if result[i] == i:  # i is prime
 			for j in range(i, n + 1, i):

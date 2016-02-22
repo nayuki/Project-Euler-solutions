@@ -23,7 +23,7 @@ public final class p203 implements EulerSolution {
 		Set<Long> numbers = new HashSet<Long>();
 		long max = 0;
 		for (int n = 0; n <= 50; n++) {
-			for(int k = 0; k <= n; k++) {
+			for (int k = 0; k <= n; k++) {
 				BigInteger x = Library.binomial(n, k);
 				if (x.bitLength() >= 64)
 					throw new AssertionError("Number too large to handle");

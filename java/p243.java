@@ -48,8 +48,7 @@ public final class p243 implements EulerSolution {
 			if (n == Integer.MAX_VALUE)
 				throw new IllegalArgumentException();
 			n++;
-		}
-		while (!Library.isPrime(n));
+		} while (!Library.isPrime(n));
 		return n;
 	}
 	
