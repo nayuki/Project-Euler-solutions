@@ -19,13 +19,15 @@ public final class p122 implements EulerSolution {
 	}
 	
 	
+	private static final int LIMIT = 200;
+	
 	private int[] minChainLength;
 	
 	
 	public String run() {
-		minChainLength = new int[201];
+		minChainLength = new int[LIMIT + 1];
 		Arrays.fill(minChainLength, 999999);
-		minChainLength[0] = 1;
+		minChainLength[0] = 0;
 		
 		List<Integer> temp = new ArrayList<Integer>();
 		temp.add(1);
@@ -33,21 +35,21 @@ public final class p122 implements EulerSolution {
 		
 		int sum = 0;
 		for (int x : minChainLength)
-			sum += x - 1;
+			sum += x;
 		return Integer.toString(sum);
 	}
 	
 	
 	private void exploreChains(List<Integer> chain) {
 		int largest = chain.get(chain.size() - 1);
-		if (chain.size() > minChainLength[largest])
+		if (chain.size() - 1 > minChainLength[largest])
 			return;
-		minChainLength[largest] = chain.size();
+		minChainLength[largest] = chain.size() - 1;
 		
 		for (int i = chain.size() - 1; i >= 0; i--) {
 			for (int j = i; j >= 0; j--) {
 				int next = chain.get(i) + chain.get(j);
-				if (largest < next && next <= 200) {
+				if (largest < next && next <= LIMIT) {
 					chain.add(next);
 					exploreChains(chain);
 					chain.remove(chain.size() - 1);

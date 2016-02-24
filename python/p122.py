@@ -11,25 +11,24 @@
 def compute():
 	LIMIT = 200
 	INFINITY = 1 << 30
-	minchainlength = [INFINITY for i in range(LIMIT + 1)]
-	minchainlength[0] = 1
+	minchainlength = [0] + [INFINITY] * LIMIT
 	
 	def explore_chains(chain):
 		largest = chain[-1]
 		n = len(chain)
-		if n > minchainlength[largest]:
+		if n - 1 > minchainlength[largest]:
 			return
-		minchainlength[largest] = n
+		minchainlength[largest] = n - 1
 		for i in reversed(range(n)):
 			for j in reversed(range(0, i + 1)):
 				next = chain[i] + chain[j]
-				if largest < next < len(minchainlength):
+				if largest < next <= LIMIT:
 					chain.append(next)
 					explore_chains(chain)
 					del chain[-1]
 	
 	explore_chains([1])
-	return str(sum(x - 1 for x in minchainlength))
+	return str(sum(minchainlength))
 
 
 if __name__ == "__main__":
