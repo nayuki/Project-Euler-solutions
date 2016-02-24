@@ -12,26 +12,37 @@ import itertools
 MODULUS = 10**6
 
 def compute():
-	for i in itertools.count():
-		ans = search(1 << i)
-		if ans is not None:
-			return str(ans)
-
-
-def search(limit):
-	# partitions[i] is {the number of ways i can be written
-	# as an unordered sum of positive integers} mod 10^6.
-	# Note that the partition function P(n, k) can be computed with
-	# dynamic programming using only 1 dimension for memoization.
-	partitions = [0] * limit
-	partitions[0] = 1
-	for i in range(1, limit):
-		for j in range(i, limit):
-			partitions[j] = (partitions[j] + partitions[j - i]) % MODULUS
-	for (i, val) in enumerate(partitions):
-		if val == 0:
-			return i
-	return None
+	partitions = [1]
+	for i in itertools.count(len(partitions)):
+		# We calculate partitions[i] mod 10^6 using a formula based on generalized pentagonal numbers:
+		#   partitions(i) =   partitions(i - pentagonal(1)) + partitions(i - pentagonal(-1))
+		#                   - partitions(i - pentagonal(2)) - partitions(i - pentagonal(-2))
+		#                   + partitions(i - pentagonal(3)) + partitions(i - pentagonal(-3))
+		#                   - partitions(i - pentagonal(4)) - partitions(i - pentagonal(-4))
+		#                   + ...,
+		#   where pentagonal(j) = (3*n^2 - n) / 2, and
+		#   we stop the sum when i - pentagonal(+/-j) < 0.
+		# Note that for j > 0, pentagonal(j) < pentagonal(-j) < pentagonal(j+1).
+		# 
+		# (The formula is used without mathematical justification;
+		# see https://en.wikipedia.org/wiki/Partition_(number_theory)#Generating_function .)
+		item = 0
+		for j in itertools.count(1):
+			sign = -1 if j % 2 == 0 else +1
+			index = (j * j * 3 - j) // 2
+			if index > i:
+				break
+			item += partitions[i - index] * sign
+			index += j  # index == (j * j * 3 + j) // 2
+			if index > i:
+				break
+			item += partitions[i - index] * sign
+			item %= MODULUS
+		
+		# Check or memoize the number
+		if item == 0:
+			return str(i)
+		partitions.append(item)
 
 
 if __name__ == "__main__":

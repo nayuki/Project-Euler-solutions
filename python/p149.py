@@ -22,32 +22,28 @@ def compute():
 	# Reshape the sequence into into a 2D array
 	grid = [randseq[i * SIZE : (i + 1) * SIZE] for i in range(SIZE)]
 	
+	# For the sequence of numbers in the grid at positions (x, y), (x+dx, y+dy), (x+2*dx, y+2*dy), ... until the
+	# last in-bounds indices, this function returns the maximum sum among all possible substrings of this sequence.
 	def get_max_substring_sum(x, y, dx, dy):
-		lst = []
-		while 0 <= x < SIZE and 0 <= y < SIZE:
-			lst.append(grid[y][x])
-			x += dx
-			y += dy
 		result = 0
 		current = 0
-		for item in lst:
-			current = max(current + item, 0)
-			result = max(current, result)
+		while 0 <= x < SIZE and 0 <= y < SIZE:
+			current = max(current + grid[y][x], 0)  # Reset the running sum if it goes negative
+			result = max(current, result)  # Keep track of the best seen running sum
+			x += dx
+			y += dy
 		return result
 	
+	# Scan along all line directions and positions
 	maximum = 0
 	for i in range(SIZE):
 		maximum = max(maximum,
-			# Top edge
-			get_max_substring_sum(i, 0,  0, +1),  # Vertical
-			get_max_substring_sum(i, 0, +1, +1),  # Diagonal
-			get_max_substring_sum(i, 0, -1, +1),  # Anti-diagonal
-			# Left edge
-			get_max_substring_sum(0, i,  0, +1),  # Horizontal
-			get_max_substring_sum(0, i, +1, +1),  # Diagonal
-			# Right edge
-			get_max_substring_sum(SIZE - 1, i,  0, +1),  # Horizontal
-			get_max_substring_sum(SIZE - 1, i, -1, +1))  # Anti-diagonal
+			get_max_substring_sum(0, i, +1,  0),  # Horizontal from left edge
+			get_max_substring_sum(i, 0,  0, +1),  # Vertical from top edge
+			get_max_substring_sum(0, i, +1, +1),  # Diagonal from left edge
+			get_max_substring_sum(i, 0, +1, +1),  # Diagonal from top edge
+			get_max_substring_sum(i, 0, -1, +1),  # Anti-diagonal from top edge
+			get_max_substring_sum(SIZE - 1, i, -1, +1))  # Anti-diagonal from right edge
 	return str(maximum)
 
 
