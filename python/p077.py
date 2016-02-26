@@ -22,8 +22,7 @@ def num_prime_sum_ways(n):
 		if eulerlib.is_prime(i):
 			primes.append(i)
 	
-	ways = [0] * (n + 1)
-	ways[0] = 1
+	ways = [1] + [0] * n
 	for p in primes:
 		for i in range(n + 1 - p):
 			ways[i + p] += ways[i]

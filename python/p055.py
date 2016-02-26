@@ -8,10 +8,7 @@
 
 
 def compute():
-	ans = 0
-	for i in range(10000):
-		if is_lychrel(i):
-			ans += 1
+	ans = sum(1 for i in range(10000) if is_lychrel(i))
 	return str(ans)
 
 

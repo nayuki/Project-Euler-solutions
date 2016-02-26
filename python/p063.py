@@ -22,11 +22,10 @@
 # 
 # We handle the rest of the testing by brute force.
 def compute():
-	ans = 0
-	for i in range(1, 10):
-		for j in range(1, 22):
-			if len(str(i**j)) == j:
-				ans += 1
+	ans = sum(1
+		for i in range(1, 10)
+		for j in range(1, 22)
+		if len(str(i**j)) == j)
 	return str(ans)
 
 

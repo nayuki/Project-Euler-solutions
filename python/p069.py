@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import sys
+import itertools, sys
 if sys.version_info.major == 2:
 	range = xrange
 
@@ -20,7 +20,7 @@ def compute():
 	
 	maxnumer = 0
 	maxdenom = 1
-	for (i, tot) in enumerate(totients[2 : ], 2):
+	for (i, tot) in itertools.islice(enumerate(totients), 2, None):
 		if i * maxdenom > maxnumer * tot:
 			maxnumer = i
 			maxdenom = totients[i]

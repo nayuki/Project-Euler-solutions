@@ -8,7 +8,7 @@
 
 
 def compute():
-	ans = sum((1 if is_player1_win(handpair) else 0) for handpair in HANDS)
+	ans = sum(1 for handpair in HANDS if is_player1_win(handpair))
 	return str(ans)
 
 

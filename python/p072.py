@@ -18,7 +18,7 @@ def compute():
 			for j in range(i, len(totients), i):
 				totients[j] = totients[j] // i * (i - 1)
 	
-	ans = sum(itertools.islice(totients, 2, len(totients)))
+	ans = sum(itertools.islice(totients, 2, None))
 	return str(ans)
 
 

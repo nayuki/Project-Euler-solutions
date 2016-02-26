@@ -10,11 +10,12 @@ import eulerlib
 
 
 def compute():
-	ans = 0
-	for i in range(100):
-		if eulerlib.sqrt(i)**2 != i:
-			temp = eulerlib.sqrt(i * 10**200)
-			ans += sum(int(c) for c in str(temp)[ : 100])
+	DIGITS = 100
+	MULTIPLIER = 100**DIGITS
+	ans = sum(
+		sum(int(c) for c in str(eulerlib.sqrt(i * MULTIPLIER))[ : DIGITS])
+		for i in range(100)
+		if eulerlib.sqrt(i)**2 != i)
 	return str(ans)
 
 
