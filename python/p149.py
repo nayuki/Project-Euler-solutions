@@ -35,16 +35,15 @@ def compute():
 		return result
 	
 	# Scan along all line directions and positions
-	maximum = 0
-	for i in range(SIZE):
-		maximum = max(maximum,
-			get_max_substring_sum(0, i, +1,  0),  # Horizontal from left edge
-			get_max_substring_sum(i, 0,  0, +1),  # Vertical from top edge
-			get_max_substring_sum(0, i, +1, +1),  # Diagonal from left edge
-			get_max_substring_sum(i, 0, +1, +1),  # Diagonal from top edge
-			get_max_substring_sum(i, 0, -1, +1),  # Anti-diagonal from top edge
-			get_max_substring_sum(SIZE - 1, i, -1, +1))  # Anti-diagonal from right edge
-	return str(maximum)
+	ans = max(
+		max(get_max_substring_sum(0, i, +1,  0),  # Horizontal from left edge
+		    get_max_substring_sum(i, 0,  0, +1),  # Vertical from top edge
+		    get_max_substring_sum(0, i, +1, +1),  # Diagonal from left edge
+		    get_max_substring_sum(i, 0, +1, +1),  # Diagonal from top edge
+		    get_max_substring_sum(i, 0, -1, +1),  # Anti-diagonal from top edge
+		    get_max_substring_sum(SIZE - 1, i, -1, +1))  # Anti-diagonal from right edge
+		for i in range(SIZE))
+	return str(ans)
 
 
 if __name__ == "__main__":

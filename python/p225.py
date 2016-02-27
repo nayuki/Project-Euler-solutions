@@ -6,16 +6,16 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import itertools
+import itertools, itertools, sys
+if sys.version_info.major == 2:
+	filterfalse = itertools.ifilterfalse
+else:
+	filterfalse = itertools.filterfalse
 
 
 def compute():
-	found = 0
-	for i in itertools.count(1, 2):
-		if not has_tribonacci_multiple(i):
-			found += 1
-			if found == 124:
-				return str(i)
+	ans = next(itertools.islice(filterfalse(has_tribonacci_multiple, itertools.count(1, 2)), 123, None))
+	return str(ans)
 
 
 def has_tribonacci_multiple(i):

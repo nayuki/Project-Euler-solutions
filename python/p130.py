@@ -6,18 +6,15 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib, itertools
+import eulerlib, itertools, sys
+if sys.version_info.major == 2:
+	filter = itertools.ifilter
 
 
 def compute():
-	ans = 0
-	found = 0
-	for i in itertools.count(7, 2):
-		if i % 5 != 0 and not eulerlib.is_prime(i) and (i - 1) % find_least_divisible_repunit(i) == 0:
-			ans += i
-			found += 1
-			if found == 25:
-				return str(ans)
+	cond = lambda i: i % 5 != 0 and not eulerlib.is_prime(i) and (i - 1) % find_least_divisible_repunit(i) == 0
+	ans = sum(itertools.islice(filter(cond, itertools.count(7, 2)), 25))
+	return str(ans)
 
 
 # Returns the smallest k such that R(k) is divisible by n.

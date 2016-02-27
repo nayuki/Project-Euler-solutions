@@ -15,12 +15,7 @@ def compute():
 	# Generate the triangle
 	ROWS = 1000
 	rand = lcg_random()
-	triangle = []
-	for i in range(ROWS):
-		row = []
-		for j in range(i + 1):
-			row.append(next(rand))
-		triangle.append(row)
+	triangle = [[next(rand) for j in range(i + 1)] for i in range(ROWS)]
 	
 	# Calculate cumulative sums for each row
 	rowsums = []
@@ -29,7 +24,6 @@ def compute():
 		for j in range(len(row)):
 			rowsum.append(rowsum[j] + row[j])
 		rowsums.append(rowsum)
-	
 	
 	# Calculate minimum subtriangle sum for each apex position
 	ans = 0

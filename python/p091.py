@@ -9,14 +9,13 @@
 
 def compute():
 	LIMIT = 51
-	ans = 0
-	for x1 in range(LIMIT):
-		for y1 in range(LIMIT):
-			for x2 in range(LIMIT):
-				for y2 in range(LIMIT):
-					# For uniqueness, ensure that (x1,y1) has a larger angle than (x2,y2)
-					if y2 * x1 < y1 * x2 and is_right_triangle(x1, y1, x2, y2):
-						ans += 1
+	ans = sum(1
+		for x1 in range(LIMIT)
+		for y1 in range(LIMIT)
+		for x2 in range(LIMIT)
+		for y2 in range(LIMIT)
+		# For uniqueness, ensure that (x1,y1) has a larger angle than (x2,y2)
+		if y2 * x1 < y1 * x2 and is_right_triangle(x1, y1, x2, y2))
 	return str(ans)
 
 

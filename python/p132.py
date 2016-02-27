@@ -6,18 +6,17 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib, itertools
+import eulerlib, itertools, sys
+if sys.version_info.major == 2:
+	filter = itertools.ifilter
 
 
 def compute():
-	ans = 0
-	count = 0
-	for i in itertools.count(2):
-		if eulerlib.is_prime(i) and repunit_mod(10**9, i) == 0:
-			ans += i
-			count += 1
-			if count == 40:
-				return str(ans)
+	# Among the integers starting from 2, take the sum of
+	# the first 40 integers satisfying the filter condition
+	cond = lambda i: eulerlib.is_prime(i) and repunit_mod(10**9, i) == 0
+	ans = sum(itertools.islice(filter(cond, itertools.count(2)), 40))
+	return str(ans)
 
 
 def repunit_mod(k, m):

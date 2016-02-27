@@ -6,18 +6,13 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib
+import eulerlib, itertools, sys
+if sys.version_info.major == 2:
+	filter = itertools.ifilter
 
 
 def compute():
-	ans = 0
-	found = 0
-	n = 10
-	while found < 11:
-		if is_truncatable_prime(n):
-			ans += n
-			found += 1
-		n += 1
+	ans = sum(itertools.islice(filter(is_truncatable_prime, itertools.count(10)), 11))
 	return str(ans)
 
 
