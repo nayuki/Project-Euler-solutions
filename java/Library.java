@@ -305,30 +305,6 @@ final class Library {
 	}
 	
 	
-	// Returns the same result as x.multiply(y), but is faster for large integers.
-	public static BigInteger multiply(BigInteger x, BigInteger y) {
-		final int CUTOFF = 1536;
-		if (x.bitLength() <= CUTOFF || y.bitLength() <= CUTOFF) {  // Base case
-			return x.multiply(y);
-			
-		} else {  // Karatsuba fast multiplication
-			int n = Math.max(x.bitLength(), y.bitLength());
-			int half = (n + 32) / 64 * 32;
-			BigInteger mask = BigInteger.ONE.shiftLeft(half).subtract(BigInteger.ONE);
-			BigInteger xlow = x.and(mask);
-			BigInteger ylow = y.and(mask);
-			BigInteger xhigh = x.shiftRight(half);
-			BigInteger yhigh = y.shiftRight(half);
-			
-			BigInteger a = multiply(xhigh, yhigh);
-			BigInteger b = multiply(xlow.add(xhigh), ylow.add(yhigh));
-			BigInteger c = multiply(xlow, ylow);
-			BigInteger d = b.subtract(a).subtract(c);
-			return a.shiftLeft(half).add(d).shiftLeft(half).add(c);
-		}
-	}
-	
-	
 	// Advances the given sequence to the next permutation and returns whether a permutation was performed.
 	// If no permutation was performed, then the input state was already the last possible permutation (a non-ascending sequence).
 	// For example:

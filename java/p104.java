@@ -34,7 +34,7 @@ public final class p104 implements EulerSolution {
 	private static boolean isFound(int n, int fibMod) {
 		if (!isPandigital(Integer.toString(fibMod)))
 			return false;
-		BigInteger fib = fibonacci(n);
+		BigInteger fib = fibonacci(n)[0];
 		if (fib.mod(BigInteger.valueOf(1000000000)).intValue() != fibMod)
 			throw new AssertionError();
 		return isPandigital(leading9Digits(fib));
@@ -65,29 +65,23 @@ public final class p104 implements EulerSolution {
 	}
 	
 	
-	private static BigInteger fibonacci(int n) {
-		BigInteger a = BigInteger.ZERO;
-		BigInteger b = BigInteger.ONE;
-		int m = 0;
-		for (int i = 31; i >= 0; i--) {
-			// Loop invariant: a = f(m), b = f(m+1)
-			
-			// Double it
-			BigInteger d = Library.multiply(a, b.shiftLeft(1).subtract(a));
-			BigInteger e = Library.multiply(a, a).add(Library.multiply(b, b));
-			a = d;
-			b = e;
-			m *= 2;
-			
-			// Advance by one conditionally
-			if (((1 << i) & n) != 0) {
-				BigInteger c = a.add(b);
-				a = b;
-				b = c;
-				m++;
-			}
+	// Returns the pair [fib(n), fib(n + 1)].
+	private static BigInteger[] fibonacci(int n) {
+		if (n < 0)
+			throw new IllegalArgumentException();
+		else if (n == 0)
+			return new BigInteger[]{BigInteger.ZERO, BigInteger.ONE};
+		else {
+			BigInteger[] ab = fibonacci(n / 2);
+			BigInteger a = ab[0];
+			BigInteger b = ab[1];
+			BigInteger c = a.multiply(b.shiftLeft(1).subtract(a));
+			BigInteger d = a.multiply(a).add(b.multiply(b));
+			if (n % 2 == 0)
+				return new BigInteger[]{c, d};
+			else
+				return new BigInteger[]{d, c.add(d)};
 		}
-		return a;
 	}
 	
 }
