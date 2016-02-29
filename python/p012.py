@@ -12,7 +12,7 @@ import eulerlib, itertools
 def compute():
 	triangular = 0
 	for i in itertools.count(1):
-		triangular += i
+		triangular += i  # Equal to i * (i + 1) // 2
 		if num_divisors(triangular) > 500:
 			break
 	return str(triangular)

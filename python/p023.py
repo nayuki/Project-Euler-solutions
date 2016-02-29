@@ -23,10 +23,7 @@ def compute():
 			else:
 				break
 	
-	ans = 0
-	for (i, x) in enumerate(expressible):
-		if not x:
-			ans += i
+	ans = sum(i for (i, x) in enumerate(expressible) if not x)
 	return str(ans)
 
 

@@ -6,13 +6,15 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib, itertools
+import eulerlib, itertools, sys
+if sys.version_info.major == 2:
+	filter = itertools.ifilter
 
 
 def compute():
-	for i in itertools.count():
-		if all((count_distinct_prime_factors(i + j) == 4) for j in range(4)):
-			return str(i)
+	cond = lambda i: all((count_distinct_prime_factors(i + j) == 4) for j in range(4))
+	ans = next(filter(cond, itertools.count()))
+	return str(ans)
 
 
 distinctprimefactorscache = {}

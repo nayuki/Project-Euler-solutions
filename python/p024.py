@@ -13,10 +13,8 @@ if sys.version_info.major == 2:
 
 def compute():
 	arr = list(range(10))
-	permiter = itertools.permutations(arr)
-	for i in range(999999):
-		next(permiter)
-	return "".join([str(x) for x in next(permiter)])
+	temp = itertools.islice(itertools.permutations(arr), 999999, None)
+	return "".join([str(x) for x in next(temp)])
 
 
 if __name__ == "__main__":

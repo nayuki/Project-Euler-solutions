@@ -11,7 +11,7 @@ import eulerlib
 
 def compute():
 	n = eulerlib.factorial(100)
-	ans = sum(map(int, str(n)))
+	ans = sum(int(c) for c in str(n))
 	return str(ans)
 
 

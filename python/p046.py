@@ -6,13 +6,16 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib, itertools
+import eulerlib, itertools, sys
+if sys.version_info.major == 2:
+	filterfalse = itertools.ifilterfalse
+else:
+	filterfalse = itertools.filterfalse
 
 
 def compute():
-	for n in itertools.count(9, 2):
-		if not test_goldbach(n):
-			return str(n)
+	ans = next(filterfalse(test_goldbach, itertools.count(9, 2)))
+	return str(ans)
 
 
 def test_goldbach(n):

@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import itertools, itertools, sys
+import itertools, sys
 if sys.version_info.major == 2:
 	filterfalse = itertools.ifilterfalse
 else:

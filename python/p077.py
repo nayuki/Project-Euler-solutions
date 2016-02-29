@@ -6,13 +6,15 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib, itertools
+import eulerlib, itertools, sys
+if sys.version_info.major == 2:
+	filter = itertools.ifilter
 
 
 def compute():
-	for n in itertools.count(2):
-		if num_prime_sum_ways(n) > 5000:
-			return str(n)
+	cond = lambda n: num_prime_sum_ways(n) > 5000
+	ans = next(filter(cond, itertools.count(2)))
+	return str(ans)
 
 
 primes = [2]

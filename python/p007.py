@@ -6,17 +6,14 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib
+import eulerlib, itertools, sys
+if sys.version_info.major == 2:
+	filter = itertools.ifilter
 
 
 def compute():
-	n = 1
-	count = 0
-	while count < 10001:
-		n += 1
-		if eulerlib.is_prime(n):
-			count += 1
-	return str(n)
+	ans = next(itertools.islice(filter(eulerlib.is_prime, itertools.count(2)), 10000, None))
+	return str(ans)
 
 
 if __name__ == "__main__":

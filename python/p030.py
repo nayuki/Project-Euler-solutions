@@ -20,7 +20,7 @@ def compute():
 
 
 def fifth_power_digit_sum(n):
-	return sum([int(c)**5 for c in str(n)])
+	return sum(int(c)**5 for c in str(n))
 
 
 if __name__ == "__main__":

@@ -9,7 +9,7 @@
 
 def compute():
 	n = 2**1000
-	ans = sum(map(int, str(n)))
+	ans = sum(int(c) for c in str(n))
 	return str(ans)
 
 

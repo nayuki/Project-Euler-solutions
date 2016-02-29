@@ -10,11 +10,9 @@ import itertools
 
 
 def compute():
-	ans = 0
-	for s in WORDS:
-		x = sum((ord(c) - ord('A') + 1) for c in s)
-		if is_triangular_number(x):
-			ans += 1
+	ans = sum(1
+		for s in WORDS
+		if is_triangular_number(sum((ord(c) - ord('A') + 1) for c in s)))
 	return str(ans)
 
 
