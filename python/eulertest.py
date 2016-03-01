@@ -10,14 +10,16 @@ import importlib, time
 
 
 def main():
-	totaltime = 0.0
+	totaltime = 0.0  # In seconds
 	for (prob, expectans) in sorted(ANSWERS.items()):
 		module = importlib.import_module("p{:03d}".format(prob))
 		starttime = time.time()
-		actualans = module.compute()
+		actualans = module.compute()  # Must return a string
 		elapsedtime = time.time() - starttime
 		totaltime += elapsedtime
-		print("Problem {:03d}: {:7d} ms{}".format(prob, int(round(elapsedtime * 1000)), "" if actualans == expectans else "    *** FAIL ***"))
+		print("Problem {:03d}: {:7d} ms{}".format(
+			prob, int(round(elapsedtime * 1000)),
+			"" if actualans == expectans else "    *** FAIL ***"))
 	print("Total computation time: {} ms".format(int(round(totaltime * 1000))))
 
 
