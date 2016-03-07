@@ -30,18 +30,17 @@ def is_player1_win(handpair):
 def get_score(hand):
 	assert len(hand) == 5
 	
-	rankcounts = [0] * 13   # rankcounts[i] is the number of cards with the rank of i
-	flushsuit = hand[0][1]  # flushsuit is in the range [0,3] if all cards have that suit; otherwise -1
-	for card in hand:
-		rankcounts[card[0]] += 1
-		if card[1] != flushsuit:
-			flushsuit = -1
+	# rankcounts[i] is the number of cards with the rank of i
+	rankcounts = [sum(1 for (rank, _) in hand if rank == i) for i in range(13)]
 	
 	# rankcounthist[i] is the number of times a rank count of i occurs.
 	# For example if there is exactly one triplet, then rankcounthist[3] = 1.
-	rankcounthist = [0] * 6
-	for count in rankcounts:
-		rankcounthist[count] += 1
+	rankcounthist = [sum(1 for count in rankcounts if count == i) for i in range(6)]
+	
+	# flushsuit is in the range [0,3] if all cards have that suit; otherwise -1
+	minsuit = min(suit for (_, suit) in hand)
+	maxsuit = max(suit for (_, suit) in hand)
+	flushsuit = minsuit if minsuit == maxsuit else -1
 	
 	bestcards = get_5_frequent_highest_cards(rankcounts, rankcounthist)
 	straighthighrank = get_straight_high_rank(rankcounts)
