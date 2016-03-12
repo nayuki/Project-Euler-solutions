@@ -14,30 +14,23 @@ public final class p002 implements EulerSolution {
 	}
 	
 	
+	/* 
+	 * Computers are fast, so we can implement this solution directly without any clever math.
+	 * Because the Fibonacci sequence grows exponentially by a factor of 1.618, the sum is
+	 * bounded above by a small multiple of 4 million. Thus the answer fits in a Java int type.
+	 */
 	public String run() {
 		int sum = 0;
-		for (int i = 0; ; i++) {
-			int fib = fibonacci(i);
-			if (fib > 4000000)
-				break;
-			if (fib % 2 == 0)
-				sum += fib;
+		int x = 1;  // Represents the current Fibonacci number being processed
+		int y = 2;  // Represents the next Fibonacci number in the sequence
+		while (x <= 4000000) {
+			if (x % 2 == 0)
+				sum += x;
+			int z = x + y;
+			x = y;
+			y = z;
 		}
 		return Integer.toString(sum);
-	}
-	
-	
-	private static int fibonacci(int x) {
-		if (x < 0 || x > 46)
-			throw new IllegalArgumentException();
-		int a = 0;
-		int b = 1;
-		for (int i = 0; i < x; i++) {
-			int c = a + b;
-			a = b;
-			b = c;
-		}
-		return a;
 	}
 	
 }

@@ -7,6 +7,7 @@
 # 
 
 
+# We implement a straightforward algorithm that examines every substring of length 13.
 def compute():
 	ans = max(digit_product(NUMBER[i : i + ADJACENT]) for i in range(len(NUMBER) - ADJACENT + 1))
 	return str(ans)

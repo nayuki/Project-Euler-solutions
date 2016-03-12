@@ -7,4 +7,5 @@
  *)
 
 
+(* Use Mathematica's built-in functions for easy problem-solving. *)
 Total[Select[Range[1999999], PrimeQ]]

@@ -7,6 +7,7 @@
  -}
 
 
+-- Computers are fast, so we can implement this solution directly without any clever math.
 main = putStrLn (show ans)
 ans = foldl1 max [a * b | a <- [100..999], b <- [100..999], isPalindrome (a * b)]
 

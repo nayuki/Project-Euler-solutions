@@ -14,6 +14,10 @@ public final class p004 implements EulerSolution {
 	}
 	
 	
+	/* 
+	 * Computers are fast, so we can implement this solution directly without any clever math.
+	 * Note that the maximum product is 999 * 999, which fits in a Java int type.
+	 */
 	public String run() {
 		int maxPalin = -1;
 		for (int i = 100; i < 1000; i++) {

@@ -7,6 +7,7 @@
 # 
 
 
+# Computers are fast, so we can implement this solution directly without any clever math.
 def compute():
 	ans = 0
 	for i in range(100, 1000):

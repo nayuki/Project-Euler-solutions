@@ -8,9 +8,11 @@
 
 
 (* 
- * For the mathematically inclined:
- *   Sum[k  , {k, n}] = n(n + 1) / 2.
- *   Sum[k^2, {k, n}] = n(n + 1)(2n + 1) / 6.
+ * Computers are fast, so we can implement this solution directly without any clever math.
+ * However for the mathematically inclined, there are closed-form formulas:
+ *   sum  = n(n + 1) / 2.
+ *   sum2 = n(n + 1)(2n + 1) / 6.
+ * Hence sum^2 - sum2 = (n^4 / 4) + (n^3 / 6) - (n^2 / 4) - (n / 6).
  *)
 n = 100;
 Sum[k, {k, n}]^2 - Sum[k^2, {k, n}]

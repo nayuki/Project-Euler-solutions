@@ -7,10 +7,16 @@
 # 
 
 
+# Computers are fast, so we can implement this solution directly without any clever math.
+# However for the mathematically inclined, there are closed-form formulas:
+#   s  = N(N + 1) / 2.
+#   s2 = N(N + 1)(2N + 1) / 6.
+# Hence s^2 - s2 = (N^4 / 4) + (N^3 / 6) - (N^2 / 4) - (N / 6).
 def compute():
-	x = sum(i for i in range(1, 101))**2
-	y = sum(i**2 for i in range(1, 101))
-	return str(x - y)
+	N = 100
+	s = sum(i for i in range(1, N + 1))
+	s2 = sum(i**2 for i in range(1, N + 1))
+	return str(s**2 - s2)
 
 
 if __name__ == "__main__":

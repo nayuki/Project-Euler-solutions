@@ -7,4 +7,5 @@
  *)
 
 
+(* Use Mathematica's built-in functions for easy problem-solving. *)
 First[Last[FactorInteger[600851475143]]]

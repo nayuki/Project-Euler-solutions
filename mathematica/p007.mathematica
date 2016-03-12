@@ -7,4 +7,5 @@
  *)
 
 
+(* Use Mathematica's built-in functions for easy problem-solving. *)
 Prime[10001]

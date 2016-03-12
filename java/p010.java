@@ -14,6 +14,9 @@ public final class p010 implements EulerSolution {
 	}
 	
 	
+	/* 
+	 * Call the sieve of Eratosthenes and sum the primes found.
+	 */
 	private static final int LIMIT = 2000000;
 	
 	public String run() {
