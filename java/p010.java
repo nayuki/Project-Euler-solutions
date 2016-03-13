@@ -16,6 +16,7 @@ public final class p010 implements EulerSolution {
 	
 	/* 
 	 * Call the sieve of Eratosthenes and sum the primes found.
+	 * A conservative upper bound for the sum is 2000000^2, which fits in a Java long type.
 	 */
 	private static final int LIMIT = 2000000;
 	

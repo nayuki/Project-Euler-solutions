@@ -7,8 +7,9 @@
 # 
 
 
+# We visit each grid cell and compute the product in the 4 directions starting from that cell.
 def compute():
-	ans = 0
+	ans = -1
 	width = len(GRID[0])
 	height = len(GRID)
 	for y in range(height):
@@ -22,6 +23,13 @@ def compute():
 			if x - CONSECUTIVE >= -1    and y + CONSECUTIVE <= height:
 				ans = max(grid_product(x, y, -1, 1, CONSECUTIVE), ans)
 	return str(ans)
+
+
+def grid_product(ox, oy, dx, dy, n):
+	result = 1
+	for i in range(n):
+		result *= GRID[oy + i * dy][ox + i * dx]
+	return result
 
 
 GRID = [
@@ -47,13 +55,6 @@ GRID = [
 	[ 1,70,54,71,83,51,54,69,16,92,33,48,61,43,52, 1,89,19,67,48],
 ]
 CONSECUTIVE = 4
-
-
-def grid_product(ox, oy, dx, dy, n):
-	result = 1
-	for i in range(n):
-		result *= GRID[oy + i * dy][ox + i * dx]
-	return result
 
 
 if __name__ == "__main__":

@@ -16,6 +16,9 @@ public final class p016 implements EulerSolution {
 	}
 	
 	
+	/* 
+	 * We implement this solution in a straightforward way with help from BigInteger.
+	 */
 	public String run() {
 		String temp = BigInteger.ONE.shiftLeft(1000).toString();
 		int sum = 0;

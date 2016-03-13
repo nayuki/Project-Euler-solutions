@@ -14,23 +14,23 @@ public final class p011 implements EulerSolution {
 	}
 	
 	
+	/* 
+	 * We visit each grid cell and compute the product in the 4 directions starting from that cell.
+	 * Note that the maximum product is 99^4 = 96059601, which fits in a Java int type.
+	 */
+	private static final int CONSECUTIVE = 4;
+	
 	public String run() {
 		int max = -1;
-		max = Math.max(maxProduct(1, 0), max);
-		max = Math.max(maxProduct(0, 1), max);
-		max = Math.max(maxProduct(1, 1), max);
-		max = Math.max(maxProduct(1, -1), max);
-		return Integer.toString(max);
-	}
-	
-	
-	private static int maxProduct(int dx, int dy) {
-		int max = -1;
 		for (int y = 0; y < SQUARE.length; y++) {
-			for (int x = 0; x < SQUARE[y].length; x++)
-				max = Math.max(product(x, y, dx, dy, 4), max);
+			for (int x = 0; x < SQUARE[y].length; x++) {
+				max = Math.max(product(x, y, 1,  0, CONSECUTIVE), max);
+				max = Math.max(product(x, y, 0,  1, CONSECUTIVE), max);
+				max = Math.max(product(x, y, 1,  1, CONSECUTIVE), max);
+				max = Math.max(product(x, y, 1, -1, CONSECUTIVE), max);
+			}
 		}
-		return max;
+		return Integer.toString(max);
 	}
 	
 	

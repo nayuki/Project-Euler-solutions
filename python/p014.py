@@ -11,8 +11,10 @@ if sys.version_info.major == 2:
 	range = xrange
 
 
+# We compute the Collatz chain length for every integer in the range according to the iteration rule.
+# Also, we cache the Collatz value for all integer arguments to speed up the computation.
 def compute():
-	ans = max((i for i in range(1, 1000000)), key=collatz_chain_length)
+	ans = max(range(1, 1000000), key=collatz_chain_length)
 	return str(ans)
 
 

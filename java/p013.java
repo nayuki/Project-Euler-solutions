@@ -16,6 +16,9 @@ public final class p013 implements EulerSolution {
 	}
 	
 	
+	/* 
+	 * We do a straightforward sum with help from Java's BigInteger type.
+	 */
 	public String run() {
 		BigInteger sum = BigInteger.ZERO;
 		for (String num : NUMBERS)

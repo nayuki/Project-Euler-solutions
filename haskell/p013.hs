@@ -7,6 +7,7 @@
  -}
 
 
+-- We do a straightforward sum thanks to Haskell's built-in arbitrary precision Integer type.
 main = putStrLn (show ans)
 ans = take 10 $ show (sum numbers)
 

@@ -7,6 +7,7 @@
  *)
 
 
+(* We do a straightforward search with some help from built-in functions. *)
 TriangleNumber[n_] = Sum[i, {i, n}];
 i = 1;
 While[DivisorSigma[0, TriangleNumber[i]] <= 500, i++]

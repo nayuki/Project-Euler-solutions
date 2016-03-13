@@ -7,6 +7,7 @@
 # 
 
 
+# We do a straightforward sum thanks to Python's built-in arbitrary precision integer type.
 def compute():
 	return str(sum(NUMBERS))[ : 10]
 

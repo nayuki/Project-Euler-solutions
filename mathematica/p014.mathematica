@@ -7,6 +7,11 @@
  *)
 
 
+(* 
+ * We compute the Collatz chain length for every integer in the range according to the iteration rule.
+ * Also, we cache the Collatz value for small integer arguments to speed up the computation.
+ *)
+
 Collatz[0] := 0
 Collatz[1] := 1
 Collatz[n_] := Block[{res = Collatz[If[EvenQ[n], n / 2, n * 3 + 1]] + 1},
