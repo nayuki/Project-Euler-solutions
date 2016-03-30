@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import sys
+import math, sys
 if sys.version_info.major == 2:
 	range = xrange
 
@@ -76,15 +76,6 @@ def prime_generator(limit):
 					isprime[j] = False
 
 
-# Returns the factorial of the given non-negative integer.
-def factorial(n):
-	assert n >= 0
-	result = 1
-	for i in range(1, n + 1):
-		result *= i
-	return result
-
-
 def binomial(n, k):
 	assert n >= 0 and 0 <= k <= n
-	return factorial(n) // (factorial(k) * factorial(n - k))
+	return math.factorial(n) // (math.factorial(k) * math.factorial(n - k))

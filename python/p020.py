@@ -6,11 +6,11 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib
+import math
 
 
 def compute():
-	n = eulerlib.factorial(100)
+	n = math.factorial(100)
 	ans = sum(int(c) for c in str(n))
 	return str(ans)
 

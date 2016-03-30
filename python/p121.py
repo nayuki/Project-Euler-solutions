@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib
+import math
 
 
 # At the beginning of turn number k (0-based), there are k + 2 discs to choose from.
@@ -46,7 +46,7 @@ def compute():
 	numer = 0
 	for i in range(TURNS //2 + 1, TURNS + 1):
 		numer += ways[TURNS][i]
-	denom = eulerlib.factorial(TURNS + 1)
+	denom = math.factorial(TURNS + 1)
 	return str(denom // numer)
 
 

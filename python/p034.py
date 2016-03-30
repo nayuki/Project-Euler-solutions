@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib, sys
+import math, sys
 if sys.version_info.major == 2:
 	range = xrange
 
@@ -26,8 +26,8 @@ def factorial_digit_sum(n):
 		n //= 10000
 	return result + FACTORIAL_DIGITS_SUM_WITHOUT_LEADING_ZEROS[n]
 
-FACTORIAL_DIGITS_SUM_WITHOUT_LEADING_ZEROS = [sum(eulerlib.factorial(int(c)) for c in str(i)) for i in range(10000)]
-FACTORIAL_DIGITS_SUM_WITH_LEADING_ZEROS = [sum(eulerlib.factorial(int(c)) for c in str(i).zfill(4)) for i in range(10000)]
+FACTORIAL_DIGITS_SUM_WITHOUT_LEADING_ZEROS = [sum(math.factorial(int(c)) for c in str(i)) for i in range(10000)]
+FACTORIAL_DIGITS_SUM_WITH_LEADING_ZEROS = [sum(math.factorial(int(c)) for c in str(i).zfill(4)) for i in range(10000)]
 
 
 if __name__ == "__main__":
