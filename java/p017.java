@@ -14,6 +14,21 @@ public final class p017 implements EulerSolution {
 	}
 	
 	
+	/* 
+	 * - For the numbers 0 to 19, we write the single word:
+	 *   {zero, one, two, three, four, five, six, seven, eight, nine,
+	 *   ten, eleven, twelve, thirteen, fourteen, fifteen, sixteen, seventeen, eighteen, nineteen}.
+	 * - For the numbers 20 to 99, we write the word for the tens place:
+	 *   {twenty, thirty, forty, fifty, sixty, seventy, eighty, ninety}.
+	 *   Subsequently if the last digit is not 0, then we write the word for the ones place (one to nine).
+	 * - For the numbers 100 to 999, we write the ones word for the hundreds place followed by "hundred":
+	 *   {one hundred, two hundred, three hundred, ..., eight hundred, nine hundred}.
+	 *   Subsequently if the last two digits are not 00, then we write the word "and"
+	 *   followed by the phrase for the last two digits (from 01 to 99).
+	 * - For the numbers 1000 to 999999, we write the word for the three digits starting at the
+	 *   thousands place and going leftward, followed by "thousand". Subsequently if the last three
+	 *   digits are not 000, then we write the phrase for the last three digits (from 001 to 999).
+	 */
 	public String run() {
 		int sum = 0;
 		for (int i = 1; i <= 1000; i++)
@@ -22,39 +37,25 @@ public final class p017 implements EulerSolution {
 	}
 	
 	
-	private static String[] ONES = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};  // Requires 0 <= n <= 9
-	private static String[] TEENS = {"ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"};
-	private static String[] TENS = {"twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"};
-	
-	
-	// Requires 0 <= n <= 99999
 	private static String toEnglish(int n) {
-		if (n < 0 || n > 99999)
-			throw new IllegalArgumentException();
-		
-		if (n < 100)
-			return tens(n);
-		else {
-			String result = "";
-			if (n >= 1000)
-				result += tens(n / 1000) + "thousand";
-			if (n / 100 % 10 != 0)
-				result += ONES[n / 100 % 10] + "hundred";
-			if (n % 100 != 0)
-				result += "and" + tens(n % 100);
-			return result;
-		}
-	}
-	
-	
-	// Requires 0 <= n <= 99
-	private static String tens(int n) {
-		if (n < 10)
+		if (0 <= n && n < 20)
 			return ONES[n];
-		else if (n < 20)  // Teens
-			return TEENS[n - 10];
+		else if (20 <= n && n < 100)
+			return TENS[n / 10] + (n % 10 != 0 ? ONES[n % 10] : "");
+		else if (100 <= n && n < 1000)
+			return ONES[n / 100] + "hundred" + (n % 100 != 0 ? "and" + toEnglish(n % 100) : "");
+		else if (1000 <= n && n < 1000000)
+			return toEnglish(n / 1000) + "thousand" + (n % 1000 != 0 ? toEnglish(n % 1000) : "");
 		else
-			return TENS[n / 10 - 2] + (n % 10 != 0 ? ONES[n % 10] : "");
+			throw new IllegalArgumentException();
 	}
+	
+	
+	private static String[] ONES = {
+		"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
+		"ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"};
+	
+	private static String[] TENS = {
+		"", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"};
 	
 }
