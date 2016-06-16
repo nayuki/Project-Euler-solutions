@@ -6,6 +6,8 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
+import math
+
 
 def compute():
 	LIMIT = 10**6
@@ -29,8 +31,7 @@ def factorialize(n):
 		n //= 10
 	return result
 
-# Hard-coded values for factorial(0), factorial(1), ..., factorial(9)
-FACTORIAL = [1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880]
+FACTORIAL = [math.factorial(i) for i in range(10)]
 
 
 if __name__ == "__main__":
