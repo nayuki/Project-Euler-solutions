@@ -35,8 +35,8 @@ public final class p267 implements EulerSolution {
 	 * Some parts are inaccurate or are based on heuristics:
 	 * - Calculating the final capital using floating-point arithmetic,
 	 *   for each bet proportion and number of wins+losses.
-	 * - Sampling the continuous input interval of [0, 1] to try
-	 *   to maximize the value of the function.
+	 * - Sampling the continuous input interval of [0.0, 1.0]
+	 *   to try to maximize the value of the function.
 	 * Overall this solution is not provably mathematically correct.
 	 */
 	public String run() {

@@ -24,8 +24,8 @@ import eulerlib, fractions, math, sys
 # Some parts are inaccurate or are based on heuristics:
 # - Calculating the final capital using floating-point arithmetic,
 #   for each bet proportion and number of wins+losses.
-# - Sampling the continuous input interval of [0, 1] to try
-#   to maximize the value of the function.
+# - Sampling the continuous input interval of [0.0, 1.0]
+#   to try to maximize the value of the function.
 # Overall this solution is not provably mathematically correct.
 def compute():
 	# Heuristic sampling algorithm.
@@ -45,9 +45,7 @@ def compute():
 		level += 1
 	
 	# Calculate the cumulative probability: binomialSum = sum (n choose k) for 0 <= k < maxIndex
-	binomialsum = 0
-	for i in range(maxindex):
-		binomialsum += eulerlib.binomial(TRIALS, i)
+	binomialsum = sum(eulerlib.binomial(TRIALS, i) for i in range(maxindex))
 	return round_to_decimal(fractions.Fraction(binomialsum, 1 << TRIALS), 12)
 
 
@@ -57,15 +55,15 @@ def calc_billionaire_probability(betproportion, trials):
 	logbillionaire = math.log(1.0e9)
 	i = 0
 	while i <= trials:  # Number of losses
-		# Need to take logarithms because Python (**) and math.pow
-		# raise an exception on overflow instead of returning infinity
+		# Need to take logarithms because Python's ** operator and math.pow()
+		# would raise an exception on overflow instead of returning infinity
 		logfinalcapital = math.log(initcapital)
 		logfinalcapital += math.log(1.0 - betproportion) * i
 		logfinalcapital += math.log(1.0 + betproportion * 2) * (trials - i)
 		if logfinalcapital < logbillionaire:
 			break
 		i += 1
-	return i
+	return i  # Range [0, TRIALS + 1]
 
 
 # Converts a fraction to a correctly rounded decimal string.
