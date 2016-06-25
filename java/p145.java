@@ -25,13 +25,15 @@ public final class p145 implements EulerSolution {
 				// Skip if the reverse will have leading zeros
 				if (num[0] != 0 && isReversible(num))
 					count++;
-			} while(increment(num));
+			} while (increment(num));
 		}
 		return Integer.toString(count);
 	}
 	
 	
-	private static boolean[] IS_DIGIT_ODD = {false, true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false, true};
+	private static boolean[] IS_DIGIT_ODD = {
+		false, true, false, true, false, true, false, true, false, true,
+		false, true, false, true, false, true, false, true, false, true};
 	
 	// Find the sum of num and reverse(num) digit by digit, checking for even digits. Discard the sum.
 	private static boolean isReversible(int[] num) {
