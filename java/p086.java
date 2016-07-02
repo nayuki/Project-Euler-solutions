@@ -23,10 +23,10 @@ public final class p086 implements EulerSolution {
 	// solutions.get(k) is the set of all solutions where the largest side has length k.
 	// A solution is a triple (x, y, z) such that 0 < x <= y <= z, and in the rectangular prism with dimensions x * y * z,
 	// the shortest surface path from one vertex to the opposite vertex has an integral length.
-	private List<Set<List<Integer>>> solutions = new ArrayList<Set<List<Integer>>>();
+	private List<Set<List<Integer>>> solutions = new ArrayList<>();
 	
 	// cumulativeSolutions.get(m) = solutions.get(0).size() + solutions.get(1).size() + ... + solutions.get(m).size().
-	private List<Integer> cumulativeSolutions = new ArrayList<Integer>();
+	private List<Integer> cumulativeSolutions = new ArrayList<>();
 	
 	
 	public String run() {
@@ -97,7 +97,7 @@ public final class p086 implements EulerSolution {
 				int max = Math.max(Math.max(x, y), z);
 				if (max < limit) {
 					// Add canonical solution
-					List<Integer> soln = new ArrayList<Integer>();
+					List<Integer> soln = new ArrayList<>();
 					Collections.addAll(soln, x, y, z);
 					Collections.sort(soln);
 					solutions.get(max).add(soln);

@@ -21,7 +21,7 @@ public final class p098 implements EulerSolution {
 	
 	
 	public String run() {
-		Map<String,List<String>> anagrams = new HashMap<String,List<String>>();
+		Map<String,List<String>> anagrams = new HashMap<>();
 		for (String word : WORDS) {
 			String key = canonicalize(word);
 			if (!anagrams.containsKey(key))

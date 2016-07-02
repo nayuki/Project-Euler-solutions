@@ -35,7 +35,7 @@ public final class p115 implements EulerSolution {
 	
 	public String run() {
 		// Dynamic programming
-		List<Long> ways = new ArrayList<Long>();
+		List<Long> ways = new ArrayList<>();
 		ways.add(1L);
 		for (int n = 1; ; n++) {
 			long sum = ways.get(n - 1);

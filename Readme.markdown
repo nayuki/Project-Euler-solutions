@@ -11,7 +11,7 @@ All problems from #1 to #100 have a Java program, and #1 to #50 have Python and 
 The project codebase contains at least 185 solutions in Java, at least 150 in Python,
 at least 120 in Mathematica, and at least 65 in Haskell.
 
-Java solutions require JDK 5 or above. Python solutions are tested to work on CPython 2.7.10 and 3.4.3. Mathematica solutions are tested to work on Mathematica 5.1.
+Java solutions require JDK 7 or above. Python solutions are tested to work on CPython 2.7.10 and 3.4.3. Mathematica solutions are tested to work on Mathematica 5.1.
 
 ---
 

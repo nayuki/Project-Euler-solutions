@@ -54,7 +54,7 @@ public final class p066 implements EulerSolution {
 	private static BigInteger smallestSolutionX(int n) {
 		List<BigInteger>[] contFrac = sqrtToContinuedFraction(n);
 		
-		List<BigInteger> temp = new ArrayList<BigInteger>();
+		List<BigInteger> temp = new ArrayList<>();
 		temp.addAll(contFrac[0]);
 		temp.addAll(contFrac[1].subList(0, contFrac[1].size() - 1));
 		
@@ -73,8 +73,8 @@ public final class p066 implements EulerSolution {
 	// result[0] is the minimal non-periodic prefix, and result[1] is the minimal periodic tail.
 	@SuppressWarnings("unchecked")
 	private static List<BigInteger>[] sqrtToContinuedFraction(int n) {
-		List<BigInteger> terms = new ArrayList<BigInteger>();
-		Map<QuadraticSurd,Integer> seen = new HashMap<QuadraticSurd,Integer>();
+		List<BigInteger> terms = new ArrayList<>();
+		Map<QuadraticSurd,Integer> seen = new HashMap<>();
 		QuadraticSurd val = new QuadraticSurd(BigInteger.ZERO, BigInteger.ONE, BigInteger.ONE, BigInteger.valueOf(n));
 		do {
 			seen.put(val, seen.size());

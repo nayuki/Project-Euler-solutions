@@ -22,10 +22,10 @@ public final class p087 implements EulerSolution {
 	public String run() {
 		int[] primes = Library.listPrimes(Library.sqrt(LIMIT));
 		
-		Set<Integer> sums = new HashSet<Integer>();
+		Set<Integer> sums = new HashSet<>();
 		sums.add(0);
 		for (int i = 2; i <= 4; i++) {
-			Set<Integer> newsums = new HashSet<Integer>();
+			Set<Integer> newsums = new HashSet<>();
 			for (int p : primes) {
 				long q = 1;
 				for (int j = 0; j < i; j++)

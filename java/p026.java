@@ -32,7 +32,7 @@ public final class p026 implements EulerSolution {
 	
 	
 	private static int getCycleLength(int n) {
-		Map<Integer,Integer> stateToIter = new HashMap<Integer,Integer>();
+		Map<Integer,Integer> stateToIter = new HashMap<>();
 		int state = 1;
 		int iter = 0;
 		while (!stateToIter.containsKey(state)) {

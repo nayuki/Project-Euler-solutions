@@ -33,7 +33,7 @@ public final class p119 implements EulerSolution {
 	
 	public String run() {
 		for (BigInteger limit = BigInteger.ONE; ; limit = limit.shiftLeft(8)) {
-			SortedSet<BigInteger> candidates = new TreeSet<BigInteger>();
+			SortedSet<BigInteger> candidates = new TreeSet<>();
 			for (int k = 2; BigInteger.valueOf(1).shiftLeft(k).compareTo(limit) < 0; k++) {
 				for (int n = 2; ; n++) {
 					BigInteger pow = BigInteger.valueOf(n).pow(k);
@@ -44,7 +44,7 @@ public final class p119 implements EulerSolution {
 				}
 			}
 			if (candidates.size() >= INDEX)
-				return new ArrayList<BigInteger>(candidates).get(INDEX - 1).toString();
+				return new ArrayList<>(candidates).get(INDEX - 1).toString();
 		}
 	}
 	

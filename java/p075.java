@@ -25,7 +25,7 @@ public final class p075 implements EulerSolution {
 		 *   Every primitive Pythagorean triple with a odd and b even can be expressed as
 		 *   a = st, b = (s^2-t^2)/2, c = (s^2+t^2)/2, where s > t > 0 are coprime odd integers.
 		 */
-		Set<IntTriple> triples = new HashSet<IntTriple>();
+		Set<IntTriple> triples = new HashSet<>();
 		for (int s = 3; s * s <= LIMIT; s += 2) {
 			for (int t = s - 2; t > 0; t -= 2) {
 				if (Library.gcd(s, t) == 1) {

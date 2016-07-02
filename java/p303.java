@@ -37,7 +37,7 @@ public final class p303 implements EulerSolution {
 		 */
 		
 		// Initialization and base case
-		List<byte[]> isSumFeasible = new ArrayList<byte[]>();
+		List<byte[]> isSumFeasible = new ArrayList<>();
 		{
 			byte[] temp = new byte[n];
 			temp[0] = 1;

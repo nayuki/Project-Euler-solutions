@@ -25,7 +25,7 @@ public final class p271 implements EulerSolution {
 		int[] factors = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43};
 		List<Integer>[] factorSolutions = new List[factors.length];
 		for (int i = 0; i < factors.length; i++) {
-			List<Integer> sols = new ArrayList<Integer>();
+			List<Integer> sols = new ArrayList<>();
 			for (int j = 0; j < factors[i]; j++) {
 				if (Library.powMod(j, 3, factors[i]) == 1)
 					sols.add(j);

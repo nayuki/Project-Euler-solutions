@@ -19,7 +19,7 @@ public final class p029 implements EulerSolution {
 	
 	
 	public String run() {
-		Set<BigInteger> generated = new HashSet<BigInteger>();
+		Set<BigInteger> generated = new HashSet<>();
 		for (int a = 2; a <= 100; a++) {
 			for (int b = 2; b <= 100; b++)
 				generated.add(BigInteger.valueOf(a).pow(b));

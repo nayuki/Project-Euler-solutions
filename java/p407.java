@@ -64,7 +64,7 @@ public final class p407 implements EulerSolution {
 		int[] newsolns = new int[1 << maxNumPrimeFactors];
 		for (int i = 1; i <= LIMIT; i++) {
 			// Compute factorization as coprime prime powers. e.g. 360 = {2^3, 3^2, 5^1}
-			List<Integer> factorization = new ArrayList<Integer>();
+			List<Integer> factorization = new ArrayList<>();
 			for (int j = i; j != 1; ) {
 				int p = smallestPrimeFactor[j];
 				int q = 1;

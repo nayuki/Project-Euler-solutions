@@ -29,7 +29,7 @@ public final class p122 implements EulerSolution {
 		Arrays.fill(minChainLength, 999999);
 		minChainLength[0] = 0;
 		
-		List<Integer> temp = new ArrayList<Integer>();
+		List<Integer> temp = new ArrayList<>();
 		temp.add(1);
 		exploreChains(temp);
 		

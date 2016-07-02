@@ -26,14 +26,14 @@ public final class p155 implements EulerSolution {
 		// possible[i] holds all the possible capacitance values of a series/parallel
 		// capacitor network that uses exactly i capacitors of 60 uF each
 		Set<FastFraction>[] possible = new Set[SIZE + 1];
-		Set<FastFraction> all = new HashSet<FastFraction>();  // Union of every possible[i]
-		possible[0] = new HashSet<FastFraction>();
-		possible[1] = new HashSet<FastFraction>();
+		Set<FastFraction> all = new HashSet<>();  // Union of every possible[i]
+		possible[0] = new HashSet<>();
+		possible[1] = new HashSet<>();
 		possible[1].add(new FastFraction(60, 1));
 		all.addAll(possible[1]);
 		
 		for (int i = 2; i <= SIZE; i++) {
-			Set<FastFraction> poss = new HashSet<FastFraction>();
+			Set<FastFraction> poss = new HashSet<>();
 			for (int j = 1; j <= i - j; j++) {
 				for (FastFraction a : possible[j]) {
 					for (FastFraction b : possible[i - j]) {

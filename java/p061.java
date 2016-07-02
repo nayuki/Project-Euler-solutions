@@ -27,7 +27,7 @@ public final class p061 implements EulerSolution {
 		numbers = new Set[9][100];
 		for (int i = 0; i < numbers.length; i++) {
 			for (int j = 0; j < numbers[i].length; j++)
-				numbers[i][j] = new HashSet<Integer>();
+				numbers[i][j] = new HashSet<>();
 		}
 		for (int sides = 3; sides <= 8; sides++) {
 			for (int n = 1; ; n++) {

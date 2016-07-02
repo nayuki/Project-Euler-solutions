@@ -41,7 +41,7 @@ public final class p093 implements EulerSolution {
 	
 	// Assumes 1 <= a < b < c < d <= 9
 	private static int longestConsecutive(int a, int b, int c, int d) {
-		Set<Integer> expressible = new HashSet<Integer>();
+		Set<Integer> expressible = new HashSet<>();
 		
 		// Try all possible orderings of operands and operators
 		int[] ops = {0, 0, 0, a, b, c, d};  // 0 = operator slot, 1 to 9 = literal operand
@@ -50,7 +50,7 @@ public final class p093 implements EulerSolution {
 			// Try all possibilities for the 3 operators
 			inner:
 			for (int i = 0; i < 64; i++) {
-				Stack<Fraction> stack = new Stack<Fraction>();
+				Stack<Fraction> stack = new Stack<>();
 				int j = 0;  // Operator index
 				for (int op : ops) {
 					if (1 <= op && op <= 9) {  // Operand

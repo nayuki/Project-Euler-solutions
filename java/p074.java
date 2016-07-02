@@ -30,7 +30,7 @@ public final class p074 implements EulerSolution {
 	
 	
 	private static int getChainLength(int n) {
-		Set<Integer> seen = new HashSet<Integer>();
+		Set<Integer> seen = new HashSet<>();
 		while (true) {
 			if (!seen.add(n))
 				return seen.size();

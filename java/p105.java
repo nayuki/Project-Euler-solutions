@@ -31,7 +31,7 @@ public final class p105 implements EulerSolution {
 	
 	
 	private static boolean isSpecialSumSet(int[] set) {
-		Set<Integer> sumsSeen = new HashSet<Integer>();
+		Set<Integer> sumsSeen = new HashSet<>();
 		int[] minSum = new int[set.length + 1];
 		int[] maxSum = new int[set.length + 1];
 		Arrays.fill(minSum, Integer.MAX_VALUE);

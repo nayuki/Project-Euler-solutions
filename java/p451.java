@@ -50,7 +50,7 @@ public final class p451 implements EulerSolution {
 		if (smallestPrimeFactor[n] == n)  // n is prime
 			return new int[]{1, n - 1};
 		else {
-			List<Integer> temp = new ArrayList<Integer>();
+			List<Integer> temp = new ArrayList<>();
 			int p = smallestPrimeFactor[n];
 			int[] sols = solutions.get(n / p);
 			for (int i = 0, inc = n / p; i < n; i += inc) {

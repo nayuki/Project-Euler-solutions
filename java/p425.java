@@ -41,7 +41,7 @@ public final class p425 implements EulerSolution {
 		Arrays.fill(pathMax, Integer.MAX_VALUE);
 		
 		// Process paths in increasing order of maximum number
-		Queue<IntPair> queue = new PriorityQueue<IntPair>();
+		Queue<IntPair> queue = new PriorityQueue<>();
 		queue.add(new IntPair(2, 2));
 		while (!queue.isEmpty()) {
 			IntPair item = queue.remove();

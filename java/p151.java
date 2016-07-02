@@ -27,7 +27,7 @@ public final class p151 implements EulerSolution {
 	}
 	
 	
-	private Map<List<Integer>,Double> expectedSingles = new HashMap<List<Integer>,Double>();
+	private Map<List<Integer>,Double> expectedSingles = new HashMap<>();
 	
 	private double getExpectedSingles(List<Integer> state) {
 		if (expectedSingles.containsKey(state))
@@ -36,7 +36,7 @@ public final class p151 implements EulerSolution {
 		double result = 0;
 		if (!state.isEmpty()) {
 			for (int i = 0; i < state.size(); i++) {
-				List<Integer> newState = new ArrayList<Integer>(state);
+				List<Integer> newState = new ArrayList<>(state);
 				int sheet = state.get(i);
 				newState.remove(i);
 				for (int j = sheet + 1; j <= 5; j++)

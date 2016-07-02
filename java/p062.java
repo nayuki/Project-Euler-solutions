@@ -21,8 +21,8 @@ public final class p062 implements EulerSolution {
 	
 	public String run() {
 		int numDigits = 0;
-		Map<String,Integer> lowest = new HashMap<String,Integer>();
-		Map<String,Integer> counts = new HashMap<String,Integer>();
+		Map<String,Integer> lowest = new HashMap<>();
+		Map<String,Integer> counts = new HashMap<>();
 		for (int i = 0; ; i++) {
 			String numClass = getCubeNumberClass(i);
 			

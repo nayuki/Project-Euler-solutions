@@ -20,7 +20,7 @@ public final class p203 implements EulerSolution {
 	
 	public String run() {
 		// Collect unique numbers in Pascal's triangle
-		Set<Long> numbers = new HashSet<Long>();
+		Set<Long> numbers = new HashSet<>();
 		long max = 0;
 		for (int n = 0; n <= 50; n++) {
 			for (int k = 0; k <= n; k++) {
