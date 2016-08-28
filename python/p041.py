@@ -16,7 +16,7 @@ def compute():
 		arr = list(range(i, 0, -1))
 		while True:
 			if i == 1 or arr[-1] not in NONPRIME_LAST_DIGITS:
-				n = int("".join([str(x) for x in arr]))
+				n = int("".join(str(x) for x in arr))
 				if eulerlib.is_prime(n):
 					return str(n)
 			if not prev_permutation(arr):
