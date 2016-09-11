@@ -24,7 +24,7 @@ public final class p357 implements EulerSolution {
 	public String run() {
 		long sum = 0;
 		for (int n = 0; n <= LIMIT; n++) {
-			if (isPrimeGenerating(n))
+			if (isPrime[n + 1] && isPrimeGenerating(n))
 				sum += n;
 		}
 		return Long.toString(sum);
