@@ -76,6 +76,19 @@ def prime_generator(limit):
 					isprime[j] = False
 
 
+def list_smallest_prime_factors(n):
+	result = [None] * (n + 1)
+	limit = sqrt(n)
+	for i in range(2, len(result)):
+		if result[i] is None:
+			result[i] = i
+			if i <= limit:
+				for j in range(i * i, n + 1, i):
+					if result[j] is None:
+						result[j] = i
+	return result
+
+
 def binomial(n, k):
 	assert n >= 0 and 0 <= k <= n
 	return math.factorial(n) // (math.factorial(k) * math.factorial(n - k))
