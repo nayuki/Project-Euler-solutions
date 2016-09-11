@@ -8,7 +8,9 @@
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 public final class p271 implements EulerSolution {
@@ -18,36 +20,38 @@ public final class p271 implements EulerSolution {
 	}
 	
 	
-	@SuppressWarnings("unchecked")
+	private static final int[] FACTORS = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43};
+	
+	private List<Set<Integer>> factorSolutions = new ArrayList<>();
+	
+	
 	public String run() {
 		// Note: 13082761331670030 = product of lowest 14 primes
 		// Find solutions to x^3 = 1 mod p, for each prime factor p
-		int[] FACTORS = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43};
-		List<Integer>[] factorSolutions = new List[FACTORS.length];
-		for (int i = 0; i < FACTORS.length; i++) {
-			List<Integer> sols = new ArrayList<>();
-			for (int j = 0; j < FACTORS[i]; j++) {
-				if (Library.powMod(j, 3, FACTORS[i]) == 1)
+		for (int fact : FACTORS) {
+			Set<Integer> sols = new HashSet<>();
+			for (int j = 1; j < fact; j++) {
+				if (Library.powMod(j, 3, fact) == 1)
 					sols.add(j);
 			}
-			factorSolutions[i] = sols;
+			factorSolutions.add(sols);
 		}
 		
-		BigInteger sum = buildAndSumSolutions(FACTORS, factorSolutions, 0, BigInteger.ZERO, BigInteger.ONE);
+		BigInteger sum = buildAndSumSolutions(0, BigInteger.ZERO, BigInteger.ONE);
 		return sum.subtract(BigInteger.ONE).toString();  // The recursive algorithm generates all solutions, but the problem statement excludes 1
 	}
 	
 	
 	// Try all possibilities recursively
-	private BigInteger buildAndSumSolutions(int[] FACTORS, List<Integer>[] factorSols, int i, BigInteger x, BigInteger m) {
-		if (i == FACTORS.length)
+	private BigInteger buildAndSumSolutions(int factorIndex, BigInteger x, BigInteger m) {
+		if (factorIndex == FACTORS.length)
 			return x;
 		else {
 			BigInteger result = BigInteger.ZERO;
-			for (int sol : factorSols[i]) {
-				BigInteger factor = BigInteger.valueOf(FACTORS[i]);
-				BigInteger newx = chineseRemainderTheorem(x, m, BigInteger.valueOf(sol), factor);
-				BigInteger temp = buildAndSumSolutions(FACTORS, factorSols, i + 1, newx, m.multiply(factor));
+			BigInteger fact = BigInteger.valueOf(FACTORS[factorIndex]);
+			for (int sol : factorSolutions.get(factorIndex)) {
+				BigInteger newx = chineseRemainderTheorem(x, m, BigInteger.valueOf(sol), fact);
+				BigInteger temp = buildAndSumSolutions(factorIndex + 1, newx, m.multiply(fact));
 				result = result.add(temp);
 			}
 			return result;
