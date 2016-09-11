@@ -23,11 +23,10 @@ def compute():
 		i = 0  # Loop invariant: i == len(issumfeasible) - 1
 		while issumfeasible[i][0] != 2:
 			prev = issumfeasible[i]
-			cur = [0] * n
+			cur = list(prev)  # Clone
 			digitmod = pow(10, i, n)
 			for j in range(n):
 				if prev[j] > 0:
-					cur[(j + digitmod * 0) % n] = prev[j]
 					cur[(j + digitmod * 1) % n] = 2
 					cur[(j + digitmod * 2) % n] = 2
 			issumfeasible.append(cur)
