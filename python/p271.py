@@ -12,20 +12,20 @@ import eulerlib
 def compute():
 	# Note: 13082761331670030 = product of lowest 14 primes
 	# Find solutions to x^3 = 1 mod p, for each prime factor p
-	factors = (2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43)
-	factorsolns = [
+	FACTORS = (2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43)
+	factorsols = [
 		[j for j in range(fact) if pow(j, 3, fact) == 1]
-		for fact in factors]
+		for fact in FACTORS]
 	
 	# Try all possibilities recursively
 	def build_and_sum_solutions(i, x, mod):
-		if i == len(factors):
+		if i == len(FACTORS):
 			return x
 		else:
-			fact = factors[i]
+			fact = FACTORS[i]
 			return sum(
 				build_and_sum_solutions(i + 1, chinese_remainder_theorem(x, mod, sol, fact), mod * fact)
-				for sol in factorsolns[i])
+				for sol in factorsols[i])
 	
 	# The recursive algorithm generates all solutions, but the problem statement excludes 1
 	ans = build_and_sum_solutions(0, 0, 1) - 1
