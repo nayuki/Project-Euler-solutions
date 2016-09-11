@@ -33,24 +33,24 @@ public final class p271 implements EulerSolution {
 			factorSolutions[i] = sols;
 		}
 		
-		buildAndAddSolutions(factors, factorSolutions, 0, BigInteger.ZERO, BigInteger.ONE);
-		return sum.toString();
+		BigInteger sum = buildAndSumSolutions(factors, factorSolutions, 0, BigInteger.ZERO, BigInteger.ONE);
+		return sum.subtract(BigInteger.ONE).toString();  // The recursive algorithm generates all solutions, but the problem statement excludes 1
 	}
 	
 	
-	// The recursive algorithm generates all solutions, but the problem statement excludes 1.
-	private BigInteger sum = BigInteger.valueOf(-1);
-	
-	
 	// Try all possibilities recursively
-	private void buildAndAddSolutions(int[] factors, List<Integer>[] factorSols, int i, BigInteger x, BigInteger m) {
+	private BigInteger buildAndSumSolutions(int[] factors, List<Integer>[] factorSols, int i, BigInteger x, BigInteger m) {
 		if (i == factors.length)
-			sum = sum.add(x);
+			return x;
 		else {
+			BigInteger result = BigInteger.ZERO;
 			for (int sol : factorSols[i]) {
 				BigInteger factor = BigInteger.valueOf(factors[i]);
-				buildAndAddSolutions(factors, factorSols, i + 1, chineseRemainderTheorem(x, m, BigInteger.valueOf(sol), factor), m.multiply(factor));
+				BigInteger newx = chineseRemainderTheorem(x, m, BigInteger.valueOf(sol), factor);
+				BigInteger temp = buildAndSumSolutions(factors, factorSols, i + 1, newx, m.multiply(factor));
+				result = result.add(temp);
 			}
+			return result;
 		}
 	}
 	
@@ -60,6 +60,7 @@ public final class p271 implements EulerSolution {
 	 * returns an integer 0 <= x < p*q satisfying these congruences.
 	 */
 	private static BigInteger chineseRemainderTheorem(BigInteger a, BigInteger p, BigInteger b, BigInteger q) {
+		// (a + (b - a) * reciprocalMod(p, q) * p) mod (p * q)
 		return a.add(b.subtract(a).multiply(p.modInverse(q)).multiply(p)).mod(p.multiply(q));
 	}
 	

@@ -33,10 +33,8 @@ public final class p357 implements EulerSolution {
 	
 	private boolean isPrimeGenerating(int n) {
 		for (int i = 1, end = Library.sqrt(n); i <= end; i++) {
-			if (n % i == 0) {
-				if (!isPrime[i + n / i])
-					return false;
-			}
+			if (n % i == 0 && !isPrime[i + n / i])
+				return false;
 		}
 		return true;
 	}
