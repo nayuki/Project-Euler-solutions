@@ -6,9 +6,7 @@
  * https://github.com/nayuki/Project-Euler-solutions
  */
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 
 public final class p122 implements EulerSolution {
@@ -19,72 +17,95 @@ public final class p122 implements EulerSolution {
 	
 	
 	/* 
-	 * This problem and solution use the concept of addition chains. See these for background information:
-	 * http://en.wikipedia.org/wiki/Addition_chain ; https://en.wikipedia.org/wiki/Addition-chain_exponentiation
-	 * The high-level idea implemented here is to explore different addition chains by brute force using depth-
-	 * first search, and to prune the exploration of chains that are longer than the best chain already found.
+	 * This problem uses the concepts of https://en.wikipedia.org/wiki/Addition_chain
+	 * and https://en.wikipedia.org/wiki/Addition-chain_exponentiation .
 	 * 
-	 * Definition: A chain is a (mutable) list of integers starting with 1, in strictly ascending order, where each
-	 * element (except 1) is the sum of two elements (not necessarily distinct) that occurred earlier in the list.
-	 * For example: [1], [1,2], [1,2,4,8,10] are valid chains; [], [3], [1,1], [1,4,2], [1,5] are invalid.
+	 * Definition: An addition chain is a finite sequence of integers {a_i} such that:
+	 * - a_0 = 1 (i.e. the head element is 1).
+	 * - For each index i (with 0 < i < length), there exists indices j and k such that 0 <= j <= k < i
+	 *   and a_i = a_j + a_k (i.e. each subsequent element is the sum of some two elements that come before it).
+	 * - The number of operations in an addition chain is equal to the length of the chain minus one.
 	 * 
-	 * The centerpiece of the solution algorithm is a recursive function (i.e. exploreChains()) that
-	 * receives a chain, performs some operations, and recurses on a longer chain. Here's how it works:
+	 * Example: {1, 2, 3, 6, 9, 11} is an addition chain because
+	 * 2 = 1 + 1, 3 = 1 + 2, 6 = 3 + 3, 9 = 3 + 6, 11 = 2 + 9.
+	 * This chain has length 6, and uses 5 addition operations.
 	 * 
-	 * - For the purposes of illustration, suppose that our chain is [1,2,4,8,10].
-	 * - Clearly this chain is a valid way to reach the sum of 10, and it took 4 operations to do so (length - 1).
-	 * - We examine the array of shortest found chain lengths. If minChainLength[10] > 4, we set this array element to 4.
-	 * - However if minChainLength[10] < 4, then we stop this branch of the DFS because there was a better way
-	 *   to reach the sum of 10. There is no rigorous mathematical justification for this search pruning though.
+	 * Note: A star chain or Brauer chain is an addition chain with the stronger condition that for each i > 0,
+	 * there exists an index j such that 0 <= j < i and a_i = a_{i-1} + a_j. However, a minimum-length star chain
+	 * might be longer than the minimum-length general addition chain. A counterexample is known for 12509;
+	 * the shortest addition chain that produces 12509 is shorter than the shortest star chain that produces it.
+	 * This is unfortunate because searching star chains is much faster than searching general addition chains.
 	 * 
-	 * - Now we make various choices to append one element to the chain and recurse on it.
-	 * - Because of the pruning criterion above, we can't add a number less than 10 into the chain (its search
-	 *   would get pruned immediately). So we need to add numbers that are greater than 10, and of course
-	 *   not greater than the problem's limit of 200.
-	 * - When we choose a pair of numbers to add together, we start at the end of the list and work backward to the front.
-	 *   This way, we try larger pairs first, such as 10+10=20, then 8+10=18, 8+8=16, 4+10=14, etc. until 1+1 = 2.
-	 *   By trying large sums first, this means more of the later recursions with smaller numbers will get pruned.
+	 * The overall strategy of this solution is to explore all addition chains by brute force using depth-first search.
+	 * We start with the base chain of {1}, progressively add elements that are the sum of some two earlier elements,
+	 * and backtrack at each stage. No memoization or breadth-first search is performed because the search space is large.
+	 * 
+	 * An important detail is that we perform depth-limited search of the full search space, with depth = 1, 2, 3, etc.
+	 * This gives us the benefit of breadth-first search without its high memory usage - namely, the first time
+	 * we visit a sum of n, we can be sure that it has been reached with the smallest possible chain length.
+	 * 
+	 * An crucial algorithmic optimization is that we only consider addition chains that are strictly increasing.
+	 * Clearly there is no benefit to producing a certain term twice within the same sequence (e.g. 2 + 2 = 4 and 1 + 3 = 4).
+	 * As for the increasing order, we argue that for every addition chain that isn't strictly increasing, it can be
+	 * reordered to one that is strictly increasing. For example, the chain {1, 2, 4, 3} can be reordered to {1, 2, 3, 4}.
+	 * This is because if a_i > a_{i+1}, then a_{i+1} can't possibly use a_i as an addend (which are all positive),
+	 * and it must have used two terms that are strictly in front of index i. Therefore, exploring only strictly increasing
+	 * addition chains will still give us full coverage of the search space.
 	 */
 	
 	private static final int LIMIT = 200;
 	
-	private int[] minChainLength;
-	
+	private byte[] minOperations;
+	private int numUnknown;
 	
 	public String run() {
-		// Set up an array of the shortest chain lengths found so far
-		minChainLength = new int[LIMIT + 1];
-		Arrays.fill(minChainLength, Integer.MAX_VALUE);
-		minChainLength[0] = 0;
+		// Set up initial array of known/unknown minimum operation counts
+		minOperations = new byte[LIMIT + 1];
+		Arrays.fill(minOperations, (byte)-1);
+		minOperations[0] = 0;
+		minOperations[1] = 0;
+		numUnknown = LIMIT - 1;
 		
-		// Explore starting from the base case
-		List<Integer> temp = new ArrayList<>();
-		temp.add(1);
-		exploreChains(temp);
+		// Perform bounded depth-first search with incrementing depth
+		for (int ops = 1; numUnknown > 0; ops++) {
+			currentChain = new int[ops + 1];
+			currentChain[0] = 1;
+			exploreChains(1);
+		}
 		
 		// Add up the results
 		int sum = 0;
-		for (int x : minChainLength)
+		for (int x : minOperations)
 			sum += x;
 		return Integer.toString(sum);
 	}
 	
 	
-	// The recursive function that builds up chains and compares them to the shortest length.
-	private void exploreChains(List<Integer> chain) {
-		int largest = chain.get(chain.size() - 1);
-		if (chain.size() - 1 > minChainLength[largest])
+	private int[] currentChain;
+	
+	// Recursively builds up chains and compares them to chain lengths already found.
+	private void exploreChains(int len) {
+		// Depth-based termination or early exit
+		if (len >= currentChain.length || numUnknown == 0)
 			return;
-		minChainLength[largest] = chain.size() - 1;
 		
-		for (int i = chain.size() - 1; i >= 0; i--) {
+		// Try all unordered pairs of values in the current chain
+		int max = currentChain[len - 1];
+		for (int i = len - 1; i >= 0; i--) {
 			for (int j = i; j >= 0; j--) {
-				int next = chain.get(i) + chain.get(j);
-				if (largest < next && next <= LIMIT) {
-					// We manipulate the list in place instead of creating a new one
-					chain.add(next);
-					exploreChains(chain);
-					chain.remove(chain.size() - 1);
+				int x = currentChain[i] + currentChain[j];
+				if (x <= max)
+					break;  // Early exit due to ascending order
+				if (x <= LIMIT) {
+					// Append x to the current chain and recurse
+					currentChain[len] = x;
+					if (minOperations[x] == -1) {
+						// For each unique value of x, we set minOperations[x] only once
+						// because we do progressive deepening in the depth-first search
+						minOperations[x] = (byte)len;
+						numUnknown--;
+					}
+					exploreChains(len + 1);
 				}
 			}
 		}
