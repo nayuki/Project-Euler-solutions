@@ -55,22 +55,22 @@ public final class p122 implements EulerSolution {
 	
 	private static final int LIMIT = 200;
 	
-	private byte[] minOperations;
+	private int[] minOperations;
 	private int numUnknown;
 	
 	public String run() {
 		// Set up initial array of known/unknown minimum operation counts
-		minOperations = new byte[LIMIT + 1];
-		Arrays.fill(minOperations, (byte)-1);
+		minOperations = new int[LIMIT + 1];
+		Arrays.fill(minOperations, -1);
 		minOperations[0] = 0;
 		minOperations[1] = 0;
 		numUnknown = LIMIT - 1;
 		
 		// Perform bounded depth-first search with incrementing depth
 		for (int ops = 1; numUnknown > 0; ops++) {
-			currentChain = new int[ops + 1];
-			currentChain[0] = 1;
-			exploreChains(1);
+			IntStack chain = new IntStack(ops + 1);
+			chain.push(1);
+			exploreChains(chain, ops);
 		}
 		
 		// Add up the results
@@ -81,34 +81,65 @@ public final class p122 implements EulerSolution {
 	}
 	
 	
-	private int[] currentChain;
-	
 	// Recursively builds up chains and compares them to chain lengths already found.
-	private void exploreChains(int len) {
+	private void exploreChains(IntStack chain, int maxOps) {
 		// Depth-based termination or early exit
-		if (len >= currentChain.length || numUnknown == 0)
+		if (chain.size > maxOps || numUnknown == 0)
 			return;
 		
 		// Try all unordered pairs of values in the current chain
-		int max = currentChain[len - 1];
-		for (int i = len - 1; i >= 0; i--) {
+		int max = chain.values[chain.size - 1];  // Peek at top
+		for (int i = chain.size - 1; i >= 0; i--) {
 			for (int j = i; j >= 0; j--) {
-				int x = currentChain[i] + currentChain[j];
+				int x = chain.values[i] + chain.values[j];
 				if (x <= max)
 					break;  // Early exit due to ascending order
 				if (x <= LIMIT) {
 					// Append x to the current chain and recurse
-					currentChain[len] = x;
+					chain.push(x);
 					if (minOperations[x] == -1) {
 						// For each unique value of x, we set minOperations[x] only once
 						// because we do progressive deepening in the depth-first search
-						minOperations[x] = (byte)len;
+						minOperations[x] = chain.size - 1;
 						numUnknown--;
 					}
-					exploreChains(len + 1);
+					exploreChains(chain, maxOps);
+					chain.pop();
 				}
 			}
 		}
+	}
+	
+	
+	
+	// This implementation exists because Stack<Integer> is unacceptably slow due to integer boxing and such.
+	private static final class IntStack {
+		
+		public int[] values;
+		public int size;
+		
+		
+		public IntStack(int capacity) {
+			values = new int[capacity];
+			size = 0;
+		}
+		
+		
+		public void push(int x) {
+			if (size >= values.length)
+				throw new IllegalStateException();
+			values[size] = x;
+			size++;
+		}
+		
+		
+		public int pop() {
+			if (size <= 0)
+				throw new IllegalStateException();
+			size--;
+			return values[size];
+		}
+		
 	}
 	
 }

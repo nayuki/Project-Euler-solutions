@@ -56,7 +56,7 @@ def compute():
 			return
 		
 		# Try all unordered pairs of values in the current chain
-		max = chain[-1]
+		max = chain[-1]  # Peek at top
 		for i in reversed(range(len(chain))):
 			for j in reversed(range(i + 1)):
 				x = chain[i] + chain[j]
