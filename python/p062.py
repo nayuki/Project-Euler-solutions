@@ -19,12 +19,9 @@ def compute():
 		
 		if len(numclass) > numdigits:
 			# Process and flush data for smaller number of digits
-			min = None
-			for (nc, vals) in data.items():
-				if vals[1] == 5 and (min is None or vals[0] < min):
-					min = vals[0]
-			if min is not None:
-				return str(min**3)
+			candidates = [lowest for (lowest, count) in data.values() if count == 5]
+			if len(candidates) > 0:
+				return str(min(candidates)**3)
 			data = {}
 			numdigits = len(numclass)
 		
