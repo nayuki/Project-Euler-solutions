@@ -6,7 +6,9 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib
+import eulerlib, sys
+if sys.version_info.major == 2:
+	range = xrange
 
 
 # From the problem statement, we are given the search range of 1 <= n <= 10^8.
