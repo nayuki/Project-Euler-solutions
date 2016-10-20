@@ -6,6 +6,8 @@
  * https://github.com/nayuki/Project-Euler-solutions
  */
 
+import java.util.Arrays;
+
 
 public final class p127 implements EulerSolution {
 	
@@ -17,19 +19,14 @@ public final class p127 implements EulerSolution {
 	private static final int LIMIT = 120000;
 	
 	public String run() {
-		int[] smallestPrimeFactor = Library.listSmallestPrimeFactors(LIMIT - 1);
-		
+		// Modification of the Sieve of Eratosthenes
 		int[] rads = new int[LIMIT];
-		for (int i = 1; i < rads.length; i++) {
-			int n = i;
-			int rad = 1;
-			while (n > 1) {
-				int p = smallestPrimeFactor[n];
-				do n /= p;
-				while (n % p == 0);
-				rad *= p;
+		Arrays.fill(rads, 1, rads.length, 1);
+		for (int i = 2; i < rads.length; i++) {
+			if (rads[i] == 1) {
+				for (int j = i; j < rads.length; j += i)
+					rads[j] *= i;
 			}
-			rads[i] = rad;
 		}
 		
 		/* 

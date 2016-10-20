@@ -6,25 +6,18 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib, fractions, itertools
+import fractions, itertools
 
 
 def compute():
 	LIMIT = 120000
-	smallestprimefactor = eulerlib.list_smallest_prime_factors(LIMIT - 1)
 	
-	rads = [0]
-	for i in range(1, LIMIT):
-		n = i
-		rad = 1
-		while n > 1:
-			p = smallestprimefactor[n]
-			while True:
-				n //= p
-				if n % p != 0:
-					break
-			rad *= p
-		rads.append(rad)
+	# Modification of the Sieve of Eratosthenes
+	rads = [0] + [1] * (LIMIT - 1)
+	for i in range(2, len(rads)):
+		if rads[i] == 1:
+			for j in range(i, len(rads), i):
+				rads[j] *= i
 	
 	# - gcd(a,b) = gcd(a,c) = gcd(b,c), so we only need to compute one of them.
 	# - Since {a, b, c} are mutually coprime, rad(a * b * c) = rad(a) * rad(b) * rad(c).
