@@ -6,15 +6,13 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import itertools, sys
-if sys.version_info.major == 2:
-	filterfalse = itertools.ifilterfalse
-else:
-	filterfalse = itertools.filterfalse
+import itertools
 
 
 def compute():
-	ans = next(itertools.islice(filterfalse(has_tribonacci_multiple, itertools.count(1, 2)), 123, None))
+	INDEX = 123  # 0-based
+	stream = (i for i in itertools.count(1, 2) if not has_tribonacci_multiple(i))
+	ans = next(itertools.islice(stream, INDEX, None))
 	return str(ans)
 
 

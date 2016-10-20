@@ -17,8 +17,7 @@ def compute():
 			for j in range(i, len(rads), i):
 				rads[j] *= i
 	
-	data = [(rads[i], i) for i in range(len(rads))]
-	data.sort()
+	data = sorted((rad, i) for (i, rad) in enumerate(rads))
 	return str(data[10000][1])
 
 

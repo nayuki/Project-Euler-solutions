@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import math, sys
+import array, math, sys
 if sys.version_info.major == 2:
 	range = xrange
 
@@ -65,15 +65,15 @@ def prime_generator(limit):
 		yield 2
 	
 	# Sieve of Eratosthenes, storing only odd numbers starting at 3
-	isprime = [True] * ((limit - 1) // 2)
+	isprime = array.array("B", b"\x01" * ((limit - 1) // 2))
 	sieveend = sqrt(limit)
 	for i in range(len(isprime)):
-		if isprime[i]:
+		if isprime[i] == 1:
 			p = i * 2 + 3
 			yield p
 			if i <= sieveend:
 				for j in range((p * p - 3) >> 1, len(isprime), p):
-					isprime[j] = False
+					isprime[j] = 0
 
 
 def list_smallest_prime_factors(n):
