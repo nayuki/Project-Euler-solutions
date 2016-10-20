@@ -6,9 +6,24 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import fractions, itertools
+import fractions
 
 
+# A straightforward solution would look like this:
+#   for c in range(2, LIMIT):
+#      for a in range(1, c):
+#        b = c - a
+#        if is_abc_hit(a, b, c):
+#          ans += c
+# 
+# Here are some observations that lead to optimizations:
+# - For each integer n >= 2, we have 2 <= rad(n) <= n.
+# - By Euclid's GCD algorithm, gcd(c,b) = gcd(a+b,b) = gcd(a,b) = gcd(a,a+b) = gcd(a,c).
+#   Hence gcd(a,b) = 1 if and only if gcd(a,c) = 1 and gcd(b,c) = 1.
+#   We only need to compute and check one of these three GCDs.
+# - Since {a, b, c} are mutually coprime, we have rad(a * b * c) = rad(a) * rad(b) * rad(c).
+# - Instead of trying all 'a' values in the range [1, c), we only try promising 'a' values such that rad(a) * rad(c) < c.
+#   If we try 'a' values in ascending order of rad(a), then we can stop the search early and not examine many values of 'a'.
 def compute():
 	LIMIT = 120000
 	
@@ -19,20 +34,19 @@ def compute():
 			for j in range(i, len(rads), i):
 				rads[j] *= i
 	
-	# - gcd(a,b) = gcd(a,c) = gcd(b,c), so we only need to compute one of them.
-	# - Since {a, b, c} are mutually coprime, rad(a * b * c) = rad(a) * rad(b) * rad(c).
-	# - rad(a)*rad(b)*rad(c) < c implies rad(a)*rad(b)*rad(c) <= c-1 implies rad(a)*rad(b) <= floor((c-1)/rad(c)).
-	sum = 0
+	sortedrads = sorted((rad, n) for (n, rad) in enumerate(rads))
+	sortedrads = sortedrads[1 : ]  # Get rid of the (0, 0) entry
+	
+	ans = 0
 	for c in range(2, LIMIT):
-		thres = (c - 1) // rads[c]
-		for a in itertools.count(1):
-			b = c - a
-			if b <= a:
+		for (rad, a) in sortedrads:
+			rad *= rads[c]
+			if rad >= c:
 				break
-			# The first two conditions are just optional optimizations
-			if rads[a] <= thres and rads[b] <= thres and rads[a] * rads[b] <= thres and fractions.gcd(a, b) == 1:
-				sum += c
-	return str(sum)
+			b = c - a
+			if a < b and rad * rads[b] < c and fractions.gcd(a, b) == 1:
+				ans += c
+	return str(ans)
 
 
 if __name__ == "__main__":
