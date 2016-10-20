@@ -51,11 +51,10 @@ public final class p124 implements EulerSolution {
 		
 		
 		public int compareTo(IntPair other) {
-			if      (a < other.a) return -1;
-			else if (a > other.a) return +1;
-			else if (b < other.b) return -1;
-			else if (b > other.b) return +1;
-			else                  return  0;
+			if (a != other.a)
+				return Integer.compare(a, other.a);
+			else
+				return Integer.compare(b, other.b);
 		}
 		
 	}

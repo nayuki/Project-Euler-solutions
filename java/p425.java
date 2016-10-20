@@ -126,12 +126,7 @@ public final class p425 implements EulerSolution {
 		
 		
 		public int compareTo(IntPair other) {
-			if (a < other.a)
-				return -1;
-			else if (a > other.a)
-				return 1;
-			else
-				return 0;
+			return Integer.compare(a, other.a);
 		}
 		
 	}
