@@ -90,13 +90,13 @@ def list_smallest_prime_factors(n):
 
 
 def binomial(n, k):
-	assert n >= 0 and 0 <= k <= n
+	assert 0 <= k <= n
 	return math.factorial(n) // (math.factorial(k) * math.factorial(n - k))
 
 
 # Returns x^-1 mod m. Note that x * x^-1 mod m = x^-1 * x mod m = 1.
 def reciprocal_mod(x, m):
-	assert m > 0 and 0 <= x < m
+	assert 0 <= x < m
 	
 	# Based on a simplification of the extended Euclidean algorithm
 	y = x
