@@ -6,18 +6,11 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import itertools, sys
-if sys.version_info.major == 2:
-	range = xrange
+import eulerlib, itertools
 
 
 def compute():
-	totients = list(range(1000001))
-	for i in range(2, len(totients)):
-		if totients[i] == i:  # i is prime
-			for j in range(i, len(totients), i):
-				totients[j] = totients[j] // i * (i - 1)
-	
+	totients = eulerlib.list_totients(10**6)
 	maxnumer = 0
 	maxdenom = 1
 	for (i, tot) in itertools.islice(enumerate(totients), 2, None):

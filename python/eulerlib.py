@@ -89,6 +89,15 @@ def list_smallest_prime_factors(n):
 	return result
 
 
+def list_totients(n):
+	result = list(range(n + 1))
+	for i in range(2, len(result)):
+		if result[i] == i:  # i is prime
+			for j in range(i, len(result), i):
+				result[j] = result[j] // i * (i - 1)
+	return result
+
+
 def binomial(n, k):
 	assert 0 <= k <= n
 	return math.factorial(n) // (math.factorial(k) * math.factorial(n - k))
