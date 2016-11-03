@@ -35,7 +35,7 @@ def get_score(hand):
 	
 	# rankcounthist[i] is the number of times a rank count of i occurs.
 	# For example if there is exactly one triplet, then rankcounthist[3] = 1.
-	rankcounthist = [sum(1 for count in rankcounts if count == i) for i in range(6)]
+	rankcounthist = [rankcounts.count(i) for i in range(6)]
 	
 	# flushsuit is in the range [0,3] if all cards have that suit; otherwise -1
 	minsuit = min(suit for (_, suit) in hand)

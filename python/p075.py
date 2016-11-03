@@ -32,7 +32,7 @@ def compute():
 		for i in range(sigma, len(ways), sigma):
 			ways[i] += 1
 	
-	ans = sum(1 for cnt in ways if cnt == 1)
+	ans = ways.count(1)
 	return str(ans)
 
 

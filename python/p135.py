@@ -32,7 +32,7 @@ def compute():
 				break
 			solutions[temp] += 1
 	
-	ans = sum(1 for x in solutions if x == 10)
+	ans = solutions.count(10)
 	return str(ans)
 
 
