@@ -9,7 +9,7 @@
 import eulerlib
 
 
-NONPRIME_LAST_DIGITS = set([0, 2, 4, 5, 6, 8])
+NONPRIME_LAST_DIGITS = {0, 2, 4, 5, 6, 8}
 
 def compute():
 	for i in range(9, 0, -1):

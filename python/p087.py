@@ -13,7 +13,7 @@ def compute():
 	LIMIT = 50000000
 	primes = eulerlib.list_primes(eulerlib.sqrt(LIMIT))
 	
-	sums = set([0])
+	sums = {0}
 	for i in range(2, 5):
 		newsums = set()
 		for p in primes:

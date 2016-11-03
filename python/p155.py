@@ -19,7 +19,7 @@ def compute():
 	# Note: Each fraction is represented as a pair (num, den), where den > 0 and gcd(num, den) = 1.
 	# This approach is much faster than using the fractions.Fraction class.
 	possible.append(set())
-	possible.append(set([(60, 1)]))
+	possible.append({(60, 1)})
 	all.update(possible[1])
 	for i in range(2, SIZE + 1):
 		poss = set()
