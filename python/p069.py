@@ -6,18 +6,13 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib, itertools
+import eulerlib, fractions
 
 
 def compute():
 	totients = eulerlib.list_totients(10**6)
-	maxnumer = 0
-	maxdenom = 1
-	for (i, tot) in itertools.islice(enumerate(totients), 2, None):
-		if i * maxdenom > maxnumer * tot:
-			maxnumer = i
-			maxdenom = totients[i]
-	return str(maxnumer)
+	ans = max(range(2, len(totients)), key=(lambda i: fractions.Fraction(i, totients[i])))
+	return str(ans)
 
 
 if __name__ == "__main__":

@@ -12,14 +12,18 @@ if sys.version_info.major == 2:
 
 
 def compute():
-	ans = 0
-	terminals = (1, 89)
-	for i in range(1, 10000000):
-		while i not in terminals:
-			i = square_digit_sum(i)
-		if i == 89:
-			ans += 1
+	ans = sum(1
+		for i in range(1, 10000000)
+		if get_terminal(i) == 89)
 	return str(ans)
+
+
+TERMINALS = (1, 89)
+
+def get_terminal(n):
+	while n not in TERMINALS:
+		n = square_digit_sum(n)
+	return n
 
 
 def square_digit_sum(n):
