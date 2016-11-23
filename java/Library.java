@@ -298,7 +298,7 @@ final class Library {
 		for (int i = 2; i <= n; i++) {
 			if (totients[i] == i) {  // i is prime
 				for (int j = i; j <= n; j += i)
-					totients[j] = totients[j] / i * (i - 1);
+					totients[j] -= totients[j] / i;
 			}
 		}
 		return totients;

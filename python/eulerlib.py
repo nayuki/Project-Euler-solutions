@@ -94,7 +94,7 @@ def list_totients(n):
 	for i in range(2, len(result)):
 		if result[i] == i:  # i is prime
 			for j in range(i, len(result), i):
-				result[j] = result[j] // i * (i - 1)
+				result[j] -= result[j] // i
 	return result
 
 
