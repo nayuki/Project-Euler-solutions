@@ -16,41 +16,37 @@ public final class p549 implements EulerSolution {
 	
 	private static final int LIMIT = Library.pow(10, 8);
 	
-	private int[] smallestPrimeFactor;
 	
+	private int[] smallestDivisibleFactorials;
 	
 	public String run() {
-		smallestPrimeFactor = Library.listSmallestPrimeFactors(LIMIT);
+		smallestDivisibleFactorials = new int[LIMIT + 1];
+		for (int i = 2; i < smallestDivisibleFactorials.length; i++) {
+			if (smallestDivisibleFactorials[i] == 0) {
+				// Now we know that i is prime
+				long power = 1;
+				middle:
+				for (int j = i; ; j += i) {
+					for (int temp = j; temp % i == 0; temp /= i) {
+						power *= i;
+						if (power > LIMIT)
+							break middle;
+						setMultiples((int)power, j);
+					}
+				}
+			}
+		}
+		
 		long sum = 0;
-		for (int i = 2; i <= LIMIT; i++)
-			sum += smallestDivisibleFactorial(i);
+		for (int x : smallestDivisibleFactorials)
+			sum += x;
 		return Long.toString(sum);
 	}
 	
 	
-	// Note: For all n >= 2, we have 2 <= smallestDivisibleFactorial(n) <= n.
-	private int smallestDivisibleFactorial(int n) {
-		if (n <= 0)
-			throw new IllegalArgumentException();
-		if (n == 1)
-			return 0;
-		
-		int result = 0;
-		while (n > 1) {
-			int prime = smallestPrimeFactor[n];
-			int power = 0;
-			for (; n % prime == 0; n /= prime, power++);
-			
-			int m = prime;
-			for (int count = 0; ; m += prime) {
-				for (int temp = m; temp % prime == 0; temp /= prime)
-					count++;
-				if (count >= power)
-					break;
-			}
-			result = Math.max(m, result);
-		}
-		return result;
+	private void setMultiples(int k, int val) {
+		for (int i = k; i < smallestDivisibleFactorials.length; i += k)
+			smallestDivisibleFactorials[i] = Math.max(val, smallestDivisibleFactorials[i]);
 	}
 	
 }
