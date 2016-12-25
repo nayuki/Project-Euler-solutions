@@ -191,6 +191,7 @@ public final class EulerTest {
 	@Test public void testP315() { assertEquals("13625242"           , new p315().run()); }
 	@Test public void testP323() { assertEquals("6.3551758451"       , new p323().run()); }
 	@Test public void testP345() { assertEquals("13938"              , new p345().run()); }
+	@Test public void testP346() { assertEquals("336108797689259276" , new p346().run()); }
 	@Test public void testP347() { assertEquals("11109800204052"     , new p347().run()); }
 	@Test public void testP357() { assertEquals("1739023853137"      , new p357().run()); }
 	@Test public void testP381() { assertEquals("139602943319822"    , new p381().run()); }
@@ -204,5 +205,6 @@ public final class EulerTest {
 	@Test public void testP433() { assertEquals("326624372659664"    , new p433().run()); }
 	@Test public void testP451() { assertEquals("153651073760956"    , new p451().run()); }
 	@Test public void testP493() { assertEquals("6.818741802"        , new p493().run()); }
+	@Test public void testP549() { assertEquals("476001479068717"    , new p549().run()); }
 	
 }
