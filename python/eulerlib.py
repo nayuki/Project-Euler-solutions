@@ -25,6 +25,14 @@ def sqrt(x):
 	return y
 
 
+# Tests whether x is a perfect square, for any integer x.
+def is_square(x):
+	if x < 0:
+		return False
+	y = sqrt(x)
+	return y * y == x
+
+
 # Tests whether the given integer is a prime number.
 def is_prime(x):
 	if x <= 1:

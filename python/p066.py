@@ -24,7 +24,7 @@ def compute():
 	ans = None
 	maxx = 0
 	for n in range(2, 1001):
-		if is_square(n):
+		if eulerlib.is_square(n):
 			continue
 		x = smallest_solution_x(n)
 		if x > maxx:
@@ -64,10 +64,6 @@ def sqrt_to_continued_fraction(n):
 			break
 	split = seen[val]
 	return (terms[ : split], terms[split : ]);
-
-
-def is_square(n):
-	return eulerlib.sqrt(n)**2 == n
 
 
 

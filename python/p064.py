@@ -10,7 +10,7 @@ import eulerlib, fractions
 
 
 def compute():
-	ans = sum(1 for i in range(1, 10001) if (not is_square(i) and get_sqrt_continued_fraction_period(i) % 2 == 1))
+	ans = sum(1 for i in range(1, 10001) if (not eulerlib.is_square(i) and get_sqrt_continued_fraction_period(i) % 2 == 1))
 	return str(ans)
 
 
@@ -23,10 +23,6 @@ def get_sqrt_continued_fraction_period(n):
 		val = (val - QuadraticSurd(val.floor(), 0, 1, val.d)).reciprocal()
 		if val in seen:
 			return len(seen) - seen[val]
-
-
-def is_square(n):
-	return eulerlib.sqrt(n)**2 == n
 
 
 
