@@ -7,8 +7,8 @@ Each solved problem has a program written in Java. Additionally, some solutions 
 Python, Mathematica, and/or Haskell programs. Some solutions include a detailed
 mathematical explanation/proof in the source code to justify the program logic.
 
-All problems from #1 to #100 have a Java program, and #1 to #50 have Python and Mathematica programs.
-The project codebase contains at least 190 solutions in Java, at least 170 in Python,
+All problems from #1 to #100 have a Java and Python program, and #1 to #50 have a Mathematica program.
+The project codebase contains at least 195 solutions in Java, at least 190 in Python,
 at least 120 in Mathematica, and at least 70 in Haskell.
 
 Java solutions require JDK 7 or above. Python solutions are tested to work on CPython 2.7.10 and 3.4.3. Mathematica solutions are tested to work on Mathematica 5.1.
