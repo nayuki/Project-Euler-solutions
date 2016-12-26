@@ -76,7 +76,7 @@ def to_digits(n):
 
 
 def to_number(digits):
-	result = 0;
+	result = 0
 	for x in digits:
 		result = result * 10 + x
 	return result

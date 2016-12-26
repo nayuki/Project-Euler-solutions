@@ -63,7 +63,7 @@ def sqrt_to_continued_fraction(n):
 		if val in seen:
 			break
 	split = seen[val]
-	return (terms[ : split], terms[split : ]);
+	return (terms[ : split], terms[split : ])
 
 
 
