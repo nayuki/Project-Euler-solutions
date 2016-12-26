@@ -6,6 +6,11 @@
  * https://github.com/nayuki/Project-Euler-solutions
  */
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 
 public final class p518 implements EulerSolution {
 	
@@ -17,32 +22,46 @@ public final class p518 implements EulerSolution {
 	private static final int LIMIT = Library.pow(10, 8);
 	
 	public String run() {
-		boolean[] isPrime = Library.listPrimality(LIMIT - 1);
-		int[] primes = Library.listPrimes(LIMIT - 1);
-		
 		long sum = 0;
-		for (int i = 0; i < primes.length; i++) {
-			int a = primes[i];
-			int x = a + 1;
-			long end = (long)x * isPrime.length;
+		boolean[] isPrime = Library.listPrimality(LIMIT - 1);
+		for (int b = 2; b < isPrime.length; b++) {
+			if (!isPrime[b])
+				continue;
 			
-			for (int j = i + 1; j < primes.length; j++) {
-				int b = primes[j];
-				int y = b + 1;
-				long temp = (long)y * y;
-				if (temp >= end)
-					break;
-				
-				if (temp % x == 0) {
-					int z = (int)(temp / x);
-					int c = z - 1;
-					if (isPrime[c]) {
-						sum += a + b + c;
+			List<Integer> factors = getFactors(b + 1);
+			Set<Long> foundA = new HashSet<>();
+			for (int u : factors) {
+				for (int v : factors) {
+					if (u <= v)
+						continue;
+					
+					long a = (b + 1L) / u * v - 1;
+					long c = (b + 1L) / v * u - 1;
+					if (a < isPrime.length && c < isPrime.length && isPrime[(int)a] && isPrime[(int)c] && foundA.add(a)) {
+						long addend = a + b + c;
+						if (sum + addend < sum)
+							throw new ArithmeticException("Overflow");
+						sum += addend;
 					}
 				}
 			}
 		}
 		return Long.toString(sum);
+	}
+	
+	
+	private static List<Integer> getFactors(int n) {
+		if (n <= 0)
+			throw new IllegalArgumentException();
+		List<Integer> result = new ArrayList<>();
+		for (int i = 1, end = Library.sqrt(n); i <= end; i++) {
+			if (n % i == 0) {
+				result.add(i);
+				if (i != end)
+					result.add(n / i);
+			}
+		}
+		return result;
 	}
 	
 }
