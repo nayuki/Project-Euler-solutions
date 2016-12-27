@@ -1,6 +1,6 @@
 /* 
  * Test suite for Project Euler all Java solutions
- * by Project Nayuki
+ * Copyright (c) Project Nayuki. All rights reserved.
  * 
  * https://www.nayuki.io/page/project-euler-solutions
  * https://github.com/nayuki/Project-Euler-solutions
