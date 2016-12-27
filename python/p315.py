@@ -56,7 +56,7 @@ def digit_sum(n):
 
 
 # Mapping of [0, 10) -> [0x00, 0x7F); each output fits in 7 bits.
-DECIMAL_DIGIT_TO_SEGMENT = [0x77, 0x12, 0x5D, 0x5B, 0x3A, 0x6B, 0x6F, 0x72, 0x7F, 0x7B]
+DECIMAL_DIGIT_TO_SEGMENT = [0b1110111, 0b0010010, 0b1011101, 0b1011011, 0b0111010, 0b1101011, 0b1101111, 0b1110010, 0b1111111, 0b1111011]
 
 
 if __name__ == "__main__":

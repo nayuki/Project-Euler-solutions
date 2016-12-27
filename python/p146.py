@@ -29,7 +29,7 @@ def compute():
 	LIMIT = 150000000
 	
 	INCREMENTS = [1, 3, 7, 9, 13, 27]  # Must be in non-decreasing order
-	NON_INCREMENTS = set(i for i in range(INCREMENTS[-1]) if i not in INCREMENTS)
+	NON_INCREMENTS = set(range(INCREMENTS[-1])) - set(INCREMENTS)
 	
 	maxnumber = LIMIT**2 + INCREMENTS[-1]
 	primes = eulerlib.list_primes(eulerlib.sqrt(maxnumber))

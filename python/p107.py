@@ -7,38 +7,52 @@
 # 
 
 
+# 
+# This problem involves constructing a minimum spanning tree of the graph.
+# 0. First we sum all the undirected edge weights of the original graph, which are given in the form of an adjacency matrix.
+# 1. Next we compute a minimum spanning tree from scratch, taking note of the total weight of the spanning tree.
+# 2. Finally we subtract the spanning tree weight from the original total weight to get the final answer.
+# 
+# Because the graph is small, the minimum spanning tree algorithm chosen is slower but simpler:
+# 0. We start with one node that forms the connected set.
+# 1. In each loop iteration, we look at all the nodes that are not in
+#    the connected set but are adjacent to some node in the connected set.
+# 2. Among these unexplored nodes, we pick the one that has the shortest edge to a connected node.
+# 3. Then we mark this new node as connected and repeat the loop.
+# This procedure can be thought of as a pessimized version of Prim's algorithm -
+# with the same kind of frontier exploration, but without the priority queue.
+# 
 def compute():
-	# Check the matrix and gather numbers
-	vertices = len(WEIGHTS)
-	if any((len(weights) != vertices) for weights in WEIGHTS):
+	# Number of nodes/vertices in the matrix
+	numnodes = len(WEIGHTS)
+	
+	# Check that the matrix is well-behaved
+	if any((len(row) != numnodes) for row in WEIGHTS):
 		raise AssertionError("Matrix not square")
-	if any(WEIGHTS[i][i] != -1 for i in range(vertices)):
+	if any(WEIGHTS[i][i] != -1 for i in range(numnodes)):
 		raise AssertionError("Self edge")
-	if any(WEIGHTS[i][j] != WEIGHTS[j][i] for i in range(vertices) for j in range(i + 1, vertices)):
+	if any(WEIGHTS[i][j] != WEIGHTS[j][i] for i in range(numnodes) for j in range(numnodes)):
 		raise AssertionError("Matrix not symmetric")
+	
+	# Add up all undirected edge weights
 	oldweight = sum(WEIGHTS[i][j]
-		for i in range(vertices)
-		for j in range(i + 1, vertices)
+		for i in range(numnodes)
+		for j in range(i + 1, numnodes)
 		if WEIGHTS[i][j] != -1)
 	
 	# Inefficient minimum spanning tree algorithm
-	reachable = [True] + [False] * (vertices - 1)
-	newweight = 0
-	for _ in range(vertices - 1):
-		lowestweight = -1
-		target = -1
-		for j in range(vertices):
-			if reachable[j]:
-				for k in range(vertices):
-					if not reachable[k] and WEIGHTS[j][k] != -1 and (lowestweight == -1 or WEIGHTS[j][k] < lowestweight):
-						lowestweight = WEIGHTS[j][k]
-						target = k
-		if lowestweight == -1:
-			raise AssertionError("No spanning tree exists")
-		reachable[target] = True
+	connected = set([0])  # Node indexes
+	newweight = 0  # Total of edge weights used in spanning tree
+	for _ in range(numnodes - 1):  # One new node is connected per iteration
+		lowestweight, newnode = min((WEIGHTS[j][k], k)
+			for j in connected
+			for k in range(numnodes)
+			if k not in connected and WEIGHTS[j][k] != -1)
+		connected.add(newnode)
 		newweight += lowestweight
 	
-	return str(oldweight - newweight)
+	ans = oldweight - newweight
+	return str(ans)
 
 
 WEIGHTS = (

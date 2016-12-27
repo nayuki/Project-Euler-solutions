@@ -34,22 +34,7 @@ def compute():
 	
 	smallestprimefactor = eulerlib.list_smallest_prime_factors(LIMIT)
 	
-	# Maximum size of set of prime factors where the product of the set <= LIMIT.
-	# This is important because the number of solutions for n is 2^N,
-	# where N is the number of distinct prime factors of n.
-	maxnumprimefactors = 0
-	prod = 1
-	for i in range(2, len(smallestprimefactor)):
-		if smallestprimefactor[i] == i:  # i is prime
-			if LIMIT // prod < i:
-				break
-			prod *= i
-			maxnumprimefactors += 1
-	
 	ans = 0
-	# Temporary arrays
-	solns    = [0] * (2**maxnumprimefactors)
-	newsolns = [0] * (2**maxnumprimefactors)
 	for i in range(1, LIMIT + 1):
 		# Compute factorization as coprime prime powers. e.g. 360 = {2^3, 3^2, 5^1}
 		factorization = []
@@ -64,28 +49,17 @@ def compute():
 					break
 			factorization.append(q)
 		
-		solns[0] = 0
-		solnslen = 1
+		solns = [0]
 		modulus = 1
 		for q in factorization:
 			# Use Chinese remainder theorem; cache parts of it
 			recip = eulerlib.reciprocal_mod(q % modulus, modulus)
 			newmod = q * modulus
-			
-			newsolnslen = 0
-			for j in range(solnslen):
-				newsolns[newsolnslen] = (0 + ((solns[j] - 0 + modulus) * recip % modulus) * q) % newmod
-				newsolnslen += 1
-				newsolns[newsolnslen] = (1 + ((solns[j] - 1 + modulus) * recip % modulus) * q) % newmod
-				newsolnslen += 1
-			
-			solnslen = newsolnslen
+			solns = [((0 + (x    ) * recip * q) % newmod) for x in solns] + \
+			        [((1 + (x - 1) * recip * q) % newmod) for x in solns]
 			modulus = newmod
-			
-			# Flip buffers
-			solns, newsolns = newsolns, solns
 		
-		ans += max(solns[ : solnslen])
+		ans += max(solns)
 	return str(ans)
 
 

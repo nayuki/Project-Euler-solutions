@@ -32,7 +32,7 @@ def compute():
 	
 	checkouts = 0
 	for remainingpoints in range(1, 100):
-		for throws in range(0, 3):
+		for throws in range(3):
 			for p in doublepoints:
 				if p <= remainingpoints:
 					checkouts += calc_ways(throws, remainingpoints - p, len(points) - 1)

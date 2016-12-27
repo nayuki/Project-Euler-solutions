@@ -6,7 +6,9 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import itertools
+import itertools, sys
+if sys.version_info.major == 2:
+	range = xrange
 
 
 # For any n >= 2, how do we compute s(n) = m, where m is the smallest integer such that m! is divisible by n?

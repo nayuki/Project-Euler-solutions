@@ -12,7 +12,7 @@ def compute():
 	partitions = []
 	for i in range(LIMIT + 1):
 		partitions.append([None] * (LIMIT + 1))
-		for j in reversed(range(0, LIMIT + 1)):
+		for j in reversed(range(LIMIT + 1)):
 			if j == i:
 				partitions[i][j] = 1
 			elif j > i:

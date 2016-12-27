@@ -40,7 +40,7 @@ def create_nested_lists(value, *dimensions):
 	elif len(dimensions) == 1:
 		return [value] * dimensions[0]
 	else:
-		return [create_nested_lists(value, *dimensions[1 : ]) for i in range(dimensions[0])]
+		return [create_nested_lists(value, *dimensions[1 : ]) for _ in range(dimensions[0])]
 
 
 if __name__ == "__main__":

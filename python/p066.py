@@ -21,15 +21,8 @@ import eulerlib, fractions
 # - (p, q) if m is even
 # - (p^2 + D q^2, 2pq) if m is odd
 def compute():
-	ans = None
-	maxx = 0
-	for n in range(2, 1001):
-		if eulerlib.is_square(n):
-			continue
-		x = smallest_solution_x(n)
-		if x > maxx:
-			ans = n
-			maxx = x
+	ans = max((n for n in range(2, 1001) if (not eulerlib.is_square(n))),
+		key=smallest_solution_x)
 	return str(ans)
 
 

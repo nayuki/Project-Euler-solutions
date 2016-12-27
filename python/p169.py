@@ -22,7 +22,7 @@ def count_ways(number, exponent, repetitions, ways):
 			result = count_ways(number, exponent - 1, 2, ways)
 			power = 1 << exponent
 			upper = power * (repetitions + 2)
-			if repetitions > 0 and power <= number and number < upper:
+			if repetitions > 0 and power <= number < upper:
 				result += count_ways(number - power, exponent, repetitions - 1, ways)
 		ways[key] = result
 	return ways[key]

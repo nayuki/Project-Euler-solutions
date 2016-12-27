@@ -12,7 +12,7 @@ import eulerlib
 def compute():
 	LIMIT = 10**14
 	
-	# Use a list container as a hack, because Python 2 does not support the 'nonlocal' feature
+	# Use a list container as a hack, because Python 2 does not support 'nonlocal' variables
 	ans = [0]
 	
 	# Note: n must be a right-truncatable Harshad number, and the other arguments are properties of the number n.

@@ -71,7 +71,7 @@ if sys.version_info.major == 2:
 def compute():
 	# Produce the entire sequence
 	LIMIT = 50000000
-	sequence = [2 * i * i - 1 for i in range(LIMIT + 1)]
+	sequence = [(2 * i * i - 1) for i in range(LIMIT + 1)]
 	sequence[0] = sequence[1] = -1
 	
 	# Divide out factors using a kind of sieve

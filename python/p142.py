@@ -43,9 +43,7 @@ def compute():
 	# Raise the limit until a sum is found
 	while True:
 		issquare = [False] * sumlimit
-		for i in itertools.count():
-			if i * i >= sumlimit:
-				break
+		for i in range(eulerlib.sqrt(len(issquare) - 1) + 1):
 			issquare[i * i] = True
 		
 		sum = find_sum(sumlimit)
