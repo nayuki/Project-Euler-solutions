@@ -34,9 +34,9 @@ def compute():
 	ans = 0
 	isprime = eulerlib.list_primality(LIMIT - 1)
 	
-	# Search all possible x's. Note that a + 1 = x * y * y >= x. Furthermore, a < b, so a + 1 <= b.
-	# Thus if x >= LIMIT, then LIMIT <= a + 1 <= b. With b >= LIMIT, no candidates are possible.
-	for x in range(1, LIMIT):
+	# Search all possible x's. We know that c = x * z * z - 1. With the requirement c < LIMIT, we have x * z * z <= LIMIT.
+	# Because z > y > 0, we know z >= 2. So at the very least we require x * 4 <= LIMIT. This implies x <= floor(LIMIT/4).
+	for x in range(1, LIMIT // 4 + 1):
 		
 		# Search all possible y's. Notice that when y increases, 'a' strictly increases.
 		# So when some y generates an 'a' such that a >= LIMIT, no candidates are possible with higher values of y.
@@ -57,9 +57,10 @@ def compute():
 					break
 				
 				# Check whether (a, b, c) is a solution
-				b = x * y * z - 1
-				if isprime[b] and isprime[c]:
-					ans += a + b + c
+				if isprime[c]:
+					b = x * y * z - 1
+					if isprime[b]:
+						ans += a + b + c
 	
 	return str(ans)
 
