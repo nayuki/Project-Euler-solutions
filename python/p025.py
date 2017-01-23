@@ -12,10 +12,11 @@
 # exponentially with a base of about 1.618, so the numbers in base 10 will lengthen by one digit
 # after every log10(1.618) ~= 4.78 steps on average. This means the answer is at index around 4780.
 def compute():
+	DIGITS = 1000
 	a = 1
 	b = 1
 	i = 1
-	while len(str(a)) != 1000:
+	while len(str(a)) != DIGITS:
 		# Loop invariant: At this point, a == fib(i) and b == fib(i+1)
 		a, b = b, a + b
 		i += 1
