@@ -16,6 +16,10 @@ public final class p022 implements EulerSolution {
 	}
 	
 	
+	/* 
+	 * We apply straightforward algorithms to sort the names, sum the letter values, and multiply by the position.
+	 */
+	
 	public String run() {
 		Arrays.sort(names);
 		int sum = 0;

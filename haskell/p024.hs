@@ -7,6 +7,15 @@
  -}
 
 
+{- 
+ - We initialize an array as the lowest permutation of the given digits, which is the sequence
+ - (0,1,2,3,4,5,6,7,8,9). Then we call the next permutation algorithm on it 999 999 times
+ - (because the index in the problem is 1-based), and stringify the resulting sequence.
+ - 
+ - The next permutation algorithm is well-known and a bit long to explain.
+ - See: https://www.nayuki.io/page/next-lexicographical-permutation-algorithm
+ -}
+
 main = putStrLn (show ans)
 ans = case (iterate (>>= nextPerm) (Just [0..9])) !! (10^6 - 1)
       of Just digits -> digitsToNum 0 digits  -- Extract from Just wrapper

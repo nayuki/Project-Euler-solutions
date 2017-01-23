@@ -7,6 +7,14 @@
  -}
 
 
+{- 
+ - We use Zeller's congruence to compute the day of week when given the year, month, and day.
+ - Then we simply check the first day of all the months in the given range by brute force.
+ - 
+ - Zeller's congruence is well-known and a bit long to explain.
+ - See: https://en.wikipedia.org/wiki/Zeller%27s_congruence
+ -}
+
 main = putStrLn (show ans)
 ans = sum [1 | y <- [1901..2000], m <- [1..12], dayOfWeek y m 1 == 0]
 

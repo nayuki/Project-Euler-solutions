@@ -10,6 +10,10 @@ import Data.List (sort)
 import Data.Char (ord)
 
 
+{- 
+ - We apply straightforward algorithms to sort the names, sum the letter values, and multiply by the position.
+ -}
+
 main = putStrLn (show ans)
 ans = sum (zipWith (*) [1..] (map strSum (sort names)))
 

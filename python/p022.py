@@ -7,6 +7,7 @@
 # 
 
 
+# We apply straightforward algorithms to sort the names, sum the letter values, and multiply by the position.
 def compute():
 	ans = sum((i + 1) * (ord(c) - ord('A') + 1)
 		for (i, name) in enumerate(sorted(NAMES))

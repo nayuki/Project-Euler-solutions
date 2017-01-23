@@ -7,6 +7,11 @@
  -}
 
 
+{- 
+ - We find the sum of proper divisors of a number by brute force,
+ - and apply the definition of an amicable number straightforwardly.
+ -}
+
 main = putStrLn (show ans)
 ans = sum [n | n <- [1..10^4], amicable n]
 

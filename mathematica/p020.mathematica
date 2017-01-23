@@ -7,4 +7,7 @@
  *)
 
 
+(* 
+ * We do a straightforward computation thanks to Mathematica's built-in arbitrary precision integer type.
+ *)
 Total[IntegerDigits[100!]]

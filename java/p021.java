@@ -14,6 +14,11 @@ public final class p021 implements EulerSolution {
 	}
 	
 	
+	/* 
+	 * We find the sum of proper divisors of a number by brute force,
+	 * and apply the definition of an amicable number straightforwardly.
+	 */
+	
 	public String run() {
 		int sum = 0;
 		for (int i = 1; i < 10000; i++) {

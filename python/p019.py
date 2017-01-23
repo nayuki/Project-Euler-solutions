@@ -9,6 +9,7 @@
 import datetime
 
 
+# We simply use Python's built-in date library to compute the answer by brute force.
 def compute():
 	ans = sum(1
 		for y in range(1901, 2001)

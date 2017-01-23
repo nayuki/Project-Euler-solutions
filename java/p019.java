@@ -14,6 +14,14 @@ public final class p019 implements EulerSolution {
 	}
 	
 	
+	/* 
+	 * We use Zeller's congruence to compute the day of week when given the year, month, and day.
+	 * Then we simply check the first day of all the months in the given range by brute force.
+	 * 
+	 * Zeller's congruence is well-known and a bit long to explain.
+	 * See: https://en.wikipedia.org/wiki/Zeller%27s_congruence
+	 */
+	
 	public String run() {
 		int count = 0;
 		for (int y = 1901; y <= 2000; y++) {

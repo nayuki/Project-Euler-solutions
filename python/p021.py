@@ -7,6 +7,9 @@
 # 
 
 
+# We first compute a table of sum-of-proper-divisors, then we use it to test which numbers are amicable.
+# This approach differs from the Java implementation because trying to directly compute
+# the proper-divisor-sum of each number by brute force is unacceptably slow in Python.
 def compute():
 	# Compute sum of proper divisors for each number
 	divisorsum = [0] * 10000

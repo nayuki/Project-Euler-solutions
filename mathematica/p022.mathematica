@@ -7,6 +7,10 @@
  *)
 
 
+(* 
+ * We apply straightforward algorithms to sort the names, sum the letter values, and multiply by the position.
+ *)
+
 peoplenames = {  (* 10 strings per line, except final line *)
 	"MARY", "PATRICIA", "LINDA", "BARBARA", "ELIZABETH", "JENNIFER", "MARIA", "SUSAN", "MARGARET", "DOROTHY",
 	"LISA", "NANCY", "KAREN", "BETTY", "HELEN", "SANDRA", "DONNA", "CAROL", "RUTH", "SHARON",

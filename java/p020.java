@@ -14,6 +14,9 @@ public final class p020 implements EulerSolution {
 	}
 	
 	
+	/* 
+	 * We do a straightforward product with help from Java's BigInteger type.
+	 */
 	public String run() {
 		String temp = Library.factorial(100).toString();
 		int sum = 0;

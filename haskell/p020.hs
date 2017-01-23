@@ -7,6 +7,10 @@
  -}
 
 
+{- 
+ - We do a straightforward product thanks to Haskell's built-in arbitrary precision Integer type.
+ -}
+
 main = putStrLn (show ans)
 ans = digitSum (factorial 100 :: Integer)
 

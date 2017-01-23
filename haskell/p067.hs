@@ -7,6 +7,15 @@
  -}
 
 
+{- 
+ - If we start at a particular cell in the triangle, what is the maximum path total?
+ - If the cell is in the bottom row, then it is simply the cell's value. Otherwise the answer
+ - is the cell's value plus either {the maximum path total of the cell down and to the left}
+ - or {the maximum path total of the cell down and to the right}, whichever is greater.
+ - To ensure that the running time is polynomial rather than exponential,
+ - we memoize the sub-result at each cell to avoid needless recomputation.
+ -}
+
 main = putStrLn (show ans)
 ans = maxPath 0 0
 
