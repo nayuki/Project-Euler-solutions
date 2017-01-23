@@ -6,7 +6,7 @@
  - https://github.com/nayuki/Project-Euler-solutions
  -}
 
-import List (sort)
+import Data.List (sort)
 
 
 main = putStrLn (show ans)

@@ -6,7 +6,7 @@
  - https://github.com/nayuki/Project-Euler-solutions
  -}
 
-import List (nub)
+import Data.List (nub)
 
 
 main = putStrLn (show ans)
