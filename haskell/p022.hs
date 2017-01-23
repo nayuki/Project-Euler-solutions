@@ -17,6 +17,7 @@ import Data.Char (ord)
 main = putStrLn (show ans)
 ans = sum (zipWith (*) [1..] (map strSum (sort names)))
 
+strSum :: String -> Int
 strSum = sum . (map (\c -> (ord c) - (ord 'A') + 1))
 
 names = [  -- 10 strings per line, except final line

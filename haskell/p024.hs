@@ -20,7 +20,7 @@ main = putStrLn (show ans)
 ans = case (iterate (>>= nextPerm) (Just [0..9])) !! (10^6 - 1)
       of Just digits -> digitsToNum 0 digits  -- Extract from Just wrapper
 
-nextPerm :: [Integer] -> Maybe [Integer]
+nextPerm :: [Int] -> Maybe [Int]
 nextPerm [] = Nothing
 nextPerm xs =
 	let
