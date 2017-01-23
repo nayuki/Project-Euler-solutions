@@ -22,14 +22,14 @@ public final class p022 implements EulerSolution {
 	
 	public String run() {
 		Arrays.sort(names);
-		int sum = 0;
+		long sum = 0;
 		for (int i = 0; i < names.length; i++) {
 			int value = 0;
 			for (int j = 0; j < names[i].length(); j++)
 				value += names[i].charAt(j) - 'A' + 1;
 			sum += value * (i + 1);
 		}
-		return Integer.toString(sum);
+		return Long.toString(sum);
 	}
 	
 	

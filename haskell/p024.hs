@@ -16,9 +16,9 @@
  - See: https://www.nayuki.io/page/next-lexicographical-permutation-algorithm
  -}
 
-main = putStrLn (show ans)
+main = putStrLn ans
 ans = case (iterate (>>= nextPerm) (Just [0..9])) !! (10^6 - 1)
-      of Just digits -> digitsToNum 0 digits  -- Extract from Just wrapper
+      of Just digits -> concatToString digits  -- Extract from Just wrapper
 
 nextPerm :: [Int] -> Maybe [Int]
 nextPerm [] = Nothing
@@ -38,5 +38,5 @@ nextPerm xs =
 		findPrefix [] = []
 		findPrefix (x:xs) = x : (if xs /= [] && x <= (head xs) then (findPrefix xs) else [])
 
-digitsToNum acc [] = acc
-digitsToNum acc (x:xs) = digitsToNum (acc * 10 + x) xs
+concatToString :: [Int] -> String
+concatToString xs = foldl (++) "" (map show xs)

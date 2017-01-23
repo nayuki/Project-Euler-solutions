@@ -36,19 +36,14 @@ public final class p019 implements EulerSolution {
 	
 	// Return value: 0 = Sunday, 1 = Monday, ..., 6 = Saturday.
 	private static int dayOfWeek(int year, int month, int day) {
+		if (year < 0 || year > 10000 || month < 1 || month > 12 || day < 1 || day > 31)
+			throw new IllegalArgumentException();
+		
 		// Zeller's congruence algorithm
-		long m = mod((long)month - 3, 4800);
-		long y = mod(year + m / 12, 400);
+		int m = (month - 3 + 4800) % 4800;
+		int y = (year + m / 12) % 400;
 		m %= 12;
-		return (int)((y + y/4 - y/100 + (13 * m + 2) / 5 + day + 2) % 7);
-	}
-	
-	
-	private static long mod(long x, long y) {
-		x %= y;
-		if (y > 0 && x < 0 || y < 0 && x > 0)
-			x += y;
-		return x;
+		return (y + y/4 - y/100 + (13 * m + 2) / 5 + day + 2) % 7;
 	}
 	
 }

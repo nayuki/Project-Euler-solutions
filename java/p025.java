@@ -32,10 +32,10 @@ public final class p025 implements EulerSolution {
 		BigInteger cur = BigInteger.ZERO;
 		for (int i = 0; ; i++) {
 			// At this point, prev = fibonacci(i - 1) and cur = fibonacci(i)
-			if (cur.compareTo(lowerThres) >= 0)
-				return Integer.toString(i);
-			else if (cur.compareTo(upperThres) >= 0)
+			if (cur.compareTo(upperThres) >= 0)
 				throw new RuntimeException("Not found");
+			else if (cur.compareTo(lowerThres) >= 0)
+				return Integer.toString(i);
 			
 			// Advance the Fibonacci sequence by one step
 			BigInteger temp = cur.add(prev);
