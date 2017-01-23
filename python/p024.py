@@ -7,8 +7,6 @@
 # 
 
 import itertools, sys
-if sys.version_info.major == 2:
-	range = xrange
 
 
 # We initialize a list as the lowest permutation of the given digits, which is the sequence

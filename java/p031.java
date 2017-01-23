@@ -28,8 +28,9 @@ public final class p031 implements EulerSolution {
 		int[][] ways = new int[COINS.length + 1][TOTAL + 1];
 		ways[0][0] = 1;
 		for (int i = 0; i < COINS.length; i++) {
+			int coin = COINS[i];
 			for (int j = 0; j <= TOTAL; j++)
-				ways[i + 1][j] = ways[i][j] + (j >= COINS[i] ? ways[i + 1][j - COINS[i]] : 0);  // Dynamic programming
+				ways[i + 1][j] = ways[i][j] + (j >= coin ? ways[i + 1][j - coin] : 0);  // Dynamic programming
 		}
 		return Integer.toString(ways[COINS.length][TOTAL]);
 	}
