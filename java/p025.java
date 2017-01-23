@@ -37,6 +37,7 @@ public final class p025 implements EulerSolution {
 			else if (cur.compareTo(upperThres) >= 0)
 				throw new RuntimeException("Not found");
 			
+			// Advance the Fibonacci sequence by one step
 			BigInteger temp = cur.add(prev);
 			prev = cur;
 			cur = temp;

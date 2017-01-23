@@ -18,5 +18,6 @@ digits = 1000
 main = putStrLn (show ans)
 ans = length (takeWhile (< 10^(digits-1)) fibonacci)
 
+-- The Fibonacci sequence as an infinite list, implemented via tail chasing.
 fibonacci :: [Integer]
 fibonacci = 0 : 1 : (zipWith (+) fibonacci (tail fibonacci))

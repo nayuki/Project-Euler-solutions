@@ -34,8 +34,9 @@ public final class p019 implements EulerSolution {
 	}
 	
 	
-	// Zeller's congruence
+	// Return value: 0 = Sunday, 1 = Monday, ..., 6 = Saturday.
 	private static int dayOfWeek(int year, int month, int day) {
+		// Zeller's congruence algorithm
 		long m = mod((long)month - 3, 4800);
 		long y = mod(year + m / 12, 400);
 		m %= 12;
