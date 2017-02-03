@@ -18,7 +18,7 @@ def compute():
 
 
 def compare_powers(pairx, pairy):
-	# Try limited-precision comparisons, retrying with increasing precision
+	# First try fast low-precision computations, retrying with increasing precision
 	precision = 16
 	while precision <= 1024:
 		# Use interval arithmetic for approximate comparisons
@@ -26,13 +26,14 @@ def compare_powers(pairx, pairy):
 		xhigh = BigFloat(pairx[0]).power(pairx[1], precision, True )
 		ylow  = BigFloat(pairy[0]).power(pairy[1], precision, False)
 		yhigh = BigFloat(pairy[0]).power(pairy[1], precision, True )
-		if xlow.compare_to(yhigh) > 0:
-			return +1
-		elif ylow.compare_to(xhigh) > 0:
+		if xhigh.compare_to(ylow) < 0:
 			return -1
-		precision *= 2
+		elif xlow.compare_to(yhigh) > 0:
+			return +1
+		else:
+			precision *= 2
 	
-	# Do full-precision comparison (very slow)
+	# Otherwise do full-precision comparison (slow)
 	x = pairx[0]**pairx[1]
 	y = pairy[0]**pairy[1]
 	if x < y:

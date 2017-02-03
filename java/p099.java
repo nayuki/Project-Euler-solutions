@@ -19,33 +19,36 @@ public final class p099 implements EulerSolution {
 	public String run() {
 		int[] maxVal = DATA[0];
 		int maxIndex = 0;
-		outer:
 		for (int i = 1; i < DATA.length; i++) {
-			// Try limited-precision comparisons, retrying with increasing precision
-			for (int precision = 16; precision <= 1024; precision *= 2) {
-				// Use interval arithmetic for approximate comparisons
-				BigFloat curLow  = new BigFloat(DATA[i][0]).power(DATA[i][1], precision, false);
-				BigFloat curHigh = new BigFloat(DATA[i][0]).power(DATA[i][1], precision, true );
-				BigFloat maxLow  = new BigFloat(maxVal[0] ).power(maxVal [1], precision, false);
-				BigFloat maxHigh = new BigFloat(maxVal[0] ).power(maxVal [1], precision, true );
-				if (curLow.compareTo(maxHigh) > 0) {
-					maxVal = DATA[i];
-					maxIndex = i;
-					continue outer;
-				} else if (curHigh.compareTo(maxLow) < 0)
-					continue outer;
-			}
-			
-			// Do full-precision comparison (very slow)
-			BigInteger cur = BigInteger.valueOf(DATA[i][0]).pow(DATA[i][1]);
-			BigInteger max = BigInteger.valueOf(maxVal [0]).pow(maxVal [1]);
-			if (cur.compareTo(max) > 0) {
+			if (comparePowers(DATA[i][0], DATA[i][1], maxVal[0], maxVal[1]) > 0) {
 				maxVal = DATA[i];
 				maxIndex = i;
 			}
 		}
 		return Integer.toString(maxIndex + 1);
 	}
+	
+	
+	private static int comparePowers(int xBase, int xExp, int yBase, int yExp) {
+		// First try fast low-precision computations, retrying with increasing precision
+		for (int precision = 16; precision <= 1024; precision *= 2) {
+			// Use interval arithmetic for approximate comparisons
+			BigFloat xLow  = new BigFloat(xBase).power(xExp, precision, false);
+			BigFloat xHigh = new BigFloat(xBase).power(xExp, precision, true );
+			BigFloat yLow  = new BigFloat(yBase).power(yExp, precision, false);
+			BigFloat yHigh = new BigFloat(yBase).power(yExp, precision, true );
+			if (xHigh.compareTo(yLow) < 0)
+				return -1;
+			else if (xLow.compareTo(yHigh) > 0)
+				return +1;
+		}
+		
+		// Otherwise do full-precision comparison (slow)
+		BigInteger xPow = BigInteger.valueOf(xBase).pow(xExp);
+		BigInteger yPow = BigInteger.valueOf(yBase).pow(yExp);
+		return xPow.compareTo(yPow);
+	}
+	
 	
 	
 	// Represents a strictly positive number equal to mantissa * 2^exponent
