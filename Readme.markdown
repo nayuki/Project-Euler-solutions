@@ -1,18 +1,20 @@
 Project Euler solutions
 =======================
 
-This package contains Nayuki's program code to solve over 190 Project Euler problems.
+A collection of Nayuki's program code to solve over 190 Project Euler math problems.
 
-Each solved problem has a program written in Java. Additionally, some solutions have Python, Mathematica, and/or Haskell programs. Some solutions include a detailed mathematical explanation/proof in the source code to justify the program logic.
+Every solved problem has a program written in Java and usually Python. Some solutions also have Mathematica and Haskell programs. Some solution programs include a detailed mathematical explanation/proof in the comments to justify the code's logic.
 
-All problems from #1 to #100 have a Java and Python program, and #1 to #50 have a Mathematica program. The project codebase contains at least 195 solutions in Java, at least 190 in Python, at least 120 in Mathematica, and at least 70 in Haskell.
+All problems from #1 to #100 have a Java and Python program, and problems #1 to #50 have a Mathematica program. This package contains at least 195 solutions in Java, at least 190 in Python, at least 120 in Mathematica, and at least 70 in Haskell.
 
-Java solutions require JDK 7 or above. Python solutions are tested to work on CPython 2.7.10 and 3.4.3. Mathematica solutions are tested to work on Mathematica 5.1.
+Java solutions require JDK 7+. Python solutions are tested to work on CPython 2.7.10 and 3.4.3. Mathematica solutions are tested to work on Mathematica 5.1.
 
----
+Home page with background info, table of solutions, benchmark timings, and more: [https://www.nayuki.io/page/project-euler-solutions](https://www.nayuki.io/page/project-euler-solutions)
 
-Home page: [https://www.nayuki.io/page/project-euler-solutions](https://www.nayuki.io/page/project-euler-solutions)
+----
 
-This code is provided for reference only. You need prior written permission to do any of the following: republish the code verbatim, publish the code with modifications, incorporate parts of the code into your own work, etc.
+Copyright © 2017 Project Nayuki. All rights reserved. No warranty.
 
-Copyright © 2016 Project Nayuki. All rights reserved. No warranty.
+This code is provided for reference only. You may republish any of this code verbatim with author and URL info intact.
+
+You need written permission from the author to make modifications to the code, include parts into your own work, etc.
