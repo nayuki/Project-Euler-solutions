@@ -1,7 +1,7 @@
 Project Euler solutions
 =======================
 
-A collection of Nayuki's program code to solve over 190 Project Euler math problems.
+A collection of Nayuki's program code to solve over 195 Project Euler math problems.
 
 Every solved problem has a program written in Java and usually Python. Some solutions also have Mathematica and Haskell programs. Some solution programs include a detailed mathematical explanation/proof in the comments to justify the code's logic.
 
