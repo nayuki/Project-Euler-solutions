@@ -10,26 +10,26 @@ import eulerlib, heapq
 
 
 def compute():
-	POWER = 500500
+	TARGET = 500500
 	MODULUS = 500500507
 	isprime = eulerlib.list_primality(7376507)  # 500500th (1-based) prime number
 	
 	queue = []
-	largestprime = 2
-	heapq.heappush(queue, (largestprime, largestprime))
+	nextprime = 2
+	heapq.heappush(queue, (nextprime, nextprime))
 	
 	ans = 1
-	for _ in range(POWER):
+	for _ in range(TARGET):
 		nextpower, prime = heapq.heappop(queue)
 		ans *= nextpower
 		ans %= MODULUS
 		heapq.heappush(queue, (nextpower**2, prime))
 		
-		if prime == largestprime:
-			largestprime += 1
-			while not isprime[largestprime]:
-				largestprime += 1
-			heapq.heappush(queue, (largestprime, largestprime))
+		if prime == nextprime:
+			nextprime += 1
+			while not isprime[nextprime]:
+				nextprime += 1
+			heapq.heappush(queue, (nextprime, nextprime))
 	
 	return str(ans)
 

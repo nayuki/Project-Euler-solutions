@@ -17,26 +17,26 @@ public final class p500 implements EulerSolution {
 	}
 	
 	
-	private static final int POWER = 500500;
+	private static final int TARGET = 500500;
 	private static final long MODULUS = 500500507;
 	
 	public String run() {
 		Queue<Item> queue = new PriorityQueue<>();
-		int largestPrime = 2;
-		queue.add(new Item(largestPrime));
+		int nextPrime = 2;
+		queue.add(new Item(nextPrime));
 		
 		long product = 1;
-		for (int i = 0; i < POWER; i++) {
+		for (int i = 0; i < TARGET; i++) {
 			Item item = queue.remove();
 			product *= item.nextPower % MODULUS;
 			product %= MODULUS;
 			item.advance();
 			queue.add(item);
 			
-			if (item.prime == largestPrime) {
-				do largestPrime++;
-				while (!Library.isPrime(largestPrime));
-				queue.add(new Item(largestPrime));
+			if (item.prime == nextPrime) {
+				do nextPrime++;
+				while (!Library.isPrime(nextPrime));
+				queue.add(new Item(nextPrime));
 			}
 		}
 		
