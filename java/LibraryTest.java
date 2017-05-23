@@ -12,6 +12,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import java.math.BigInteger;
 import java.util.Arrays;
+import org.junit.Assert;
 import org.junit.Test;
 
 
@@ -193,6 +194,66 @@ public final class LibraryTest {
 		assertEquals(3, Library.powMod(7, 7, 10));
 		assertEquals(326216098, Library.powMod(78051657, 234602, 456087413));
 		assertEquals(1488576545, Library.powMod(2147480000, 2147483645, 2147483647));
+	}
+	
+	
+	@Test
+	public void testReciprocalMod() {
+		int[][] goodCases = {
+			{1, 2, 1},
+			{1, 3, 1},
+			{2, 3, 2},
+			{1, 4, 1},
+			{3, 4, 3},
+			{1, 5, 1},
+			{2, 5, 3},
+			{3, 5, 2},
+			{4, 5, 4},
+			{2, 7, 4},
+			{3, 7, 5},
+			{4, 7, 2},
+			{5, 7, 3},
+			{6, 7, 6},
+			{18585, 26128, 5705},
+			{4352341, 7559949, 3054661},
+			{290514683, 936234758, 903930729},
+			{735803087, 1384775511, 1321131185},
+			{1, 2147483647, 1},
+			{2, 2147483647, 1073741824},
+			{188080773, 2147483647, 1201032874},
+			{527995520, 2147483647, 1215591224},
+			{1154582780, 2147483647, 193267031},
+			{1321286464, 2147483647, 95844396},
+			{2147483645, 2147483647, 1073741823},
+			{2147483646, 2147483647, 2147483646},
+		};
+		for (int[] cs : goodCases)
+			assertEquals(cs[2], Library.reciprocalMod(cs[0], cs[1]));
+		
+		int[][] badCases = {
+			// Values out of range
+			{Integer.MIN_VALUE, Integer.MIN_VALUE},
+			{-1, -1},
+			{0, -1},
+			{-1, 0},
+			{0, 0},
+			{1, 1},
+			{3, 2},
+			{Integer.MAX_VALUE, 1},
+			// Values not coprime
+			{2, 4},
+			{2, 6},
+			{3, 6},
+			{44100, 48000},
+			{77, 2147483646},
+			{30783, 2147483646},
+		};
+		for (int[] cs : badCases) {
+			try {
+				Library.reciprocalMod(cs[0], cs[1]);
+				Assert.fail();
+			} catch (IllegalArgumentException e) {}  // Pass
+		}
 	}
 	
 	

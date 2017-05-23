@@ -138,7 +138,7 @@ final class Library {
 			b = c;
 		}
 		if (x == 1)
-			return (a + m) % m;
+			return a >= 0 ? a : a + m;
 		else
 			throw new IllegalArgumentException("Reciprocal does not exist");
 	}
