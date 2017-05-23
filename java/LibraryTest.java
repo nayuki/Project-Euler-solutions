@@ -18,8 +18,7 @@ import org.junit.Test;
 
 public final class LibraryTest {
 	
-	@Test
-	public void testReverse() {
+	@Test public void testReverse() {
 		assertEquals("", Library.reverse(""));
 		assertEquals("a", Library.reverse("a"));
 		assertEquals("ba", Library.reverse("ab"));
@@ -28,8 +27,7 @@ public final class LibraryTest {
 	}
 	
 	
-	@Test
-	public void testIsPalindromeString() {
+	@Test public void testIsPalindromeString() {
 		assertTrue(Library.isPalindrome(""));
 		assertTrue(Library.isPalindrome("a"));
 		assertTrue(Library.isPalindrome("aa"));
@@ -46,8 +44,7 @@ public final class LibraryTest {
 	}
 	
 	
-	@Test
-	public void testIsPalindromeInt() {
+	@Test public void testIsPalindromeInt() {
 		assertTrue(Library.isPalindrome(0));
 		assertTrue(Library.isPalindrome(1));
 		assertTrue(Library.isPalindrome(5));
@@ -67,8 +64,7 @@ public final class LibraryTest {
 	}
 	
 	
-	@Test
-	public void testSqrtInt() {
+	@Test public void testSqrtInt() {
 		assertEquals(0, Library.sqrt(0));
 		assertEquals(1, Library.sqrt(1));
 		assertEquals(1, Library.sqrt(2));
@@ -103,8 +99,7 @@ public final class LibraryTest {
 	}
 	
 	
-	@Test
-	public void testSqrtLong() {
+	@Test public void testSqrtLong() {
 		assertEquals(0L, Library.sqrt(0L));
 		assertEquals(1L, Library.sqrt(1L));
 		assertEquals(1L, Library.sqrt(2L));
@@ -141,8 +136,7 @@ public final class LibraryTest {
 	}
 	
 	
-	@Test
-	public void testIsSquare() {
+	@Test public void testIsSquare() {
 		assertTrue(Library.isSquare(0));
 		assertTrue(Library.isSquare(1));
 		assertTrue(Library.isSquare(4));
@@ -173,8 +167,7 @@ public final class LibraryTest {
 	}
 	
 	
-	@Test
-	public void testPowMod() {
+	@Test public void testPowMod() {
 		assertEquals(0, Library.powMod(0, 0, 1));
 		assertEquals(0, Library.powMod(1, 0, 1));
 		assertEquals(0, Library.powMod(0, 1, 1));
@@ -197,8 +190,7 @@ public final class LibraryTest {
 	}
 	
 	
-	@Test
-	public void testReciprocalMod() {
+	@Test public void testReciprocalMod() {
 		int[][] goodCases = {
 			{1, 2, 1},
 			{1, 3, 1},
@@ -257,8 +249,7 @@ public final class LibraryTest {
 	}
 	
 	
-	@Test
-	public void testFactorial() {
+	@Test public void testFactorial() {
 		assertEquals(new BigInteger("1"), Library.factorial(0));
 		assertEquals(new BigInteger("1"), Library.factorial(1));
 		assertEquals(new BigInteger("2"), Library.factorial(2));
@@ -288,8 +279,7 @@ public final class LibraryTest {
 	}
 	
 	
-	@Test
-	public void testBinomial() {
+	@Test public void testBinomial() {
 		assertEquals(new BigInteger("1"), Library.binomial(0, 0));
 		assertEquals(new BigInteger("1"), Library.binomial(1, 0));
 		assertEquals(new BigInteger("1"), Library.binomial(1, 1));
@@ -307,8 +297,7 @@ public final class LibraryTest {
 	}
 	
 	
-	@Test
-	public void testGcd() {
+	@Test public void testGcd() {
 		assertEquals(0, Library.gcd(0, 0));
 		assertEquals(1, Library.gcd(0, 1));
 		assertEquals(1, Library.gcd(1, 0));
@@ -328,8 +317,7 @@ public final class LibraryTest {
 	}
 	
 	
-	@Test
-	public void testIsPrime() {
+	@Test public void testIsPrime() {
 		assertFalse(Library.isPrime(0));
 		assertFalse(Library.isPrime(1));
 		assertTrue(Library.isPrime(2));
@@ -365,8 +353,7 @@ public final class LibraryTest {
 	}
 	
 	
-	@Test
-	public void testListPrimality() {
+	@Test public void testListPrimality() {
 		boolean[] isPrime = Library.listPrimality(1000);
 		for (int i = 0; i < isPrime.length; i++)
 			assertEquals(Library.isPrime(i), isPrime[i]);
@@ -384,8 +371,7 @@ public final class LibraryTest {
 	}
 	
 	
-	@Test
-	public void testListPrimes() {
+	@Test public void testListPrimes() {
 		int limit = 1000;
 		int[] primes = Library.listPrimes(limit);
 		for (int i = 0; i < primes.length - 1; i++)
@@ -406,8 +392,7 @@ public final class LibraryTest {
 	}
 	
 	
-	@Test
-	public void testTotient() {
+	@Test public void testTotient() {
 		assertEquals( 1, Library.totient( 1));
 		assertEquals( 1, Library.totient( 2));
 		assertEquals( 2, Library.totient( 3));
@@ -442,8 +427,7 @@ public final class LibraryTest {
 	}
 	
 	
-	@Test
-	public void testListTotients() {
+	@Test public void testListTotients() {
 		int[] totients = Library.listTotients(1000);
 		for (int i = 1; i < totients.length; i++)
 			assertEquals(Library.totient(i), totients[i]);
@@ -461,8 +445,7 @@ public final class LibraryTest {
 	}
 	
 	
-	@Test
-	public void testNextPermutation() {
+	@Test public void testNextPermutation() {
 		int[] arr;
 		
 		assertFalse(Library.nextPermutation(new int[0]));
