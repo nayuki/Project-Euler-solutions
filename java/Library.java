@@ -34,7 +34,7 @@ final class Library {
 		if (x < 0)
 			throw new IllegalArgumentException("Square root of negative number");
 		int y = 0;
-		for (int i = 32768; i != 0; i >>>= 1) {
+		for (int i = 1 << 15; i != 0; i >>>= 1) {
 			y |= i;
 			if (y > 46340 || y * y > x)
 				y ^= i;
@@ -109,19 +109,19 @@ final class Library {
 		
 		// Exponentiation by squaring
 		int z = 1;
-		while (y != 0) {
+		for (; y != 0; y >>>= 1) {
 			if ((y & 1) != 0)
 				z = (int)((long)z * x % m);
 			x = (int)((long)x * x % m);
-			y >>>= 1;
 		}
 		return z;
 	}
 	
 	
-	// Returns x^-1 mod m, where the result is in the range [0, m). Note that (x * x^-1) mod m = (x^-1 * x) mod m = 1.
+	// Returns x^-1 mod m, where the result is in the range [0, m).
+	// Note that (x * x^-1) mod m = (x^-1 * x) mod m = 1.
 	public static int reciprocalMod(int x, int m) {
-		if (!(m > 0 && 0 <= x && x < m))
+		if (!(0 <= x && x < m))
 			throw new IllegalArgumentException();
 		
 		// Based on a simplification of the extended Euclidean algorithm
@@ -179,7 +179,7 @@ final class Library {
 	}
 	
 	
-	// Tests whether the given integer is prime.
+	// Tests whether the given non-negative integer is prime.
 	public static boolean isPrime(int x) {
 		if (x < 0)
 			throw new IllegalArgumentException("Negative number");
@@ -201,7 +201,8 @@ final class Library {
 	
 	// Returns a Boolean array 'isPrime' where isPrime[i] indicates whether i is prime, for 0 <= i <= n.
 	// For a large batch of queries, this is faster than calling isPrime() for each integer.
-	// For example: listPrimality(100) = {false, false, true, true, false, true, false, true, false, false, ...} (array length 101).
+	// For example: listPrimality(100) = {false, false, true, true, false, true, false, true,
+	// false, false, false, true, false, true, false, false, false, true, ...} (array length 101).
 	public static boolean[] listPrimality(int n) {
 		if (n < 0)
 			throw new IllegalArgumentException("Negative array size");
@@ -243,7 +244,7 @@ final class Library {
 	}
 	
 	
-	// Returns an array spf where spf[k] is the smallest prime factor of k, valid for 0 <= k <= n.
+	// Returns an array spf where spf[k] is the smallest prime factor of k, valid for 2 <= k <= n.
 	// For example: listSmallestPrimeFactors(10) = {0, 0, 2, 3, 2, 5, 2, 7, 2, 3, 2}.
 	public static int[] listSmallestPrimeFactors(int n) {
 		int[] result = new int[n + 1];
