@@ -12,6 +12,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import java.math.BigInteger;
 import java.util.Arrays;
+import java.util.Random;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -83,6 +84,17 @@ public final class LibraryTest {
 	}
 	
 	
+	@Test public void testSqrtIntRandomly() {
+		final int trials = 1000000;
+		for (int i = 0; i < trials; i++) {
+			int x = rand.nextInt() >>> 1;  // uint31
+			int y = Library.sqrt(x);
+			assertTrue(0 <= y && y <= x);
+			assertTrue((long)y * y <= x && x < (y + 1L) * (y + 1L));
+		}
+	}
+	
+	
 	@Test(expected=IllegalArgumentException.class)
 	public void testSqrtIntInvalid0() {
 		Library.sqrt(-1);
@@ -117,6 +129,18 @@ public final class LibraryTest {
 		assertEquals(46340L, Library.sqrt(2147483648L));
 		assertEquals(2645751L, Library.sqrt(7000000000000L));
 		assertEquals(3037000499L, Library.sqrt(9223372036854775807L));
+	}
+	
+	
+	@Test public void testSqrtLongRandomly() {
+		final int trials = 1000000;
+		for (int i = 0; i < trials; i++) {
+			long x = rand.nextLong() >>> 1;  // uint63
+			long y = Library.sqrt(x);
+			assertTrue(0 <= y && y <= x);
+			if (x > 0)
+				assertTrue(y <= x / y && x / (y + 1) < y + 1);
+		}
 	}
 	
 	
@@ -249,6 +273,28 @@ public final class LibraryTest {
 	}
 	
 	
+	@Test public void testReciprocalModRandomly() {
+		final int trials = 100000;
+		for (int i = 0; i < trials; i++) {
+			int mod = rand.nextInt() >>> 1;  // uint31
+			if (mod < 2)
+				continue;
+			int x = rand.nextInt(mod);
+			if (Library.gcd(x, mod) == 1) {
+				int y = Library.reciprocalMod(x, mod);
+				assertTrue(1 <= y && y < mod);
+				assertEquals(1, (long)x * y % mod);
+				assertEquals(x, Library.reciprocalMod(y, mod));
+			} else {
+				try {
+					Library.reciprocalMod(x, mod);
+					Assert.fail();
+				} catch (IllegalArgumentException e) {}  // Pass
+			}
+		}
+	}
+	
+	
 	@Test public void testFactorial() {
 		assertEquals(new BigInteger("1"), Library.factorial(0));
 		assertEquals(new BigInteger("1"), Library.factorial(1));
@@ -314,6 +360,22 @@ public final class LibraryTest {
 		assertEquals(2147483647, Library.gcd(0, 2147483647));
 		assertEquals(2147483647, Library.gcd(2147483647, 2147483647));
 		assertEquals(1, Library.gcd(2147483646, 2147483647));
+	}
+	
+	
+	@Test public void testGcdRandomly() {
+		final int trials = 1000000;
+		for (int i = 0; i < trials; i++) {
+			int x = rand.nextInt() >>> 1;  // uint31
+			int y = rand.nextInt() >>> 1;  // uint31
+			int z = Library.gcd(x, y);
+			if (x == 0)
+				assertEquals(y, z);
+			else if (y == 0)
+				assertEquals(x, z);
+			else  // x, y > 0
+				assertTrue(0 < z && z <= x && z <= y && x % z == 0 && y % z == 0);
+		}
 	}
 	
 	
@@ -416,6 +478,20 @@ public final class LibraryTest {
 	}
 	
 	
+	@Test public void testTotientRandomly() {
+		final int trials = 100;
+		for (int i = 0; i < trials; i++) {
+			int n = rand.nextInt(100000) + 1;
+			int tot = 0;
+			for (int j = 1; j <= n; j++) {
+				if (Library.gcd(j, n) == 1)
+					tot++;
+			}
+			assertEquals(tot, Library.totient(n));
+		}
+	}
+	
+	
 	@Test(expected=IllegalArgumentException.class)
 	public void testTotientInvalid0() {
 		Library.totient(-1);
@@ -469,5 +545,9 @@ public final class LibraryTest {
 			assertTrue(Library.nextPermutation(arr));
 		assertFalse(Library.nextPermutation(arr));  assertArrayEquals(new int[]{9, 5, 3, 2, 1}, arr);
 	}
+	
+	
+	
+	private static Random rand = new Random();
 	
 }
