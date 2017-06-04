@@ -9,7 +9,7 @@
 
 # Computers are fast, so we can implement this solution directly without any clever math.
 def compute():
-	ans = sum(x for x in range(1000) if (x % 3 == 0 or x % 5 == 0))
+	ans = sum(set(range(0, 1000, 3)).union(set(range(0, 1000, 5))))
 	return str(ans)
 
 
