@@ -10,12 +10,14 @@
 # Computers are fast, so we can implement this solution directly without any clever math.
 def compute():
 	ans = 0
-	for i in range(100, 1000):
-		for j in range(100, 1000):
+	stop = 100
+	for i in range(1000, 100, -1):
+		for j in range(1000, stop, -1):
 			k = i * j
 			s = str(k)
 			if s == s[::-1] and k > ans:
 				ans = k
+				stop = j
 	return str(ans)
 
 
