@@ -30,9 +30,9 @@ public final class p451 implements EulerSolution {
 		
 		// Process every integer in range
 		solutions = new IntArrayArray(LIMIT / 2 + 1);  // Uses about 2 GiB of memory
-		solutions.append(new int[]{});
-		solutions.append(new int[]{});
-		solutions.append(new int[]{1});
+		solutions.append();
+		solutions.append();
+		solutions.append(1);
 		long sum = 0;
 		for (int i = 3; i <= LIMIT; i++) {
 			int[] sols = getSolutions(i);
@@ -50,6 +50,8 @@ public final class p451 implements EulerSolution {
 		if (smallestPrimeFactor[n] == n)  // n is prime
 			return new int[]{1, n - 1};
 		else {
+			// Note: Changing the ArrayList<Integer> to an implementation
+			// based on int[] does not yield meaningful speed improvement
 			List<Integer> temp = new ArrayList<>();
 			int p = smallestPrimeFactor[n];
 			int[] sols = solutions.get(n / p);
@@ -60,28 +62,24 @@ public final class p451 implements EulerSolution {
 						temp.add(k);
 				}
 			}
-			return toIntArray(temp);
+			
+			// Convert List<Integer> to int[]
+			int[] result = new int[temp.size()];
+			for (int i = 0; i < result.length; i++)
+				result[i] = temp.get(i);
+			return result;
 		}
 	}
 	
 	
-	private static int[] toIntArray(List<Integer> list) {
-		int[] result = new int[list.size()];
-		for (int i = 0; i < result.length; i++)
-			result[i] = list.get(i);
-		return result;
-	}
 	
-	
-	
-	// Conceptually like int[][], but having elements all packed into one int[]
-	private static class IntArrayArray {
+	// Conceptually like int[][], but having elements all packed into one int[].
+	private static final class IntArrayArray {
 		
 		private int[] data;
 		private int dataLength;
 		private int[] starts;
 		private int index;
-		
 		
 		
 		public IntArrayArray(int len) {
@@ -95,13 +93,12 @@ public final class p451 implements EulerSolution {
 		}
 		
 		
-		
 		public int[] get(int i) {
 			return Arrays.copyOfRange(data, starts[i], starts[i + 1]);
 		}
 		
 		
-		public void append(int[] arr) {
+		public void append(int... arr) {
 			while (dataLength + arr.length > data.length)
 				data = Arrays.copyOf(data, data.length * 2);
 			
