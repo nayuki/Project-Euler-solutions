@@ -22,7 +22,6 @@ public final class p029 implements EulerSolution {
 	 * We generate all the possible powers in the given range, put each value
 	 * into a set, and let the set count the number of unique values present.
 	 */
-	
 	public String run() {
 		Set<BigInteger> generated = new HashSet<>();
 		for (int a = 2; a <= 100; a++) {
