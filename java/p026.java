@@ -34,13 +34,14 @@ public final class p026 implements EulerSolution {
 	private static int getCycleLength(int n) {
 		Map<Integer,Integer> stateToIter = new HashMap<>();
 		int state = 1;
-		int iter = 0;
-		while (!stateToIter.containsKey(state)) {
-			stateToIter.put(state, iter);
-			state = state * 10 % n;
-			iter++;
+		for (int iter = 0; ; iter++) {
+			if (stateToIter.containsKey(state))
+				return iter - stateToIter.get(state);
+			else {
+				stateToIter.put(state, iter);
+				state = state * 10 % n;
+			}
 		}
-		return iter - stateToIter.get(state);
 	}
 	
 }

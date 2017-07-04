@@ -19,14 +19,12 @@ def compute():
 	return str(ans)
 
 
-# Tests whether {(0,0), (x1,y1), (x2,y2)} forms a right triangle.
+# Tests whether the three points {(0,0), (x1,y1), (x2,y2)} form a right triangle.
 def is_right_triangle(x1, y1, x2, y2):
-	dx = x2 - x1
-	dy = y2 - y1
-	a = x1 * x1 + y1 * y1
-	b = x2 * x2 + y2 * y2
-	c = dx * dx + dy * dy
-	return a + b == c or b + c == a or c + a == b
+	a = x1**2 + y1**2
+	b = x2**2 + y2**2
+	c = (x2 - x1)**2 + (y2 - y1)**2
+	return (a + b == c) or (b + c == a) or (c + a == b)
 
 
 if __name__ == "__main__":

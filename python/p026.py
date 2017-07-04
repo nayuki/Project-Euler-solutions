@@ -6,6 +6,8 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
+import itertools
+
 
 def compute():
 	ans = max(range(1, 1000), key=reciprocal_cycle_len)
@@ -15,12 +17,12 @@ def compute():
 def reciprocal_cycle_len(n):
 	seen = {}
 	x = 1
-	i = 0
-	while x not in seen:
-		seen[x] = i
-		x = x * 10 % n
-		i += 1
-	return i - seen[x]
+	for i in itertools.count():
+		if x in seen:
+			return i - seen[x]
+		else:
+			seen[x] = i
+			x = x * 10 % n
 
 
 if __name__ == "__main__":
