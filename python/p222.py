@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import math
+import eulerlib, math
 
 
 def compute():
@@ -32,7 +32,7 @@ def compute():
 		
 		# Memoization
 		if minlength[currentsphereindex][setofspheres] is None:
-			if bin(setofspheres).count("1") == 1:
+			if eulerlib.popcount(setofspheres) == 1:
 				result = sphereradii[currentsphereindex]  # This sphere is rightmost
 			else:
 				result = float("inf")

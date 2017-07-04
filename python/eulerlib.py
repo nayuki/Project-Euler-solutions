@@ -11,6 +11,12 @@ if sys.version_info.major == 2:
 	range = xrange
 
 
+# Returns the number of 1's in the binary representation of
+# the non-negative integer x. Also known as Hamming weight.
+def popcount(x):
+	return bin(x).count("1")
+
+
 # Given integer x, this returns the integer floor(sqrt(x)).
 def sqrt(x):
 	assert x >= 0

@@ -6,19 +6,18 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
+import eulerlib
+
 
 def compute():
 	# Memoization
 	maxsum = [[None] * (2**COLUMNS) for _ in range(ROWS)]
 	
-	def hamming_weight(x):
-		return bin(x).count("1")
-	
 	# Returns the maximum sum when considering the submatrix from row 'startrow' until the bottom,
 	# with the bit set 'setofcols' indicating which column indexes are still free to be used.
 	def find_maximum_sum(startrow, setofcols):
 		if startrow == ROWS:
-			assert hamming_weight(setofcols) == COLUMNS - ROWS
+			assert eulerlib.popcount(setofcols) == COLUMNS - ROWS
 			return 0
 		if maxsum[startrow][setofcols] is None:
 			result = 0

@@ -6,6 +6,8 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
+import eulerlib
+
 
 def compute():
 	# Each die has (10 choose 6) arrangements, so we have at most 44100 arrangements to check
@@ -13,7 +15,7 @@ def compute():
 		for i in range(1 << 10)
 		for j in range(i, 1 << 10)  # Ensure i <= j to force the dice to be orderless
 		# If both have Hamming weight of 6
-		if bin(i).count("1") == bin(j).count("1") == 6 and is_arrangement_valid(i, j))
+		if eulerlib.popcount(i) == eulerlib.popcount(j) == 6 and is_arrangement_valid(i, j))
 	return str(ans)
 
 

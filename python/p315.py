@@ -25,11 +25,11 @@ def sam_transitions_minus_max_transitions(n):
 		newstate = number_to_segments(n)
 		if newstate == segmentstate:
 			break
-		maxtrans += bin(newstate ^ segmentstate).count("1")
+		maxtrans += eulerlib.popcount(newstate ^ segmentstate)
 		segmentstate = newstate
-		samtrans += 2 * bin(newstate).count("1")
+		samtrans += 2 * eulerlib.popcount(newstate)
 		n = digit_sum(n)
-	maxtrans += bin(segmentstate).count("1")
+	maxtrans += eulerlib.popcount(segmentstate)
 	return samtrans - maxtrans
 
 
