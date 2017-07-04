@@ -71,7 +71,7 @@ public final class p216 implements EulerSolution {
 	 * 
 	 * Credits:
 	 *   My algorithm and proof were written with major help from this document:
-	 *   http://fun-math-problems.googlecode.com/svn/trunk/doc/euler/p216.tex
+	 *   https://code.google.com/archive/p/fun-math-problems/source/default/source?page=15 , p216.tex
 	 */
 	
 	private static final int LIMIT = 50000000;

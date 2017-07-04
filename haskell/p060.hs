@@ -6,7 +6,7 @@
  - https://github.com/nayuki/Project-Euler-solutions
  -}
 
-import Data.Numbers.Primes (isPrime, primes)  -- From http://hackage.haskell.org/package/primes
+import Data.Numbers.Primes (isPrime, primes)  -- From https://hackage.haskell.org/package/primes
 
 
 -- Arbitrary initial limit for the sum of the set of chosen concatenatable primes.
