@@ -30,7 +30,7 @@ def test_bit(x, i):
 	return ((x >> i) & 1) != 0
 
 
-SQUARES = ((0, 1), (0, 4), (0, 9), (1, 6), (2, 5), (3, 6), (4, 9), (6, 4), (8, 1))
+SQUARES = [(i**2 // 10, i**2 % 10) for i in range(1, 10)]
 
 
 if __name__ == "__main__":

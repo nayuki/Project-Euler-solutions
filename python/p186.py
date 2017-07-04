@@ -23,7 +23,7 @@ def compute():
 class DisjointSet(object):
 	
 	def __init__(self, size):
-		self.nodes = [DisjointSet.Node() for i in range(size)]
+		self.nodes = [DisjointSet.Node() for _ in range(size)]
 	
 	def _find(self, i):
 		return self.nodes[i].find()

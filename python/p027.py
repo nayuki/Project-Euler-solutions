@@ -23,7 +23,7 @@ def count_consecutive_primes(ab):
 			return i
 
 
-isprimecache = list(map(eulerlib.is_prime, range(1000)))
+isprimecache = eulerlib.list_primality(1000)
 
 def is_prime(n):
 	if n < 0:
