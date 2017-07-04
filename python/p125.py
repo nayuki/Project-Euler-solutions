@@ -18,7 +18,7 @@ def compute():
 			if sigma >= 100000000:
 				break
 			s = str(sigma)
-			if s == s[::-1]:  # Is palindrome
+			if s == s[ : : -1]:  # Is palindrome
 				nums.add(sigma)
 	return str(sum(nums))
 

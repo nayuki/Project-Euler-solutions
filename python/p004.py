@@ -14,7 +14,7 @@ def compute():
 		for j in range(100, 1000):
 			k = i * j
 			s = str(k)
-			if s == s[::-1] and k > ans:
+			if s == s[ : : -1] and k > ans:
 				ans = k
 	return str(ans)
 
