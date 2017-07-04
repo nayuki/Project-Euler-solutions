@@ -11,7 +11,9 @@ import eulerlib
 
 def compute():
 	isprime = eulerlib.list_primality(20000000)
-	ans = sum(sam_transitions_minus_max_transitions(i) for (i, p) in enumerate(isprime) if i >= 10000000 and p)
+	ans = sum(sam_transitions_minus_max_transitions(i)
+		for (i, p) in enumerate(isprime)
+		if i >= 10000000 and p)
 	return str(ans)
 
 

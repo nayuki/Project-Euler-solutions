@@ -52,7 +52,8 @@ def compute():
 					heapq.heappush(queue, (nextpmax, m))
 			tempdigits[i] = digits[i]  # Restore the digit
 	
-	ans = sum(i for i in range(len(isprime)) if (isprime[i] and (pathmax[i] is None or pathmax[i] > i)))
+	ans = sum(i for i in range(len(isprime))
+		if isprime[i] and (pathmax[i] is None or pathmax[i] > i))
 	return str(ans)
 
 

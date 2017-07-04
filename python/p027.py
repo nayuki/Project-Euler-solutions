@@ -10,7 +10,8 @@ import eulerlib, itertools
 
 
 def compute():
-	ans = max(((a, b) for a in range(-999, 1000) for b in range(2, 1000)), key=count_consecutive_primes)
+	ans = max(((a, b) for a in range(-999, 1000) for b in range(2, 1000)),
+		key=count_consecutive_primes)
 	return str(ans[0] * ans[1])
 
 

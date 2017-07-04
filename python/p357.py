@@ -52,7 +52,7 @@ def compute():
 			for d in range(2, eulerlib.sqrt(n) + 1))
 	
 	ans = sum(n for n in range(LIMIT + 1)
-		if (isprime[n + 1] and is_prime_generating(n)))
+		if isprime[n + 1] and is_prime_generating(n))
 	return str(ans)
 
 

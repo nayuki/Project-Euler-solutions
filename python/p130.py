@@ -12,7 +12,8 @@ if sys.version_info.major == 2:
 
 
 def compute():
-	cond = lambda i: i % 5 != 0 and not eulerlib.is_prime(i) and (i - 1) % find_least_divisible_repunit(i) == 0
+	cond = lambda i: (i % 5 != 0) and (not eulerlib.is_prime(i)) \
+		and ((i - 1) % find_least_divisible_repunit(i) == 0)
 	ans = sum(itertools.islice(filter(cond, itertools.count(7, 2)), 25))
 	return str(ans)
 
