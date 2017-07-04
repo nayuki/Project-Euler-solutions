@@ -15,7 +15,7 @@ def compute():
 	# 0. Determine whether a k-digit solution is possible, for increasing values of k.
 	# 1. Knowing that a k-digit solution exists, construct the minimum solution.
 	# 
-	# Let n >= 1 be a arbitrary integer that will remain constant for the rest of the explanation.
+	# Let n >= 1 be an arbitrary integer that will remain constant for the rest of the explanation.
 	# 
 	# When we look at the set of all k-digit numbers using only the digits {0, 1, 2}
 	# (with possible leading zeros), each number will have a particular remainder modulo n.

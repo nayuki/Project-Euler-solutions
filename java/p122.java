@@ -44,7 +44,7 @@ public final class p122 implements EulerSolution {
 	 * This gives us the benefit of breadth-first search without its high memory usage - namely, the first time
 	 * we visit a sum of n, we can be sure that it has been reached with the smallest possible chain length.
 	 * 
-	 * An crucial algorithmic optimization is that we only consider addition chains that are strictly increasing.
+	 * A crucial algorithmic optimization is that we only consider addition chains that are strictly increasing.
 	 * Clearly there is no benefit to producing a certain term twice within the same sequence (e.g. 2 + 2 = 4 and 1 + 3 = 4).
 	 * As for the increasing order, we argue that for every addition chain that isn't strictly increasing, it can be
 	 * reordered to one that is strictly increasing. For example, the chain {1, 2, 4, 3} can be reordered to {1, 2, 3, 4}.
