@@ -27,5 +27,6 @@ main = putStrLn (show ans)
 ans = sum [1 | n <- [1..9], k <- [1..21], (numLength (n^k :: Integer)) == k]
 
 numLength :: Integer -> Int
-numLength n | n < 10    = 1
-            | otherwise = (numLength (div n 10)) + 1
+numLength n
+	| n < 10    = 1
+	| otherwise = (numLength (div n 10)) + 1

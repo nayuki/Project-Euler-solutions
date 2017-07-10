@@ -197,5 +197,4 @@ englishWords = [  -- 10 strings per line, except final line
 	"WING", "WINNER", "WINTER", "WISH", "WITH", "WITHDRAW", "WITHIN", "WITHOUT", "WOMAN", "WONDER",
 	"WONDERFUL", "WOOD", "WORD", "WORK", "WORKER", "WORKING", "WORKS", "WORLD", "WORRY", "WORTH",
 	"WOULD", "WRITE", "WRITER", "WRITING", "WRONG", "YARD", "YEAH", "YEAR", "YES", "YESTERDAY",
-	"YET", "YOU", "YOUNG", "YOUR", "YOURSELF", "YOUTH"
-]
+	"YET", "YOU", "YOUNG", "YOUR", "YOURSELF", "YOUTH"]

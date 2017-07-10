@@ -41,5 +41,4 @@ isDcf (numer, denom) = let
 		n1 = div numer 10
 		d0 = mod denom 10
 		d1 = div denom 10
-	in
-		(n1 == d0 && n0 * denom == numer * d1) || (n0 == d1 && n1 * denom == numer * d0)
+	in (n1 == d0 && n0 * denom == numer * d1) || (n0 == d1 && n1 * denom == numer * d0)
