@@ -26,25 +26,25 @@ public final class p280 implements EulerSolution {
 			int[] sucIds = new int[suc.size()];
 			Iterator<State> it = suc.iterator();
 			for (int i = 0; i < sucIds.length; i++)
-				sucIds[i] = it.next().getId();
-			successors[st.getId()] = sucIds;
+				sucIds[i] = it.next().id;
+			successors[st.id] = sucIds;
 		}
 		
 		double sum = 0;
 		double[] probs = new double[State.ID_LIMIT];
-		probs[State.START_STATE.getId()] = 1;
+		probs[State.START_STATE.id] = 1;
 		for (int i = 1; ; i++) {
 			// Note: The done state has no outgoing neighbors, so its probability disappears in the next iteration
 			double[] nextProbs = new double[probs.length];
 			for (int j = 0; j < probs.length; j++) {
-				if (probs[j] == 0)
-					continue;
-				int[] suc = successors[j];
-				for (int k : suc)
-					nextProbs[k] += probs[j] / suc.length;
+				if (probs[j] > 0) {
+					int[] suc = successors[j];
+					for (int k : suc)
+						nextProbs[k] += probs[j] / suc.length;
+				}
 			}
 			
-			double doneNow = nextProbs[State.DONE_STATE.getId()];
+			double doneNow = nextProbs[State.DONE_STATE.id];
 			if (i > 44 && doneNow < 1e-20)  // Note: Minimum completion is 44 steps
 				break;
 			sum += doneNow * i;
@@ -82,6 +82,9 @@ public final class p280 implements EulerSolution {
 		}
 		
 		
+		// A number in the range [0, ID_LIMIT) such that each distinct state has a different ID.
+		public final int id;
+		
 		private boolean isDone;  // Note: When the ant is done, we neglect its position - so there's only 1 done state, not 5
 		private int antX;
 		private int antY;
@@ -93,19 +96,15 @@ public final class p280 implements EulerSolution {
 			antX = x;
 			antY = y;
 			hasSeed = seed;
-		}
-		
-		
-		// Returns a unique number for this state, in the range [0, NUMBER_OF_STATES)
-		public int getId() {
-			if (isDone)
-				return 5 * 5 * (1 << hasSeed.length);
 			
-			int result = 0;
-			for (int i = 0; i < hasSeed.length; i++)
-				result |= (hasSeed[i] ? 1 : 0) << i;
-			result = antX + antY * 5 + result * 25;
-			return result;
+			if (done)
+				id = 5 * 5 * (1 << seed.length);
+			else {
+				int temp = 0;
+				for (int i = 0; i < seed.length; i++)
+					temp |= (seed[i] ? 1 : 0) << i;
+				id = x + y * 5 + temp * 25;
+			}
 		}
 		
 		
@@ -135,7 +134,7 @@ public final class p280 implements EulerSolution {
 			} else if (seed[10] && y == 0 && !seed[x]) {  // Drop seed
 				seed[10] = false;
 				seed[x] = true;
-				done = seed[0] && seed[1] && seed[2] && seed[3] && seed[4];
+				done = seed[0] & seed[1] & seed[2] & seed[3] & seed[4];
 			}
 			result.add(new State(done, x, y, seed));
 		}
