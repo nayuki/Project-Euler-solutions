@@ -7,11 +7,19 @@
  -}
 
 module EulerLib
-	(digitSum, sqrt, isPrime)
+	(factorial, binomial, digitSum, sqrt, isPrime)
 	where
 
 import Prelude hiding (sqrt)
 import Data.Bits
+
+
+factorial :: Integral a => a -> Integer
+factorial n = product [1 .. (toInteger n)]
+
+
+binomial :: Integral a => a -> a -> Integer
+binomial n k = div (product [(toInteger (n - k + 1)) .. (toInteger n)]) (factorial k)
 
 
 digitSum :: Integral a => a -> a

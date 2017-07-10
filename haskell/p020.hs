@@ -14,6 +14,4 @@ import EulerLib
  -}
 
 main = putStrLn (show ans)
-ans = EulerLib.digitSum (factorial 100 :: Integer)
-
-factorial n = product [1..n]
+ans = EulerLib.digitSum (EulerLib.factorial 100)

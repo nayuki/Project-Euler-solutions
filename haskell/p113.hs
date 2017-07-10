@@ -6,6 +6,8 @@
  - https://github.com/nayuki/Project-Euler-solutions
  -}
 
+import EulerLib
+
 
 {- 
  - Let n be the number of digits. To count the number of increasing or decreasing numbers using combinatorics,
@@ -35,5 +37,4 @@
  -}
 n = 100
 main = putStrLn (show ans)
-ans = (((binomial (n+9) 9) - 1) + ((binomial (n+10) 10) - n - 1) - n*9) :: Integer
-binomial n r = div (product [n-r+1..n]) (product [1..r])
+ans = ((EulerLib.binomial (n+9) 9) - 1) + ((EulerLib.binomial (n+10) 10) - n - 1) - n*9
