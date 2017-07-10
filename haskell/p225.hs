@@ -11,6 +11,7 @@ index = 124  -- 1-based
 main = putStrLn (show ans)
 ans = (filter hasNoTribonacciMultiple [1,3..]) !! (index - 1)
 
+hasNoTribonacciMultiple :: Int -> Bool
 hasNoTribonacciMultiple n = let
 		tribonacci (a, b, c) = (b, c, mod (a + b + c) n)
 		func init slow@(a, _, _) fast

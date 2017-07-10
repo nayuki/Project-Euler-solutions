@@ -15,5 +15,6 @@ arrive89 1 = False
 arrive89 89 = True
 arrive89 n = arrive89 (squareDigitSum n)
 
+squareDigitSum :: Int -> Int
 squareDigitSum 0 = 0
 squareDigitSum n = (mod n 10)^2 + (squareDigitSum (div n 10))
