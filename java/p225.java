@@ -32,14 +32,14 @@ public final class p225 implements EulerSolution {
 		// Floyd's cycle-finding algorithm
 		Tribonacci slow = new Tribonacci(modulus);
 		Tribonacci fast = new Tribonacci(modulus);
-		while (true) {
+		for (boolean head = true; ; head = false) {
 			if (slow.hasMultiple())
 				return true;
+			if (!head && slow.equals(fast))
+				return false;
 			slow.next();
 			fast.next();
 			fast.next();
-			if (slow.equals(fast))
-				return false;
 		}
 	}
 	
