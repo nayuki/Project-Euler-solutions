@@ -6,15 +6,14 @@
  - https://github.com/nayuki/Project-Euler-solutions
  -}
 
+import EulerLib
+
 
 {- 
  - We do a straightforward product thanks to Haskell's built-in arbitrary precision Integer type.
  -}
 
 main = putStrLn (show ans)
-ans = digitSum (factorial 100 :: Integer)
-
-digitSum 0 = 0
-digitSum n = (mod n 10) + (digitSum (div n 10))
+ans = EulerLib.digitSum (factorial 100 :: Integer)
 
 factorial n = product [1..n]

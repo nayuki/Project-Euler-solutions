@@ -6,6 +6,8 @@
  - https://github.com/nayuki/Project-Euler-solutions
  -}
 
+import EulerLib
+
 
 base = 10
 digits = 20
@@ -41,9 +43,6 @@ ans = (ways (digits + consecutive) 0) - (ways (digits + consecutive - 1) 0)
 ways :: Int -> Int -> Integer
 ways 0 0 = 1
 ways 0 _ = 0
-ways d p = if (digitSum p) > maxSum then 0
+ways d p = if (EulerLib.digitSum p) > maxSum then 0
 	else sum [waysMemo !! (d - 1) !! ((mod p (base^(consecutive - 1))) * base + i) | i <- [0..9]]
 waysMemo = [[ways d p | p <- [0..]] | d <- [0..]]
-
-digitSum 0 = 0
-digitSum n = (mod n 10) + (digitSum (div n 10))

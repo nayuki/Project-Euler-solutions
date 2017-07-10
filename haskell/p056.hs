@@ -6,9 +6,8 @@
  - https://github.com/nayuki/Project-Euler-solutions
  -}
 
+import EulerLib
+
 
 main = putStrLn (show ans)
-ans = foldl1 max [digitsum (a^b) | a <- [0..99], b <- [0..99]]
-
-digitsum 0 = 0
-digitsum n = (mod n 10) + (digitsum (div n 10))
+ans = foldl1 max [EulerLib.digitSum (a^b) | a <- [0..99], b <- [0..99]]

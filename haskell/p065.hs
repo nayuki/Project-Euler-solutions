@@ -6,6 +6,8 @@
  - https://github.com/nayuki/Project-Euler-solutions
  -}
 
+import EulerLib
+
 
 limit = 100
 main = putStrLn (show ans)
@@ -15,12 +17,9 @@ ans = let
 			| otherwise = let (n, d) = func (i+1) end
 			in ((eContFracTerm i) * n + d, n)
 		(numer, _) = func 0 limit
-	in digitSum numer
+	in EulerLib.digitSum numer
 
 eContFracTerm 0 = 2
 eContFracTerm i
 	| mod i 3 == 2 = (div i 3) * 2 + 2
 	| otherwise    = 1
-
-digitSum 0 = 0
-digitSum n = (mod n 10) + (digitSum (div n 10))
