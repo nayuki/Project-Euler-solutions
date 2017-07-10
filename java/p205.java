@@ -27,10 +27,11 @@ public final class p205 implements EulerSolution {
 		for (int i = 0; i < 6; i++)
 			sixCubicPdf = convolve(sixCubicPdf, CUBIC_DIE_PDF);
 		
-		long count = 0;
+		long numer = 0;
 		for (int i = 0; i < ninePyramidalPdf.length; i++)
-			count += (long)ninePyramidalPdf[i] * sum(sixCubicPdf, 0, i);
-		return String.format("%.7f", count / Math.pow(4, 9) / Math.pow(6, 6));
+			numer += (long)ninePyramidalPdf[i] * sum(sixCubicPdf, 0, i);
+		long denom = (long)sum(ninePyramidalPdf, 0, ninePyramidalPdf.length) * sum(sixCubicPdf, 0, sixCubicPdf.length);
+		return String.format("%.7f", (double)numer / denom);
 	}
 	
 	
@@ -44,9 +45,9 @@ public final class p205 implements EulerSolution {
 	}
 	
 	
-	private static int sum(int[] array, int from, int to) {
+	private static int sum(int[] array, int start, int end) {
 		int sum = 0;
-		for (int i = from; i < to; i++)
+		for (int i = start; i < end; i++)
 			sum += array[i];
 		return sum;
 	}
