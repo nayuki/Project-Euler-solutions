@@ -101,7 +101,7 @@ public final class p084 implements EulerSolution {
 	}
 	
 	
-	private class CardDeck {
+	private final class CardDeck {
 		
 		private int[] cards;
 		private int index;

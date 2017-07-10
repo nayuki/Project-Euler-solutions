@@ -113,7 +113,7 @@ public final class p425 implements EulerSolution {
 	
 	
 	
-	private static class IntPair implements Comparable<IntPair> {
+	private static final class IntPair implements Comparable<IntPair> {
 		
 		public final int a;
 		public final int b;
