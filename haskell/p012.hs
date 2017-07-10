@@ -15,4 +15,4 @@ ans = head $ filter (\n -> (divisors n) > 500) $ map triangleNumber [0..]
 triangleNumber i = div (i * (i + 1)) 2
 
 divisors :: Int -> Int
-divisors n = (sum [1 | k <- [1 .. (EulerLib.sqrt n)], mod n k == 0]) * 2 - (if (EulerLib.sqrt n)^2 == n then 1 else 0)
+divisors n = (sum [1 | k <- [1 .. (EulerLib.sqrt n)], mod n k == 0]) * 2 - EulerLib.boolToInt ((EulerLib.sqrt n)^2 == n)

@@ -177,8 +177,8 @@ find :: Integer -> Integer -> Integer
 find ring remain = let
 		a = all EulerLib.isPrime [ring * 6 - 1, ring * 6 + 1, ring * 12 + 5]
 		b = all EulerLib.isPrime [ring * 6 - 1, ring * 6 + 5, ring * 12 - 7]
-		remain' = remain - (if a then 1 else 0)
-		remain'' = remain' - (if b then 1 else 0)
+		remain' = remain - (EulerLib.boolToInt a)
+		remain'' = remain' - (EulerLib.boolToInt b)
 	in if remain' == 0
 		then (ring * (ring - 1) * 3 + 2)
 		else if remain'' == 0

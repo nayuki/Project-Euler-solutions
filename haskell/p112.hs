@@ -8,6 +8,7 @@
 
 import Data.List (sort)
 import Data.Ratio ((%))
+import qualified EulerLib
 
 
 target = 99 % 100
@@ -18,6 +19,6 @@ ans = let
 			s = show i
 			t = sort s
 			bouncy = s /= t && (reverse s) /= t
-			c = count + (if bouncy then 1 else 0)
+			c = count + (EulerLib.boolToInt bouncy)
 			in if ((c % i) == target) then i else (func (i + 1) c)
 	in func 1 0

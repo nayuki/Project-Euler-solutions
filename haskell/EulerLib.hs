@@ -7,11 +7,16 @@
  -}
 
 module EulerLib
-	(factorial, binomial, digitSum, sqrt, isPrime)
+	(boolToInt, factorial, binomial, digitSum, sqrt, isPrime)
 	where
 
 import Prelude hiding (sqrt)
 import Data.Bits
+
+
+boolToInt :: Integral a => Bool -> a
+boolToInt False = 0
+boolToInt True  = 1
 
 
 factorial :: Integral a => a -> Integer
