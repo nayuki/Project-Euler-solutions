@@ -8,10 +8,10 @@
 
 
 main = putStrLn (show ans)
-ans = length (filter (inTriangle 0 0) triangles)
+ans = sum [1 | tri <- triangles, isPointInTriangle (0,0) tri]
 
 -- Use cross products to determine handedness
-inTriangle x y (x0,y0,x1,y1,x2,y2) = let
+isPointInTriangle (x,y) (x0,y0,x1,y1,x2,y2) = let
 		a = signum ((x0 - x1) * (y - y0) - (y0 - y1) * (x - x0))
 		b = signum ((x1 - x2) * (y - y1) - (y1 - y2) * (x - x1))
 		c = signum ((x2 - x0) * (y - y2) - (y2 - y0) * (x - x2))
