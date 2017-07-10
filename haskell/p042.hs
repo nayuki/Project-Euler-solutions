@@ -7,10 +7,11 @@
  -}
 
 import Data.Char (ord)
+import qualified EulerLib
 
 
 main = putStrLn (show ans)
-ans = length $ filter isTriangular $ map wordValue englishWords
+ans = EulerLib.count isTriangular (map wordValue englishWords)
 
 isTriangular n = (last (takeWhile (<= n) triangleNumbers)) == n
 triangleNumbers = [div (n * (n + 1)) 2 | n <- [1..]]  -- [1, 3, 6, 10, 15, 21, 28, ...]

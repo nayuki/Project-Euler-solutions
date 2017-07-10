@@ -6,10 +6,12 @@
  - https://github.com/nayuki/Project-Euler-solutions
  -}
 
+import qualified EulerLib
+
 
 limit = 10^7
 main = putStrLn (show ans)
-ans = sum [1 | n <- [1 .. (limit - 1)], arrive89 n]
+ans = EulerLib.count arrive89 [1 .. (limit - 1)]
 
 arrive89 :: Int -> Bool
 arrive89 1 = False

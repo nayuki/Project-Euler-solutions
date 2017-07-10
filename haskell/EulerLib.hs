@@ -7,7 +7,7 @@
  -}
 
 module EulerLib
-	(boolToInt, factorial, binomial, digitSum, sqrt, isPrime)
+	(boolToInt, count, factorial, binomial, digitSum, sqrt, isPrime)
 	where
 
 import Prelude hiding (sqrt)
@@ -17,6 +17,12 @@ import Data.Bits
 boolToInt :: Integral a => Bool -> a
 boolToInt False = 0
 boolToInt True  = 1
+
+
+-- Counts the number of elements in the list that satisfy the predicate.
+count :: (a -> Bool) -> [a] -> Int
+count pred list = length (filter pred list)
+-- Or shorter: count = length . filter
 
 
 factorial :: Integral a => a -> Integer

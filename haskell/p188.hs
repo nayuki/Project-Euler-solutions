@@ -6,6 +6,8 @@
  - https://github.com/nayuki/Project-Euler-solutions
  -}
 
+import qualified EulerLib
+
 
 main = putStrLn (show ans)
 ans = tetrationMod 1777 1855 (10^8)
@@ -25,4 +27,4 @@ powMod x y m
 		temp = powMod (mod (x * x) m) (div y 2) m
 
 totient :: Integer -> Integer
-totient x = fromIntegral $ sum [1 | y <- [1..x], gcd x y == 1]
+totient x = fromIntegral $ EulerLib.count (\y -> gcd x y == 1) [1..x]

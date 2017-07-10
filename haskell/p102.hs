@@ -6,9 +6,11 @@
  - https://github.com/nayuki/Project-Euler-solutions
  -}
 
+import qualified EulerLib
+
 
 main = putStrLn (show ans)
-ans = sum [1 | tri <- triangles, isPointInTriangle (0,0) tri]
+ans = EulerLib.count (isPointInTriangle (0,0)) triangles
 
 -- Use cross products to determine handedness
 isPointInTriangle (x,y) (x0,y0,x1,y1,x2,y2) = let

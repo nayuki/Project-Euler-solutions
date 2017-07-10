@@ -6,6 +6,8 @@
  - https://github.com/nayuki/Project-Euler-solutions
  -}
 
+import qualified EulerLib
+
 
 p = 1009 :: Integer
 q = 3643 :: Integer
@@ -30,7 +32,7 @@ countAllUnconcealed prime = let
 
 
 countUnconcealed :: Integer -> Integer -> Integer
-countUnconcealed modulus e = sum [1 | m <- [0 .. (modulus - 1)], (powMod m e modulus) == m]
+countUnconcealed modulus e = fromIntegral (EulerLib.count (\m -> (powMod m e modulus) == m) [0 .. (modulus - 1)])
 
 
 powMod :: Integer -> Integer -> Integer -> Integer
