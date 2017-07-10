@@ -20,36 +20,35 @@ public final class p280 implements EulerSolution {
 	
 	// Model the problem as a Markov process, and solve using dynamic programming
 	public String run() {
-		int[][] successors = new int[State.NUMBER_OF_STATES][];
-		Set<State> allStates = State.listAllStates();
-		for (State st : allStates) {
+		int[][] successors = new int[State.ID_LIMIT][];
+		for (State st : State.listAllStates()) {
 			Set<State> suc = st.getSuccessors();
-			int[] sucId = new int[suc.size()];
+			int[] sucIds = new int[suc.size()];
 			Iterator<State> it = suc.iterator();
-			for (int i = 0; i < sucId.length; i++)
-				sucId[i] = it.next().getId();
-			successors[st.getId()] = sucId;
+			for (int i = 0; i < sucIds.length; i++)
+				sucIds[i] = it.next().getId();
+			successors[st.getId()] = sucIds;
 		}
 		
 		double sum = 0;
-		double[] probs = new double[State.NUMBER_OF_STATES];
+		double[] probs = new double[State.ID_LIMIT];
 		probs[State.START_STATE.getId()] = 1;
 		for (int i = 1; ; i++) {
 			// Note: The done state has no outgoing neighbors, so its probability disappears in the next iteration
-			double[] newProbs = new double[probs.length];
+			double[] nextProbs = new double[probs.length];
 			for (int j = 0; j < probs.length; j++) {
 				if (probs[j] == 0)
 					continue;
 				int[] suc = successors[j];
 				for (int k : suc)
-					newProbs[k] += probs[j] / suc.length;
+					nextProbs[k] += probs[j] / suc.length;
 			}
 			
-			double doneNow = newProbs[State.DONE_STATE.getId()];
+			double doneNow = nextProbs[State.DONE_STATE.getId()];
 			if (i > 44 && doneNow < 1e-20)  // Note: Minimum completion is 44 steps
 				break;
 			sum += doneNow * i;
-			probs = newProbs;
+			probs = nextProbs;
 		}
 		return String.format("%.6f", sum);
 	}
@@ -58,7 +57,7 @@ public final class p280 implements EulerSolution {
 	
 	private static class State {
 		
-		public static final int NUMBER_OF_STATES = 5 * 5 * (1 << 11) + 1;
+		public static final int ID_LIMIT = 5 * 5 * (1 << 11) + 1;
 		
 		public static State START_STATE = new State(false, 2, 2, new boolean[]{false, false, false, false, false, true, true, true, true, true, false});
 		public static State DONE_STATE  = new State(true , 0, 0, new boolean[]{true, true, true, true, true, false, false, false, false, false, false});
