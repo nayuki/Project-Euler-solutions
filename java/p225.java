@@ -6,6 +6,8 @@
  * https://github.com/nayuki/Project-Euler-solutions
  */
 
+import java.util.Arrays;
+
 
 public final class p225 implements EulerSolution {
 	
@@ -19,7 +21,7 @@ public final class p225 implements EulerSolution {
 	public String run() {
 		int count = 0;
 		for (int i = 1; ; i += 2) {
-			if (!hasMultiple(i)) {
+			if (!hasTribonacciMultiple(i)) {
 				count++;
 				if (count == INDEX)
 					return Integer.toString(i);
@@ -28,60 +30,33 @@ public final class p225 implements EulerSolution {
 	}
 	
 	
-	private static boolean hasMultiple(int modulus) {
+	// Tests whether any term of the Tribonacci sequence [1, 1, 1, 3, 5, 9, 17, 31, ...]
+	// is a multiple of 'modulus'. Although the mathematical sequence is infinitely long,
+	// this function returns an answer in O(modulus^3) time.
+	private static boolean hasTribonacciMultiple(int modulus) {
 		// Floyd's cycle-finding algorithm
-		Tribonacci slow = new Tribonacci(modulus);
-		Tribonacci fast = new Tribonacci(modulus);
+		int[] slow = {1, 1, 1};
+		int[] fast = slow.clone();
 		for (boolean head = true; ; head = false) {
-			if (slow.hasMultiple())
+			if (slow[0] % modulus == 0)
 				return true;
-			if (!head && slow.equals(fast))
+			if (!head && Arrays.equals(slow, fast))
 				return false;
-			slow.next();
-			fast.next();
-			fast.next();
+			tribonacci(slow, modulus);
+			tribonacci(fast, modulus);
+			tribonacci(fast, modulus);
 		}
 	}
 	
 	
-	
-	private static class Tribonacci {
-		
-		public final int modulus;
-		
-		public int a;
-		public int b;
-		public int c;
-		
-		
-		public Tribonacci(int mod) {
-			a = 1 % mod;
-			b = 1 % mod;
-			c = 1 % mod;
-			modulus = mod;
-		}
-		
-		
-		public void next() {
-			int d = (a + b + c) % modulus;
-			a = b;
-			b = c;
-			c = d;
-		}
-		
-		
-		public boolean hasMultiple() {
-			return a == 0 || b == 0 || c == 0;
-		}
-		
-		
-		public boolean equals(Tribonacci other) {
-			return a == other.a
-			    && b == other.b
-			    && c == other.c
-			    && modulus == other.modulus;
-		}
-		
+	// Advances the 3-element Tribonacci state vector by one iteration in place.
+	private static void tribonacci(int[] state, int mod) {
+		int a = state[0];
+		int b = state[1];
+		int c = state[2];
+		state[0] = b;
+		state[1] = c;
+		state[2] = (a + b + c) % mod;
 	}
 	
 }
