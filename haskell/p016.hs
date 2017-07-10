@@ -6,7 +6,7 @@
  - https://github.com/nayuki/Project-Euler-solutions
  -}
 
-import EulerLib
+import qualified EulerLib
 
 
 -- We implement this solution in a straightforward way thanks to Haskell's built-in arbitrary precision Integer type.

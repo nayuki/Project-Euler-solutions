@@ -7,7 +7,7 @@
  -}
 
 import Data.List (foldl1')
-import EulerLib
+import qualified EulerLib
 
 
 target = 2000000

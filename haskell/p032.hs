@@ -7,7 +7,7 @@
  -}
 
 import Data.List (sort)
-import EulerLib
+import qualified EulerLib
 
 
 main = putStrLn (show ans)

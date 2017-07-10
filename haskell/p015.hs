@@ -6,7 +6,7 @@
  - https://github.com/nayuki/Project-Euler-solutions
  -}
 
-import EulerLib
+import qualified EulerLib
 
 
 -- This is a classic combinatorics problem. To get from the top left corner to the bottom right corner of an N*N grid,

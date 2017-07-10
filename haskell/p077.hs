@@ -6,7 +6,7 @@
  - https://github.com/nayuki/Project-Euler-solutions
  -}
 
-import EulerLib
+import qualified EulerLib
 
 
 target = 5000
