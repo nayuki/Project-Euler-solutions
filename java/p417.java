@@ -98,12 +98,12 @@ public final class p417 implements EulerSolution {
 	
 	
 	private static long[] calcPrimePowersAndTotients(int[] primes) {
-		DynamicArray temp = new DynamicArray(primes.length * 2);
+		LongList temp = new LongList(primes.length * 2);
 		for (int p : primes) {
 			if (p == 2 || p == 5)
 				continue;
 			for (long pow = p, tot = p - 1; pow <= LIMIT; pow *= p, tot *= p)
-				temp.add(pow << 32 | tot);
+				temp.append(pow << 32 | tot);
 		}
 		long[] result = temp.toArray();
 		Arrays.sort(result);
@@ -170,13 +170,13 @@ public final class p417 implements EulerSolution {
 	
 	
 	// A growable list of long values that is more time- and space-efficient than java.util.List<Long>
-	private static class DynamicArray {
+	private static class LongList {
 		
 		private long[] data;
 		private int length;
 		
 		
-		public DynamicArray(int initCapacity) {
+		public LongList(int initCapacity) {
 			if (initCapacity < 1)
 				throw new IllegalArgumentException();
 			data = new long[initCapacity];
@@ -184,7 +184,7 @@ public final class p417 implements EulerSolution {
 		}
 		
 		
-		public void add(long x) {
+		public void append(long x) {
 			if (length == data.length)
 				data = Arrays.copyOf(data, length * 2);
 			data[length] = x;
