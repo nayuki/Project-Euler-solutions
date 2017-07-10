@@ -9,8 +9,6 @@
 import EulerLib
 
 
+limit = 2000000 :: Int
 main = putStrLn (show ans)
-ans = sum (filter isPrime [2 .. 2000000-1])
-
-isPrime :: Int -> Bool
-isPrime n = n > 1 && null [() | k <- [2 .. (EulerLib.sqrt n)], mod n k == 0]
+ans = sum (filter EulerLib.isPrime [2 .. (limit - 1)])

@@ -7,7 +7,7 @@
  -}
 
 module EulerLib
-	(digitSum, sqrt)
+	(digitSum, sqrt, isPrime)
 	where
 
 import Prelude hiding (sqrt)
@@ -28,3 +28,7 @@ sqrt n = sqrtAlpha 1 where
 		| otherwise = sqrtAlpha (Data.Bits.shiftL i 1)
 	sqrtBeta 0 acc = acc
 	sqrtBeta i acc = sqrtBeta (div i 2) (if (i + acc)^2 <= n then i + acc else acc)
+
+
+isPrime :: (Integral a, Data.Bits.Bits a) => a -> Bool
+isPrime n = n > 1 && null [() | k <- [2 .. (sqrt n)], mod n k == 0]

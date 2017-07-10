@@ -6,6 +6,8 @@
  - https://github.com/nayuki/Project-Euler-solutions
  -}
 
+import EulerLib
+
 
 target = 5000
 main = putStrLn (show ans)
@@ -25,8 +27,5 @@ ans = head $ dropWhile (\n -> partitions n n <= target) [0..]
 partitions :: Int -> Int -> Int
 partitions _ 0 = 1
 partitions 0 _ = 0
-partitions i n = (if ((isPrime i) && i <= n) then (partitionsMemo !! i !! (n - i)) else 0) + (partitionsMemo !! (i - 1) !! n)
+partitions i n = (if ((EulerLib.isPrime i) && i <= n) then (partitionsMemo !! i !! (n - i)) else 0) + (partitionsMemo !! (i - 1) !! n)
 partitionsMemo = [[partitions i n | n <- [0..]] | i <- [0..]]
-
-isPrime :: Int -> Bool
-isPrime n = n > 1 && null [() | k <- [2 .. n-1], mod n k == 0]

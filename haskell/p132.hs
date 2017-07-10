@@ -10,7 +10,7 @@ import EulerLib
 
 
 main = putStrLn (show ans)
-cond i = isPrime i && (repunitMod (10^9) i) == 0
+cond i = EulerLib.isPrime i && (repunitMod (10^9) i) == 0
 ans = sum (take 40 (filter cond [2..]))
 
 repunitMod :: Integer -> Integer -> Integer
@@ -20,6 +20,3 @@ powMod :: Integer -> Integer -> Integer -> Integer
 powMod _ 0 _ = 1
 powMod x 1 m = mod x m
 powMod x y m = mod ((powMod x (div y 2) m)^2 * (if ((mod y 2) == 0) then 1 else x)) m
-
-isPrime :: Integer -> Bool
-isPrime n = n > 1 && null [() | k <- [2 .. (EulerLib.sqrt n)], mod n k == 0]
