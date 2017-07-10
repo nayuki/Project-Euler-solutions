@@ -6,7 +6,7 @@
  - https://github.com/nayuki/Project-Euler-solutions
  -}
 
-import Data.Bits (shiftL, shiftR)
+import EulerLib
 
 
 {- 
@@ -186,14 +186,4 @@ find ring remain = let
 			else find (ring + 1) remain''
 
 isPrime :: Integer -> Bool
-isPrime n = n > 1 && null [() | k <- [2 .. (sqrtInt n)], mod n k == 0]
-
--- sqrtInt n = floor(sqrt(n)).
--- Implemented entirely in integer arithmetic; guaranteed no rounding error.
-sqrtInt :: Integer -> Integer
-sqrtInt n = sqrtAlpha 1 where
-	sqrtAlpha i
-		| i * i > n = sqrtBeta (shiftR i 1) 0
-		| otherwise = sqrtAlpha (shiftL i 1)
-	sqrtBeta 0 acc = acc
-	sqrtBeta i acc = sqrtBeta (div i 2) (if (i + acc)^2 <= n then i + acc else acc)
+isPrime n = n > 1 && null [() | k <- [2 .. (EulerLib.sqrt n)], mod n k == 0]
