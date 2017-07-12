@@ -211,5 +211,6 @@ public final class EulerTest {
 	@Test public void testP500() { assertEquals("35407281"           , new p500().run()); }
 	@Test public void testP518() { assertEquals("100315739184392"    , new p518().run()); }
 	@Test public void testP549() { assertEquals("476001479068717"    , new p549().run()); }
+	@Test public void testP587() { assertEquals("2240"               , new p587().run()); }
 	
 }
