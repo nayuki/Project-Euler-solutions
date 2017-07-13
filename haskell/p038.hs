@@ -21,6 +21,6 @@ number d = number' d 0 where
 	number' [] acc = acc
 	number' (d:ds) acc = number' ds (acc * 10 + d)
 
-pandigital d = (List.sort d) == [1..9]
+pandigital d = (sort d) == [1..9]
 
 concatProd n x = concat [digits (x * i) | i <- [1..n]]

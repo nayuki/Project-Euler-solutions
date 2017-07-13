@@ -44,5 +44,5 @@
  - According to the problem statement, we need to exclude 0 and include 2^30. But both are losing positions, so the adjustments cancel out.
  -}
 main = putStrLn (show ans)
-ans = fibonacci 32
+ans = fibonacci !! 32
 fibonacci = 0 : 1 : (zipWith (+) fibonacci (tail fibonacci))
