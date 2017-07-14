@@ -13,9 +13,6 @@ def compute():
 	PRIME_LIMIT = 100000  # Arbitrary initial cutoff
 	primes = eulerlib.list_primes(PRIME_LIMIT)
 	
-	# Memoization
-	isconcatprime = {}
-	
 	
 	# Tries to find any suitable set and return its sum, or None if none is found.
 	# A set is suitable if it contains only primes, its size is targetsize,
@@ -45,11 +42,9 @@ def compute():
 	
 	
 	# Tests whether concat(primes[x], primes[y]) is a prime number, with memoization.
+	@eulerlib.memoize
 	def is_concat_prime(x, y):
-		key = (x, y)
-		if key not in isconcatprime:
-			isconcatprime[key] = is_prime(int(str(primes[x]) + str(primes[y])))
-		return isconcatprime[key]
+		return is_prime(int(str(primes[x]) + str(primes[y])))
 	
 	
 	# Tests whether the given integer is prime. The implementation performs trial division,

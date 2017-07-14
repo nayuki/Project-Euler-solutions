@@ -8,7 +8,7 @@
 
 
 def compute():
-	ans = max((p for p in range(1, 1001)), key=count_solutions)
+	ans = max(range(1, 1001), key=count_solutions)
 	return str(ans)
 
 

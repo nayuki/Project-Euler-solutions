@@ -14,12 +14,9 @@ def compute():
 	subsets[0] = 1
 	
 	for i in range(1, 250250 + 1):
-		newsubsets = list(subsets)
-		temp = pow(i, i, 250)
-		for j in range(len(subsets)):
-			k = (j + temp) % 250
-			newsubsets[k] = (subsets[j] + subsets[k]) % MOD
-		subsets = newsubsets
+		offset = pow(i, i, 250)
+		subsets = [(val + subsets[(j - offset) % 250]) % MOD
+			for (j, val) in enumerate(subsets)]
 	
 	ans = (subsets[0] - 1) % MOD
 	return str(ans)

@@ -8,18 +8,11 @@
 
 
 def compute():
-	bestkey = None
-	bestscore = None
-	for x in range(97, 123):  # ASCII lowercase 'a' to 'z'
-		for y in range(97, 123):
-			for z in range(97, 123):
-				key = (x, y, z)
-				plaintext = decrypt(CIPHERTEXT, key)
-				score = get_score(plaintext)
-				if bestkey is None or score > bestscore:
-					bestkey = key
-					bestscore = score
-	
+	bestkey = max(((x, y, z)
+		for x in range(97, 123)  # ASCII lowercase 'a' to 'z'
+		for y in range(97, 123)
+		for z in range(97, 123)),
+		key=lambda key: get_score(decrypt(CIPHERTEXT, key)))
 	ans = sum(decrypt(CIPHERTEXT, bestkey))
 	return str(ans)
 
