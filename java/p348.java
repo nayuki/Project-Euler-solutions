@@ -16,6 +16,10 @@ public final class p348 implements EulerSolution {
 	
 	private static final int TARGET_WAYS = 4;
 	private static final int TARGET_COUNT = 5;
+	static {
+		assert 0 <= TARGET_COUNT;
+		assert 0 <= TARGET_WAYS && TARGET_WAYS <= Byte.MAX_VALUE - 1;
+	}
 	
 	public String run() {
 		for (long limit = 1; ; limit *= 10) {
@@ -28,10 +32,7 @@ public final class p348 implements EulerSolution {
 	}
 	
 	
-	@SuppressWarnings("unused")
 	private static long trySearch(int limit) {
-		if (TARGET_COUNT < 0 || TARGET_WAYS < 0 || TARGET_WAYS > Byte.MAX_VALUE - 1)
-			throw new AssertionError();
 		byte[] ways = new byte[limit];
 		
 		for (int i = cbrt(limit - 1); i > 1; i--) {
@@ -57,12 +58,8 @@ public final class p348 implements EulerSolution {
 	
 	
 	private static int cbrt(int x) {
-		if (x < 0) {
-			if (x == -2147483648)
-				return -1290;
-			else
-				return -cbrt(-x);
-		}
+		if (x < 0)
+			throw new IllegalArgumentException("Not implemented");
 		int y = 0;
 		for (int i = 1 << 10; i != 0; i >>>= 1) {
 			y |= i;

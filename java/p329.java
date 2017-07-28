@@ -19,6 +19,10 @@ public final class p329 implements EulerSolution {
 	private static final int START_NUM = 1;
 	private static final int END_NUM = 500;
 	private static final String CROAK_SEQ = "PPPPNNPPPNPPNPN";
+	static {
+		assert 0 <= START_NUM && START_NUM < END_NUM && END_NUM < Integer.MAX_VALUE;
+		assert 1 <= CROAK_SEQ.length() && CROAK_SEQ.length() <= 31;
+	}
 	
 	private static final int NUM_JUMPS = CROAK_SEQ.length() - 1;
 	private static final int NUM_TRIALS = 1 << NUM_JUMPS;

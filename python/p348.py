@@ -22,15 +22,14 @@ def compute():
 
 def try_search(limit):
 	ways = {}
-	i = 2
-	while True:
+	
+	for i in itertools.count(2):
 		cube = i**3
 		if cube >= limit:
 			break
 		for j in range(2, eulerlib.sqrt(limit - 1 - cube) + 1):
 			index = cube + j**2
 			ways[index] = ways.get(index, 0) + 1
-		i += 1
 	
 	result = 0
 	count = 0

@@ -13,6 +13,8 @@ def compute():
 	START_NUM = 1
 	END_NUM = 500
 	CROAK_SEQ = "PPPPNNPPPNPPNPN"
+	assert 0 <= START_NUM < END_NUM
+	assert 1 <= len(CROAK_SEQ)
 	
 	NUM_JUMPS = len(CROAK_SEQ) - 1
 	NUM_TRIALS = 2**NUM_JUMPS
