@@ -14,6 +14,33 @@ public final class p348 implements EulerSolution {
 	}
 	
 	
+	/* 
+	 * Given a range of integers [0, n), we can bulk-calculate how many ways
+	 * each integer can be expressed as a sum of a cube and a square.
+	 * 
+	 * Start by initializing an array of length n with all zeros.
+	 * Next, write a two-level loop to explore all the cubes i^3
+	 * and squares j^2 such that their sum is less than n:
+	 * 
+	 *   ways = new int[n];  // Initially all zero
+	 *   for (i = 2; i^3 < n; i++) {
+	 *     for (j = 2; i^3 + j^2 < n; j++) {
+	 *       ways[i^3 + j^2]++;
+	 *     }
+	 *   }
+	 * 
+	 * The array creation takes O(n) time. The outer loop runs O(n^(1/3)) iterations,
+	 * the inner loop runs O(n^(1/2)) iterations per outer loop, hence the inner loop body
+	 * runs O(n^(5/6)) iterations. Thus the whole process runs in O(n) time and memory.
+	 * 
+	 * Finally we iterate forward through the array, selecting numbers that
+	 * are palindromes and can be summed in the target number of ways.
+	 * 
+	 * If the answer is not found in our range [0, n), then we increase the range and search
+	 * again. If we multiply n by some factor (say 2 or 10), then the geometric series ensures
+	 * that the total work we do is O(n) with respect to the magnitude of the final answer.
+	 */
+	
 	private static final int TARGET_WAYS = 4;
 	private static final int TARGET_COUNT = 5;
 	static {
@@ -32,9 +59,20 @@ public final class p348 implements EulerSolution {
 	}
 	
 	
+	// Examines all integers in the range [0, limit), and returns the sum of the lowest
+	// TARGET_COUNT integers each with the property that it is a palidrome in base 10
+	// and it can be expressed in exactly TARGET_COUNT ways as a sum of a perfect square
+	// greater than 1 and a perfect cube greater than 1. If fewer than TARGET_COUNT integers
+	// in [0, limit) have the desired property, then -1 is returned. Note that if
+	// trySearch(n) == k != -1, then for every m > n, trySearch(m) == k also holds.
 	private static long trySearch(int limit) {
+		// ways[i] is exactly the number of ways that i can be expressed as a sum of a
+		// square greater than 1 and a cube greater than 1. However, the counting of ways
+		// saturates at TARGET_COUNT+1 to prevent potentially unboundedly large values.
 		byte[] ways = new byte[limit];
 		
+		// Count both loops downward, so that the end
+		// value is a constant instead of a variable
 		for (int i = cbrt(limit - 1); i > 1; i--) {
 			int cube = i * i * i;
 			for (int j = Library.sqrt(limit - 1 - cube); j > 1; j--) {
@@ -43,6 +81,7 @@ public final class p348 implements EulerSolution {
 			}
 		}
 		
+		// Examine which numbers are palindromes and have the target number of ways
 		long result = 0;
 		int count = 0;
 		for (int i = 0; i < ways.length; i++) {
@@ -53,10 +92,11 @@ public final class p348 implements EulerSolution {
 					return result;
 			}
 		}
-		return -1;
+		return -1;  // Not found
 	}
 	
 	
+	// Returns floor(cbrt(x)) for x >= 0.
 	private static int cbrt(int x) {
 		if (x < 0)
 			throw new IllegalArgumentException("Not implemented");
