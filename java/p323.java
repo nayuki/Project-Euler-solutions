@@ -74,11 +74,10 @@ public final class p323 implements EulerSolution {
 	@SuppressWarnings("unused")
 	public String run() {
 		// Calculate the answer
-		Fraction ZERO = new Fraction(BigInteger.ZERO);
 		Fraction[] expect = new Fraction[SIZE + 1];
-		expect[0] = ZERO;
+		expect[0] = Fraction.ZERO;
 		for (int n = 1; n < expect.length; n++) {
-			Fraction sum = ZERO;
+			Fraction sum = Fraction.ZERO;
 			for (int k = 0; k < n; k++) {
 				BigInteger binom = Library.binomial(n, k);
 				Fraction term = new Fraction(expect[k].numerator.multiply(binom), expect[k].denominator);
@@ -92,14 +91,14 @@ public final class p323 implements EulerSolution {
 		// Round the fraction properly. This is the pedantically correct version of doing
 		// String.format("%.10f", ans.numerator.doubleValue() / ans.denominator.doubleValue())
 		Fraction ans = expect[SIZE];
-		assert ans.compareTo(ZERO) >= 0;
+		assert ans.compareTo(Fraction.ZERO) >= 0;
 		
 		
 		Fraction scaled = new Fraction(ans.numerator.multiply(BigInteger.TEN.pow(DECIMALS)), ans.denominator);
 		BigInteger[] quotRem = scaled.numerator.divideAndRemainder(scaled.denominator);
 		BigInteger whole = quotRem[0];
 		Fraction frac = new Fraction(quotRem[1], scaled.denominator);
-		assert frac.compareTo(ZERO) >= 0;
+		assert frac.compareTo(Fraction.ZERO) >= 0;
 		assert frac.compareTo(new Fraction(BigInteger.ONE)) < 0;
 		Fraction HALF = new Fraction(BigInteger.ONE, BigInteger.valueOf(2));
 		if (frac.compareTo(HALF) > 0 || frac.equals(HALF) && whole.testBit(0))

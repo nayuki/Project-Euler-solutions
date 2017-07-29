@@ -338,6 +338,9 @@ final class Library {
 // Immutable unlimited precision fraction
 final class Fraction implements Comparable<Fraction> {
 	
+	public static final Fraction ZERO = new Fraction(BigInteger.ZERO);
+	
+	
 	public final BigInteger numerator;    // Always coprime with denominator
 	public final BigInteger denominator;  // Always positive
 	

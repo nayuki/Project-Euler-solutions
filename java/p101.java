@@ -43,7 +43,7 @@ public final class p101 implements EulerSolution {
 	private static final int DEGREE = 10;
 	
 	public String run() {
-		Fraction sum = new Fraction(BigInteger.ZERO);
+		Fraction sum = Fraction.ZERO;
 		for (int k = 1; k <= DEGREE; k++) {
 			for (int n = k + 1; ; n++) {
 				if (n == DEGREE + 2)
@@ -66,7 +66,7 @@ public final class p101 implements EulerSolution {
 	
 	private static Fraction optimumPolynomial(int k, int n) {
 		// Lagrange interpolation
-		Fraction sum = new Fraction(BigInteger.ZERO);
+		Fraction sum = Fraction.ZERO;
 		for (int i = 1; i <= k; i++) {
 			Fraction product = new Fraction(generatingFunction(i));
 			for (int j = 1; j <= k; j++) {
