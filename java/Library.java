@@ -215,7 +215,7 @@ final class Library {
 		for (int i = 3, end = sqrt(n); i <= end; i += 2) {
 			if (result[i]) {
 				// Note: i * i does not overflow
-				for (int j = i * i; j <= n; j += i << 1)
+				for (int j = i * i, inc = i * 2; j <= n; j += inc)
 					result[j] = false;
 			}
 		}
@@ -226,16 +226,16 @@ final class Library {
 	// Returns all the prime numbers less than or equal to n, in ascending order.
 	// For example: listPrimes(97) = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, ..., 83, 89, 97}.
 	public static int[] listPrimes(int n) {
-		boolean[] isprime = listPrimality(n);
+		boolean[] isPrime = listPrimality(n);
 		int count = 0;
-		for (boolean b : isprime) {
+		for (boolean b : isPrime) {
 			if (b)
 				count++;
 		}
 		
 		int[] result = new int[count];
-		for (int i = 0, j = 0; i < isprime.length; i++) {
-			if (isprime[i]) {
+		for (int i = 0, j = 0; i < isPrime.length; i++) {
+			if (isPrime[i]) {
 				result[j] = i;
 				j++;
 			}
@@ -253,6 +253,7 @@ final class Library {
 			if (result[i] == 0) {
 				result[i] = i;
 				if (i <= limit) {
+					// Note: i * i does not overflow
 					for (int j = i * i; j <= n; j += i) {
 						if (result[j] == 0)
 							result[j] = i;
@@ -292,17 +293,17 @@ final class Library {
 	public static int[] listTotients(int n) {
 		if (n < 0)
 			throw new IllegalArgumentException("Negative array size");
-		int[] totients = new int[n + 1];
+		int[] result = new int[n + 1];
 		for (int i = 0; i <= n; i++)
-			totients[i] = i;
+			result[i] = i;
 		
 		for (int i = 2; i <= n; i++) {
-			if (totients[i] == i) {  // i is prime
+			if (result[i] == i) {  // i is prime
 				for (int j = i; j <= n; j += i)
-					totients[j] -= totients[j] / i;
+					result[j] -= result[j] / i;
 			}
 		}
-		return totients;
+		return result;
 	}
 	
 	
