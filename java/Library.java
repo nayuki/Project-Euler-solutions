@@ -342,6 +342,12 @@ final class Fraction implements Comparable<Fraction> {
 	public final BigInteger denominator;  // Always positive
 	
 	
+	public Fraction(BigInteger numer) {
+		numerator = numer;
+		denominator = BigInteger.ONE;
+	}
+	
+	
 	public Fraction(BigInteger numer, BigInteger denom) {
 		if (denom.signum() == 0)
 			throw new ArithmeticException("Division by zero");

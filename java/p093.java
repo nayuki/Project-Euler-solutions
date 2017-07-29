@@ -54,7 +54,7 @@ public final class p093 implements EulerSolution {
 				int j = 0;  // Operator index
 				for (int op : ops) {
 					if (1 <= op && op <= 9) {  // Operand
-						stack.push(new Fraction(BigInteger.valueOf(op), BigInteger.ONE));
+						stack.push(new Fraction(BigInteger.valueOf(op)));
 					} else if (op == 0) {  // Operator
 						if (stack.size() < 2)
 							continue outer;  // Stack underflow; skip this ordering

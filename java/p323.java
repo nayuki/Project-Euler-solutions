@@ -74,7 +74,7 @@ public final class p323 implements EulerSolution {
 	@SuppressWarnings("unused")
 	public String run() {
 		// Calculate the answer
-		Fraction ZERO = new Fraction(BigInteger.ZERO, BigInteger.ONE);
+		Fraction ZERO = new Fraction(BigInteger.ZERO);
 		Fraction[] expect = new Fraction[SIZE + 1];
 		expect[0] = ZERO;
 		for (int n = 1; n < expect.length; n++) {
@@ -85,7 +85,7 @@ public final class p323 implements EulerSolution {
 				sum = sum.add(term);
 			}
 			BigInteger twoPowN = BigInteger.ONE.shiftLeft(n);
-			Fraction temp = sum.add(new Fraction(twoPowN, BigInteger.ONE));
+			Fraction temp = sum.add(new Fraction(twoPowN));
 			expect[n] = new Fraction(temp.numerator, temp.denominator.multiply(twoPowN.subtract(BigInteger.ONE)));
 		}
 		
@@ -100,7 +100,7 @@ public final class p323 implements EulerSolution {
 		BigInteger whole = quotRem[0];
 		Fraction frac = new Fraction(quotRem[1], scaled.denominator);
 		assert frac.compareTo(ZERO) >= 0;
-		assert frac.compareTo(new Fraction(BigInteger.ONE, BigInteger.ONE)) < 0;
+		assert frac.compareTo(new Fraction(BigInteger.ONE)) < 0;
 		Fraction HALF = new Fraction(BigInteger.ONE, BigInteger.valueOf(2));
 		if (frac.compareTo(HALF) > 0 || frac.equals(HALF) && whole.testBit(0))
 			whole = whole.add(BigInteger.ONE);
