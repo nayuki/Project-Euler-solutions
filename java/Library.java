@@ -363,22 +363,30 @@ final class Fraction implements Comparable<Fraction> {
 	
 	
 	public Fraction add(Fraction other) {
-		return new Fraction(numerator.multiply(other.denominator).add(other.numerator.multiply(denominator)), denominator.multiply(other.denominator));
+		return new Fraction(
+			numerator.multiply(other.denominator).add(other.numerator.multiply(denominator)),
+			denominator.multiply(other.denominator));
 	}
 	
 	
 	public Fraction subtract(Fraction other) {
-		return new Fraction(numerator.multiply(other.denominator).subtract(other.numerator.multiply(denominator)), denominator.multiply(other.denominator));
+		return new Fraction(
+			numerator.multiply(other.denominator).subtract(other.numerator.multiply(denominator)),
+			denominator.multiply(other.denominator));
 	}
 	
 	
 	public Fraction multiply(Fraction other) {
-		return new Fraction(numerator.multiply(other.numerator), denominator.multiply(other.denominator));
+		return new Fraction(
+			numerator.multiply(other.numerator),
+			denominator.multiply(other.denominator));
 	}
 	
 	
 	public Fraction divide(Fraction other) {
-		return new Fraction(numerator.multiply(other.denominator), denominator.multiply(other.numerator));
+		return new Fraction(
+			numerator.multiply(other.denominator),
+			denominator.multiply(other.numerator));
 	}
 	
 	
@@ -386,12 +394,14 @@ final class Fraction implements Comparable<Fraction> {
 		if (!(obj instanceof Fraction))
 			return false;
 		Fraction other = (Fraction)obj;
-		return numerator.equals(other.numerator) && denominator.equals(other.denominator);
+		return numerator.equals(other.numerator)
+			&& denominator.equals(other.denominator);
 	}
 	
 	
 	public int compareTo(Fraction other) {
-		return numerator.multiply(other.denominator).compareTo(other.numerator.multiply(denominator));
+		return numerator.multiply(other.denominator)
+			.compareTo(other.numerator.multiply(denominator));
 	}
 	
 	
