@@ -306,28 +306,30 @@ final class Library {
 	}
 	
 	
-	// Advances the given sequence to the next permutation and returns whether a permutation was performed.
-	// If no permutation was performed, then the input state was already the last possible permutation (a non-ascending sequence).
+	// Attempts to advance the given sequence to the next permutation in lexicographical order.
+	// Returns true if the sequence was successfully permuted, or returns false if the sequence
+	// was already at the last possible permutation (a non-ascending sequence).
+	// Explanation: https://www.nayuki.io/page/next-lexicographical-permutation-algorithm
 	// For example:
 	// - nextPermutation({0,0,1}) changes the argument array to {0,1,0} and returns true.
 	// - nextPermutation({1,0,0}) leaves the argument array unchanged and returns false.
-	public static boolean nextPermutation(int[] a) {
-		int n = a.length, i, j;
-		for (i = n - 2; ; i--) {
-			if (i < 0)
-				return false;
-			if (a[i] < a[i + 1])
-				break;
+	public static boolean nextPermutation(int[] arr) {
+		int i = arr.length - 1;
+		for (; i > 0 && arr[i - 1] >= arr[i]; i--);
+		if (i <= 0)
+			return false;
+		{
+			int j = arr.length - 1;
+			for (; arr[j] <= arr[i - 1]; j--);
+			int temp = arr[i - 1];
+			arr[i - 1] = arr[j];
+			arr[j] = temp;
 		}
-		for (j = 1; i + j < n - j; j++) {
-			int tp = a[i + j];
-			a[i + j] = a[n - j];
-			a[n - j] = tp;
+		for (int j = arr.length - 1; i < j; i++, j--) {
+			int temp = arr[i];
+			arr[i] = arr[j];
+			arr[j] = temp;
 		}
-		for (j = i + 1; a[j] <= a[i]; j++);
-		int tp = a[i];
-		a[i] = a[j];
-		a[j] = tp;
 		return true;
 	}
 	
