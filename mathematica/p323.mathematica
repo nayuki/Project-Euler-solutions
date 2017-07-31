@@ -24,5 +24,5 @@
 
 cdf[n_] = (1 - (1/2)^n) ^ 32;
 pdf[n_] := cdf[n] - cdf[n - 1]
-Sum[n * pdf[n], {n, Infinity}]  (* Exact *)
-N[%, 11]  (* Rounded *)
+answer = Sum[n * pdf[n], {n, Infinity}];  (* Exact *)
+N[answer, 11]  (* Rounded *)

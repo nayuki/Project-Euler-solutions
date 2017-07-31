@@ -120,6 +120,6 @@
  *)
 CountReversibles[d_] := Piecewise[{
   {20 * 30^(d / 2 - 1), Mod[d, 2] == 0},
-  {100 * 500^((n - 3) / 4), Mod[d, 4] == 3},
+  {100 * 500^((d - 3) / 4), Mod[d, 4] == 3},
   {0, Mod[d, 4] == 1}}]
 Sum[CountReversibles[d], {d, 1, 9}]
