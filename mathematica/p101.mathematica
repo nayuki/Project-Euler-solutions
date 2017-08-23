@@ -31,5 +31,5 @@
  * the first incorrect term (FIT) of OP(k, n) exists for some n in {k+1, k+2, ..., 11}.
  *)
 u[n_] = Sum[(-n)^k, {k, 0, 10}];  (* Degree 10 polynomial *)
-OP[k_, n_] := InterpolatingPolynomial[Table[u[i], {i, k}], x] /. (x -> n)
+OP[k_, n_] := ReplaceAll[InterpolatingPolynomial[Table[u[i], {i, k}], x], x -> n]
 Sum[Select[Table[OP[k, i], {i, k+1, 11}], Function[x, x != 0]][[1]], {k, 1, 10}]
