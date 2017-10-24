@@ -7,9 +7,10 @@
  *)
 
 
-SemiprimeQ[n_] := Total[Map[Function[a, a[[2]]], FactorInteger[n]]] == 2
-s = 0;
-For[i = 1, i < 10^8, i++,
-  If[SemiprimeQ[i],
-    s++]]
-s
+lim = 10^8;
+
+SemiprimeQ[n_] := 3 <= DivisorSigma[0, i] <= 4 && !IntegerQ[i^(1/3)]
+ans = 0;
+For[i = 1, i < lim, i++,
+  ans += Boole[SemiprimeQ[i]]]
+ans
