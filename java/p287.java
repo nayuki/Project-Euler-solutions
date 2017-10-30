@@ -6,6 +6,8 @@
  * https://github.com/nayuki/Project-Euler-solutions
  */
 
+import java.math.BigInteger;
+
 
 public final class p287 implements EulerSolution {
 	
@@ -42,9 +44,6 @@ public final class p287 implements EulerSolution {
 	 *   satisfy x^2 + y^2 > R^2, hence the entire region is white.
 	 * - Otherwise, the region must contain both black and white points,
 	 *   so we split into 4 subregions and recurse.
-	 * 
-	 * For N = 24, the minimum encoded bit length for this
-	 * circle image fits in an int32, but this is unproven.
 	 */
 	
 	private static final int N = 24;
@@ -53,13 +52,13 @@ public final class p287 implements EulerSolution {
 	
 	public String run() {
 		int temp = 1 << (N - 1);
-		return Long.toString(compressedLength(N, -temp, temp, -temp, temp));
+		return compressedLength(N, -temp, temp, -temp, temp).toString();
 	}
 	
 	
 	// Returns the exact minimum number of bits required to encode
 	// the circle image's region of [xStart, end) * [yStart, yEnd).
-	private long compressedLength(int n, int xStart, int xEnd, int yStart, int yEnd) {
+	private BigInteger compressedLength(int n, int xStart, int xEnd, int yStart, int yEnd) {
 		assert n >= 0;
 		assert xStart < xEnd && xEnd - xStart == 1 << n;
 		assert yStart < yEnd && yEnd - yStart == 1 << n;
@@ -72,15 +71,15 @@ public final class p287 implements EulerSolution {
 		long maxRadius = (long)maxAbsX * maxAbsX + (long)maxAbsY * maxAbsY;
 		
 		if (maxRadius <= RADIUS_SQUARED || minRadius > RADIUS_SQUARED)  // All black or all white, respectively
-			return 2;
+			return BigInteger.valueOf(2);
 		else {
 			int xMid = (xStart + xEnd) / 2;
 			int yMid = (yStart + yEnd) / 2;
-			return 1 +
-				compressedLength(n - 1, xStart, xMid, yMid  , yEnd) +  // Top left
-				compressedLength(n - 1, xMid  , xEnd, yMid  , yEnd) +  // Top right
-				compressedLength(n - 1, xStart, xMid, yStart, yMid) +  // Bottom left
-				compressedLength(n - 1, xMid  , xEnd, yStart, yMid);   // Bottom right
+			return BigInteger.ONE
+				.add(compressedLength(n - 1, xStart, xMid, yMid  , yEnd))   // Top left
+				.add(compressedLength(n - 1, xMid  , xEnd, yMid  , yEnd))   // Top right
+				.add(compressedLength(n - 1, xStart, xMid, yStart, yMid))   // Bottom left
+				.add(compressedLength(n - 1, xMid  , xEnd, yStart, yMid));  // Bottom right
 		}
 	}
 	
