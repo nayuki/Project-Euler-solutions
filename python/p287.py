@@ -34,36 +34,43 @@
 #   satisfy x^2 + y^2 > R^2, hence the entire region is white.
 # - Otherwise, the region must contain both black and white points,
 #   so we split into 4 subregions and recurse.
+# 
+# One further optimization: If the region [xstart, xend) * [ystart, yend) lies
+# entirely within a quadrant, then calculating minR and maxR becomes trivial.
+# In fact, only the root call to compressed_length() spans both positive
+# and negative coordinates; all deeper calls are entirely within a quadrant.
+# For a region with [xstart, xend) where xstart < xend <= 0, compressed_length()
+# yields the same result when the range is replaced with [-xend + 1, -xstart + 1).
+# Hence by symmetry, we can only consider cases where 0 <= xstart < xend,
+# and not deal with negative ranges. This optimized bit length algorithm can
+# no longer be adapted to encode the actual compressed bit stream, however.
 def compute():
 	N = 24
 	RADIUS_SQUARED = 2**(2 * N - 2)
 	
 	# Returns the exact minimum number of bits required to encode
-	# the circle image's region of [xstart, end) * [ystart, yend).
+	# the circle image's region of [xstart, end) * [ystart, yend),
+	# requiring 0 <= xstart < xend and 0 <= ystart < yend.
 	def compressed_length(xstart, xend, ystart, yend):
-		maxabsx = max(abs(xstart), abs(xend - 1))
-		maxabsy = max(abs(ystart), abs(yend - 1))
-		maxradius = maxabsx * maxabsx + maxabsy * maxabsy
-		if maxradius <= RADIUS_SQUARED:  # All black
+		if xstart * xstart + ystart * ystart > RADIUS_SQUARED:  # All white
 			return 2
-		
-		minabsx = 0 if (xstart <= 0 < xend) else min(abs(xstart), abs(xend - 1))
-		minabsy = 0 if (ystart <= 0 < yend) else min(abs(ystart), abs(yend - 1))
-		minradius = minabsx * minabsx + minabsy * minabsy
-		if minradius > RADIUS_SQUARED:  # All white
+		elif (xend - 1) * (xend - 1) + (yend - 1) * (yend - 1) <= RADIUS_SQUARED:  # All black
 			return 2
-		
-		# Else subdivide and recurse
-		xmid = (xstart + xend) >> 1
-		ymid = (ystart + yend) >> 1
-		return (1 +
-			compressed_length(xstart, xmid, ymid  , yend) +  # Top left
-			compressed_length(xmid  , xend, ymid  , yend) +  # Top right
-			compressed_length(xstart, xmid, ystart, ymid) +  # Bottom left
-			compressed_length(xmid  , xend, ystart, ymid))   # Bottom right
+		else:  # Subdivide and recurse
+			xmid = (xstart + xend) >> 1
+			ymid = (ystart + yend) >> 1
+			return (1 +
+				compressed_length(xstart, xmid, ymid  , yend) +  # Top left
+				compressed_length(xmid  , xend, ymid  , yend) +  # Top right
+				compressed_length(xstart, xmid, ystart, ymid) +  # Bottom left
+				compressed_length(xmid  , xend, ystart, ymid))   # Bottom right
 	
 	temp = 2**(N - 1)
-	return str(compressed_length(-temp, temp, -temp, temp))
+	return str(1 +
+		compressed_length(0, temp, 0, temp) +
+		compressed_length(0, temp, 1, temp + 1) +
+		compressed_length(1, temp + 1, 0, temp) +
+		compressed_length(1, temp + 1, 1, temp + 1))
 
 
 if __name__ == "__main__":
