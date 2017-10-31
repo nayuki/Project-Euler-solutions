@@ -41,23 +41,26 @@ def compute():
 	# Returns the exact minimum number of bits required to encode
 	# the circle image's region of [xstart, end) * [ystart, yend).
 	def compressed_length(xstart, xend, ystart, yend):
-		minabsx = 0 if (xstart <= 0 < xend) else min(abs(xstart), abs(xend - 1))
-		minabsy = 0 if (ystart <= 0 < yend) else min(abs(ystart), abs(yend - 1))
 		maxabsx = max(abs(xstart), abs(xend - 1))
 		maxabsy = max(abs(ystart), abs(yend - 1))
-		minradius = minabsx * minabsx + minabsy * minabsy
 		maxradius = maxabsx * maxabsx + maxabsy * maxabsy
-		
-		if maxradius <= RADIUS_SQUARED or minradius > RADIUS_SQUARED:  # All black or all white, respectively
+		if maxradius <= RADIUS_SQUARED:  # All black
 			return 2
-		else:
-			xmid = (xstart + xend) >> 1
-			ymid = (ystart + yend) >> 1
-			return (1 +
-				compressed_length(xstart, xmid, ymid  , yend) +  # Top left
-				compressed_length(xmid  , xend, ymid  , yend) +  # Top right
-				compressed_length(xstart, xmid, ystart, ymid) +  # Bottom left
-				compressed_length(xmid  , xend, ystart, ymid))   # Bottom right
+		
+		minabsx = 0 if (xstart <= 0 < xend) else min(abs(xstart), abs(xend - 1))
+		minabsy = 0 if (ystart <= 0 < yend) else min(abs(ystart), abs(yend - 1))
+		minradius = minabsx * minabsx + minabsy * minabsy
+		if minradius > RADIUS_SQUARED:  # All white
+			return 2
+		
+		# Else subdivide and recurse
+		xmid = (xstart + xend) >> 1
+		ymid = (ystart + yend) >> 1
+		return (1 +
+			compressed_length(xstart, xmid, ymid  , yend) +  # Top left
+			compressed_length(xmid  , xend, ymid  , yend) +  # Top right
+			compressed_length(xstart, xmid, ystart, ymid) +  # Bottom left
+			compressed_length(xmid  , xend, ystart, ymid))   # Bottom right
 	
 	temp = 2**(N - 1)
 	return str(compressed_length(-temp, temp, -temp, temp))
