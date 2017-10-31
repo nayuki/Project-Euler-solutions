@@ -35,6 +35,9 @@
 # - Otherwise, the region must contain both black and white points,
 #   so we split into 4 subregions and recurse.
 def compute():
+	N = 24
+	RADIUS_SQUARED = 2**(2 * N - 2)
+	
 	# Returns the exact minimum number of bits required to encode
 	# the circle image's region of [xstart, end) * [ystart, yend).
 	def compressed_length(xstart, xend, ystart, yend):
@@ -58,10 +61,6 @@ def compute():
 	
 	temp = 2**(N - 1)
 	return str(compressed_length(-temp, temp, -temp, temp))
-
-
-N = 24
-RADIUS_SQUARED = 2**(2 * N - 2)
 
 
 if __name__ == "__main__":
