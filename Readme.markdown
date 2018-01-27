@@ -13,7 +13,7 @@ Home page with background info, table of solutions, benchmark timings, and more:
 
 ----
 
-Copyright © 2017 Project Nayuki. All rights reserved. No warranty.
+Copyright © 2018 Project Nayuki. All rights reserved. No warranty.
 
 This code is provided for reference only. You may republish any of this code verbatim with author and URL info intact.
 
