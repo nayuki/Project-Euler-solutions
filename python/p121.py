@@ -43,9 +43,7 @@ def compute():
 			row.append(temp)
 		ways.append(row)
 	
-	numer = 0
-	for i in range(TURNS // 2 + 1, TURNS + 1):
-		numer += ways[TURNS][i]
+	numer = sum(ways[TURNS][i] for i in range(TURNS // 2 + 1, TURNS + 1))
 	denom = math.factorial(TURNS + 1)
 	return str(denom // numer)
 

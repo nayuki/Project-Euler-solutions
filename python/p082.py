@@ -29,7 +29,7 @@ def compute():
 			distance[y][x] = min(GRID[y][x] + get_value(x, y + 1), distance[y][x])
 	
 	# Minimum of rightmost column
-	ans = min(distance[y][w - 1] for y in range(h))
+	ans = min(distance[y][-1] for y in range(h))
 	return str(ans)
 
 

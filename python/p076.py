@@ -14,13 +14,14 @@ def compute():
 		partitions.append([None] * (LIMIT + 1))
 		for j in reversed(range(LIMIT + 1)):
 			if j == i:
-				partitions[i][j] = 1
+				val = 1
 			elif j > i:
-				partitions[i][j] = 0
+				val = 0
 			elif j == 0:
-				partitions[i][j] = partitions[i][j + 1]
+				val = partitions[i][j + 1]
 			else:
-				partitions[i][j] = partitions[i][j + 1] + partitions[i - j][j]
+				val = partitions[i][j + 1] + partitions[i - j][j]
+			partitions[i][j] = val
 	
 	ans = partitions[LIMIT][1] - 1
 	return str(ans)
