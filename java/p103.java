@@ -6,8 +6,7 @@
  * https://github.com/nayuki/Project-Euler-solutions
  */
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 
 public final class p103 implements EulerSolution {
@@ -17,14 +16,14 @@ public final class p103 implements EulerSolution {
 	}
 	
 	
-	private static final int TARGET = 7;
+	private static final int TARGET_SIZE = 7;
 	
 	public String run() {
 		for (int sum = 0; ; sum++) {
-			List<Integer> set = new ArrayList<>();
-			if (makeSpecialSumSet(set, 1, sum)) {
+			SpecialSumSet set = SpecialSumSet.makeSet(TARGET_SIZE, sum);
+			if (set != null) {
 				String ans = "";
-				for (int x : set)
+				for (int x : set.values)
 					ans += x;
 				return ans;
 			}
@@ -32,47 +31,90 @@ public final class p103 implements EulerSolution {
 	}
 	
 	
-	private static boolean makeSpecialSumSet(List<Integer> set, int start, int remain) {
-		if (set.size() == TARGET)
-			return true;
+	
+	private static final class SpecialSumSet {
 		
-		// Try adding each possible next element
-		for (int i = start; i <= remain; i++) {
-			set.add(i);
-			if (checkPropertiesWithLastValue(set) && makeSpecialSumSet(set, i + 1, remain - i))
-				return true;
-			set.remove(set.size() - 1);
+		public static SpecialSumSet makeSet(int targetSize, int maximumSum) {
+			return makeSet(new SpecialSumSet(), targetSize, maximumSum, 1);
 		}
-		return false;
-	}
-	
-	
-	private static boolean checkPropertiesWithLastValue(List<Integer> set) {
-		// Unpack into primitives for faster computation
-		int size = set.size();
-		int[] array = new int[size];
-		for (int i = 0; i < size; i++)
-			array[i] = set.get(i);
 		
-		int end = 1 << (size - 1);
-		for (int i = end; i < end * 2; i++) {
-			int size0 = Integer.bitCount(i);
-			int sum0 = 0;
-			for (int k = 0; k < size; k++)
-				sum0 += ((i >>> k) & 1) * array[k];
+		
+		private static SpecialSumSet makeSet(SpecialSumSet set, int sizeRemain, int sumRemain, int startVal) {
+			if (sizeRemain == 0)
+				return set;
+			if (sizeRemain >= 2 && startVal * sizeRemain >= sumRemain)
+				return null;
 			
-			for (int j = 1; j < end; j++) {
-				if ((i & j) != 0)  // Subsets not disjoint
+			int endVal = sumRemain;
+			if (set.values.length >= 2)
+				endVal = Math.min(set.values[0] + set.values[1], endVal);
+			for (int val = startVal; val <= endVal; val++) {
+				SpecialSumSet temp = set.add(val);
+				if (temp == null)
 					continue;
-				int size1 = Integer.bitCount(j);
-				int sum1 = 0;
-				for (int k = 0; k < size - 1; k++)
-					sum1 += ((j >>> k) & 1) * array[k];
-				if (sum0 == sum1 || size0 < size1 && sum0 > sum1 || size1 < size0 && sum1 > sum0)
-					return false;
+				temp = makeSet(temp, sizeRemain - 1, sumRemain - val, val + 1);
+				if (temp != null)
+					return temp;
 			}
+			return null;
 		}
-		return true;
+		
+		
+		public int[] values;
+		
+		private boolean[] sumPossible;
+		private int[] minimumSum;
+		private int[] maximumSum;
+		
+		
+		public SpecialSumSet() {
+			this(new int[]{}, new boolean[]{true}, new int[]{0}, new int[]{0});
+		}
+		
+		
+		private SpecialSumSet(int[] vals, boolean[] sumPosb, int[] minSum, int[] maxSum) {
+			values = vals;
+			sumPossible = sumPosb;
+			minimumSum = minSum;
+			maximumSum = maxSum;
+		}
+		
+		
+		public SpecialSumSet add(int val) {
+			if (val <= 0)
+				throw new IllegalArgumentException();
+			int size = values.length;
+			if (size >= 1 && val <= values[size - 1])
+				throw new IllegalArgumentException();
+			
+			for (int i = val; i < sumPossible.length; i++) {
+				if (sumPossible[i] & sumPossible[i - val])
+					return null;
+			}
+			
+			int newSize = size + 1;
+			int[] newMin = Arrays.copyOf(minimumSum, newSize + 1);
+			int[] newMax = Arrays.copyOf(maximumSum, newSize + 1);
+			newMin[newSize] = Integer.MAX_VALUE;
+			newMax[newSize] = Integer.MIN_VALUE;
+			for (int i = newSize; i >= 1; i--) {
+				newMin[i] = Math.min(newMin[i - 1] + val, newMin[i]);
+				newMax[i] = Math.max(newMax[i - 1] + val, newMax[i]);
+			}
+			for (int i = 0; i < newSize; i++) {
+				if (newMax[i] >= newMin[i + 1])
+					return null;
+			}
+			
+			boolean[] newPosb = Arrays.copyOf(sumPossible, sumPossible.length + val);
+			for (int i = newPosb.length - 1; i >= val; i--)
+				newPosb[i] |= newPosb[i - val];
+			
+			int[] newVals = Arrays.copyOf(values, newSize);
+			newVals[size] = val;
+			return new SpecialSumSet(newVals, newPosb, newMin, newMax);
+		}
+		
 	}
 	
 }
