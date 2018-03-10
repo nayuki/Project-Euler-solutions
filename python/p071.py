@@ -14,11 +14,11 @@ if sys.version_info.major == 2:
 # We consider each (integer) denominator d from 1 to 1000000 by brute force.
 # For a given d, what is the largest integer n such that n/d < 3/7?
 # 
-# * If d is a multiple of 7, then the integer n' = (d / 7) * 3 satisfies n'/d = 3/7.
+# - If d is a multiple of 7, then the integer n' = (d / 7) * 3 satisfies n'/d = 3/7.
 #   Hence we choose n = n' - 1 = (d / 7) * 3 - 1, so that n/d < 3/7.
 #   Since (d / 7) * 3 is already an integer, it is equal to floor(d * 3 / 7),
 #   which will unifie with the next case. Thus n = floor(d * 3 / 7) - 1.
-# * Otherwise d is not a multiple of 7, so choosing n = floor(d * 3 / 7)
+# - Otherwise d is not a multiple of 7, so choosing n = floor(d * 3 / 7)
 #   will automatically satisfy n/d < 3/7, and be the largest possible n
 #   due to the definition of the floor function.
 # 

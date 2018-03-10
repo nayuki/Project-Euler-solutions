@@ -47,34 +47,34 @@ import qualified EulerLib
  -               C
  - 
  - Basic observations:
- - - Except for the degenerate ring 0, each ring k has 6k cells.
+ - * Except for the degenerate ring 0, each ring k has 6k cells.
  -   The kth ring has exactly 6 corner cells and 6(k - 1) edge cells.
- - - In the code we will skip the PD (prime difference) calculation for
+ - * In the code we will skip the PD (prime difference) calculation for
  -   rings 0 and 1 because the existence of ring 0 breaks many patterns.
- - - Doing the PD calculation for rings 0 and 1 by hand (n = 1 to 7
+ - * Doing the PD calculation for rings 0 and 1 by hand (n = 1 to 7
  -   inclusive), we find that PD(n) = 3 for and only for n = 1, 2.
  - 
  - Now let's analyze the characteristics of all cells in rings 2 or above.
  - It's hard to justify these assertions rigorously, but they are true from
  - looking at the spiral diagram.
  - 
- - - Corner cells along the upward vertical direction and the edge cells
+ - * Corner cells along the upward vertical direction and the edge cells
  -   immediately to the right of this vertical column are the most interesting,
  -   so we will save these cases for last.
  - 
- - - Claim: Except for cells immediately right of the upward corner column,
+ - * Claim: Except for cells immediately right of the upward corner column,
  -   no edge cell satisfies PD(n) = 3. Proof: Take an arbitrary edge cell n
  -   not immediately to the right of the upward corner column...
- -   - The two neighbors in the same ring have a difference of 1 compared to n,
+ -   * The two neighbors in the same ring have a difference of 1 compared to n,
  -     which is not a prime number.
- -   - The two neighbors in the previous (inward) ring are consecutive numbers,
+ -   * The two neighbors in the previous (inward) ring are consecutive numbers,
  -     so exactly one of them has an even absolute difference with n. Because
  -     n is in ring 2 or above, the difference with any neighboring number in the
  -     previous ring is at least 6. Thus an even number greater than 2 is not prime.
- -   - Similarly, the two neighbors in the next (outward) ring are consecutive numbers.
+ -   * Similarly, the two neighbors in the next (outward) ring are consecutive numbers.
  -     One of them has an even difference with n, and this number is also at least 6,
  -     so one neighbor is definitely not prime.
- -   - Therefore with at least 4 neighbors that do not have a prime difference, PD(n) <= 2.
+ -   * Therefore with at least 4 neighbors that do not have a prime difference, PD(n) <= 2.
  -   Example of an edge cell n = 11 in ring 2, which is straight left of the origin:
  -         10
  -     24      03
@@ -82,19 +82,19 @@ import qualified EulerLib
  -     25      04
  -         12
  - 
- - - Claim: No corner cell in the other 5 directions satisfies PD(n) = 3.
+ - * Claim: No corner cell in the other 5 directions satisfies PD(n) = 3.
  -   Proof: Take an arbitrary corner cell n in the non-upward direction...
- -   - Two of its neighbors (in the same ring) have a difference of 1,
+ -   * Two of its neighbors (in the same ring) have a difference of 1,
  -     which is not prime.
- -   - One neighbor is in the previous ring (inward) while three neighbors
+ -   * One neighbor is in the previous ring (inward) while three neighbors
  -     are in the next ring (outward).
- -   - Let the inner ring neighbor be k and the outer ring's middle neighbor
+ -   * Let the inner ring neighbor be k and the outer ring's middle neighbor
  -     be m. The three outer ring neighbors are {m - 1, m, m + 1}.
- -   - Then n - k + 6 = m - n. Also, {m - 1, m + 1} have the same parity,
+ -   * Then n - k + 6 = m - n. Also, {m - 1, m + 1} have the same parity,
  -     and {k, m} have the same other parity.
- -   - Either both {|k - n|, |m - n|} are even or both {|m - 1 - n|, |m + 1 - n|} are even.
+ -   * Either both {|k - n|, |m - n|} are even or both {|m - 1 - n|, |m + 1 - n|} are even.
  -     In any case, all these differences are at least 6, so the even numbers are not prime.
- -   - Therefore with at least 4 neighbors that do not have a prime difference, PD(n) <= 2.
+ -   * Therefore with at least 4 neighbors that do not have a prime difference, PD(n) <= 2.
  -   Example of a corner cell n = 14 in ring 2, which is straight below the origin:
  -         05
  -     13      15
@@ -102,16 +102,16 @@ import qualified EulerLib
  -     28      30
  -         29
  - 
- - - Now let's consider an arbitrary upward corner cell n in ring k, with k >= 2.
+ - * Now let's consider an arbitrary upward corner cell n in ring k, with k >= 2.
  -   We shall give variables to all its neighbors like this:
  -         d
  -     e       f
  -         n
  -     b       c
  -         a
- -   - a is in the previous ring, {b, c} are in the same ring as n,
+ -   * a is in the previous ring, {b, c} are in the same ring as n,
  -     and {d, e, f} are in the next ring.
- -   - Equations derived from the structure of the hexagonal spiral:
+ -   * Equations derived from the structure of the hexagonal spiral:
  -     n = 3k(k - 1) + 2.
  -     a = n - 6(k - 1).
  -     b = n + 1.
@@ -119,14 +119,14 @@ import qualified EulerLib
  -     d = n + 6k.
  -     e = n + 6k + 1 = d + 1.
  -     f = n + 6k + 6(k + 1) - 1 = n + 12k + 5.
- -   - Hence we get these absolute differences with n:
+ -   * Hence we get these absolute differences with n:
  -     |a - n| = 6(k - 1). (Not prime because it's a multiple of 6)
  -     |b - n| = 1. (Not prime)
  -     |c - n| = 6k - 1. (Possibly prime)
  -     |d - n| = 6k. (Not prime because it's a multiple of 6)
  -     |e - n| = 6k + 1. (Possibly prime)
  -     |f - n| = 12k + 5. (Possibly prime)
- -   - Therefore for each k >= 2, we need to count how many numbers
+ -   * Therefore for each k >= 2, we need to count how many numbers
  -     in the set {6k - 1, 6k + 1, 12k + 5} are prime.
  -   Example of a corner cell n = 8 in ring 2, which is straight above the origin:
  -         20
@@ -135,7 +135,7 @@ import qualified EulerLib
  -     09      19
  -         02
  - 
- - - Finally let's consider an arbitrary edge cell immediately to the right of the
+ - * Finally let's consider an arbitrary edge cell immediately to the right of the
  -   upward vertical column. Suppose the cell's value is n and it is in ring k,
  -   with k >= 2. Give variables to all its neighbors like this:
  -         f
@@ -143,9 +143,9 @@ import qualified EulerLib
  -         n
  -     a       d
  -         b
- -   - {a, b} are in the previous ring, {c, d} are in the current ring, and {e, f} are in
+ -   * {a, b} are in the previous ring, {c, d} are in the current ring, and {e, f} are in
  -     the next ring. The ascending ordering of all these numbers is (a, b, c, d, n, e, f).
- -   - Equations derived from the structure of the hexagonal spiral:
+ -   * Equations derived from the structure of the hexagonal spiral:
  -     n = 3k(k + 1) + 1.
  -     a = n - 6k - 6(k - 1) + 1 = n - 12k + 7.
  -     b = n - 6k.
@@ -153,14 +153,14 @@ import qualified EulerLib
  -     d = n - 1.
  -     e = n + 6(k + 1) - 1 = n + 6k + 5.
  -     f = n + 6(k + 1).
- -   - Hence we get these absolute differences with n:
+ -   * Hence we get these absolute differences with n:
  -     |a - n| = 12k - 7. (Possibly prime)
  -     |b - n| = 6k. (Not prime because it's a multiple of 6)
  -     |c - n| = 6k - 1. (Possibly prime)
  -     |d - n| = 1. (Not prime)
  -     |e - n| = 6k + 5. (Possibly prime)
  -     |f - n| = 6(k + 1). (Not prime because it's a multiple of 6)
- -   - Therefore for each k >= 2, we need to count how many numbers
+ -   * Therefore for each k >= 2, we need to count how many numbers
  -     in the set {6k - 1, 6k + 5, 12k - 7} are prime.
  -   Example of an edge cell n = 19 in ring 2:
  -         37

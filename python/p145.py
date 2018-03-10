@@ -15,10 +15,10 @@
 # reversed number does not have leading zeros.
 # 
 # Consider different cases for the number of digits n (from 1 to 9, but the arguments apply generally):
-# * n = 1:
+# - n = 1:
 #   Clearly there are no solutions because the last digit is always even.
 # 
-# * n = 0 mod 2:
+# - n = 0 mod 2:
 #   We begin by proving that when a number is "reversible", the process of adding
 #   the number to the reverse of itself will involve no carries in the arithmetic.
 #   Normally a rigorous proof would require the use of mathematical induction,
@@ -70,7 +70,7 @@
 #     (9,0).
 #   Therefore by combinatorics, there are 20 * 30^(n/2 - 1) reversible n-digit numbers when n is even.
 #   
-# * n = 1 mod 2:
+# - n = 1 mod 2:
 #   Let's illustrate what happens with a 7-digit number abcdefg:
 #     0101010
 #     abcdefg
@@ -93,7 +93,7 @@
 #   This is why we get the alternating pattern of carries in the adding process.
 #   
 #   The rest of the work is to enumerate the possibilities for each type of digit(s) in the number:
-#   * Pairs of digits which take no carry and must generate a carry (20 choices):
+#   - Pairs of digits which take no carry and must generate a carry (20 choices):
 #     (9,8), (9,6), (9,4), (9,2),
 #     (8,9), (8,7), (8,5), (8,3),
 #     (7,8), (7,6), (7,4),
@@ -103,7 +103,7 @@
 #     (3,8),
 #     (2,9).
 #     Note that the first and last digits fall into this category, and there are no 0s at all.
-#   * Non-middle pairs of digits which take a carry and generate no carry (25 choices):
+#   - Non-middle pairs of digits which take a carry and generate no carry (25 choices):
 #     (0,0), (0,2), (0,4), (0,6), (0,8),
 #     (1,1), (1,3), (1,5), (1,7),
 #     (2,0), (2,2), (2,4), (2,6),
@@ -113,7 +113,7 @@
 #     (6,0), (6,2),
 #     (7,1),
 #     (8,0).
-#   * Middle single digit, which takes a carry and generates no carry (5 choices): 0, 1, 2, 3, 4.
+#   - Middle single digit, which takes a carry and generates no carry (5 choices): 0, 1, 2, 3, 4.
 #   All in all, there are 5 * 20^((n + 1)/4) * 25^((n - 3)/4) = 100 * 500^((n - 3)/4)
 #   reversible n-digit numbers when n = 3 mod 4.
 def compute():
