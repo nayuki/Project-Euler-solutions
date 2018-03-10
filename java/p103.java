@@ -16,6 +16,72 @@ public final class p103 implements EulerSolution {
 	}
 	
 	
+	/* 
+	 * We start with three pedantic lemmas to constrain the nature of possible solutions.
+	 * 
+	 * No-zero lemma:
+	 *   A special sum set (SSS) should not contain the value 0. The problem statement
+	 *   doesn't say this explicitly, but it is implied in the numerical examples.
+	 * Proof:
+	 *   - For size n = 0, {} technically qualifies as an SSS, and is trivially optimum.
+	 *     But the problem statement does not mention the n = 0 case at all.
+	 *   - For size n = 1, {0} has sum 0, which is better than the SSS {1} given in the
+	 *     problem statement, yet this violates no properties. Even though the subsets
+	 *     {} and {0} have the same sum of 0, the properties only apply to non-empty subsets.
+	 *   - For size n = 2, {0,1} has sum 1, which is better than the SSS {1,2} given in
+	 *     the problem statement, yet this still violates no properties. There is exactly
+	 *     one possible pair of non-empty disjoint subsets, namely {0} vs. {1}, and
+	 *     this pair satisfies both properties.
+	 *   - For sizes n >= 3, having 0 in the set would violate property (ii) for the pair of
+	 * 	subsets {0,a} and {b}, where 0 and a and b are distinct elements of the set and a < b.
+	 *   Hence for 0 <= n <= 2, allowing 0 would produce a more optimum solution than the
+	 *   examples given in the problem statement, and for n >= 3 an SSS can never contain 0.
+	 * 
+	 * As for negative numbers, the intent of the problem statement readily suggests that elements
+	 * are never negative. Furthermore, having negative numbers in a set would either affect the
+	 * sum by only a small amount or violate property (ii), making the problem uninteresting.
+	 * 
+	 * Upper bound lemma:
+	 *   For each natural number n >= 0, there exists a special sum set
+	 *   whose size is n and whose sum is (n + 1) * 2^n - 1.
+	 * Proof:
+	 *   - For each index i (counting from 0), let element i equal 2^n + 2^i.
+	 *   - The sum of all the elements is (2^n + 2^0) + (2^n + 2^1) + ... + (2^n + 2^(n-1))
+	 *     = n * 2^n + (2^0 + 2^1 + ... + 2^(n-1)) = n * 2^n + 2^n - 1 = (n + 1) * 2^n - 1.
+	 *   - For example with n = 4, the elements expressed in binary are {10001,
+	 *     10010, 10100, 11000}. Their sum is 1001111 (binary) = 79 (decimal).
+	 *   - Notice that when summing a subset of (distinct) elements, the bottom n bits
+	 *     never produce a carry. This means the bottom n bits behave like a set union,
+	 *     and the activity in the bottom n bits never affect the 2^n term or above.
+	 *   - Property (i) is satisfied because for any subset B, the bottommost n bits of S(B)
+	 *     encode which elements are present. Thus any two unequal subsets will have unequal sums.
+	 *   - Property (ii) is satisfied because for any subset B, the value floor(S(B) / 2^n)
+	 *     (i.e. dropping the bottommost n bits) encodes the size of B.
+	 * Corollaries:
+	 *   - For any given upper bound, there are a finite number of {{sets of positive integers}
+	 *     whose sum doesn't exceed the upper bound}. Thus once we find an SSS with a certain sum,
+	 *     we can argue by finite search that there must exist an optimum SSS whose sum is
+	 *     less than or equal to the aforementioned sum.
+	 *   - For size 7, we know there exists an SSS of sum exactly (7 + 1) * 2^7 - 1 = 1023.
+	 *     Hence we don't need to search any larger sums or use wide integer types.
+	 * 
+	 * Lower bound lemma:
+	 *   For each n >= 3, each special sum set of size n must have sum at least 2^n.
+	 * Proof:
+	 *   - A set of size n has exactly 2^n - 1 non-empty subsets
+	 *     (the kind relevant to the problem statement).
+	 *   - Because all elements are positive integers, the lowest possible
+	 *     subset sum is 1, and the highest sum is the sum of all elements.
+	 *   - To satisfy property (i) and give each non-empty subset a unique sum, the
+	 *     set of sums with the smallest maximum value is {1, 2, 3, ..., 2^n - 1}.
+	 *   - To achieve the aforementioned set of subset sums using positive elements,
+	 *     the one and only solution is the set {1, 2, 4, 8, ..., 2^(n-1)}.
+	 *   - But for n >= 3, the pair of subsets {1,2} and {4} violates property (ii).
+	 *   - Hence the set cannot have sum 2^n - 1. It must have a sum of at least 2^n.
+	 * Corollary:
+	 *   We can begin searching for an optimum SSS with the initial maximum sum set to 2^n.
+	 */
+	
 	private static final int TARGET_SIZE = 7;
 	
 	public String run() {
