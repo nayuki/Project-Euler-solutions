@@ -93,8 +93,8 @@ public final class p103 implements EulerSolution {
 		// + ... + n = n * (n + 1) / 2. If the search specifies a maximum sum lower
 		// than this, then no solution can exist. But for simplicity we just start
 		// searching from a maximum sum of 0.
-		for (int sum = 0; ; sum++) {
-			SpecialSumSet set = SpecialSumSet.makeSet(TARGET_SIZE, sum);
+		for (int maxSum = 0; ; maxSum++) {
+			SpecialSumSet set = SpecialSumSet.makeSet(TARGET_SIZE, maxSum);
 			if (set != null) {  // Solution found; concatenate numbers into a string
 				String ans = "";
 				for (int x : set.values)

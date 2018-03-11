@@ -75,18 +75,33 @@ import itertools
 def compute():
 	TARGET_SIZE = 7
 	
-	# At the top level, we try to find a special sum set with sum at most s,
-	# incrementing the bound s until we succeed. When we find a solution
-	# with sum at most s, but find none with sum at most s - 1, it implies
-	# that the optimum set's sum is exactly s.
-	# Note: A set of n positive integers must have a sum of at least 1 + 2 + 3
-	# + ... + n = n * (n + 1) / 2. If the search specifies a maximum sum lower
-	# than this, then no solution can exist. But for simplicity we just start
-	# searching from a maximum sum of 0.
-	for sum in itertools.count():
-		set = SpecialSumSet.make_set(TARGET_SIZE, sum)
-		if set is not None:  # Solution found; concatenate numbers into a string
-			return "".join(map(str, set.values))
+	# At the top level, we try larger and smaller values of s until we find the smallest value
+	# of s such that there exists a special sum set with sum at most s. As long as no solution
+	# exists when the sum is at most s - 1, it means that the optimum set's sum is exactly s.
+	
+	# First we try maxsum = 1, 2, 4, 8, ..., doubling the maximum sum until we find a solution.
+	maxsum = 1
+	while SpecialSumSet.make_set(TARGET_SIZE, maxsum) is None:
+		maxsum *= 2
+	# Now we know that there must be a special sum set whose sum is at most
+	# maxsum, and also that no solution exists for maxsum / 2.
+	
+	# Perform a kind of binary search to decrease maxsum to the optimal value.
+	# For example, if maxsum = 256, then we know that a solution exists for
+	# maxsum = 256 but no solution exists for maxsum = 128. We don't know if
+	# maxsum = 129, 130, ..., 255 will yield solutions. We first try maxsum
+	# = 256 - 64, and depending on whether a solution exists, we eliminate
+	# either the bottom half of the search range or the top half. Then we
+	# try smaller steps, and stop after handling a step size of 1.
+	i = maxsum // 4
+	while i > 0:
+		maxsum -= i
+		if SpecialSumSet.make_set(TARGET_SIZE, maxsum) is None:
+			maxsum += i
+		i //= 2
+	
+	set = SpecialSumSet.make_set(TARGET_SIZE, maxsum)  # Must be not None
+	return "".join(map(str, set.values))
 
 
 
