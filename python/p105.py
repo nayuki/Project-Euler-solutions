@@ -14,26 +14,22 @@ def compute():
 
 def is_special_sum_set(s):
 	sumsseen = set()
-	duplicateseen = [False]
 	minsum = [None] * (len(s) + 1)
-	maxsum = list(minsum)
+	maxsum = [None] * (len(s) + 1)
 	
 	def explore_subsets(i, count, sum):
 		if i == len(s):
-			if sum in sumsseen:
-				duplicateseen[0] = True
-			else:
-				sumsseen.add(sum)
-				if minsum[count] is None or sum < minsum[count]:
-					minsum[count] = sum
-				if maxsum[count] is None or sum > maxsum[count]:
-					maxsum[count] = sum
+			sumsseen.add(sum)
+			if minsum[count] is None or sum < minsum[count]:
+				minsum[count] = sum
+			if maxsum[count] is None or sum > maxsum[count]:
+				maxsum[count] = sum
 		else:
 			explore_subsets(i + 1, count, sum)
 			explore_subsets(i + 1, count + 1, sum + s[i])
 	
 	explore_subsets(0, 0, 0)
-	return not duplicateseen[0] and all(maxsum[i] < minsum[i + 1] for i in range(len(s)))
+	return len(sumsseen) == 2**len(s) and all(maxsum[i] < minsum[i + 1] for i in range(len(s)))
 
 
 SETS = [

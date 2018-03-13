@@ -39,10 +39,8 @@ public final class p105 implements EulerSolution {
 		for (int i = 0; i < (1 << set.length); i++) {  // Step through all subsets
 			int size = Integer.bitCount(i);
 			int sum = 0;
-			for (int j = 0; j < set.length; j++) {
-				if (((i >>> j) & 1) != 0)
-					sum += set[j];
-			}
+			for (int j = 0; j < set.length; j++)
+				sum += set[j] * ((i >>> j) & 1);
 			if (!sumsSeen.add(sum))
 				return false;
 			minSum[size] = Math.min(sum, minSum[size]);
