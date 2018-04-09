@@ -10,10 +10,9 @@ import itertools
 
 
 def compute():
-	for i in itertools.count(1):
-		digits = sorted(str(i))
-		if all(sorted(str(i * j)) == digits for j in range(2, 7)):
-			return str(i)
+	cond = lambda i: all(sorted(str(i)) == sorted(str(j * i)) for j in range(2, 7))
+	ans = next(i for i in itertools.count(1) if cond(i))
+	return str(ans)
 
 
 if __name__ == "__main__":
