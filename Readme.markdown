@@ -5,7 +5,7 @@ A collection of Nayuki's program code to solve over 200 Project Euler math probl
 
 Every solved problem has a program written in Java and usually Python. Some solutions also have Mathematica and Haskell programs. Some solution programs include a detailed mathematical explanation/proof in the comments to justify the code's logic.
 
-All problems from #1 to #100 have a Java and Python program, and problems #1 to #50 have a Mathematica program. This package contains at least 200 solutions in Java, at least 195 in Python, at least 120 in Mathematica, and at least 90 in Haskell.
+All problems from #1 to #100 have a Java and Python program, and problems #1 to #50 have a Mathematica program. This package contains at least 200 solutions in Java, at least 195 in Python, at least 125 in Mathematica, and at least 90 in Haskell.
 
 Java solutions require JDK 7+. Python solutions are tested to work on CPython 2.7.10 and 3.4.3. Mathematica solutions are tested to work on Mathematica 5.1.
 

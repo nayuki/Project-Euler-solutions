@@ -20,12 +20,12 @@ import eulerlib, fractions, itertools
 def compute():
 	TARGET = fractions.Fraction(1, 10)
 	numprimes = 0
-	for i in itertools.count(1, 2):
-		for j in range(4):
-			if eulerlib.is_prime(i * i - j * (i - 1)):
+	for n in itertools.count(1, 2):
+		for i in range(4):
+			if eulerlib.is_prime(n * n - i * (n - 1)):
 				numprimes += 1
-		if i > 1 and fractions.Fraction(numprimes, i * 2 - 1) < TARGET:
-			return str(i)
+		if n > 1 and fractions.Fraction(numprimes, n * 2 - 1) < TARGET:
+			return str(n)
 
 
 if __name__ == "__main__":
