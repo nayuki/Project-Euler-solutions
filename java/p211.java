@@ -6,6 +6,8 @@
  * https://github.com/nayuki/Project-Euler-solutions
  */
 
+import java.util.Arrays;
+
 
 public final class p211 implements EulerSolution {
 	
@@ -21,11 +23,14 @@ public final class p211 implements EulerSolution {
 	public String run() {
 		// sigma2[i] is the sum of the square of i's divisors.
 		// For example, sigma2[6] = 1^2 + 2^2 + 3^2 + 6^2 = 20.
+		// Computing using a modification of the sieve of Eratosthenes.
 		long[] sigma2 = new long[LIMIT];
-		for (int i = 1; i < sigma2.length; i++) {
-			long i2 = (long)i * i;
-			for (int j = i; j < sigma2.length; j += i)
-				sigma2[j] += i2;
+		Arrays.fill(sigma2, 1, sigma2.length, 1);
+		for (int i = 2; i < sigma2.length; i++) {
+			if (sigma2[i] == 1) {
+				for (int j = i; j < sigma2.length; j += i)
+					sigma2[j] *= powerSquareSum(j, i);
+			}
 		}
 		
 		long sum = 0;
@@ -34,6 +39,21 @@ public final class p211 implements EulerSolution {
 				sum += i;
 		}
 		return Long.toString(sum);
+	}
+	
+	
+	// Suppose i is the highest natural number such that k^i divides n.
+	// Then this function returns k^(2*0) + k^(2*1) + k^(2*2) + ... + k^(2*i).
+	// For example, with n=50 and k=5, i=2 because k^2 = 25 divides n = 50,
+	// so the result is k^0 + k^2 + k^4 = 1 + 25 + 625 = 651.
+	private static long powerSquareSum(int n, int k) {
+		long result = 1;
+		long k2 = (long)k * k;
+		while (n % k == 0) {
+			n /= k;
+			result = result * k2 + 1;
+		}
+		return result;
 	}
 	
 	
