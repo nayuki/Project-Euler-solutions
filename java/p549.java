@@ -63,7 +63,7 @@ public final class p549 implements EulerSolution {
 	private static final int LIMIT = Library.pow(10, 8);
 	
 	public String run() {
-		// Modification of the Sieve of Eratosthenes
+		// Modification of the sieve of Eratosthenes
 		int[] smallestDivisibleFactorials = new int[LIMIT + 1];
 		for (int i = 2; i < smallestDivisibleFactorials.length; i++) {
 			if (smallestDivisibleFactorials[i] == 0) {

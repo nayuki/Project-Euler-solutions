@@ -57,7 +57,7 @@ if sys.version_info.major == 2:
 def compute():
 	LIMIT = 10**8
 	
-	# Modification of the Sieve of Eratosthenes
+	# Modification of the sieve of Eratosthenes
 	smallestdivisiblefactorials = [0] * (LIMIT + 1)
 	for i in range(2, len(smallestdivisiblefactorials)):
 		if smallestdivisiblefactorials[i] == 0:

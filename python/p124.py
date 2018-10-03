@@ -10,7 +10,7 @@
 def compute():
 	LIMIT = 100000
 	
-	# Modification of the Sieve of Eratosthenes
+	# Modification of the sieve of Eratosthenes
 	rads = [0] + [1] * LIMIT
 	for i in range(2, len(rads)):
 		if rads[i] == 1:
