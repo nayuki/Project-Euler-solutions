@@ -13,9 +13,11 @@ if sys.version_info.major == 2:
 
 def compute():
 	# As stated in the problem, 1 = 1^5 is excluded.
-	# If a number has at least n >= 7 digits, then even if every digit is 9,
+	# If a number has at least n >= 6 digits, then even if every digit is 9,
 	# n * 9^5 is still less than the number (which is at least 10^n).
-	ans = sum(i for i in range(2, 1000000) if i == fifth_power_digit_sum(i))
+        # Since 6 * 9^5 = 354,294 and 999,999 > 354,294, there can be no 
+        # 6 digit number greater than 354,294 that is a fifth power digit sum
+	ans = sum(i for i in range(2, 354294) if i == fifth_power_digit_sum(i))
 	return str(ans)
 
 
