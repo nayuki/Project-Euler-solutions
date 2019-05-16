@@ -1,0 +1,17 @@
+Proje Euler çözümleri
+
+200'den fazla Proje Euler matematik problemini çözmek için Nayuki'nin program kodunun bir derlemesi.
+
+Her çözülen sorunun Java ve genellikle Python ile yazilmis bir programi vardir. Bazi çözümler ayrica Mathematica ve Haskell programlarina da sahiptir. Bazi çözüm programlari, kodun mantigini dogrulamak için yorumlarda ayrintili bir matematiksel açiklama / kanit içerir.
+
+# 1'den 100'e kadar olan tüm problemlerin bir Java ve Python programi vardir ve # 1'den # 50'ye kadar olan problemlerin bir Mathematica programi vardir. Bu paket Java'da en az 200, Python'da en az 200, Mathematica'da en az 125 ve Haskell'de en az 95 çözüm içermektedir.
+
+Java çözümleri JDK 7+ gerektirir. Python çözümleri CPython 2.7.10 ve 3.4.3 üzerinde çalismak üzere test edilmistir. Mathematica çözümleri, Mathematica 5.1 üzerinde çalismak üzere test edilmistir.
+
+Arka plan bilgisine sahip ana sayfa, çözüm tablosu, kiyaslama zamanlamalari ve daha fazlasi: https://www.nayuki.io/page/project-euler-solutions
+
+elif Hakki © 2018 Project Nayuki. Tüm haklari Saklidir. Garanti yok.
+
+Bu kod sadece referans içindir. Bu kodun herhangi birini sözlü olarak yazar ve URL bilgisi bozulmamis olarak yeniden yayinlayabilirsiniz.
+
+Kodda degisiklik yapmak, kendi çalismaniza parçalari dahil etmek vb. Için yazarin yazili iznine ihtiyaciniz var.
