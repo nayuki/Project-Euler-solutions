@@ -62,11 +62,11 @@ public final class p211 implements EulerSolution {
 	// Consider the set of all squared natural numbers, i.e. {0, 1, 4, 9, 16, 25, ...}.
 	// When this set is viewed modulo some number n, usually not every residue is in the set.
 	// For example, all squares modulo 3 is {0, 1} - so a perfect square modulo 3 is never 2.
-	// By choosing a suitably large modulus, we can .
+	// By choosing a suitably large modulus, we can quickly exclude many numbers that can't be perfect squares.
 	private static final class SquareTester {
 		
-		// isResidue[i] is true iff there exists a natural number k such that k^2 = i mod modulus.
-		// Hence for any k, if isResidue[k] is false then k is not a perfect square.
+		// isResidue[i] is true iff there exists a natural number k such that i = k^2 mod modulus.
+		// Hence for any i, if isResidue[i mod modulus] is false, then i is not a perfect square.
 		private boolean[] isResidue;
 		
 		
