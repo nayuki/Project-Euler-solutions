@@ -70,7 +70,7 @@ public final class EulerTest {
 	@Test public void testP056() { assertEquals("972"                     , new p056().run()); }
 	@Test public void testP057() { assertEquals("153"                     , new p057().run()); }
 	@Test public void testP058() { assertEquals("26241"                   , new p058().run()); }
-	@Test public void testP059() { assertEquals("107359"                  , new p059().run()); }
+	@Test public void testP059() { assertEquals("129448"                  , new p059().run()); }
 	@Test public void testP060() { assertEquals("26033"                   , new p060().run()); }
 	@Test public void testP061() { assertEquals("28684"                   , new p061().run()); }
 	@Test public void testP062() { assertEquals("127035954683"            , new p062().run()); }
