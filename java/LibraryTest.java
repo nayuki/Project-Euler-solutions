@@ -26,7 +26,22 @@ public final class LibraryTest {
 		assertEquals("001", Library.reverse("100"));
 		assertEquals("a0a", Library.reverse("a0a"));
 	}
-	
+	@Test
+    public void Testpow() {
+	    assertEquals(1,pow(2147483647,0));
+	    assertEquals(1,pow(2147483646,0));
+	    assertEquals(1,pow(2147483648,0));
+	    assertEquals(0,pow(0,2147483647));
+	    assertEquals(0,pow(0,2147483648));
+	    assertEquals(0,pow(0,2147483646));
+	    assertEquals(4,pow(2,2));
+	    assertEquals(1,pow(-2147483648,0));
+	    assertEquals(1,pow(-2147483647,0));
+	    assertEquals(1,pow(-2147483649,0));
+	    assertEquals(0,pow(0,-2147483648));
+	    assertEquals(0,pow(0,-2147483649));
+	    assertEquals(0,pow(0,2147483647));
+			   }
 	
 	@Test public void testIsPalindromeString() {
 		assertTrue(Library.isPalindrome(""));
