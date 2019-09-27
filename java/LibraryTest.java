@@ -26,6 +26,7 @@ public final class LibraryTest {
 		assertEquals("001", Library.reverse("100"));
 		assertEquals("a0a", Library.reverse("a0a"));
 	}
+	
 	@Test public void Testpow() {
 	    	assertEquals(1,pow(2147483647,0));
 	    	assertEquals(1,pow(2147483646,0));
