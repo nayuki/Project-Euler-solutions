@@ -27,6 +27,26 @@ public final class LibraryTest {
 		assertEquals("a0a", Library.reverse("a0a"));
 	}
 	
+	@Test public void  testreciprocalMod(){
+		assertEquals(0,Library.reciprocalMod(0, 1) );
+		assertEquals(1,Library.reciprocalMod(1, 2) );
+	}
+		
+	@Test(expected = IllegalArgumentException.class)
+    		public void testreciprocalMod_ThrowsIllegalArgumentException1() {
+       		Library.reciprocalMod(-1, 1);
+    	}
+
+	
+    	@Test(expected = IllegalArgumentException.class)
+    		public void testreciprocalMod_ThrowsIllegalArgumentException2() {
+       		Library.reciprocalMod(0, 10 );
+    	}
+    	@Test(expected = IllegalArgumentException.class)
+    		public void testreciprocalMod_ThrowsIllegalArgumentException3() {
+       		Library.reciprocalMod(2, 10 );
+    	}
+	
 	
 	@Test public void testIsPalindromeString() {
 		assertTrue(Library.isPalindrome(""));
