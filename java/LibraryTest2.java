@@ -19,19 +19,19 @@ class LibraryTest2 {
 	
 	// test with case  y = 0
 	@Test
-	void testPow1() {
+	void testPow3() {
 		assertNotSame("Negative exponent", Library.pow(1,0));
 	}
 	
 	@Test
 	// test with case  x != 0 and y != 0
-	void testPow1() {
+	void testPow4() {
 		assertEquals(1,Library.pow(1,1));
 	}
 	
 	@Test
 	// test with case over flow
-	void testPow1() {
+	void testPow5() {
 		assertNotSame("Negative exponent", Library.pow(9999999,99999));
 	}
 }
