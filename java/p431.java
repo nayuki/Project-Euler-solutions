@@ -68,5 +68,85 @@ public final class p431 implements EulerSolution {
 		}
 		return discVolume * Math.tan(REPOSE);
 	}
+	// test thu nhat cho x0 ngoai vong while
+	@Test
+	void testFindRootSecant1() {
+		final double expected = 3;
+		final double actual = findRootSecant(3, 3, 4);
+		Assert.assertEquals(expected, actual);
+	}
+
+	// test thu 2 cho x0 trong vong while, re nhanh thu nhat
+	@Test
+	void testFindRootSecant2() {
+		final double expected = -4.684585527286632;
+		final double actual = findRootSecant(2.99999, 3, 4);
+		Assert.assertEquals(expected, actual);
+	}
+
+	// test thu 3 cho x0 trong while, re nhanh thu 2
+	@Test
+	void testFindRootSecant3() {
+		final double expected = -4.684585527286632;
+		final double actual = findRootSecant(2.9999999, 3, 4);
+		Assert.assertEquals(expected, actual);
+	}
+
+	// test thu 4 cho x0 trong while, re nhanh thu 3
+	@Test
+	void testFindRootSecant4() {
+		final double expected = -4.684585527286632;
+		final double actual = findRootSecant(2.999999999, 3, 4);
+		Assert.assertEquals(expected, actual);
+	}
+
+	// test thu 5 cho x1 ngoai while
+	@Test
+	void testFindRootSecant5() {
+		final double expected = -4.684585527286632;
+		final double actual = findRootSecant(3, 4, 4);
+		Assert.assertEquals(expected, actual);
+	}
+
+	// test thu 6 cho x1 trong while, re nhanh thu nhat
+	@Test
+	void testFindRootSecant6() {
+		final double expected = -4.684585527286632;
+		final double actual = findRootSecant(3, 3.00001, 4);
+		Assert.assertEquals(expected, actual);
+	}
+
+	// test thu 7 cho x1 trong while, re nhanh thu 2
+	@Test
+	void testFindRootSecant7() {
+		final double expected = -4.684585527286632;
+		final double actual = findRootSecant(3, 3.0000001, 4);
+		Assert.assertEquals(expected, actual);
+	}
+
+	// test thu 8 cho x1 trong while, re nhanh thu nhat
+	@Test
+	void testFindRootSecant8() {
+		final double expected = -4.684585527286632;
+		final double actual = findRootSecant(3, 3.000000001, 4);
+		Assert.assertEquals(expected, actual);
+	}
+
+	// test thu 9 cho val
+	@Test
+	void testFindRootSecant9() {
+		final double expected = -5.999999999997416;
+		final double actual = findRootSecant(3, 4, 0);
+		Assert.assertEquals(expected, actual);
+	}
+
+	// test thu 10 cho val lan 2
+	@Test
+	void testFindRootSecant10() {
+		final double expected = -4.342681616492063;
+		final double actual = findRootSecant(3, 4, 8);
+		Assert.assertEquals(expected, actual);
+	}
+
 	
 }
