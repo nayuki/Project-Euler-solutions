@@ -191,22 +191,22 @@ public final class LibraryTest {
 	}
 	
 	@Test public void testPow() {
-		assertEquals(new IllegalArgumentException("Negative base not supported"), Library.testPow(-1, 2));
-		assertEquals( new IllegalArgumentException("Negative exponent");, Library.testPow(1, -2));
-		assertEquals(1, Library.testPow(0, 0));
-		assertEquals(1, Library.testPow(1, 0));
-		assertEquals(0, Library.testPow(0, 1));
-		assertEquals(1, Library.testPow(1, 1));
-		assertEquals(8, Library.testPow(2, 3));
-		assertEquals(1, Library.testPow(2, 0));
-		assertEquals(2, Library.testPow(2, 1));
-		assertEquals(new ArithmeticException("/ by zero") , Library.testPow(0, 2));
-		assertEquals(1, Library.testPow(1, 2));
-		assertEquals(4, Library.testPow(2, 2));
-		assertEquals(64, Library.testPow(4, 3));
-		assertEquals(823543, Library.testPow(7, 7));
-		assertEquals(new ArithmeticException("Overflow"), Library.testPow(78051657, 234602));
-		assertEquals(new ArithmeticException("Overflow"), Library.testPow(2147480000, 2147483645));
+		assertEquals(new IllegalArgumentException("Negative base not supported"), Library.pow(-1, 2));
+		assertEquals( new IllegalArgumentException("Negative exponent");, Library.pow(1, -2));
+		assertEquals(1, Library.pow(0, 0));
+		assertEquals(1, Library.pow(1, 0));
+		assertEquals(0, Library.pow(0, 1));
+		assertEquals(1, Library.pow(1, 1));
+		assertEquals(8, Library.pow(2, 3));
+		assertEquals(1, Library.pow(2, 0));
+		assertEquals(2, Library.pow(2, 1));
+		assertEquals(new ArithmeticException("/ by zero") , Library.pow(0, 2));
+		assertEquals(1, Library.pow(1, 2));
+		assertEquals(4, Library.pow(2, 2));
+		assertEquals(64, Library.pow(4, 3));
+		assertEquals(823543, Library.pow(7, 7));
+		assertEquals(new ArithmeticException("Overflow"), Library.pow(78051657, 234602));
+		assertEquals(new ArithmeticException("Overflow"), Library.pow(2147480000, 2147483645));
 	}
 	
 	@Test public void testPowMod() {
