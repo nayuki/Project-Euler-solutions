@@ -89,6 +89,12 @@ final class Library {
 		int z = 1;
 		for (int i = 0; i < y; i++) {
 			if (Integer.MAX_VALUE / z < x)
+				/*
+				 * There is a little error here
+				 * 
+				 * If the variable x equals 0 and y is greater than 1, an exception will occur 
+				 * when performing the Integer.MAX_VALUE / z division
+				 */
 				throw new ArithmeticException("Overflow");
 			z *= x;
 		}
