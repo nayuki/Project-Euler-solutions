@@ -7,24 +7,32 @@
  */
 
 
-public final class p010 implements EulerSolution {
+public final class p010 {
 	
-	public static void main(String[] args) {
-		System.out.println(new p010().run());
-	}
-	
-	
-	/* 
-	 * Call the sieve of Eratosthenes and sum the primes found.
-	 * A conservative upper bound for the sum is 2000000^2, which fits in a Java long type.
-	 */
-	private static final int LIMIT = 2000000;
-	
-	public String run() {
-		long sum = 0;
-		for (int p : Library.listPrimes(LIMIT - 1))
-			sum += p;
-		return Long.toString(sum);
-	}
-	
+	public static boolean isPrime(long z)
+    {
+        if (z < 2) 
+            return false;
+        else if (z == 2) 
+            return true;
+        for (int i = 2; i < Math.pow(z, 0.5) + 1; i++) 
+        {
+            if (z % i == 0)
+                return false;
+        }
+        return true;
+    }
+
+    public static void main(String[] args)
+    {
+        long sum = 0;  
+        for (int i = 1; i < 2000000; i++)
+        {
+            if (isPrime(i))
+            {
+                sum += i;
+            }
+        }
+        System.out.println(sum);
+    }
 }
