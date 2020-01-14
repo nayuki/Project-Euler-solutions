@@ -40,14 +40,15 @@ public final class p059 implements EulerSolution {
 	}
 	
 	
-	// Heuristical scoring function. The current implementation returns only integral values, but floating-point values are legal too.
+	// Heuristical function that returns a penalty score, where lower is better.
+	// The current implementation returns only integral values, but floating-point values are legal too.
 	private static double score(byte[] b) {
 		double sum = 0;
 		for (int i = 0; i < b.length; i++) {
 			char c = (char)b[i];
-			if (c >= 'A' && c <= 'Z')
+			if ('A' <= c && c <= 'Z')
 				sum += 1;  // Uppercase letters are good
-			else if (c >= 'a' && c <= 'z')
+			else if ('a' <= c && c <= 'z')
 				sum += 2;  // Lowercase letters are excellent
 			else if (c < 0x20 || c == 0x7F)
 				sum -= 10;  // Control characters are very bad

@@ -17,7 +17,7 @@ def compute():
 	return str(ans)
 
 
-# A heuristic function, not based on any formal definition.
+# Heuristical function that returns a penalty score, where lower is better.
 def get_score(plaintext):
 	result = 0
 	for c in plaintext:
