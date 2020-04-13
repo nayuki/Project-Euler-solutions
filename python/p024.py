@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import itertools, sys
+import itertools
 
 
 # We initialize a list as the lowest permutation of the given digits, which is the sequence

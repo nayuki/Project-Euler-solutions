@@ -71,12 +71,7 @@ def round_to_decimal(fracnum, places):
 	assert places > 0
 	if fracnum < 0:
 		return "-" + round_to_decimal(-fracnum, places)
-	
-	# Round half to even
-	fracnum *= 10**places
-	rounded = round(fracnum)
-	
-	s = str(rounded).zfill(places + 1)
+	s = str(round(fracnum * 10**places)).zfill(places + 1)
 	return s[ : -places] + "." + s[-places : ]
 
 

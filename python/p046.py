@@ -7,11 +7,10 @@
 # 
 
 import eulerlib, itertools
-filterfalse = itertools.filterfalse
 
 
 def compute():
-	ans = next(filterfalse(test_goldbach, itertools.count(9, 2)))
+	ans = next(itertools.filterfalse(test_goldbach, itertools.count(9, 2)))
 	return str(ans)
 
 
