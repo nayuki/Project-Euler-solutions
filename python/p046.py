@@ -6,11 +6,8 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib, itertools, sys
-if sys.version_info.major == 2:
-	filterfalse = itertools.ifilterfalse
-else:
-	filterfalse = itertools.filterfalse
+import eulerlib, itertools
+filterfalse = itertools.filterfalse
 
 
 def compute():

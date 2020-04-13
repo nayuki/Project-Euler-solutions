@@ -6,9 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib, itertools, sys
-if sys.version_info.major == 2:
-	filter = itertools.ifilter
+import eulerlib, itertools
 
 
 # Computers are fast, so we can implement this solution by testing each number

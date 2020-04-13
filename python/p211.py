@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import array, eulerlib, sys
+import array, eulerlib
 
 
 def compute():
@@ -49,10 +49,7 @@ def list_sigma2(n):
 				if quasiprimefactor[j] == 0:
 					quasiprimefactor[j] = i
 	
-	if sys.version_info.major < 3:
-		sigma2 = [0] * (n + 1)
-	else:
-		sigma2 = array.array("Q", (0 for _ in range(n + 1)))
+	sigma2 = array.array("Q", (0 for _ in range(n + 1)))
 	sigma2[1] = 1
 	for i in range(2, len(sigma2)):
 		p = quasiprimefactor[i]
