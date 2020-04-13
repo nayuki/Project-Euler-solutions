@@ -6,10 +6,6 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import sys
-if sys.version_info.major == 2:
-	range = xrange  # Very important to let the inner loop terminate early
-
 
 def compute():
 	SIZE_LIMIT = 1000000

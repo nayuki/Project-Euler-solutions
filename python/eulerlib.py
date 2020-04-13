@@ -6,9 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import array, math, sys
-if sys.version_info.major == 2:
-	range = xrange
+import array, math
 
 
 # Returns the number of 1's in the binary representation of

@@ -6,9 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import fractions, sys
-if sys.version_info.major == 2:
-	range = xrange
+import fractions
 
 
 def compute():

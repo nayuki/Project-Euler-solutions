@@ -6,10 +6,6 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import sys
-if sys.version_info.major == 2:
-	range = xrange
-
 
 def compute():
 	# As stated in the problem, 1 = 1^5 is excluded.

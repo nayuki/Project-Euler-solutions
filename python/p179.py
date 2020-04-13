@@ -6,10 +6,6 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import sys
-if sys.version_info.major == 2:
-	range = xrange
-
 
 def compute():
 	divisors = [2] * (10**7 + 1)  # Invalid for indexes 0 and 1

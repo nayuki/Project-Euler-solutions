@@ -7,13 +7,13 @@ Every solved problem has a program written in Java and usually Python. Some solu
 
 All problems from #1 to #100 have a Java and Python program, and problems #1 to #50 have a Mathematica program. This package contains at least 200 solutions in Java, at least 200 in Python, at least 125 in Mathematica, and at least 95 in Haskell.
 
-Java solutions require JDK 7+. Python solutions are tested to work on CPython 2.7.10 and 3.4.3. Mathematica solutions are tested to work on Mathematica 5.1.
+Java solutions require JDK 7+. Python solutions are tested to work on CPython 3.4.3. Mathematica solutions are tested to work on Mathematica 5.1.
 
 Home page with background info, table of solutions, benchmark timings, and more: [https://www.nayuki.io/page/project-euler-solutions](https://www.nayuki.io/page/project-euler-solutions)
 
 ----
 
-Copyright © 2019 Project Nayuki. All rights reserved. No warranty.
+Copyright © 2020 Project Nayuki. All rights reserved. No warranty.
 
 This code is provided for reference only. You may republish any of this code verbatim with author and URL info intact.
 

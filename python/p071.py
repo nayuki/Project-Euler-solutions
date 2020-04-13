@@ -6,10 +6,6 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import sys
-if sys.version_info.major == 2:
-	range = xrange
-
 
 # We consider each (integer) denominator d from 1 to 1000000 by brute force.
 # For a given d, what is the largest integer n such that n/d < 3/7?

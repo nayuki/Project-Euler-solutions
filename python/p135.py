@@ -6,10 +6,6 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import sys
-if sys.version_info.major == 2:
-	range = xrange  # Very important to let the inner loop terminate early
-
 
 # Let x = m, y = m - k, z = m - 2k (this is an arithmetic sequence).
 # By tedious but straightforward algebra, x^2 - y^2 - z^2 = (m - k)(5k - m).

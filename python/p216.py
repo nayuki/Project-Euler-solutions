@@ -6,10 +6,6 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import sys
-if sys.version_info.major == 2:
-	range = xrange
-
 
 # As per the problem statement, define t(n) = 2n^2 - 1 and assume that always n > 1.
 # Hence t(n) >= 7, and the sequence is strictly increasing (with no repeats).

@@ -6,9 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib, sys
-if sys.version_info.major == 2:
-	range = xrange
+import eulerlib
 
 
 def compute():

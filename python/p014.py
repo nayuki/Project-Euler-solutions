@@ -7,8 +7,6 @@
 # 
 
 import eulerlib, sys
-if sys.version_info.major == 2:
-	range = xrange
 
 
 # We compute the Collatz chain length for every integer in the range according to the iteration rule.

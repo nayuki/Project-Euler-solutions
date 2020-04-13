@@ -6,10 +6,6 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import sys
-if sys.version_info.major == 2:
-	range = xrange
-
 
 def compute():
 	ans = sum(i for i in range(1000000) if is_decimal_binary_palindrome(i))
