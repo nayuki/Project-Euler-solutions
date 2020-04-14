@@ -22,7 +22,7 @@ def compute():
 	for i in range(len(nine_pyramidal_pdf)):
 		ans += nine_pyramidal_pdf[i] * sum(six_cubic_pdf[ : i])
 	ans = float(ans) / (sum(nine_pyramidal_pdf) * sum(six_cubic_pdf))
-	return "{:.7f}".format(ans)
+	return f"{ans:.7f}"
 
 
 def convolve(a, b):

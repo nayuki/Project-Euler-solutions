@@ -33,7 +33,7 @@ def compute():
 			break
 		ans += donenow * i
 		probs = nextprobs
-	return "{:.6f}".format(ans)
+	return f"{ans:.6f}"
 
 
 

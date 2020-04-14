@@ -69,7 +69,7 @@ def compute():
 	ans = expect[-1]
 	
 	# Round the fraction properly. This is the pedantically
-	# correct version of doing "{:.10f}".format(float(ans))
+	# correct version of doing f"{float(ans):.10f}"
 	assert ans >= 0
 	scaled = ans * 10**DECIMALS
 	whole = scaled.numerator // scaled.denominator
@@ -82,7 +82,7 @@ def compute():
 	if DECIMALS == 0:
 		return temp
 	temp = temp.zfill(DECIMALS + 1)
-	return "{}.{}".format(temp[ : -DECIMALS], temp[-DECIMALS : ])
+	return f"{temp[:-DECIMALS]}.{temp[-DECIMALS:]}"
 
 
 if __name__ == "__main__":

@@ -51,7 +51,7 @@ def compute():
 					count[i][index] = (count[i][index] + count[i - 1][k]) % MODULUS
 	
 	ans = sum(sqsum[LENGTH][i**2] for i in range(1, eulerlib.sqrt(MAX_SQR_DIGIT_SUM)))
-	return "{:09d}".format(ans % MODULUS)
+	return f"{ans%MODULUS:09}"
 
 
 if __name__ == "__main__":

@@ -61,7 +61,7 @@ def format_fraction(val, digits):
 	HALF = fractions.Fraction(1, 2)
 	if rem > HALF or (rem == HALF and flr % 2 == 1):
 		flr += 1
-	return "{}.{}".format(flr // scaler, str(flr % scaler).zfill(digits))
+	return f"{flr//scaler}.{str(flr%scaler).zfill(digits)}"
 
 
 def divide_exactly(x, y):

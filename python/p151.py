@@ -11,7 +11,7 @@ import eulerlib
 
 def compute():
 	ans = get_expected_singles((1,)) - 2
-	return "{:.6f}".format(ans)
+	return f"{ans:.6f}"
 
 
 @eulerlib.memoize

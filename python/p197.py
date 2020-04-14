@@ -37,7 +37,7 @@ def compute():
 	
 	ans = x + f(x)
 	ans = math.floor(ans * 1.0e9) / 1.0e9  # Truncate to 9 digits after the decimal point
-	return "{:.9f}".format(ans)
+	return f"{ans:.9f}"
 
 
 if __name__ == "__main__":

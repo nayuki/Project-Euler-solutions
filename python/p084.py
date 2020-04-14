@@ -63,7 +63,7 @@ def compute():
 		visitcounts[location] += 1
 	
 	temp = sorted(enumerate(visitcounts), key=(lambda ic: -ic[1]))
-	ans = "".join("{:02d}".format(i) for (i, c) in temp[ : 3])
+	ans = "".join(f"{i:02}" for (i, c) in temp[ : 3])
 	return str(ans)
 
 
