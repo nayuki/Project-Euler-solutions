@@ -27,7 +27,7 @@ def get_sqrt_continued_fraction_period(n):
 
 
 # Represents (a + b * sqrt(d)) / c. d must not be a perfect square.
-class QuadraticSurd(object):
+class QuadraticSurd:
 	
 	def __init__(self, a, b, c, d):
 		if c == 0:

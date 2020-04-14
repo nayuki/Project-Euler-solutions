@@ -46,7 +46,7 @@ def compare_powers(pairx, pairy):
 
 
 # Represents a strictly positive number equal to mantissa * 2^exponent
-class BigFloat(object):
+class BigFloat:
 	
 	def __init__(self, man, exp=0):
 		self.mantissa = man

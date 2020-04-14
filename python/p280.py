@@ -38,7 +38,7 @@ def compute():
 
 
 # Represents the global state of the system, including the ant and seeds. Immutable.
-class State(object):
+class State:
 	
 	# All valid state IDs are in the range [0, ID_LIMIT). Not every number in the range is a valid state.
 	ID_LIMIT = 5 * 5 * 2**11 + 1

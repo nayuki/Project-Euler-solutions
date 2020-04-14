@@ -32,7 +32,7 @@ def compute():
 
 
 # Provides memoization for generating and testing pentagonal numbers.
-class PentagonalNumberHelper(object):
+class PentagonalNumberHelper:
 	def __init__(self):
 		self.term_list = [0]
 		self.term_set = set()

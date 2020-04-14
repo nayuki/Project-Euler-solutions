@@ -110,7 +110,7 @@ def compute():
 # Objects of the class are immutable. Objects also keep track of extra data to
 # make it easier to check if adding a new element would violate the properties,
 # without explicitly checking every non-empty disjoint subset pair by brute force.
-class SpecialSumSet(object):
+class SpecialSumSet:
 	
 	# Returns the lexicographically lowest special sum set with the given size
 	# and with a sum of at most maximumsum, or None if no such set exists.

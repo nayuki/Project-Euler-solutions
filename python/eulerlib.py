@@ -153,7 +153,7 @@ def next_permutation(arr):
 
 
 # Decorator. The underlying function must take only positional arguments, no keyword arguments.
-class memoize(object):
+class memoize:
 	
 	def __init__(self, func):
 		self.func = func

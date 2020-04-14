@@ -20,7 +20,7 @@ def compute():
 	return str(ans)
 
 
-class DisjointSet(object):
+class DisjointSet:
 	
 	def __init__(self, size):
 		self.nodes = [DisjointSet.Node() for _ in range(size)]
@@ -45,7 +45,7 @@ class DisjointSet(object):
 		return self._find(i).size
 	
 	
-	class Node(object):
+	class Node:
 		def __init__(self):
 			self.parent = self
 			self.rank = 0
@@ -57,7 +57,7 @@ class DisjointSet(object):
 			return self.parent
 
 
-class LfgRandom(object):
+class LfgRandom:
 	
 	def __init__(self):
 		self.k = 1

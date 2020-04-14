@@ -68,7 +68,7 @@ def compute():
 
 
 
-class CardDeck(object):
+class CardDeck:
 
 	def __init__(self, size):
 		self.cards = list(range(size))

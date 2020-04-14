@@ -61,7 +61,7 @@ def sqrt_to_continued_fraction(n):
 
 
 # Represents (a + b * sqrt(d)) / c. d must not be a perfect square.
-class QuadraticSurd(object):
+class QuadraticSurd:
 	
 	def __init__(self, a, b, c, d):
 		if c == 0:
