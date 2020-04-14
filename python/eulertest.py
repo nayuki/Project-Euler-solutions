@@ -11,15 +11,28 @@ import importlib, time
 
 def main():
 	totaltime = 0.0  # In seconds
+	numpass = 0
+	numfail = 0
+	numremain = len(ANSWERS)
+	
 	for (prob, expectans) in sorted(ANSWERS.items()):
 		module = importlib.import_module(f"p{prob:03}")
 		starttime = time.time()
 		actualans = module.compute()  # Must return a string
 		elapsedtime = time.time() - starttime
 		totaltime += elapsedtime
-		failstr = "" if actualans == expectans else "    *** FAIL ***"
+		
+		if actualans == expectans:
+			failstr = ""
+			numpass += 1
+		else:
+			failstr = "    *** FAIL ***"
+			numfail += 1
+		numremain -= 1
+		
+		print("\r"+(" "*70)+"\r", end="")
 		print(f"Problem {prob:03}: {int(round(elapsedtime * 1000)):7} ms{failstr}")
-	print(f"Total computation time: {int(round(totaltime * 1000))} ms")
+		print(f"Elapsed = {int(totaltime)} s, Passed = {numpass}, Failed = {numfail}, Remaining = {numremain}", end="", flush=True)
 
 
 ANSWERS = {
