@@ -59,7 +59,7 @@ def compute():
 	SIZE = 32
 	DECIMALS = 10
 	assert SIZE >= 0
-	assert DECIMALS >= 0
+	assert DECIMALS > 0
 	
 	# Calculate the answer
 	expect = [fractions.Fraction(0)]
@@ -71,18 +71,8 @@ def compute():
 	# Round the fraction properly. This is the pedantically
 	# correct version of doing f"{float(ans):.10f}"
 	assert ans >= 0
-	scaled = ans * 10**DECIMALS
-	whole = scaled.numerator // scaled.denominator
-	frac = scaled - whole
-	assert 0 <= frac < 1
-	HALF = fractions.Fraction(1, 2)
-	if frac > HALF or (frac == HALF and whole % 2 == 1):
-		whole += 1
-	temp = str(whole)
-	if DECIMALS == 0:
-		return temp
-	temp = temp.zfill(DECIMALS + 1)
-	return f"{temp[:-DECIMALS]}.{temp[-DECIMALS:]}"
+	s = str(round(ans * 10**DECIMALS)).zfill(DECIMALS + 1)
+	return f"{s[:-DECIMALS]}.{s[-DECIMALS:]}"
 
 
 if __name__ == "__main__":

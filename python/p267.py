@@ -67,12 +67,13 @@ def calc_billionaire_probability(betproportion, trials):
 
 
 # Converts a fraction to a correctly rounded decimal string.
-def round_to_decimal(fracnum, places):
-	assert places > 0
-	if fracnum < 0:
-		return "-" + round_to_decimal(-fracnum, places)
-	s = str(round(fracnum * 10**places)).zfill(places + 1)
-	return s[ : -places] + "." + s[-places : ]
+def round_to_decimal(val, digits):
+	if digits <= 0:
+		raise ValueError()
+	if val < 0:
+		return "-" + round_to_decimal(-val, digits)
+	s = str(round(val * 10**digits)).zfill(digits + 1)
+	return f"{s[:-digits]}.{s[-digits:]}"
 
 
 if __name__ == "__main__":
