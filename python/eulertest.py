@@ -30,7 +30,7 @@ def main():
 			numfail += 1
 		numremain -= 1
 		
-		print("\r"+(" "*70)+"\r", end="")
+		print(f"\r{' '*70}\r", end="")
 		print(f"Problem {prob:03}: {int(round(elapsedtime * 1000)):7} ms{failstr}")
 		print(f"Elapsed = {int(totaltime)} s, Passed = {numpass}, Failed = {numfail}, Remaining = {numremain}", end="", flush=True)
 
