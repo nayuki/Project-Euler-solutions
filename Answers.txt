@@ -63,7 +63,7 @@ Problem 055: 249
 Problem 056: 972
 Problem 057: 153
 Problem 058: 26241
-Problem 059: 107359
+Problem 059: 129448
 Problem 060: 26033
 Problem 061: 28684
 Problem 062: 127035954683
