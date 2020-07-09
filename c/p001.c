@@ -26,17 +26,17 @@ size_t getSum(size_t max)
 size_t getSum2(size_t max) 
 {
     size_t limit = max - 1;
-    int numb5 = limit / 5;
-    int numb3 = limit / 3;
-    int numb15 = limit / 15;
+    size_t numb5 = limit / 5;
+    size_t numb3 = limit / 3;
+    size_t numb15 = limit / 15;
     return (5 * (numb5 * (numb5 + 1)) + (3 * (numb3 * (numb3 + 1))) - (15 * (numb15 * (numb15 + 1)))) / 2;
-
 }
 
-
 /*
- * The funny thing is that the first getSum() generate less assembly code than the getSum2().
- * However when benchmarking, the second function didn't even run because of the lack of branch predictions. This will make it faster
+ * Reading the assembly ouput of getSum() and getSum2(), one might be tricked into thinking that getSum() is faster because it generated 6 assemnly 
+ * lines less. It is however very slow because of the branches (from the for loop and the checks if the number is a mutliple of 3 or 5) which would 
+ * definitely lead to false branch predictions.
+ * When benchmarking, getSum() takes longer and longer, as the while loop increases while getSum2() finishes at a constant time of a couple of milliseconds.
  */
 int main(int argc, char** argv)
 {
