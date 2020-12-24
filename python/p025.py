@@ -6,6 +6,9 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
+# Previous solution
+
+"""
 import itertools
 
 
@@ -30,3 +33,20 @@ def compute():
 
 if __name__ == "__main__":
 	print(compute())
+"""
+
+# Proposed solution
+# No need to use extra module (itertools) and esp. raise errors!
+# The solution can be found much much easier:
+
+def compute():
+    maxn = pow(10,999)-1
+    n1,n2 = 0,1; i = 1
+    while 1:
+      i += 1; n = n1 + n2
+      if n > maxn: break
+      n1,n2 = n2,n 
+    return i
+
+if __name__ == "__main__":
+    print(compute())
