@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import fractions
+import math
 
 
 # The smallest number n that is evenly divisible by every number in a set {k1, k2, ..., k_m}
@@ -17,7 +17,7 @@ import fractions
 def compute():
 	ans = 1
 	for i in range(1, 21):
-		ans *= i // fractions.gcd(i, ans)
+		ans *= i // math.gcd(i, ans)
 	return str(ans)
 
 

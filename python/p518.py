@@ -6,7 +6,7 @@
 # https:#github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib, fractions, itertools
+import eulerlib, math, itertools
 
 
 # Suppose (a+1, b+1, c+1) are three positive integers that form a geometric sequence.
@@ -50,7 +50,7 @@ def compute():
 			# Search all valid z's. We require z > y and gcd(y, z) = 1. Notice that when z increases, c strictly increases.
 			# So when some z generates a c such that c >= LIMIT, no candidates are possible with higher values of z.
 			for z in itertools.count(y + 1):
-				if fractions.gcd(y, z) != 1:
+				if math.gcd(y, z) != 1:
 					continue
 				c = x * z * z - 1
 				if c >= LIMIT:

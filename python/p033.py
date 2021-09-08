@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import fractions
+import math
 
 
 def compute():
@@ -39,7 +39,7 @@ def compute():
 			if (n1 == d0 and n0 * d == n * d1) or (n0 == d1 and n1 * d == n * d0):
 				numer *= n
 				denom *= d
-	return str(denom // fractions.gcd(numer, denom))
+	return str(denom // math.gcd(numer, denom))
 
 
 if __name__ == "__main__":

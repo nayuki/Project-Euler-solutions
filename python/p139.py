@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib, fractions
+import eulerlib, math
 
 
 def compute():
@@ -24,7 +24,7 @@ def compute():
 			p = a + b + c
 			if p >= LIMIT:
 				break
-			if c % (a - b) == 0 and fractions.gcd(s, t) == 1:
+			if c % (a - b) == 0 and math.gcd(s, t) == 1:
 				ans += (LIMIT - 1) // p
 	return str(ans)
 

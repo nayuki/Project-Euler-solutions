@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib, fractions
+import eulerlib, fractions, math
 
 
 # Based on this insane theorem: Suppose D > 1 is an integer, non-perfect-square.
@@ -72,7 +72,7 @@ class QuadraticSurd:
 			a = -a
 			b = -b
 			c = -c
-		gcd = fractions.gcd(fractions.gcd(a, b), c)
+		gcd = math.gcd(math.gcd(a, b), c)
 		if gcd != 1:
 			a //= gcd
 			b //= gcd

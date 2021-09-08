@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib, fractions
+import eulerlib, math
 
 
 def compute():
@@ -38,7 +38,7 @@ class QuadraticSurd:
 			a = -a
 			b = -b
 			c = -c
-		gcd = fractions.gcd(fractions.gcd(a, b), c)
+		gcd = math.gcd(math.gcd(a, b), c)
 		if gcd != 1:
 			a //= gcd
 			b //= gcd

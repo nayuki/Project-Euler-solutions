@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import fractions
+import math
 
 
 # Warning: Running this solution requires about 1 GiB of memory
@@ -29,8 +29,8 @@ def compute():
 					pseudosum = n0 * d1 + n1 * d0
 					numerprod = n0 * n1
 					denomprod = d0 * d1
-					npgcd = fractions.gcd(pseudosum, numerprod)
-					dpgcd = fractions.gcd(pseudosum, denomprod)
+					npgcd = math.gcd(pseudosum, numerprod)
+					dpgcd = math.gcd(pseudosum, denomprod)
 					poss.add((pseudosum // dpgcd, denomprod // dpgcd))  # Parallel
 					poss.add((numerprod // npgcd, pseudosum // npgcd))  # Series
 		possible.append(poss)

@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import fractions, itertools
+import math, itertools
 
 
 def compute():
@@ -27,7 +27,7 @@ def compute():
 				if s * s // 2 >= limit * 3:
 					return
 				
-				if fractions.gcd(s, t) == 1:
+				if math.gcd(s, t) == 1:
 					for k in itertools.count(1):
 						a = s * t * k
 						b = (s * s - t * t) // 2 * k

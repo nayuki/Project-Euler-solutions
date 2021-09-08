@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib, fractions
+import eulerlib, math
 
 
 def compute():
@@ -19,7 +19,7 @@ def compute():
 	triples = set()
 	for s in range(3, eulerlib.sqrt(LIMIT) + 1, 2):
 		for t in range(s - 2, 0, -2):
-			if fractions.gcd(s, t) == 1:
+			if math.gcd(s, t) == 1:
 				a = s * t
 				b = (s * s - t * t) // 2
 				c = (s * s + t * t) // 2

@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import fractions
+import math
 
 
 # A straightforward solution would look like this:
@@ -44,7 +44,7 @@ def compute():
 			if rad >= c:
 				break
 			b = c - a
-			if a < b and rad * rads[b] < c and fractions.gcd(a, b) == 1:
+			if a < b and rad * rads[b] < c and math.gcd(a, b) == 1:
 				ans += c
 	return str(ans)
 

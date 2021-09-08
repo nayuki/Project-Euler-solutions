@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib, fractions, itertools
+import eulerlib, math, itertools
 
 
 # Consider an arbitrary almost equilateral triangle with side lengths (c, c, c +/- 1).
@@ -52,7 +52,7 @@ def compute():
 		if s * s > (LIMIT + 1) // 3:
 			break
 		for t in range(s - 2, 0, -2):
-			if fractions.gcd(s, t) == 1:
+			if math.gcd(s, t) == 1:
 				a = s * t
 				b = (s * s - t * t) // 2
 				c = (s * s + t * t) // 2
