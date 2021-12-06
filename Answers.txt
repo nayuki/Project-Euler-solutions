@@ -4,7 +4,6 @@ Computed by Project Nayuki
 https://www.nayuki.io/page/project-euler-solutions
 https://github.com/nayuki/Project-Euler-solutions
 
-
 Problem 001: 233168
 Problem 002: 4613732
 Problem 003: 6857
