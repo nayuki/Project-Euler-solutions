@@ -7,23 +7,24 @@
 # 
 
 import importlib, time
+from typing import Any, Dict, cast
 
 
-def main():
-	totaltime = 0.0  # In seconds
-	numpass = 0
-	numfail = 0
-	numremain = len(ANSWERS)
+def main() -> None:
+	totaltime: float = 0.0  # In seconds
+	numpass: int = 0
+	numfail: int = 0
+	numremain: int = len(ANSWERS)
 	
 	for (prob, expectans) in sorted(ANSWERS.items()):
 		module = importlib.import_module(f"p{prob:03}")
-		starttime = time.time()
-		actualans = module.compute()  # Must return a string
-		elapsedtime = time.time() - starttime
+		starttime: float = time.time()
+		actualans: str = cast(Any, module).compute()  # Must return a string
+		elapsedtime: float = time.time() - starttime
 		totaltime += elapsedtime
 		
 		if actualans == expectans:
-			failstr = ""
+			failstr: str = ""
 			numpass += 1
 		else:
 			failstr = "    *** FAIL ***"
@@ -35,7 +36,7 @@ def main():
 		print(f"Elapsed = {int(totaltime)} s, Passed = {numpass}, Failed = {numfail}, Remaining = {numremain}", end="", flush=True)
 
 
-ANSWERS = {
+ANSWERS: Dict[int,str] = {
 	  1: "233168",
 	  2: "4613732",
 	  3: "6857",
