@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib, sys
+import eulerlib, functools, sys
 
 
 # We compute the Collatz chain length for every integer in the range according to the iteration rule.
@@ -17,7 +17,7 @@ def compute():
 	return str(ans)
 
 
-@eulerlib.memoize
+@functools.cache
 def collatz_chain_length(x):
 	if x == 1:
 		return 1

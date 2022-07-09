@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib
+import eulerlib, functools
 
 
 def compute():
@@ -14,7 +14,7 @@ def compute():
 	return f"{ans:.6f}"
 
 
-@eulerlib.memoize
+@functools.cache
 def get_expected_singles(state):
 	result = 0.0
 	if len(state) > 0:

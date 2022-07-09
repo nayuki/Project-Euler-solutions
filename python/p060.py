@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib
+import eulerlib, functools
 
 
 def compute():
@@ -42,7 +42,7 @@ def compute():
 	
 	
 	# Tests whether concat(primes[x], primes[y]) is a prime number, with memoization.
-	@eulerlib.memoize
+	@functools.cache
 	def is_concat_prime(x, y):
 		return is_prime(int(str(primes[x]) + str(primes[y])))
 	

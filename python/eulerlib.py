@@ -160,25 +160,3 @@ def next_permutation(arr: List[E]) -> bool:
 	# Reverse suffix
 	arr[i : ] = arr[len(arr) - 1 : i - 1 : -1]
 	return True
-
-
-
-R = TypeVar("R")
-
-
-# Decorator. The underlying function must take only positional arguments, no keyword arguments.
-class memoize(Generic[R]):
-	
-	cache: Dict[Any,R]
-	
-	def __init__(self, func: Callable[...,R]):
-		self.func = func
-		self.cache = {}
-	
-	def __call__(self, *args: Any) -> R:
-		if args in self.cache:
-			return self.cache[args]
-		else:
-			val: R = self.func(*args)
-			self.cache[args] = val
-			return val

@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib, sys
+import eulerlib, functools, sys
 
 
 def compute():
@@ -16,7 +16,7 @@ def compute():
 	return str(ans)
 
 
-@eulerlib.memoize
+@functools.cache
 def count_ways(number, exponent, repetitions):
 	if exponent < 0:
 		return 1 if number == 0 else 0

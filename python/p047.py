@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib, itertools
+import eulerlib, functools, itertools
 
 
 def compute():
@@ -15,7 +15,7 @@ def compute():
 	return str(ans)
 
 
-@eulerlib.memoize
+@functools.cache
 def count_distinct_prime_factors(n):
 	count = 0
 	while n > 1:
