@@ -26,7 +26,7 @@ def compute():
 		k = 1
 		while k < p:
 			k *= 10
-		m = (q - p) * eulerlib.reciprocal_mod(k % q, q) % q
+		m = (q - p) * pow(k, -1, q) % q
 		ans += m * k + p
 	return str(ans)
 

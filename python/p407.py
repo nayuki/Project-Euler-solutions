@@ -53,7 +53,7 @@ def compute():
 		modulus = 1
 		for q in factorization:
 			# Use Chinese remainder theorem; cache parts of it
-			recip = eulerlib.reciprocal_mod(q % modulus, modulus)
+			recip = pow(q, -1, modulus)
 			newmod = q * modulus
 			solns = [((0 + (x    ) * recip * q) % newmod) for x in solns] + \
 			        [((1 + (x - 1) * recip * q) % newmod) for x in solns]

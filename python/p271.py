@@ -6,8 +6,6 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib
-
 
 # First we observe that the modulus 13082761331670030 can be factorized as
 # 2 * 3 * 5 * 7 * 11 * 13 * 17 * 19 * 23 * 29 * 31 * 37 * 41 * 43,
@@ -55,7 +53,7 @@ def compute():
 # Assuming that p and q are coprime, 0 <= a < p, and 0 <= b < q, this returns the unique
 # integer x in the range [0, p*q) such that x satisfies (x = a mod p) and (x = b mod q).
 def chinese_remainder_theorem(a, p, b, q):
-	return (a + (b - a) * eulerlib.reciprocal_mod(p % q, q) * p) % (p * q)
+	return (a + (b - a) * pow(p, -1, q) * p) % (p * q)
 
 
 if __name__ == "__main__":

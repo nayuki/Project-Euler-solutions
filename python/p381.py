@@ -25,7 +25,7 @@ def compute():
 	# = -3/8 mod p.
 	# Every part of the equation is modulo a prime p > 4.
 	def s(p):
-		return (p - 3) * eulerlib.reciprocal_mod(8 % p, p) % p
+		return (p - 3) * pow(8, -1, p) % p
 	
 	ans = sum(s(p) for p in eulerlib.prime_generator(10**8) if p >= 5)
 	return str(ans)
