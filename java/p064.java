@@ -84,7 +84,7 @@ public final class p064 implements EulerSolution {
 		
 		
 		public BigInteger floor() {
-			BigInteger temp = Library.sqrt(b.multiply(b).multiply(d));
+			BigInteger temp = b.multiply(b).multiply(d).sqrt();
 			if (b.signum() == -1)
 				temp = temp.add(BigInteger.ONE).negate();
 			temp = temp.add(a);

@@ -59,7 +59,7 @@ public final class p100 implements EulerSolution {
 		BigInteger y = y0;  // An alias for the number of red discs
 		while (true) {
 			// Check if this solution is acceptable
-			BigInteger sqrt = Library.sqrt(y.multiply(y).multiply(BigInteger.valueOf(8)).add(BigInteger.ONE));
+			BigInteger sqrt = y.multiply(y).multiply(BigInteger.valueOf(8)).add(BigInteger.ONE).sqrt();
 			if (sqrt.testBit(0)) {  // Is odd
 				BigInteger blue = sqrt.add(BigInteger.ONE).divide(BigInteger.valueOf(2)).add(y);
 				if (blue.add(y).compareTo(BigInteger.TEN.pow(12)) > 0)

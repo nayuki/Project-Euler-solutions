@@ -57,20 +57,6 @@ final class Library {
 	}
 	
 	
-	// Returns floor(sqrt(x)), for x >= 0.
-	public static BigInteger sqrt(BigInteger x) {
-		if (x.signum() == -1)
-			throw new IllegalArgumentException("Square root of negative number");
-		BigInteger y = BigInteger.ZERO;
-		for (int i = (x.bitLength() - 1) / 2; i >= 0; i--) {
-			y = y.setBit(i);
-			if (y.multiply(y).compareTo(x) > 0)
-				y = y.clearBit(i);
-		}
-		return y;
-	}
-	
-	
 	// Tests whether x is a perfect square, for any value x.
 	public static boolean isSquare(int x) {
 		if (x < 0)
