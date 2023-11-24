@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import array, eulerlib, itertools
+import array, itertools, math
 
 
 # Let n be an arbitrary integer such that n >= 3.
@@ -46,7 +46,7 @@ def compute():
 	
 	# Build table of smallest prime factors
 	smallestprimefactor = array.array("L", itertools.repeat(0, LIMIT + 1))
-	end = eulerlib.sqrt(len(smallestprimefactor) - 1)
+	end = math.isqrt(len(smallestprimefactor) - 1)
 	for i in range(2, len(smallestprimefactor)):
 		if smallestprimefactor[i] == 0:
 			smallestprimefactor[i] = i

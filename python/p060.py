@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib, functools
+import eulerlib, functools, math
 
 
 def compute():
@@ -56,7 +56,7 @@ def compute():
 		elif x in (0, 1):
 			return False
 		else:
-			end = eulerlib.sqrt(x)
+			end = math.isqrt(x)
 			for p in primes:
 				if p > end:
 					break

@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib, math
+import math
 
 
 def compute():
@@ -16,7 +16,7 @@ def compute():
 	#   Every primitive Pythagorean triple with a odd and b even can be expressed as
 	#   a = st, b = (s^2-t^2)/2, c = (s^2+t^2)/2, where s > t > 0 are coprime odd integers.
 	ans = 0
-	for s in range(3, eulerlib.sqrt(LIMIT * 2), 2):
+	for s in range(3, math.isqrt(LIMIT * 2), 2):
 		for t in range(1, s, 2):
 			a = s * t
 			b = (s * s - t * t) // 2

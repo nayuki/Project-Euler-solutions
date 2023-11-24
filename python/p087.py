@@ -6,12 +6,12 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib
+import eulerlib, math
 
 
 def compute():
 	LIMIT = 50000000
-	primes = eulerlib.list_primes(eulerlib.sqrt(LIMIT))
+	primes = eulerlib.list_primes(math.isqrt(LIMIT))
 	
 	sums = {0}
 	for i in range(2, 5):

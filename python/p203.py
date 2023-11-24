@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib
+import eulerlib, math
 
 
 def compute():
@@ -15,7 +15,7 @@ def compute():
 	maximum = max(numbers)
 	
 	# Prepare list of squared primes
-	primes = eulerlib.list_primes(eulerlib.sqrt(maximum))
+	primes = eulerlib.list_primes(math.isqrt(maximum))
 	primessquared = [p * p for p in primes]
 	
 	def is_squarefree(n):

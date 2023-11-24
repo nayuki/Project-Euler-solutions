@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib
+import eulerlib, math
 
 
 # Right off the bat, we can exclude 90% of the candidates by the following observations:
@@ -32,7 +32,7 @@ def compute():
 	NON_INCREMENTS = set(range(INCREMENTS[-1])) - set(INCREMENTS)
 	
 	maxnumber = LIMIT**2 + INCREMENTS[-1]
-	primes = eulerlib.list_primes(eulerlib.sqrt(maxnumber))
+	primes = eulerlib.list_primes(math.isqrt(maxnumber))
 	
 	def has_consecutive_primes(n):
 		# Generate the set of numbers to test for primality
@@ -52,7 +52,7 @@ def compute():
 	
 	
 	def is_prime(n):
-		end = eulerlib.sqrt(n)
+		end = math.isqrt(n)
 		for p in primes:
 			if p > end:
 				break

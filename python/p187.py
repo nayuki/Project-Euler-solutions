@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib
+import eulerlib, math
 
 
 # LIMIT is the highest number that we will test for being semiprime.
@@ -20,7 +20,7 @@ def compute():
 	LIMIT = 10**8 - 1
 	ans = 0
 	primes = eulerlib.list_primes(LIMIT // 2)
-	sqrt = eulerlib.sqrt(LIMIT)
+	sqrt = math.isqrt(LIMIT)
 	for (i, p) in enumerate(primes):
 		if p > sqrt:
 			break

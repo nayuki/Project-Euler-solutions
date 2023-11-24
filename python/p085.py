@@ -6,12 +6,12 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib
+import math
 
 
 def compute():
 	TARGET = 2000000
-	end = eulerlib.sqrt(TARGET) + 1
+	end = math.isqrt(TARGET) + 1
 	gen = ((w, h) for w in range(1, end) for h in range(1, end))
 	func = lambda wh: abs(num_rectangles(*wh) - TARGET)
 	ans = min(gen, key=func)

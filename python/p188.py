@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib, sys
+import math, sys
 
 
 def compute():
@@ -28,7 +28,7 @@ def totient(n):
 	assert n > 0
 	p = 1
 	i = 2
-	end = eulerlib.sqrt(n)
+	end = math.isqrt(n)
 	while i <= end:
 		if n % i == 0:  # Found a factor
 			p *= i - 1
@@ -36,7 +36,7 @@ def totient(n):
 			while n % i == 0:
 				p *= i
 				n //= i
-			end = eulerlib.sqrt(n)
+			end = math.isqrt(n)
 		i += 1
 	if n != 1:
 		p *= n - 1

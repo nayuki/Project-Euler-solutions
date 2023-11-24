@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib
+import math
 
 
 # Suppose the box has b blue discs and r red discs.
@@ -50,7 +50,7 @@ def compute():
 	y = y0  # An alias for the number of red discs
 	while True:
 		# Check if this solution is acceptable
-		sqrt = eulerlib.sqrt(y**2 * 8 + 1)
+		sqrt = math.isqrt(y**2 * 8 + 1)
 		if sqrt % 2 == 1:  # Is odd
 			blue = (sqrt + 1) // 2 + y
 			if blue + y > 10**12:

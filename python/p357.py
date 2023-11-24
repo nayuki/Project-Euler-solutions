@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib
+import eulerlib, math
 
 
 # From the problem statement, we are given the search range of 1 <= n <= 10^8.
@@ -47,7 +47,7 @@ def compute():
 	def is_prime_generating(n):
 		return all(
 			(n % d != 0 or isprime[d + n // d])
-			for d in range(2, eulerlib.sqrt(n) + 1))
+			for d in range(2, math.isqrt(n) + 1))
 	
 	ans = sum(n for n in range(LIMIT + 1)
 		if isprime[n + 1] and is_prime_generating(n))

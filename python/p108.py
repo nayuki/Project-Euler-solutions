@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib, itertools
+import itertools, math
 
 
 # Rewrite the equation with x = n+i, y = n+j, and manipulate it:
@@ -31,7 +31,7 @@ def compute():
 # Returns the number of divisors of n^2
 def count_divisors_squared(n):
 	count = 1
-	end = eulerlib.sqrt(n)
+	end = math.isqrt(n)
 	for i in itertools.count(2):
 		if i > end:
 			break
@@ -43,7 +43,7 @@ def count_divisors_squared(n):
 				if n % i != 0:
 					break
 			count *= j * 2 + 1
-			end = eulerlib.sqrt(n)
+			end = math.isqrt(n)
 	if n != 1:  # Remaining largest prime factor
 		count *= 3
 	return count

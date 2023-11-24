@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib, itertools
+import itertools, math
 
 
 # Given a range of integers [0, n), we can bulk-calculate how many ways
@@ -61,7 +61,7 @@ def try_search(limit):
 		cube = i**3
 		if cube >= limit:
 			break
-		for j in range(2, eulerlib.sqrt(limit - 1 - cube) + 1):
+		for j in range(2, math.isqrt(limit - 1 - cube) + 1):
 			index = cube + j**2
 			ways[index] = ways.get(index, 0) + 1
 	

@@ -103,7 +103,7 @@ class QuadraticSurd:
 	
 	
 	def floor(self):
-		temp = eulerlib.sqrt(self.b * self.b * self.d)
+		temp = math.isqrt(self.b * self.b * self.d)
 		if self.b < 0:
 			temp = -(temp + 1)
 		temp += self.a

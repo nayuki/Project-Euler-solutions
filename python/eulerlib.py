@@ -16,25 +16,11 @@ def popcount(x: int) -> int:
 	return bin(x).count("1")
 
 
-# Given integer x, this returns the integer floor(sqrt(x)).
-def sqrt(x: int) -> int:
-	assert x >= 0
-	i: int = 1
-	while i * i <= x:
-		i *= 2
-	y: int = 0
-	while i > 0:
-		if (y + i)**2 <= x:
-			y += i
-		i //= 2
-	return y
-
-
 # Tests whether x is a perfect square, for any integer x.
 def is_square(x: int) -> bool:
 	if x < 0:
 		return False
-	y: int = sqrt(x)
+	y: int = math.isqrt(x)
 	return y * y == x
 
 
@@ -47,7 +33,7 @@ def is_prime(x: int) -> bool:
 	elif x % 2 == 0:
 		return False
 	else:
-		for i in range(3, sqrt(x) + 1, 2):
+		for i in range(3, math.isqrt(x) + 1, 2):
 			if x % i == 0:
 				return False
 		return True
@@ -59,7 +45,7 @@ def list_primality(n: int) -> List[bool]:
 	# Sieve of Eratosthenes
 	result: List[bool] = [True] * (n + 1)
 	result[0] = result[1] = False
-	for i in range(sqrt(n) + 1):
+	for i in range(math.isqrt(n) + 1):
 		if result[i]:
 			for j in range(i * i, len(result), i):
 				result[j] = False
@@ -79,7 +65,7 @@ def prime_generator(limit: int) -> Generator[int,None,None]:
 	
 	# Sieve of Eratosthenes, storing only odd numbers starting at 3
 	isprime: array.array[int] = array.array("B", b"\x01" * ((limit - 1) // 2))
-	sieveend: int = sqrt(limit)
+	sieveend: int = math.isqrt(limit)
 	for i in range(len(isprime)):
 		if isprime[i] == 1:
 			p: int = i * 2 + 3
@@ -91,7 +77,7 @@ def prime_generator(limit: int) -> Generator[int,None,None]:
 
 def list_smallest_prime_factors(n: int) -> List[int]:
 	result: List[Optional[int]] = [None] * (n + 1)
-	limit = sqrt(n)
+	limit = math.isqrt(n)
 	for i in range(2, len(result)):
 		if result[i] is None:
 			result[i] = i

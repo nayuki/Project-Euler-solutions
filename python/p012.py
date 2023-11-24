@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib, itertools
+import itertools, math
 
 
 def compute():
@@ -19,7 +19,7 @@ def compute():
 
 # Returns the number of integers in the range [1, n] that divide n.
 def num_divisors(n):
-	end = eulerlib.sqrt(n)
+	end = math.isqrt(n)
 	result = sum(2
 		for i in range(1, end + 1)
 		if n % i == 0)

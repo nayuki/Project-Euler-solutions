@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib
+import math
 
 
 # Consider the set of all integers from 1 to n, inclusive: {1, 2, ..., n}.
@@ -41,7 +41,7 @@ def compute():
 	MODULUS = 10**9
 	
 	# Can be any number from 1 to LIMIT, but somewhere near sqrt(LIMIT) is preferred
-	splitcount = eulerlib.sqrt(LIMIT)
+	splitcount = math.isqrt(LIMIT)
 	# Consider divisors individually up and including this number
 	splitat = LIMIT // (splitcount + 1)
 	

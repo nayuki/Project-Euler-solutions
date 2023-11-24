@@ -6,17 +6,17 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib
+import eulerlib, math
 
 
 def compute():
 	DIGITS = 10
 	
-	primes = eulerlib.list_primes(eulerlib.sqrt(10**DIGITS))
+	primes = eulerlib.list_primes(math.isqrt(10**DIGITS))
 	
 	# Only valid if 1 < n <= 10^DIGITS.
 	def is_prime(n):
-		end = eulerlib.sqrt(n)
+		end = math.isqrt(n)
 		for p in primes:
 			if p > end:
 				break

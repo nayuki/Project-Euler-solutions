@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib
+import math
 
 
 def compute():
@@ -20,7 +20,7 @@ def compute():
 
 def has_pandigital_product(n):
 	# Find and examine all factors of n
-	for i in range(1, eulerlib.sqrt(n) + 1):
+	for i in range(1, math.isqrt(n) + 1):
 		if n % i == 0:
 			temp = str(n) + str(i) + str(n // i)
 			if "".join(sorted(temp)) == "123456789":

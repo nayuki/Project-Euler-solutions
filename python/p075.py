@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib, math
+import math
 
 
 def compute():
@@ -17,7 +17,7 @@ def compute():
 	#   a = st, b = (s^2-t^2)/2, c = (s^2+t^2)/2, where s > t > 0 are coprime odd integers.
 	# 
 	triples = set()
-	for s in range(3, eulerlib.sqrt(LIMIT) + 1, 2):
+	for s in range(3, math.isqrt(LIMIT) + 1, 2):
 		for t in range(s - 2, 0, -2):
 			if math.gcd(s, t) == 1:
 				a = s * t

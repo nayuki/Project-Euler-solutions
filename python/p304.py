@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib
+import eulerlib, math
 
 
 def compute():
@@ -18,7 +18,7 @@ def compute():
 	# iscomposite[i] pertains to the number BASE + i
 	# Sieve of Eratosthenes, but starting at BASE
 	iscomposite = [False] * SEARCH_RANGE
-	primes = eulerlib.list_primes(eulerlib.sqrt(BASE + SEARCH_RANGE))
+	primes = eulerlib.list_primes(math.isqrt(BASE + SEARCH_RANGE))
 	for p in primes:
 		for i in range((BASE + p - 1) // p * p - BASE, len(iscomposite), p):
 			iscomposite[i] = True

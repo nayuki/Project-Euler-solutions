@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib, itertools
+import itertools, math
 
 
 def compute():
@@ -30,7 +30,7 @@ def compute():
 					continue
 				
 				zlimit = min(y, limit - x - y)
-				for c in itertools.count(eulerlib.sqrt(y) + 1):
+				for c in itertools.count(math.isqrt(y) + 1):
 					z = c * c - y
 					if z >= zlimit:
 						break
@@ -43,7 +43,7 @@ def compute():
 	# Raise the limit until a sum is found
 	while True:
 		issquare = [False] * sumlimit
-		for i in range(eulerlib.sqrt(len(issquare) - 1) + 1):
+		for i in range(math.isqrt(len(issquare) - 1) + 1):
 			issquare[i * i] = True
 		
 		sum = find_sum(sumlimit)

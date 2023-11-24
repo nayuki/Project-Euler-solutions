@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import array, eulerlib
+import array, eulerlib, math
 
 
 def compute():
@@ -38,7 +38,7 @@ def compute():
 def list_sigma2(n):
 	# If i has a prime factor p <= sqrt, then quasiprimefactor[i] = p.
 	# Otherwise i > sqrt must be prime, and quasiprimefactor[i] = 0 because i may overflow an int16.
-	sqrt = eulerlib.sqrt(n)
+	sqrt = math.isqrt(n)
 	quasiprimefactor = array.array("H", (0 for _ in range(n + 1)))
 	
 	# Richer version of the sieve of Eratosthenes

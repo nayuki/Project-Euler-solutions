@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib
+import eulerlib, math
 
 
 def compute():
@@ -14,7 +14,7 @@ def compute():
 	
 	possible = set()
 	primes = eulerlib.list_primes(LIMIT // 2)
-	end = eulerlib.sqrt(LIMIT)
+	end = math.isqrt(LIMIT)
 	for i in range(len(primes)):
 		p = primes[i]
 		if p > end:

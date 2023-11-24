@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib, itertools
+import itertools, math
 
 
 # The key insight is to use dynamic programming to build up the answer one digit at a time.
@@ -50,7 +50,7 @@ def compute():
 					sqsum[i][index] = (sqsum[i][index] + sqsum[i - 1][k] + pow(BASE, i - 1, MODULUS) * j * count[i - 1][k]) % MODULUS
 					count[i][index] = (count[i][index] + count[i - 1][k]) % MODULUS
 	
-	ans = sum(sqsum[LENGTH][i**2] for i in range(1, eulerlib.sqrt(MAX_SQR_DIGIT_SUM)))
+	ans = sum(sqsum[LENGTH][i**2] for i in range(1, math.isqrt(MAX_SQR_DIGIT_SUM)))
 	return f"{ans%MODULUS:09}"
 
 
