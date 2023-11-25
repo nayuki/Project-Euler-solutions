@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib, math, itertools
+import math, itertools
 
 
 # Consider an arbitrary almost equilateral triangle with side lengths (c, c, c +/- 1).

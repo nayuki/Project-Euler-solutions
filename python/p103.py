@@ -6,8 +6,6 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import itertools
-
 
 # We start with three pedantic lemmas to constrain the nature of possible solutions.
 # 
