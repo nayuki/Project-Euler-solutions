@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib, fractions
+import fractions, math
 
 
 # Define a sequence of random variables:
@@ -64,7 +64,7 @@ def compute():
 	# Calculate the answer
 	expect = [fractions.Fraction(0)]
 	for n in range(1, SIZE + 1):
-		temp = sum(eulerlib.binomial(n, k) * expect[k] for k in range(n))
+		temp = sum(math.comb(n, k) * expect[k] for k in range(n))
 		expect.append((2**n + temp) / (2**n - 1))
 	ans = expect[-1]
 	

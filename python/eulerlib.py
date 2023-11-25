@@ -97,11 +97,6 @@ def list_totients(n: int) -> List[int]:
 	return result
 
 
-def binomial(n: int, k: int) -> int:
-	assert 0 <= k <= n
-	return math.factorial(n) // (math.factorial(k) * math.factorial(n - k))
-
-
 E = TypeVar("E", bound="_Comparable")
 
 class _Comparable(Protocol):

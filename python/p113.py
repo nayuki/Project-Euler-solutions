@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib
+import math
 
 
 # Let n be the number of digits. To count the number of increasing or decreasing numbers using combinatorics,
@@ -35,8 +35,8 @@ import eulerlib
 # (Technically, in the problem statement and this solution, "increasing" actually means "nondecreasing" and "decreasing" means "nonincreasing".)
 def compute():
 	DIGITS = 100
-	increasing = eulerlib.binomial(DIGITS + 9, 9) - 1
-	decreasing = eulerlib.binomial(DIGITS + 10, 10) - (DIGITS + 1)
+	increasing = math.comb(DIGITS + 9, 9) - 1
+	decreasing = math.comb(DIGITS + 10, 10) - (DIGITS + 1)
 	flat = DIGITS * 9
 	ans = increasing + decreasing - flat
 	return str(ans)

@@ -6,14 +6,14 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib
+import math
 
 
 def compute():
 	ans = sum(1
 		for n in range(1, 101)
 		for k in range(0, n + 1)
-		if eulerlib.binomial(n, k) > 1000000)
+		if math.comb(n, k) > 1000000)
 	return str(ans)
 
 

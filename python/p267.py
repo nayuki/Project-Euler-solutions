@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib, fractions, math
+import fractions, math
 
 
 # When you win a coin toss, your capital is multiplied by (1 + 2f).
@@ -45,7 +45,7 @@ def compute():
 		level += 1
 	
 	# Calculate the cumulative probability: binomialSum = sum (n choose k) for 0 <= k < maxIndex
-	binomialsum = sum(eulerlib.binomial(TRIALS, i) for i in range(maxindex))
+	binomialsum = sum(math.comb(TRIALS, i) for i in range(maxindex))
 	return round_to_decimal(fractions.Fraction(binomialsum, 1 << TRIALS), 12)
 
 

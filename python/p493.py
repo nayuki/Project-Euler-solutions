@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib, fractions, math
+import fractions, math
 
 
 def compute():
@@ -32,7 +32,7 @@ def compute():
 				count = divide_exactly(count, math.factorial(x))
 			
 			for x in hist:
-				count *= eulerlib.binomial(BALLS_PER_COLOR, x)
+				count *= math.comb(BALLS_PER_COLOR, x)
 			
 			distinctcolors = len(history)
 			numerator[0] += count * distinctcolors
@@ -44,7 +44,7 @@ def compute():
 				history.pop()
 	
 	explore(NUM_PICKED, BALLS_PER_COLOR, [])
-	denominator = eulerlib.binomial(NUM_COLORS * BALLS_PER_COLOR, NUM_PICKED)
+	denominator = math.comb(NUM_COLORS * BALLS_PER_COLOR, NUM_PICKED)
 	ans = fractions.Fraction(numerator[0], denominator)
 	return format_fraction(ans, DECIMALS)
 	
