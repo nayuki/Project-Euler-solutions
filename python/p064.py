@@ -38,7 +38,7 @@ class QuadraticSurd:
 			a = -a
 			b = -b
 			c = -c
-		gcd = math.gcd(math.gcd(a, b), c)
+		gcd = math.gcd(a, b, c)
 		if gcd != 1:
 			a //= gcd
 			b //= gcd
