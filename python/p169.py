@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib, functools, sys
+import functools, sys
 
 
 def compute():

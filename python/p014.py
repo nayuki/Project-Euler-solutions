@@ -6,7 +6,7 @@
 # https://github.com/nayuki/Project-Euler-solutions
 # 
 
-import eulerlib, functools, sys
+import functools, sys
 
 
 # We compute the Collatz chain length for every integer in the range according to the iteration rule.
