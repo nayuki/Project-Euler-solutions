@@ -201,8 +201,11 @@ final class Library {
 		for (int i = 3, end = sqrt(n); i <= end; i += 2) {
 			if (result[i]) {
 				// Note: i * i does not overflow
-				for (int j = i * i, inc = i * 2; j <= n; j += inc)
+				for (int j = i * i, inc = i * 2, bound = Integer.MAX_VALUE - inc; j <= n; j += inc) {
 					result[j] = false;
+					if (j > bound)
+						break;
+				}
 			}
 		}
 		return result;
@@ -240,9 +243,11 @@ final class Library {
 				result[i] = i;
 				if (i <= limit) {
 					// Note: i * i does not overflow
-					for (int j = i * i; j <= n; j += i) {
+					for (int j = i * i, bound = Integer.MAX_VALUE - i; j <= n; j += i) {
 						if (result[j] == 0)
 							result[j] = i;
+						if (j > bound)
+							break;
 					}
 				}
 			}
@@ -285,8 +290,11 @@ final class Library {
 		
 		for (int i = 2; i <= n; i++) {
 			if (result[i] == i) {  // i is prime
-				for (int j = i; j <= n; j += i)
+				for (int j = i, bound = Integer.MAX_VALUE - i; j <= n; j += i) {
 					result[j] -= result[j] / i;
+					if (j > bound)
+						break;
+				}
 			}
 		}
 		return result;
